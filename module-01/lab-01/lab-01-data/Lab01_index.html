@@ -94,7 +94,7 @@
 
     <footer>
         <p><i>Map authored by Ryan Kelly</i></p>
-        <p><i>Additional information about the data and map goes here</i></p>
+        <p><i>Additional information about the data and map goes right here</i></p>
         <p><i>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis urna magna, maximus nec laoreet sit amet, dictum ultricies nibh. Ut id auctor lacus. Nam a dolor et justo luctus luctus. Duis a elit eget risus dictum vehicula id eu elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed sed enim nisl. Vestibulum commodo imperdiet lacus, sed facilisis erat placerat sit amet. Nulla consequat malesuada neque eget aliquet. Integer non convallis nisl, gravida ultrices ex. Fusce nec vestibulum elit. Sed elementum lectus ipsum, vulputate elementum ex laoreet a. Aenean eu ex varius, varius felis vitae, efficitur nulla. Quisque pretium laoreet ante, in sodales dui vehicula at. Mauris eu sem sapien.</i>
         </p>
     </footer>
@@ -122,7 +122,8 @@
                 fillOpacity: 1,
                 fillColor: '#1f78b4'
             };
-    }          
+    }  
+        
 }).addTo(map);
 });  
 
@@ -142,9 +143,7 @@ $.getJSON("ky_counties_housing.json", function(data) {
                 };
         }          
     }).addTo(map);
-});
-    
-
+})
     function drawMap() {
 
      var breaks = getClassBreaks();  
@@ -153,28 +152,41 @@ $.getJSON("ky_counties_housing.json", function(data) {
             fillColor: getColor(layer.feature.properties[attribute]/layer.feature.properties[norm],breaks)
         });
     });
-        
-        function getClassBreaks(){
+    }
+
+    function getClassBreaks() {
+
+    // create empty Array for storing values
     var values = [];
+
+    // loop through all the counties
     dataLayer.eachLayer(function(layer) {
-    var value = layer.feature.properties[attribute]/layer.feature.properties[norm];
-    values.push(value);   
-});
+        var value = layer.feature.properties[attribute]/layer.feature.properties[norm];
+        values.push(value);   // push the normalized value for each layer into the Array
+    }); 
 
-
+    // determine similar clusters
     var clusters = ss.ckmeans(values, 5);  
 
- 
+    // create an array of the lowest value within each cluster
     var breaks = clusters.map(function(cluster){
-        return [cluster[0],cluster.pop()];   
-});
-
-    return breaks;
-    }
+            return [cluster[0],cluster.pop()];   
+    });
+        console.log(breaks);
+    return breaks; // return Array of class breaks
+    } // end getClassBreaks function
     
    
 function getColor(d, breaks) {
 
+      var breaks = getClassBreaks();
+
+    dataLayer.eachLayer(function(layer) {
+        layer.setStyle({
+            fillColor: getColor(layer.feature.properties[attribute]/layer.feature.properties[norm], breaks)
+        });
+    });
+    
       if(d <= breaks[0][1]) {
             return '#f1eef6';
         } else if(d <= breaks[1][1]) {
@@ -185,7 +197,8 @@ function getColor(d, breaks) {
             return '#2b8cbe'
         } else if(d <= breaks[4][1]) {
             return '#045a8d'
-        }}    
+        }
+}    
     
     
 function drawLegend(breaks){
@@ -218,7 +231,7 @@ function drawLegend(breaks){
          
         legend.addTo(map);
     };
-    };
+    
 
         
     </script>
