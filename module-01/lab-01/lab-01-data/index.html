@@ -105,9 +105,10 @@
     zoom: 7.4,
     zoomControl: false
 }
-    var value;
+    
     var attribute = "RENTER";
     var norm = "TOTAL";
+    var name = "NAME";
     var map = L.map('map', options);
         
     map.addControl(L.control.zoom({position: 'topright'}));    
@@ -133,18 +134,18 @@
         console.log(e.latlng);
     });
     
-    map.on('click', function(e) {
-        dataLayer.eachLayer(function(layer) {
-            layer.bindPopup("I am a popup");
-    });
-    
-    })
-            
-    
-           
-            
-           
-                    
+    map.on('click', onLayerClick); 
+        
+    var popup = L.popup();
+
+        function onLayerClick(e) {
+            popup
+        .setLatLng(e.latlng)
+        .setContent((attribute/norm) +"%" + " are renters in " + name.toString() + " County")
+        .openOn(map);
+    }
+
+         
     
     function drawMap(dataLayer){
         
