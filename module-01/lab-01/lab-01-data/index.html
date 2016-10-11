@@ -61,7 +61,7 @@
             }
         .legend h3 {
                 font-size: 1.1em;
-                font-weight: normal;
+                font-weight: bold;
                 color: #001323;
                 margin: 0 0 10px 0;
             }
@@ -85,16 +85,16 @@
 
 <body>
     <header>
-        <h1>Housing Ownership in Kentucky</h1>
-        <h2><i>Percent Ownership by County</i></h2>
+        <h1>Housing Rental in Kentucky</h1>
+        <h2><i>Percent Renter-Occupied by County</i></h2>
     </header>
 
     <div id='map'></div>
 
     <footer>
         <p><i>Map authored by Ryan Kelly</i></p>
-        <p><i>Date created: October 11, 2016</i></p>
-        <p><i>Get rid of all this Latin text</i>
+        <p><i>Map created October 11, 2016</i></p>
+        <p><i>Rental rates tend to significantly higher in urban counties where there are greater numbers of people occupying apartment complexes.  There is also a higher-than-average number of rental properties in counties which are home to a major university and/or a major military base, underscoring the highly transient nature of college students and military personnel.</i>
         </p>
     </footer>
 
@@ -105,14 +105,18 @@
     zoom: 7.4,
     zoomControl: false
 }
+    var value;
+    var attribute = "RENTER";
+    var norm = "TOTAL";
     var map = L.map('map', options);
         
+    map.addControl(L.control.zoom({position: 'topright'}));    
     $.getJSON("ky_counties_housing.json", function(data) {
         var dataLayer = L.geoJson(data,{
             style: function(feature) {
                 return {
-                    color: '#dddddd',
-                    weight: 1,
+                    color: 'black',
+                    weight: 1.2,
                     fillOpacity: 1,
                     fillColor: '#1f78b4'
                 }
@@ -122,26 +126,48 @@
         
     console.log(data);  
         
-        drawMap(dataLayer);
+    drawMap(dataLayer);
     });  
     
+    map.on('click', function(e) {
+        console.log(e.latlng);
+    });
+    
+    map.on('click', function(e) {
+        dataLayer.eachLayer(function(layer) {
+            layer.bindPopup("I am a popup");
+    });
+    
+    })
+            
+    
+           
+            
+           
+                    
+    
     function drawMap(dataLayer){
-        var breaks = getClassBreaks();
+        
+        var breaks = getClassBreaks(dataLayer);
         
         dataLayer.eachLayer(function(layer) {
             layer.setStyle({
-                fillColor : getColor(layer.feature.properties['OWNER']/layer.feature.properties['TOTAL'],breaks)
+                fillColor : getColor(layer.feature.properties[attribute]/layer.feature.properties[norm],breaks)
             })
         });
-        
-        }
-     
-    function getClassBreaks(){
+       
+        drawLegend(breaks);
+    }
+    
+      
+    
+    function getClassBreaks(dataLayer){
         
         var values = [];
+        
         dataLayer.eachLayer(function(layer) {
-            var value = (layer.feature.properties['OWNER']/layer.feature.properties['TOTAL']);
-            values.push(value);
+            values.push(layer.feature.properties[attribute]/layer.feature.properties[norm])
+            
     }); 
         console.log(values);
 
@@ -155,12 +181,7 @@
     }
         
     function getColor(d, breaks){
-        var breaks = getClassBreaks(dataLayer);
-        dataLayer.eachLayer(function(layer) {
-        layer.setStyle({
-            fillColor: getColor(layer.feature.properties['OWNER']/layer.feature.properties['TOTAL'], breaks)
-        });
-    });
+        
     
       if(d <= breaks[0][1]) {
             return '#f1eef6';
@@ -175,6 +196,30 @@
         }
     }
      
+        
+    function drawLegend(breaks){
+
+        var legend = L.control({position: 'topleft'});
+        
+        legend.onAdd = function(){
+            var div = L.DomUtil.create('div', 'legend');
+            div.innerHTML = "<h3>" + "<b><u>PERCENT RENTER OCCUPIED</u></b>"  + "</h3>";
+            for (var i = 0; i < breaks.length; i++) {
+                var color = getColor(breaks[i][0], breaks);
+                div.innerHTML +=
+                   '<span style="background:' + color + '"></span> ' +
+                   '<label>'+(breaks[i][0]*100).toLocaleString()+'%' + ' &mdash; ' + 
+                    (breaks[i][1]*100).toLocaleString()+'%' + '</label>';
+            }
+            return div;
+        };
+        
+        legend.addTo(map);
+    }
+        
+   
+        
+        
     </script>
     
 </body>
