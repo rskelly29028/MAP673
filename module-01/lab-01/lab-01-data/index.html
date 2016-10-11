@@ -104,74 +104,61 @@
     center: [37.8, -85.8],
     zoom: 7.4,
     zoomControl: false
-};
+}
     var map = L.map('map', options);
+        
     $.getJSON("ky_counties_housing.json", function(data) {
+        var dataLayer = L.geoJson(data,{
+            style: function(feature) {
+                return {
+                    color: '#dddddd',
+                    weight: 1,
+                    fillOpacity: 1,
+                    fillColor: '#1f78b4'
+                }
+        }  
     
-    console.log(data);
-    });
-        
-    $.getJSON("ky_counties_housing.json", function(data) {
-    L.geoJson(data).addTo(map);
-    L.geoJson(data, {
-        style: function(feature) {
-        return {
-                color: '#dddddd',
-                weight: 1,
-                fillOpacity: 1,
-                fillColor: '#1f78b4'
-            };
-    }  
-        
     }).addTo(map);
+        
+    console.log(data);  
+        
+        drawMap(dataLayer);
     });  
-
-    var dataLayer,
-    attribute = "OWNED_MORT",
-    norm = "OWNER";
-
     
-
-    function drawMap() {
-
-     var breaks = getClassBreaks();  
-     dataLayer.eachLayer(function(layer) {
-        layer.setStyle({
-            fillColor: getColor(layer.feature.properties[attribute]/layer.feature.properties[norm],breaks)
+    function drawMap(dataLayer){
+        var breaks = getClassBreaks();
+        
+        dataLayer.eachLayer(function(layer) {
+            layer.setStyle({
+                fillColor : getColor(layer.feature.properties['OWNER']/layer.feature.properties['TOTAL'],breaks)
+            })
         });
-    });
-    }
-
-    function getClassBreaks() {
-
-    // create empty Array for storing values
-    var values = [];
-
-    // loop through all the counties
-    dataLayer.eachLayer(function(layer) {
-        var value = layer.feature.properties[attribute]/layer.feature.properties[norm];
-        values.push(value);   // push the normalized value for each layer into the Array
+        
+        }
+     
+    function getClassBreaks(){
+        
+        var values = [];
+        dataLayer.eachLayer(function(layer) {
+            var value = (layer.feature.properties['OWNER']/layer.feature.properties['TOTAL']);
+            values.push(value);
     }); 
+        console.log(values);
 
-    // determine similar clusters
-    var clusters = ss.ckmeans(values, 5);  
-
-    // create an array of the lowest value within each cluster
-    var breaks = clusters.map(function(cluster){
+        
+        var clusters = ss.ckmeans(values, 5);  
+        var breaks = clusters.map(function(cluster){
             return [cluster[0],cluster.pop()];   
     });
         console.log(breaks);
-    return breaks; // return Array of class breaks
-    } // end getClassBreaks function
-    
-   
-    function getColor(d, breaks) {
-
-      var breaks = getClassBreaks();
-
-    dataLayer.eachLayer(function(layer) {
+        return breaks;         
+    }
+        
+    function getColor(d, breaks){
+        var breaks = getClassBreaks(dataLayer);
+        dataLayer.eachLayer(function(layer) {
         layer.setStyle({
-            fillColor: getColor(layer.feature.properties[attribute]/layer.feature.properties[norm], breaks)
+            fillColor: getColor(layer.feature.properties['OWNER']/layer.feature.properties['TOTAL'], breaks)
         });
     });
     
@@ -186,42 +173,8 @@
         } else if(d <= breaks[4][1]) {
             return '#045a8d'
         }
-}    
-    
-    
-function drawLegend(breaks){
-        console.log(breaks);
-
-        var legend = L.control({position: 'topleft'});
-
-         
-        legend.onAdd = function () {
-             
-            var div = L.DomUtil.create('div', 'legend');
-            div.innerHTML = "<h3>" + attribute + " per " + norm + "</h3>";
-
-             
-            for (var i = 0; i < breaks.length; i++) {
-                 
-                var color = getColor(breaks[i][0], breaks);
-
-                
-                div.innerHTML +=
-                   '<span style="background:' + color + '"></span> ' +
-                   '<label>'+(breaks[i][0]*100).toLocaleString() + ' &mdash; ' + 
-                    (breaks[i][1]*100).toLocaleString() + '</label>';
-            }
-
-             
-            return div;
-        };
-
-         
-        legend.addTo(map);
     }
-    
-
-        
+     
     </script>
     
 </body>
