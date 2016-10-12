@@ -11,7 +11,6 @@
     
     <script src="https://unpkg.com/leaflet@1.0.1/dist/leaflet.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.2.min.js"></script>
-    <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/simple-statistics/1.0.1/simple_statistics.js"></script>
     <style>
         body {
@@ -120,30 +119,34 @@
                     weight: 1.2,
                     fillOpacity: 1,
                     fillColor: '#1f78b4'
-                }
-        }  
+                    }
+            },
+            onEachFeature : function(feature, layer) {
+                console.log(feature); 
+                layer.bindPopup('hi there! I should be feature property data')
+            }
     
-    }).addTo(map);
+        }).addTo(map);
         
-    console.log(data);  
+         
         
-    drawMap(dataLayer);
+        drawMap(dataLayer);
     });  
     
     map.on('click', function(e) {
         console.log(e.latlng);
     });
     
-    map.on('click', onLayerClick); 
-        
-    var popup = L.popup();
-
-        function onLayerClick(e) {
-            popup
-        .setLatLng(e.latlng)
-        .setContent((attribute/norm) +"%" + " are renters in " + name.toString() + " County")
-        .openOn(map);
-    }
+//    map.on('click', onLayerClick); 
+//        
+//    var popup = L.popup();
+//
+//    function onLayerClick(e) {
+//            popup
+//        .setLatLng(e.latlng)
+//        .setContent((attribute/norm) +"%" + " are renters in " + name.toString() + " County")
+//        .openOn(map);
+//    }
 
          
     
