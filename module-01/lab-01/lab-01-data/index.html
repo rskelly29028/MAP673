@@ -11,7 +11,6 @@
     
     <script src="https://unpkg.com/leaflet@1.0.1/dist/leaflet.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.2.min.js"></script>
-    <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/simple-statistics/1.0.1/simple_statistics.js"></script>
     <style>
         body {
@@ -131,19 +130,15 @@
     drawMap(dataLayer);
         
        map.on('click', function(e){
-            var newlatlng = e.latlng;
-            console.log(newlatlng);
             dataLayer.eachLayer(function(layer){
-                var attribute = "RENTER";
-                var norm = "TOTAL";
-                var name = "NAME";
-                var renter=[(attribute/norm)*100];
-                layer.bindPopup(renter.numberValue + "%" + " are renters in " + name.toString() + " County");
+                var attribute = layer.feature.properties.RENTER;
+                var norm = layer.feature.properties.TOTAL;
+                var name = layer.feature.properties.NAME;
+                var renter = Math.round((attribute/norm)*100);
+                layer.bindPopup(renter + "%" + " are renters in " + name + " County");
        })
     })
     });  
-  
-    // DO NOT TOUCH CODE BELOW THIS COMMENT
         
     function drawMap(dataLayer){
         
