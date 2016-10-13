@@ -131,9 +131,14 @@
     drawMap(dataLayer);
         
        map.on('click', function(e){
-        dataLayer.eachLayer(function(layer){
-        var renter=[(attribute/norm)*100];
-        layer.bindPopup(renter + "%" + " are renters in " + name.toString() + " County");
+            var newlatlng = e.latlng;
+            console.log(newlatlng);
+            dataLayer.eachLayer(function(layer){
+                var attribute = "RENTER";
+                var norm = "TOTAL";
+                var name = "NAME";
+                var renter=[(attribute/norm)*100];
+                layer.bindPopup(renter.numberValue + "%" + " are renters in " + name.toString() + " County");
        })
     })
     });  
