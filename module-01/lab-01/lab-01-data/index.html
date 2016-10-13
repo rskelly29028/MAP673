@@ -86,7 +86,7 @@
 <body>
     <header>
         <h1>Housing Rental in Kentucky</h1>
-        <h2><i>Percent Renter-Occupied by County</i></h2>
+        <h2><i>Percent Renter Occupied by County</i></h2>
     </header>
 
     <div id='map'></div>
@@ -94,7 +94,7 @@
     <footer>
         <p><i>Map authored by Ryan Kelly</i></p>
         <p><i>Map created October 11, 2016</i></p>
-        <p><i>Rental rates tend to significantly higher in urban counties where there are greater numbers of people occupying apartment complexes.  There is also a higher-than-average number of rental properties in counties which are home to a major university and/or a major military base, underscoring the highly transient nature of college students and military personnel.</i>
+        <p><i>The purpose of the map is to display the percent of the total poplation residing in rental properties.  Rental rates tend to be significantly higher in urban counties (such as Fayette and Jefferson) where there are greater numbers of people occupying apartment complexes.  There is also a higher-than-average number of rental properties in counties which are home to a major university and/or a military base, underscoring the highly transient nature of college students and military personnel.  The symbology can influence the nature of the data by placing it in natural breaks, thus maximizing the range of rental residents per county.  Had the author elected to classify by quantiles and/or by standard deviations from the mean, the display would be markedly different.  The map also does not show the actual raw number of renters per county, thus slight increases or decreases in the number of renters in a sparsely populated county can radically alter its display.</i>
         </p>
     </footer>
 
@@ -105,7 +105,7 @@
     zoom: 7.4,
     zoomControl: false
 }
-    
+
     var attribute = "RENTER";
     var norm = "TOTAL";
     var name = "NAME";
@@ -122,32 +122,42 @@
                     fillColor: '#1f78b4'
                 }
         }  
+            
     
-    
+            
+  //          onEachFeature : function(feature,layer){
+  //              console.log(feature);
+  //              layer.bindPopup('Hello')
+  //      }
+            
     }).addTo(map);
         
     console.log(data);  
         
     drawMap(dataLayer);
     });  
-    
-    map.on('click', function(e) {
-        console.log(e.latlng);
-    });
-    
-    map.on('click', onLayerClick); 
+  
+    map.on('click', function(e){
+        dataLayer.eachLayer(function(layer){
+            var renter=[(attribute/norm)*100];
+            layer.bindPopup(renter + "%" + " are renters in " + name.toString() + " County");
+        })
+    })
         
-    var popup = L.popup();
+        
+   //     map.on('click', onMapClick);
+        
+   //     var popup = L.popup(dataLayer);
 
-        function onLayerClick(e) {
-            popup
-        .setLatLng(e.latlng)
-        .setContent((attribute/norm) +"%" + " are renters in " + name.toString() + " County")
-        .openOn(map);
-        }
-
-         
-    
+   //     function onMapClick(e) {
+   //         popup
+   //     .setLatLng(e.latlng)
+   //     .setContent((attribute/norm) +"%" + " are renters in " + name.toString() + " County")
+   //     .openOn(map);
+   //     }
+       
+    // DO NOT TOUCH CODE BELOW THIS COMMENT
+        
     function drawMap(dataLayer){
         
         var breaks = getClassBreaks(dataLayer);
@@ -161,8 +171,6 @@
         drawLegend(breaks);
     }
     
-      
-    
     function getClassBreaks(dataLayer){
         
         var values = [];
@@ -172,8 +180,6 @@
             
     }); 
         console.log(values);
-
-        
         var clusters = ss.ckmeans(values, 5);  
         var breaks = clusters.map(function(cluster){
             return [cluster[0],cluster.pop()];   
@@ -183,7 +189,6 @@
     }
         
     function getColor(d, breaks){
-        
     
       if(d <= breaks[0][1]) {
             return '#f1eef6';
@@ -197,8 +202,7 @@
             return '#045a8d'
         }
     }
-     
-        
+         
     function drawLegend(breaks){
 
         var legend = L.control({position: 'topleft'});
@@ -218,10 +222,7 @@
         
         legend.addTo(map);
     }
-        
-   
-        
-        
+                
     </script>
     
 </body>
