@@ -38,7 +38,7 @@
 			width: 80%;
 			height: 540px;
 			margin: 10px 10%;
-			background: whitesmoke;
+			background: #808080;
 			border: 2px solid #dddedf;
 		}
 		
@@ -86,7 +86,7 @@
         .info {
             padding: 6px 8px;
             font-size: 1em;
-            background: rgba(255,255,255,0.8);
+            background: whitesmoke;
             box-shadow: 0 0 15px rgba(0,0,0,0.2);
             border-radius: 5px;
             text-align: right;   
@@ -99,17 +99,17 @@
 
 <body>
 	<header>
-		<h1>Map Title</h1>
-		<h2>Map Subtitle</h2>
+		<h1>Housing Vacancies in Kentucky</h1>
+        <h2><i>Percent Vacancies by County</i></h2>
 	</header>
 
     <div id='ui-controls'>
 
         <label>Choose a data attribute:</label>
-        <select id="occupied">
-            <option value="OWNED_MORT" selected>Owned with Mortgage</option>
-            <option value="OWNED_FREE">Owned Free and Clear</option> 
-            <option value="RENTER">Rented</option>
+        <select id="total">
+            <option value="VACANT">Vacant Housing Units</option>
+            <option value="VACANT_FOR">Vacant Units for Rent</option> 
+            <option value="VACANT_FO2">Vacant Units for Sale</option>
         </select>
 
     </div> 
@@ -119,7 +119,7 @@
 
 	<footer>
 		<p>Map authored by Ryan Kelly</p>
-		<p>Map created October 17, 2016</p>
+		<p>Map created October 18, 2016</p>
 	</footer>
 	<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="https://unpkg.com/leaflet@1.0.1/dist/leaflet.js"></script>
@@ -138,15 +138,15 @@
 		var map = L.map('map', options);
 
 		var dataLayer, // declare global variable for map units
-			attribute = "OWNED_MORT", // assign initial variable to store data attribute 
-			norm = "OCCUPIED"; // asign initial variable to store normalizing data attribute
+			attribute = "VACANT", // assign initial variable to store data attribute 
+			norm = "TOTAL"; // asign initial variable to store normalizing data attribute
 
 		// QJuery AJAX request to load external GEoJSON file
         var labels = {
-            "OCCUPIED": "occupied units",
-            "OWNED_MORT": "% occupied housing units owned with mortgage",
-            "OWNED_FREE": "% occupied housing units owned free and clear",
-            "RENTER": "% occupied housing units rented"   
+            "TOTAL": "total housing units",
+            "VACANT": "% vacant housing units of total",
+            "VACANT_FOR": "% of total housing units which are vacant rentals",
+            "VACANT_FO2": "% of total housing units which are vacant and for sale"   
         }
 		$.getJSON("ky_counties_housing.json", function (data) {
 
@@ -154,8 +154,8 @@
 			dataLayer = L.geoJson(data, {
 				style: function (feature) { // style each feature of GeoJson layer
 					return {
-						color: '#dddddd', // set stroke color
-						weight: 2, // set stroke weight
+						color: '#000000', // set stroke color
+						weight: 0.5, // set stroke weight
 						fillOpacity: 1, // override defautl fill opacity
 						fillColor: '#1f78b4' // set fill color
 					};
@@ -237,13 +237,13 @@
 			if (d <= breaks[0][1]) {
 				return '#f1eef6';
 			} else if (d <= breaks[1][1]) {
-				return '#bdc9e1';
+				return '#def38d';
 			} else if (d <= breaks[2][1]) {
-				return '#74a9cf';
+				return '#adde63';
 			} else if (d <= breaks[3][1]) {
-				return '#2b8cbe'
+				return '#299c39'
 			} else if (d <= breaks[4][1]) {
-				return '#045a8d'
+				return '#186321'
 			}
 		}
 
@@ -287,7 +287,7 @@
         }
         
         function buildUI(){
-            $('select[id="occupied"]').change(function() {
+            $('select[id="total"]').change(function() {
 
                 attribute = $(this).val();
                 drawMap();
@@ -322,10 +322,10 @@
             var props = layer.feature.properties;
 
             var html = "<h3>"+props['NAME']+" County</h3>"+
-                    "total # occupied units: <b>"+ props["OCCUPIED"]+"</b><br>"+
-                    "# owned with mortgage or loan: <b>"+ props["OWNED_MORT"]+"</b><br>"+
-                    "# owned free and clear: <b>"+ props["OWNED_FREE"]+"</b><br>"+
-                    "# occupied by renters: <b>"+ props["RENTER"]+"</b>"
+                    "total # vacant units: <b>"+ props["VACANT"]+"</b><br>"+
+                    "# of vacant units for rent: <b>"+ props["VACANT_FOR"]+"</b><br>"+
+                    "# of vacant units for sale: <b>"+ props["VACANT_FO2"]+"</b><br>"+
+                    "# of total housing units:   <b>"+ props["TOTAL"]+"</b><br>"
 
             $(".info").html(html);
         }
