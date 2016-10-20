@@ -166,6 +166,7 @@
 			drawMap(); // call function to draw the map
             buildUI();
             drawInfo();
+            changeLayerColor();
           
         });
 
@@ -315,8 +316,29 @@
             dataLayer.on('mouseout', function() {
                 $(".info").hide();    
             });
+    
         }
-        
+        // CODE BELOW NEW RSK CODE... WORK ON IT
+        function changeLayerColor() {
+            dataLayer.on('mouseover', function pointMouseover(leafletEvent) {
+                var value = leafletEvent.target;
+                value.setStyle({
+                    weight: 2,
+                    color: 'yellow',
+                    fillColor: '#d63194'
+            });
+            dataLayer.on('mouseout', function pointMouseover(leafletEvent){
+                var dataLayer = leafletEvent.target;
+                dataLayer.setStyle({
+                    weight: 0.5,
+                    color: 'black',
+            });
+            drawMap();
+            })
+    } 
+                
+            )
+        }
         function updateInfo(layer) {
 
             var props = layer.feature.properties;
