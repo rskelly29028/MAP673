@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset=utf-8 />
-	<title>Lab 01 solution with comments</title>
+	<title>Lab 02 </title>
 	<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 
 	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.1/dist/leaflet.css" />
@@ -120,6 +120,7 @@
 	<footer>
         <p><i>Map authored by Ryan Kelly</i></p>
         <p><i>Map created October 20, 2016</i></p>
+        <p>This map displays the current state of housing vacancies across the state of Kentucky.  The data include the total number of housing units for each county, the number of vacancies in each county, and the number of those vacancies which are rentals and the number which are for sale.</p>
 	</footer>
 	<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="https://unpkg.com/leaflet@1.0.1/dist/leaflet.js"></script>
@@ -143,15 +144,17 @@
 
 		// QJuery AJAX request to load external GEoJSON file
         var labels = {
-            "TOTAL": "total housing units",
-            "VACANT": "% vacant housing units of total",
-            "VACANT_FOR": "% of total housing units which are vacant rentals",
-            "VACANT_FO2": "% of total housing units which are vacant and for sale"   
+            "TOTAL": "Total Housing Units",
+            "VACANT": "% Vacant Housing Units of Total",
+            "VACANT_FOR": "% of Total Housing Units which are Vacant Rentals",
+            "VACANT_FO2": "% of Total Housing Units which are Vacant and for Sale"   
         }
+        
 		$.getJSON("ky_counties_housing.json", function (data) {
 
 			// create Leaflet GeoJson layer with GeoJSON data and assign to global variable 
 			dataLayer = L.geoJson(data, {
+                onEachFeature: onEachFeature,
 				style: function (feature) { // style each feature of GeoJson layer
 					return {
 						color: '#000000', // set stroke color
@@ -163,11 +166,11 @@
 			}).addTo(map); // add the Leaflet GeoJson layer to the map
 
             drawLegend();
-			drawMap(); // call function to draw the map
+			drawMap(); 
             buildUI();
             drawInfo();
-            changeLayerColor();
-          
+            onEachFeature();
+                      
         });
 
 		function drawMap() {
@@ -261,9 +264,7 @@
 				// create a new HTML <div> element and give it a class name of "legend"
 				var div = L.DomUtil.create('div', 'legend');
 
-				
 				return div;
-
 
 			};
 
@@ -273,6 +274,7 @@
         
         function updateLegend(breaks) {
 
+            // creates natural breaks and assigns colors to different classes
             var legend = $('.legend').html("<h3>" + labels[attribute] + "</h3><ul>"); 
 
             for (var i = 0; i <= breaks.length-1; i++) {
@@ -299,7 +301,7 @@
         // code executed here when change event occurs
         
         function drawInfo() {
-
+            // creates an information box in the top right corner of map frame
             var info = L.control({position: 'topright'});
             
             info.onAdd = function(map) {
@@ -309,27 +311,65 @@
                 return div;  
 
             }
+            
             info.addTo(map);
+            // adds data to information box upon mouseover event
             dataLayer.on('mouseover', function() {
                 $(".info").show();
             });
+            // removes data from information box upon mouseout event
             dataLayer.on('mouseout', function() {
                 $(".info").hide();    
             });
     
         }
-        // CODE BELOW NEW RSK CODE... WORK ON IT
+    
+       // function changeLayerColor(e) {
+            // changes color of layer to magenta with mouseover and returns back to original color settings with mouseout
+         //   dataLayer.on('mouseover', function pointMouseover(leafletEvent) {
+        //        var dataLayer = leafletEvent.target;
+        //        dataLayer.setStyle({
+        //            weight: 2,
+         //           color: 'yellow',
+        //            fillColor: '#d63194'
+      //      });
+     //       dataLayer.on('mouseout', function
+     //       pointMouseover(leafletEvent){
+     //           var dataLayer = leafletEvent.target;
+     //           dataLayer.setStyle({
+     //               weight: 0.5,
+     //               color: 'black',
+     //       });
+     //       drawMap();
+     //       })
+     //   }          
+     //       )
+     //   }
+                   
+        function updateInfo(layer) {
+            // updates the information associated with each county so that the data can be populated in the information box
+            var props = layer.feature.properties;
+
+            var html = "<h3>"+props['NAME']+" County</h3>"+
+                    "Total # of Vacant Units: <b>"+ props["VACANT"]+"</b><br>"+
+                    "# of Vacant Units for Rent: <b>"+ props["VACANT_FOR"]+"</b><br>"+
+                    "# of Vacant Units for Sale: <b>"+ props["VACANT_FO2"]+"</b><br>"+
+                    "# of Total Housing Units:   <b>"+ props["TOTAL"]+"</b><br>"
+
+            $(".info").html(html);
+        }
         
-        
-        function changeLayerColor(e) {
-            dataLayer.on('mouseover', function pointMouseover(leafletEvent) {
+        function onEachFeature(feature, layer) {
+            // changes color of layer to magenta with mouseover and returns back to original color settings with mouseout
+            layer.on('mouseover', function pointMouseover(leafletEvent) {
                 var dataLayer = leafletEvent.target;
                 dataLayer.setStyle({
-                    weight: 2,
+                    weight: 2.5,
                     color: 'yellow',
                     fillColor: '#d63194'
             });
-            dataLayer.on('mouseout', function pointMouseover(leafletEvent){
+            layer.on('mouseout', function
+            pointMouseover(leafletEvent){
                 var dataLayer = leafletEvent.target;
                 dataLayer.setStyle({
                     weight: 0.5,
@@ -337,24 +377,11 @@
             });
             drawMap();
             })
-    } 
-                
+        }          
             )
         }
-            
-                
-        function updateInfo(layer) {
-
-            var props = layer.feature.properties;
-
-            var html = "<h3>"+props['NAME']+" County</h3>"+
-                    "total # vacant units: <b>"+ props["VACANT"]+"</b><br>"+
-                    "# of vacant units for rent: <b>"+ props["VACANT_FOR"]+"</b><br>"+
-                    "# of vacant units for sale: <b>"+ props["VACANT_FO2"]+"</b><br>"+
-                    "# of total housing units:   <b>"+ props["TOTAL"]+"</b><br>"
-
-            $(".info").html(html);
-        }
+        
+        
 	</script>
 
 </body>
