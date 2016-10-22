@@ -9,6 +9,7 @@
 	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.1/dist/leaflet.css" />
 	<link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
 
+    
 	<style>
 		body {
 			margin: 0;
@@ -94,7 +95,9 @@
         .info h3 {
             margin: 0;
         }
+        
 	</style>
+    
 </head>
 
 <body>
@@ -135,12 +138,12 @@
                 dragging: false,
 				zoomControl: false
 			}
-			// create a new Leaflet map, passing map options, and assign to variable
+			// creates a new Leaflet map, passing map options, and assigns to variables
 		var map = L.map('map', options);
 
-		var dataLayer, // declare global variable for map units
-			attribute = "VACANT", // assign initial variable to store data attribute 
-			norm = "TOTAL"; // asign initial variable to store normalizing data attribute
+		var dataLayer, // declares global variable for map units
+			attribute = "VACANT", // assigns initial variable to store data attribute 
+			norm = "TOTAL"; // assigns initial variable to store normalizing data attribute
 
 		// QJuery AJAX request to load external GEoJSON file
         var labels = {
@@ -152,18 +155,18 @@
         
 		$.getJSON("ky_counties_housing.json", function (data) {
 
-			// create Leaflet GeoJson layer with GeoJSON data and assign to global variable 
+			// creates Leaflet GeoJson layer with GeoJSON data and assign to global variable 
 			dataLayer = L.geoJson(data, {
                 onEachFeature: onEachFeature,
-				style: function (feature) { // style each feature of GeoJson layer
+				style: function (feature) { // styles each feature of GeoJson layer
 					return {
-						color: '#000000', // set stroke color
-						weight: 0.5, // set stroke weight
-						fillOpacity: 1, // override defautl fill opacity
-						fillColor: '#1f78b4' // set fill color
+						color: '#000000', // sets stroke color
+						weight: 0.5, // sets stroke weight
+						fillOpacity: 1, // overrides defautl fill opacity
+						fillColor: '#1f78b4' // sets fill color
 					};
 				}
-			}).addTo(map); // add the Leaflet GeoJson layer to the map
+			}).addTo(map); // adds the Leaflet GeoJson layer to the map
 
             drawLegend();
 			drawMap(); 
@@ -175,22 +178,22 @@
 
 		function drawMap() {
 
-			// call function to determine class breaks and assign return value to variable
+			// calls function to determine class breaks and assign return value to variable
 			var breaks = getClassBreaks();
 
 			// loop through each layer of the GeoJson layer
 			dataLayer.eachLayer(function (layer) {
 
-				// create shorthand variable to access layer properties
+				// creates shorthand variable to access layer properties
 				var props = layer.feature.properties;
 
-				// change the fill color of the layer using the layer's attribute values
+				// changes the fill color of the layer using the layer's attribute values
 				layer.setStyle({
 					fillColor: getColor(props[attribute] /
 						props[norm], breaks)
 				});
 
-				// bind a tooltip to the layer, populated with calculated layer attribtue values
+				// binds a tooltip to the layer, populated with calculated layer attribtue values
 				layer.bindTooltip("<b>" + layer.feature.properties["NAME"] + " County</b></br>" +
 					labels[attribute] + ": " +
 					((layer.feature.properties[attribute] / layer.feature.properties[norm]) * 100).toLocaleString() + "%", {
@@ -201,28 +204,24 @@
                 });
 			});
 
-			// call the function to draw the legend, sending the breaks array as arugment
+			// calls the function to draw the legend, sending the breaks array as arugment
 			updateLegend(breaks);
 		}
 
 		function getClassBreaks() {
 
-			// create empty array to hold range of data values
+			// creates an empty array to hold range of data values
 			var values = [];
-
-			// loop through each layer
+			// loops through each layer
 			dataLayer.eachLayer(function (layer) {
-
-				// calculate the normalized value of the layer's data attribute
+				// calculates the normalized value of the layer's data attribute
 				var value = layer.feature.properties[attribute] / layer.feature.properties[norm];
-
-				// push that value into the array
+				// pushes the values into the array
 				values.push(value);
 			});
 
-			// use simple statistics to create 5 class ranges (5 arrays of values)
+			// uses simple statistics to create 5 class ranges (5 arrays of values)
 			var clusters = ss.ckmeans(values, 5);
-
 			// JS map method returns an array of the low and high values from each cluster
 			var breaks = clusters.map(function (cluster) {
 				return [cluster[0], cluster.pop()];
@@ -235,9 +234,8 @@
 
 		function getColor(d, breaks) {
 			// function accepts a single normalized data attribute value 
-			// and uses a series of conditional statements to determine which 
+			// and uses a series of conditional statements to determine 
 			// which color value to return to return to the function caller
-
 			if (d <= breaks[0][1]) {
 				return '#f1eef6';
 			} else if (d <= breaks[1][1]) {
@@ -260,12 +258,10 @@
 
 			// when the legend is added to the map
 			legend.onAdd = function (map) {
-
 				// create a new HTML <div> element and give it a class name of "legend"
 				var div = L.DomUtil.create('div', 'legend');
 
 				return div;
-
 			};
 
 			// add the legend to the map
@@ -278,9 +274,7 @@
             var legend = $('.legend').html("<h3>" + labels[attribute] + "</h3><ul>"); 
 
             for (var i = 0; i <= breaks.length-1; i++) {
-
                 var color = getColor(breaks[i][0], breaks);
-
                 legend.append(
                     '<span style="background:' + color + '"></span> ' +
                     '<label>'+(breaks[i][0]*100).toLocaleString() + ' &mdash; ' + 
@@ -297,8 +291,6 @@
 
             });
         }
-        
-        // code executed here when change event occurs
         
         function drawInfo() {
             // creates an information box in the top right corner of map frame
@@ -323,28 +315,6 @@
             });
     
         }
-    
-       // function changeLayerColor(e) {
-            // changes color of layer to magenta with mouseover and returns back to original color settings with mouseout
-         //   dataLayer.on('mouseover', function pointMouseover(leafletEvent) {
-        //        var dataLayer = leafletEvent.target;
-        //        dataLayer.setStyle({
-        //            weight: 2,
-         //           color: 'yellow',
-        //            fillColor: '#d63194'
-      //      });
-     //       dataLayer.on('mouseout', function
-     //       pointMouseover(leafletEvent){
-     //           var dataLayer = leafletEvent.target;
-     //           dataLayer.setStyle({
-     //               weight: 0.5,
-     //               color: 'black',
-     //       });
-     //       drawMap();
-     //       })
-     //   }          
-     //       )
-     //   }
                    
         function updateInfo(layer) {
             // updates the information associated with each county so that the data can be populated in the information box
@@ -380,7 +350,6 @@
         }          
             )
         }
-        
         
 	</script>
 
