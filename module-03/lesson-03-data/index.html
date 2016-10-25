@@ -62,6 +62,9 @@
             dragging: true,
             zoomControl: true
         }
+        
+      
+        
         var map = L.map('map', options);
         
             var tiles = L.tileLayer('http://{s}.tile.stamen.com/toner-background/{z}/{x}/{y}.{ext}',{
@@ -73,7 +76,7 @@
         });
         map.addLayer(tiles);
 
-        // declare global variables
+        var dataLayer;
         
         $.getJSON("us-states.json", function(states) {
             
@@ -85,24 +88,103 @@
                 header: true,
 	            complete: function(data) {
                    
-                    console.log(data);
+                    processData(states, data);
 	       }
         });
         });
         
-       
-        // AJAX requests to load data files (a GeoJSON and a CSV file)
+        function processData(states, data){
 
-        // function to process/bind CSV attribute data to geometry data
+            for (var state in states.features) {
 
-        // function to draw the geometries to the map
+                var props = states.features[state].properties.STATEFP;
 
-        // function to update the map (once for the initial data view and then again to update the map per the user's request)
+                for(var d in data.data) {
+                    var state_FIP = states.features[state].properties.STATEFP,
+                        dataFIP = data.data[d].STATE_FIP
+                    if(state_FIP === dataFIP){
+                        states.features[state].properties = data.data[d];
+                        console.log (states.features[state]);
+                        break;
+                    }
+                }
 
-        // function gets the class breaks   
 
+                }
+            
+            drawMap(states);
+            
+            }
+        
+            function drawMap(states){
+            
+                dataLayer = L.geoJson(states, {
+                    style: function (feature) {
+					   return {
+						  color: 'black', // set stroke color
+						  weight: 1.25, // set stroke weight
+						  fillOpacity: 1, // override defautl fill opacity
+						  fillColor: '#1f78b4' // set fill color
+					   };
+                    }
+				}).addTo(map);
+                
+                var breaks = getClassBreaks();
+                updateMap(breaks);
+                
+            }
+        
+        // function gets the class breaks
+        		function getClassBreaks() {
+                    
+                     var values = [];
+
+			         dataLayer.eachLayer(function (layer) {
+                         
+                         for (var i = 2001; i <= 2013; i++){
+                             var value = layer.feature.properties[String(i)];
+                             values.push(Number(value));
+                         }           
+			});
+            
+            var breaks = ss.quantile(values, [0, 0.25, 0.5, 0.75, 1]);
+                    
+            return breaks;
+            console.log(breaks);
+            
+		}
+
+        // function to update the map
+        function updateMap(breaks){
+            
+            dataLayer.eachLayer(function(layer){
+                
+                layer.setStyle({
+                    fillColor : getColor(Number(layer.feature.properties['2001']),breaks)
+            });
+        })
+        
+        }
+        
         // function to get the color value
 
+        function getColor(d, breaks) {
+            
+                console.log (d,breaks);
+			
+                if (d <= breaks[1]) {
+				        return '#f7ffce';
+			     } else if (d <= breaks[2]) {
+				        return '#adde63';
+			     } else if (d <= breaks[3]) {
+				        return '#299c39';
+			     } else if (d <= breaks[4]) {
+				        return '#186321'
+			} 
+		}
+                
+        
+        
         // function to draw the legend
 
         // function to create the UI
