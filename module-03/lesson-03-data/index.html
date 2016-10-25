@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset=utf-8 />
+    <title>MAP 673 Lab 03</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/4.1.2/papaparse.min.js"></script>
+    <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/simple-statistics/1.0.0/simple_statistics.min.js"></script>
+    
+    <link rel="stylesheet" 
+    href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+    <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: whitesmoke;
+            font-family: Lato, sans-serif;
+            color: #0D0000;
+        }
+        header {
+            padding: 6px 10%;
+        }
+        h1 {
+            position: absolute;
+            z-index: 100;
+            top: 10px;
+            left: 60px;
+            padding: 8px 15px;
+            margin: 0;
+            color: whitesmoke;
+            font-size: 1.5em;
+            background: rgba(25,25,25,0.8);
+            border-radius: 5px;
+        
+        }
+        #map {
+            position: absolute;
+            width: 100%;
+            top: 0;
+            bottom: 0;
+        }    
+    </style>
+</head>
+
+<body>
+    <h1>Unemployment Rates by State, 2001-2013</h1>
+    <div id='map'></div>
+    
+    <script>
+        
+         // instantiate the Leaflet map
+        var options = {
+            center: [38.2, -94],
+            zoom: 4,
+            minZoom: 4,
+            maxZoom: 6,
+            dragging: true,
+            zoomControl: true
+        }
+        var map = L.map('map', options);
+        
+            var tiles = L.tileLayer('http://{s}.tile.stamen.com/toner-background/{z}/{x}/{y}.{ext}',{
+            attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>,<a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.8</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+            subdomains: 'abcd',
+            minZoom: 4,
+            maxZoom: 6,
+            ext: 'png'
+        });
+        map.addLayer(tiles);
+
+        // declare global variables
+        
+        $.getJSON("us-states.json", function(states) {
+            
+            console.log(states);
+            
+            Papa.parse("states-unemployment.csv", {
+            
+                download: true,
+                header: true,
+	            complete: function(data) {
+                   
+                    console.log(data);
+	       }
+        });
+        });
+        
+       
+        // AJAX requests to load data files (a GeoJSON and a CSV file)
+
+        // function to process/bind CSV attribute data to geometry data
+
+        // function to draw the geometries to the map
+
+        // function to update the map (once for the initial data view and then again to update the map per the user's request)
+
+        // function gets the class breaks   
+
+        // function to get the color value
+
+        // function to draw the legend
+
+        // function to create the UI
+
+    </script>
+    
+</body>
+
+</html>
