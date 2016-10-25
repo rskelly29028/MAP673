@@ -225,7 +225,7 @@
                          }           
 			});
             
-            var breaks = ss.quantile(values, [0, 0.25, 0.5, 0.75, 1]);
+            var breaks = ss.quantile(values, [0, 0.2, 0.4, 0.6, 0.8, 1]);
                     
             return breaks;
             console.log(breaks);
@@ -250,19 +250,19 @@
             
                 console.log (d,breaks);
 			
-                if (d <= breaks[1]) {
+                 if (d <= breaks[0]) {
 				        return '#f7ffce';
-			     } else if (d <= breaks[2]) {
+			     } else if (d <= breaks[1]) {
 				        return '#adde63';
-			     } else if (d <= breaks[3]) {
+			     } else if (d <= breaks[2]) {
 				        return '#299c39';
-			     } else if (d <= breaks[4]) {
-				        return '#186321'
+			     } else if (d <= breaks[3]) {
+				        return '#186321';
+                 } else if (d <= breaks[4]){
+                        return '#000000';
+                 }
 			} 
-		}
-                
-        
-        
+		
         // function to draw the legend
         function drawLegend(breaks){
             
@@ -289,6 +289,8 @@
         }
         
         // function to create the UI
+        
+        
         function buildsliderControlUI(breaks){
             
             var sliderControl = L.control({position: 'bottomleft'});
