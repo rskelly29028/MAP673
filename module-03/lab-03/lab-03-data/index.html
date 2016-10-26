@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset=utf-8 />
+    <title>MAP 673 Lab 03</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/4.1.2/papaparse.min.js"></script>
+    <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/simple-statistics/1.0.0/simple_statistics.min.js"></script>
+    
+    <link rel="stylesheet" 
+    href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+    <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: whitesmoke;
+            font-family: Lato, sans-serif;
+            color: #0D0000;
+        }
+        header {
+            padding: 6px 10%;
+        }
+        h1 {
+            position: absolute;
+            z-index: 100;
+            top: 10px;
+            left: 60px;
+            padding: 8px 15px;
+            margin: 0;
+            color: whitesmoke;
+            font-size: 1.5em;
+            background: blue;
+            border-radius: 5px;
+        
+        }
+        #map {
+            position: absolute;
+            width: 100%;
+            top: 0;
+            bottom: 0;
+        }
+        
+		.legend {
+			padding: 6px 8px;
+			font-size: 1em;
+			background: #404040;
+            color: white;
+			box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+			border-radius: 5px;
+            width: 160px;
+		}
+		
+		.legend h3 {
+			font-size: 1.1em;
+			font-weight: normal;
+            line-height: 1em;
+			color: white;
+			margin: 0;
+		}
+		
+		.legend span {
+			width: 30px;
+			height: 20px;
+			float: left;
+			margin-right: 10px;
+		}
+		
+		.legend label {
+			font-size: 1.1em;
+		}
+		
+		.legend label: after {
+			content: '';
+			display: block;
+			clear: both;
+		}
+        .legend ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 12px 4px 8;
+        }
+        .legend li {
+            list-style-type: none;
+            height: 22px;
+        }
+        #ui-controls {
+            width: 176px;   
+            padding: 8px 15px 8px 15px;
+            background: rgba(75,75,75,0.8);
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            border-radius: 5px; 
+            color: whitesmoke;
+        }
+        #ui-controls .min {
+            float: left;
+        }
+        #ui-controls .max {
+            float: right;
+        }
+        .year-slider {
+            width: 100%;
+        }
+        .info {
+            padding: 6px 8px;
+            font-size: 1em;
+            background: whitesmoke;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            border-radius: 5px;
+            text-align: right;   
+        }
+        .info h3 {
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Unemployment Rates by County in Kentucky, 2000-2013</h1>
+    <div id='map'></div>
+    
+    <div id="ui-controls">
+        <label><span class="min">2001</span><span class="max">2013</span>
+        <input type="range" min="2001", max="2013", 
+            value="2001", step="1" class="year-slider">
+        </label>
+    </div>
+    
+    <script>
+        
+        var options = {
+            center: [37.8, -86],
+            zoom: 7,
+            minZoom: 6,
+            maxZoom: 8,
+            dragging: true,
+            zoomControl: true
+        }
+        
+        var map = L.map('map', options);
+        
+            var tiles = L.tileLayer('http://{s}.tile.stamen.com/toner-background/{z}/{x}/{y}.{ext}',{
+                attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>,<a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.8</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+                subdomains: 'abcd',
+                minZoom: 4,
+                maxZoom: 10,
+                ext: 'png'
+        });
+        
+        // add the map layer tiles 
+        map.addLayer(tiles);
+        
+        // create a global variable
+        var dataLayer;
+        
+        // import the geoJSON
+        $.getJSON("ky-counties.json", function(counties) {
+            
+            console.log(counties);
+            // import the Papa Parse function and the CSV file to be parsed
+            Papa.parse("ky-unemployment-data.csv", {
+            
+                download: true,
+                header: true,
+	            complete: function(data) {
+                   
+                    processData(counties, data);
+                    
+	       }
+                
+        });
+        });
+        
+        
+        // create a function to loop through the counties data and grab the county FIPS code to ensure a match for each county
+        function processData(counties, data){
+
+            for (var county in counties.features) {
+
+                var props = counties.features[county].properties.NAME;
+
+                for(var d in data.data) {
+                    var county_FIP = counties.features[county].properties.NAME,
+                        dataFIP = data.data[d].NAME
+                    if(county_FIP === dataFIP){
+                        counties.features[county].properties = data.data[d];
+                        console.log (counties.features[county]);
+                        break;
+                    }
+                }
+
+
+                }
+            
+            drawMap(counties);
+            
+            }
+        
+        
+        // create the function to create the states and superimpose atop the tiles
+            function drawMap(counties){
+            
+                dataLayer = L.geoJson(counties, {
+                    style: function (feature) {
+					   return {
+						  color: 'black', // set stroke color
+						  weight: 1.25, // set stroke weight
+						  fillOpacity: 1, // override defautl fill opacity
+						  fillColor: '#1f78b4' // set fill color
+					   };
+                    }
+				}).addTo(map);
+            
+            var breaks = getClassBreaks();
+                
+            updateMap(breaks, '2000');
+            drawLegend(breaks);
+            buildSliderUI(breaks);
+            drawInfo(breaks);
+            
+                
+            }
+
+        // create the function to create the class breaks within an array
+        		function getClassBreaks() {
+                    
+                     var values = [];
+
+			         dataLayer.eachLayer(function (layer) {
+                         
+                         for (var i = 2000; i <= 2013; i++){
+                             var value = layer.feature.properties[String(i)];
+                             values.push(Number(value));
+                         }           
+			});
+            
+            // create a variable using quantile method for statistics
+            var breaks = ss.quantile(values, [0, 0.2, 0.4, 0.6, 0.8, 1]);
+                    
+            return breaks;
+            console.log(breaks);
+            
+		}
+
+        // create function to update the map
+        function updateMap(breaks, attribute){
+            
+            dataLayer.eachLayer(function(layer){
+                
+                layer.setStyle({
+                    fillColor : getColor(Number(layer.feature.properties[attribute]),breaks)
+            });
+        })
+        
+        }
+        
+        // function to get the color values
+
+        function getColor(d, breaks) {
+            
+                console.log (d,breaks);
+			
+                 if (d <= breaks[1]) {
+				        return '#eff8ad';
+			     } else if (d <= breaks[2]) {
+				        return '#adde63';
+			     } else if (d <= breaks[3]) {
+				        return '#299c39';
+			     } else if (d <= breaks[4]) {
+				        return '#186321';
+                 } else if (d <= breaks[5]){
+                        return '#003139';
+                 }
+			} 
+		
+        // create function to draw the legend
+        function drawLegend(breaks){
+            
+            var legendControl = L.control({position: 'bottomright'});
+            legendControl.onAdd = function(map) {
+                var div = L.DomUtil.create('div', 'legend');
+                return div;
+            };
+            
+            legendControl.addTo(map);
+            
+            var legend = $('.legend').html("<h3><span>2001</span> KY County % Unemployment</h3><ul>");
+            
+            for (var i=0; i < breaks.length -1; i++) {
+                
+                var color = getColor(breaks[i + 1], breaks);
+                
+                $('.legend ul').append('<li><span style="background:' + color + '"></span>' + 
+                    breaks[i] + "%" + ' &mdash; ' +
+                    breaks[i+1] + "%" + '</li>');
+            }
+            
+            legend.append("</ul>");
+        }
+        
+        // create function to generate the slider User Interface
+        function buildSliderUI(breaks){
+            
+            var sliderControl = L.control({position: 'bottomleft'});
+            
+            sliderControl.onAdd = function(map) {
+                
+                var slider = L.DomUtil.get("ui-controls");
+                
+                L.DomEvent.addListener(slider, 'mousedown', function(e) {
+                    L.DomEvent.stopPropagation(e);
+                    
+                });
+                
+            return slider;
+            }
+            
+            sliderControl.addTo(map);
+            
+            $(".year-slider").on("input change", function(){
+                    
+                var attribute = $(this).val();
+                updateMap(breaks, attribute);
+                $('.legend h3 span').html(attribute);
+            });
+        }
+        
+        // build the information box
+        function drawInfo(breaks) {
+            // creates an information box in the top right corner of map frame
+            var info = L.control({position: 'topright'});
+            
+            info.onAdd = function(map) {
+
+                var div = L.DomUtil.create('div', 'info');
+
+                return div;  
+
+            }
+            
+            info.addTo(map);
+            // adds data to information box upon mouseover event
+            dataLayer.on('mouseover', function() {
+                $(".info").show();
+            });
+            // removes data from information box upon mouseout event
+            dataLayer.on('mouseout', function() {
+                $(".info").hide();    
+            });
+    
+        }
+        
+        
+        
+           function onEachFeature(feature, layer) {
+            // changes color of layer to magenta with mouseover and returns back to original color settings with mouseout
+            layer.on('mouseover', function pointMouseover(leafletEvent) {
+                var dataLayer = leafletEvent.target;
+                dataLayer.setStyle({
+                    weight: 2.5,
+                    color: 'yellow',
+                    fillColor: '#d63194'
+            });
+            layer.on('mouseout', function
+            pointMouseover(leafletEvent){
+                var dataLayer = leafletEvent.target;
+                dataLayer.setStyle({
+                    weight: 0.5,
+                    color: 'black',
+            });
+            drawMap();
+            })
+        }          
+            )
+        }
+    </script>
+        
+</body>
+
+</html>      
