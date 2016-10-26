@@ -105,14 +105,6 @@
         .year-slider {
             width: 100%;
         }
-        footer {
-            padding: 6px 10%;
-            color: darkgrey;
-        }
-        p {
-            font-size: 1em;
-            color: white;
-        }
     </style>
 </head>
 
@@ -129,7 +121,6 @@
     
     <script>
         
-         // instantiate the Leaflet map
         var options = {
             center: [38.2, -94],
             zoom: 4,
@@ -138,8 +129,6 @@
             dragging: true,
             zoomControl: true
         }
-        
-      
         
         var map = L.map('map', options);
         
@@ -150,14 +139,18 @@
             maxZoom: 6,
             ext: 'png'
         });
+        
+        // add the map layer tiles 
         map.addLayer(tiles);
 
+        // create a global variable
         var dataLayer;
         
+        // import the geoJSON
         $.getJSON("us-states.json", function(states) {
             
             console.log(states);
-            
+            // import the Papa Parse function and the CSV file to be parsed
             Papa.parse("states-unemployment.csv", {
             
                 download: true,
@@ -169,6 +162,7 @@
         });
         });
         
+        // create a function to loop through the states data and grab the FIPS code to ensure a match for each state
         function processData(states, data){
 
             for (var state in states.features) {
@@ -192,6 +186,7 @@
             
             }
         
+            // create the function to create the states and superimpose atop the tiles
             function drawMap(states){
             
                 dataLayer = L.geoJson(states, {
@@ -206,13 +201,14 @@
 				}).addTo(map);
                 
                 var breaks = getClassBreaks();
-                updateMap(breaks);
+                
+                updateMap(breaks, '2001');
                 drawLegend(breaks);
-                buildsliderControlUI(breaks);
+                buildSliderUI(breaks);
                 
             }
         
-        // function gets the class breaks
+                // create the function to create the class breaks within an array
         		function getClassBreaks() {
                     
                      var values = [];
@@ -225,6 +221,7 @@
                          }           
 			});
             
+            // create a variable using quantile method for statistics
             var breaks = ss.quantile(values, [0, 0.2, 0.4, 0.6, 0.8, 1]);
                     
             return breaks;
@@ -232,38 +229,38 @@
             
 		}
 
-        // function to update the map
-        function updateMap(breaks){
+        // create function to update the map
+        function updateMap(breaks, attribute){
             
             dataLayer.eachLayer(function(layer){
                 
                 layer.setStyle({
-                    fillColor : getColor(Number(layer.feature.properties['2001']),breaks)
+                    fillColor : getColor(Number(layer.feature.properties[attribute]),breaks)
             });
         })
         
         }
         
-        // function to get the color value
+        // function to get the color values
 
         function getColor(d, breaks) {
             
                 console.log (d,breaks);
 			
-                 if (d <= breaks[0]) {
-				        return '#f7ffce';
-			     } else if (d <= breaks[1]) {
-				        return '#adde63';
+                 if (d <= breaks[1]) {
+				        return '#eff8ad';
 			     } else if (d <= breaks[2]) {
-				        return '#299c39';
+				        return '#adde63';
 			     } else if (d <= breaks[3]) {
+				        return '#299c39';
+			     } else if (d <= breaks[4]) {
 				        return '#186321';
-                 } else if (d <= breaks[4]){
-                        return '#000000';
+                 } else if (d <= breaks[5]){
+                        return '#003139';
                  }
 			} 
 		
-        // function to draw the legend
+        // create function to draw the legend
         function drawLegend(breaks){
             
             var legendControl = L.control({position: 'bottomright'});
@@ -274,7 +271,7 @@
             
             legendControl.addTo(map);
             
-            var legend = $('.legend').html("<h3>US Unemployment Rates</h3><ul>");
+            var legend = $('.legend').html("<h3><span>2001</span> US Unemployment Rates</h3><ul>");
             
             for (var i=0; i < breaks.length -1; i++) {
                 
@@ -288,14 +285,13 @@
             legend.append("</ul>");
         }
         
-        // function to create the UI
-        
-        
-        function buildsliderControlUI(breaks){
+        // create function to generate the slider User Interface
+        function buildSliderUI(breaks){
             
             var sliderControl = L.control({position: 'bottomleft'});
             
             sliderControl.onAdd = function(map) {
+                
                 var slider = L.DomUtil.get("ui-controls");
                 
                 L.DomEvent.addListener(slider, 'mousedown', function(e) {
@@ -308,10 +304,11 @@
             
             sliderControl.addTo(map);
             
-            $(".year-slider")
-                .on("input change", function(){
-                    attribute = $(this).val();
-                updateMap(breaks);
+            $(".year-slider").on("input change", function(){
+                    
+                var attribute = $(this).val();
+                updateMap(breaks, attribute);
+                $('.legend h3 span').html(attribute);
             });
         }
 
