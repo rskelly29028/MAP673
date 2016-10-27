@@ -106,9 +106,10 @@
             width: 100%;
         }
         .info {
+            color: white;
             padding: 6px 8px;
             font-size: 1em;
-            background: whitesmoke;
+            background: #616161;
             box-shadow: 0 0 15px rgba(0,0,0,0.2);
             border-radius: 5px;
             text-align: right;   
@@ -157,6 +158,7 @@
         // create a global variable
         var dataLayer;
         
+        
         // import the geoJSON
         $.getJSON("ky-counties.json", function(counties) {
             
@@ -173,6 +175,9 @@
 	       }
                 
         });
+        
+        
+            
         });
         
         
@@ -205,6 +210,7 @@
             function drawMap(counties){
             
                 dataLayer = L.geoJson(counties, {
+                    onEachFeature: onEachFeature,
                     style: function (feature) {
 					   return {
 						  color: 'black', // set stroke color
@@ -221,8 +227,8 @@
             drawLegend(breaks);
             buildSliderUI(breaks);
             drawInfo(breaks);
+            updateInfo(breaks);
             
-                
             }
 
         // create the function to create the class breaks within an array
@@ -354,7 +360,14 @@
     
         }
         
-        
+         function updateInfo(layer) {
+            // updates the information associated with each county so that the data can be populated in the information box
+            var props = dataLayer;
+            // var props = counties.features[county].properties.NAME;
+            var html = "<h3>"+props['NAME']+" County</h3>"
+
+            $(".info").html(html);
+        }
         
            function onEachFeature(feature, layer) {
             // changes color of layer to magenta with mouseover and returns back to original color settings with mouseout
