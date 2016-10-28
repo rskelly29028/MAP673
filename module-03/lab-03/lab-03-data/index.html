@@ -115,7 +115,7 @@
             background: #616161;
             box-shadow: 0 0 15px rgba(0,0,0,0.2);
             border-radius: 5px;
-            text-align: right;   
+            text-align: center;   
         }
         .info h3 {
             margin: 0;
@@ -128,9 +128,9 @@
     <div id='map'></div>
     
     <div id="ui-controls">
-        <label><span class="min">2001</span><span class="max">2013</span>
-        <input type="range" min="2001", max="2013", 
-            value="2001", step="1" class="year-slider">
+        <label><span class="min">2000</span><span class="max">2013</span>
+        <input type="range" min="2000", max="2013", 
+            value="2000", step="1" class="year-slider">
         </label>
     </div>
     
@@ -179,10 +179,7 @@
                 
         });
         
-        
-            
         });
-        
         
         // create a function to loop through the counties data and grab the county FIPS code to ensure a match for each county
         function processData(counties, data){
@@ -208,8 +205,7 @@
             
             }
         
-        
-        // create the function to create the states and superimpose atop the tiles
+        // create the function to create the counties and superimpose atop the tiles
             function drawMap(counties){
             
                 dataLayer = L.geoJson(counties, {
@@ -223,9 +219,7 @@
 					   };
                     }
 				}).addTo(map);
-                
-                
-            
+               
             var breaks = getClassBreaks();
                 
             updateMap(breaks, '2000');
@@ -235,9 +229,6 @@
             updateInfo();
             
 			};
-
-		
-            
 
         // create the function to create the class breaks within an array
         		function getClassBreaks() {
@@ -302,15 +293,15 @@
             
             legendControl.addTo(map);
             
-            var legend = $('.legend').html("<h3><span>2001</span> KY County % Unemployment</h3><ul>");
+            var legend = $('.legend').html("<h3><span>2000</span> KY County % Unemployment</h3><ul>");
             
             for (var i=0; i < breaks.length -1; i++) {
                 
                 var color = getColor(breaks[i + 1], breaks);
                 
                 $('.legend ul').append('<li><span style="background:' + color + '"></span>' + 
-                    breaks[i] + "%" + ' &mdash; ' +
-                    breaks[i+1] + "%" + '</li>');
+                    Math.round(breaks[i]) + "%" + ' &mdash; ' +
+                    Math.round(breaks[i+1]) + "%" + '</li>');
             }
             
             legend.append("</ul>");
@@ -370,25 +361,39 @@
         
          function updateInfo(layer) {
             // updates the information associated with each county so that the data can be populated in the information box
-            var props = dataLayer;
-            //var props = counties.features[county].properties.NAME;
-            var html = "<h3>"+ props['NAME'] +" County</h3>"
-
+            var props = layer.feature.properties;
+            var html = "<h3>"+ props['NAME'] +" County</h3>"+
+                "2000: " + props['2000']+"%<br>"+
+                "2001: " + props['2001']+"%<br>"+
+                "2002: " + props['2002']+"%<br>"+
+                "2003: " + props['2003']+"%<br>"+
+                "2004: " + props['2004']+"%<br>"+
+                "2005: " + props['2005']+"%<br>"+
+                "2007: " + props['2006']+"%<br>"+
+                "2008: " + props['2007']+"%<br>"+
+                "2009: " + props['2008']+"%<br>"+
+                "2010: " + props['2010']+"%<br>"+
+                "2011: " + props['2011']+"%<br>"+
+                "2012: " + props['2012']+"%<br>"+
+                "2013: " + props['2013']+"%"
             $(".info").html(html);
         }
         
            function onEachFeature(feature, layer) {
             // changes color of layer to magenta with mouseover and returns back to original color settings with mouseout
             layer.on('mouseover', function pointMouseover(leafletEvent) {
+                updateInfo(layer);
                 var dataLayer = leafletEvent.target;
                 dataLayer.setStyle({
                     weight: 2.5,
                     color: 'yellow',
                     fillColor: '#d63194'
             }); 
+            
             layer.on('click',function pointMouseclick(leafletEvent){
                 var dataLayer = leafletEvent.target;
-                layer.bindPopup(feature.properties.NAME + " County had a "+ feature.properties.NAME.numberValue + "% unemployment rate in<br> "+ layer.feature.properties.attribute).openPopup;
+                var props = layer.feature.properties;
+                layer.bindPopup(feature.properties.NAME + " County<br>" + props['2000'] + "% unemployment in<br> "+ props).openPopup;
                 });  // creates a popup of data on a mouseclick
             layer.on('mouseout', function pointMouseover(leafletEvent){
                 var dataLayer = leafletEvent.target;
