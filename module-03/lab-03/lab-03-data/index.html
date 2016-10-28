@@ -165,7 +165,7 @@
         // import the geoJSON
         $.getJSON("ky-counties.json", function(counties) {
             
-            console.log(counties);
+//            console.log(counties);
             // import the Papa Parse function and the CSV file to be parsed
             Papa.parse("ky-unemployment-data.csv", {
             
@@ -193,7 +193,7 @@
                         dataFIP = data.data[d].NAME
                     if(county_FIP === dataFIP){
                         counties.features[county].properties = data.data[d];
-                        console.log (counties.features[county]);
+//                        console.log (counties.features[county]);
                         break;
                     }
                 }
@@ -226,7 +226,7 @@
             drawLegend(breaks);
             buildSliderUI(breaks);
             drawInfo();
-            updateInfo();
+//            updateInfo();
             
 			};
 
@@ -267,7 +267,7 @@
 
         function getColor(d, breaks) {
             
-                console.log (d,breaks);
+//                console.log (d,breaks);
 			
                  if (d <= breaks[1]) {
 				        return '#eff8ad';
@@ -362,6 +362,8 @@
          function updateInfo(layer) {
             // updates the information associated with each county so that the data can be populated in the information box
             var props = layer.feature.properties;
+			 
+			console.log(layer.feature.properties);
             var html = "<h3>"+ props['NAME'] +" County</h3>"+
                 "2000: " + props['2000']+"%<br>"+
                 "2001: " + props['2001']+"%<br>"+
