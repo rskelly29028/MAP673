@@ -44,7 +44,10 @@
             top: 0;
             bottom: 0;
         }
-        
+        p {
+            font-size: 1em;
+            color: white;
+        }
 		.legend {
 			padding: 6px 8px;
 			font-size: 1em;
@@ -228,10 +231,13 @@
             updateMap(breaks, '2000');
             drawLegend(breaks);
             buildSliderUI(breaks);
-            drawInfo(breaks);
-            updateInfo(breaks);
+            drawInfo();
+            updateInfo();
             
-            }
+			};
+
+		
+            
 
         // create the function to create the class breaks within an array
         		function getClassBreaks() {
@@ -365,8 +371,8 @@
          function updateInfo(layer) {
             // updates the information associated with each county so that the data can be populated in the information box
             var props = dataLayer;
-            // var props = counties.features[county].properties.NAME;
-            var html = "<h3>"+props['NAME']+" County</h3>"
+            //var props = counties.features[county].properties.NAME;
+            var html = "<h3>"+ props['NAME'] +" County</h3>"
 
             $(".info").html(html);
         }
@@ -379,19 +385,25 @@
                     weight: 2.5,
                     color: 'yellow',
                     fillColor: '#d63194'
-            });
-            layer.on('mouseout', function
-            pointMouseover(leafletEvent){
+            }); 
+            layer.on('click',function pointMouseclick(leafletEvent){
+                var dataLayer = leafletEvent.target;
+                layer.bindPopup(feature.properties.NAME + " County had a "+ feature.properties.NAME.numberValue + "% unemployment rate in<br> "+ layer.feature.properties.attribute).openPopup;
+                });  // creates a popup of data on a mouseclick
+            layer.on('mouseout', function pointMouseover(leafletEvent){
                 var dataLayer = leafletEvent.target;
                 dataLayer.setStyle({
                     weight: 0.5,
                     color: 'black',
+                    fillColor: 'blue'  
             });
-            return map;
+            
             })
-        }          
-            )
-        }
+        });          
+            
+            };
+           
+        
     </script>
         
 </body>
