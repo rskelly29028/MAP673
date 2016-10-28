@@ -265,9 +265,13 @@
 
 			dataLayer.eachLayer(function (layer) {
 
+				var props = layer.feature.properties;
+				
 				layer.setStyle({
 					fillColor: getColor(Number(layer.feature.properties[attribute]), breaks)
 				});
+				
+				layer.bindPopup(props.NAME + " County<br>" + props['2000'] + "% unemployment in<br> " + props);
 			})
 
 		}
@@ -409,11 +413,11 @@
 					fillColor: '#d63194'
 				});
 
-				layer.on('click', function pointMouseclick(leafletEvent) {
-					var dataLayer = leafletEvent.target;
-					var props = layer.feature.properties;
-					layer.bindPopup(feature.properties.NAME + " County<br>" + props['2000'] + "% unemployment in<br> " + props).openPopup;
-				}); // creates a popup of data on a mouseclick
+//				layer.on('click', function pointMouseclick(leafletEvent) {
+//					var dataLayer = leafletEvent.target;
+//					var props = layer.feature.properties;
+//					layer.bindPopup(feature.properties.NAME + " County<br>" + props['2000'] + "% unemployment in<br> " + props).openPopup;
+//				}); // creates a popup of data on a mouseclick
 
 				layer.on('mouseout', function pointMouseover(leafletEvent) {
 					var dataLayer = leafletEvent.target;
