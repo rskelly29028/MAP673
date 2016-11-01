@@ -1,0 +1,1153 @@
+{
+  "meta" : {
+    "view" : {
+      "id" : "btt2-zrt5",
+      "name" : "Summary Population Distribution By District",
+      "attribution" : "Kenya National Bureau of Statistics",
+      "attributionLink" : "http://www.knbs.or.ke",
+      "averageRating" : 0,
+      "category" : "Census",
+      "createdAt" : 1355327677,
+      "description" : "Population",
+      "displayType" : "table",
+      "downloadCount" : 434,
+      "hideFromCatalog" : false,
+      "hideFromDataJson" : false,
+      "indexUpdatedAt" : 1452779876,
+      "licenseId" : "CC0_10",
+      "newBackend" : false,
+      "numberOfComments" : 0,
+      "oid" : 2962879,
+      "publicationAppendEnabled" : false,
+      "publicationDate" : 1452764718,
+      "publicationGroup" : 552180,
+      "publicationStage" : "published",
+      "rowsUpdatedAt" : 1364318204,
+      "rowsUpdatedBy" : "tm4c-rqum",
+      "tableId" : 757307,
+      "totalTimesRated" : 0,
+      "viewCount" : 1394,
+      "viewLastModified" : 1452764718,
+      "viewType" : "tabular",
+      "columns" : [ {
+        "id" : -1,
+        "name" : "sid",
+        "dataTypeName" : "meta_data",
+        "fieldName" : ":sid",
+        "position" : 0,
+        "renderTypeName" : "meta_data",
+        "format" : { }
+      }, {
+        "id" : -1,
+        "name" : "id",
+        "dataTypeName" : "meta_data",
+        "fieldName" : ":id",
+        "position" : 0,
+        "renderTypeName" : "meta_data",
+        "format" : { }
+      }, {
+        "id" : -1,
+        "name" : "position",
+        "dataTypeName" : "meta_data",
+        "fieldName" : ":position",
+        "position" : 0,
+        "renderTypeName" : "meta_data",
+        "format" : { }
+      }, {
+        "id" : -1,
+        "name" : "created_at",
+        "dataTypeName" : "meta_data",
+        "fieldName" : ":created_at",
+        "position" : 0,
+        "renderTypeName" : "meta_data",
+        "format" : { }
+      }, {
+        "id" : -1,
+        "name" : "created_meta",
+        "dataTypeName" : "meta_data",
+        "fieldName" : ":created_meta",
+        "position" : 0,
+        "renderTypeName" : "meta_data",
+        "format" : { }
+      }, {
+        "id" : -1,
+        "name" : "updated_at",
+        "dataTypeName" : "meta_data",
+        "fieldName" : ":updated_at",
+        "position" : 0,
+        "renderTypeName" : "meta_data",
+        "format" : { }
+      }, {
+        "id" : -1,
+        "name" : "updated_meta",
+        "dataTypeName" : "meta_data",
+        "fieldName" : ":updated_meta",
+        "position" : 0,
+        "renderTypeName" : "meta_data",
+        "format" : { }
+      }, {
+        "id" : -1,
+        "name" : "meta",
+        "dataTypeName" : "meta_data",
+        "fieldName" : ":meta",
+        "position" : 0,
+        "renderTypeName" : "meta_data",
+        "format" : { }
+      }, {
+        "id" : 53272264,
+        "name" : "District",
+        "dataTypeName" : "text",
+        "fieldName" : "district",
+        "position" : 1,
+        "renderTypeName" : "text",
+        "tableColumnId" : 6012359,
+        "width" : 196,
+        "cachedContents" : {
+          "non_null" : 316,
+          "largest" : "YATTA",
+          "null" : 0,
+          "top" : [ {
+            "item" : "TRANS MARA",
+            "count" : 20
+          }, {
+            "item" : "KAJIADO CENTRAL",
+            "count" : 19
+          }, {
+            "item" : "LOITOKITOK",
+            "count" : 18
+          }, {
+            "item" : "KERICHO",
+            "count" : 17
+          }, {
+            "item" : "KIPKELION",
+            "count" : 16
+          }, {
+            "item" : "BURET",
+            "count" : 15
+          }, {
+            "item" : "SOTIK",
+            "count" : 14
+          }, {
+            "item" : "BOMET",
+            "count" : 13
+          }, {
+            "item" : "KAJIADO NORTH",
+            "count" : 12
+          }, {
+            "item" : "KAKAMEGA CENTRAL",
+            "count" : 11
+          }, {
+            "item" : "KAKAMEGA SOUTH",
+            "count" : 10
+          }, {
+            "item" : "KAKAMEGA NORTH",
+            "count" : 9
+          }, {
+            "item" : "KAKAMEGA EAST",
+            "count" : 8
+          }, {
+            "item" : "LUGARI",
+            "count" : 7
+          }, {
+            "item" : "VIHIGA",
+            "count" : 6
+          }, {
+            "item" : "EMUHAYA",
+            "count" : 5
+          }, {
+            "item" : "HAMISI",
+            "count" : 4
+          }, {
+            "item" : "MUMIAS",
+            "count" : 3
+          }, {
+            "item" : "BUTERE",
+            "count" : 2
+          }, {
+            "item" : "BUNGOMA SOUTH",
+            "count" : 1
+          } ],
+          "smallest" : "BARINGO"
+        },
+        "format" : { }
+      }, {
+        "id" : 53272265,
+        "name" : "rural/urban",
+        "dataTypeName" : "text",
+        "fieldName" : "rural_urban",
+        "position" : 2,
+        "renderTypeName" : "text",
+        "tableColumnId" : 6012360,
+        "width" : 232,
+        "cachedContents" : {
+          "non_null" : 316,
+          "largest" : "urban",
+          "null" : 0,
+          "top" : [ {
+            "item" : "Rural",
+            "count" : 20
+          }, {
+            "item" : "urban",
+            "count" : 19
+          } ],
+          "smallest" : "Rural"
+        },
+        "format" : { }
+      }, {
+        "id" : 53272266,
+        "name" : "Male",
+        "dataTypeName" : "number",
+        "fieldName" : "male",
+        "position" : 3,
+        "renderTypeName" : "number",
+        "tableColumnId" : 6012361,
+        "width" : 148,
+        "cachedContents" : {
+          "non_null" : 316,
+          "average" : "60735.62658227848",
+          "largest" : "582554",
+          "null" : 0,
+          "top" : [ {
+            "item" : "0",
+            "count" : 20
+          }, {
+            "item" : "5998",
+            "count" : 19
+          }, {
+            "item" : "46556",
+            "count" : 18
+          }, {
+            "item" : "47354",
+            "count" : 17
+          }, {
+            "item" : "30516",
+            "count" : 16
+          }, {
+            "item" : "16439",
+            "count" : 15
+          }, {
+            "item" : "4887",
+            "count" : 14
+          }, {
+            "item" : "21385",
+            "count" : 13
+          }, {
+            "item" : "22015",
+            "count" : 12
+          }, {
+            "item" : "3101",
+            "count" : 11
+          }, {
+            "item" : "12700",
+            "count" : 10
+          } ],
+          "smallest" : "0",
+          "sum" : "19192458"
+        },
+        "format" : { }
+      }, {
+        "id" : 53272267,
+        "name" : "Female",
+        "dataTypeName" : "number",
+        "fieldName" : "female",
+        "position" : 4,
+        "renderTypeName" : "number",
+        "tableColumnId" : 6012362,
+        "width" : 172,
+        "cachedContents" : {
+          "non_null" : 316,
+          "average" : "61448.22468354430",
+          "largest" : "561862",
+          "null" : 0,
+          "top" : [ {
+            "item" : "0",
+            "count" : 20
+          }, {
+            "item" : "6782",
+            "count" : 19
+          }, {
+            "item" : "47897",
+            "count" : 18
+          }, {
+            "item" : "50373",
+            "count" : 17
+          }, {
+            "item" : "31674",
+            "count" : 16
+          }, {
+            "item" : "17810",
+            "count" : 15
+          }, {
+            "item" : "5190",
+            "count" : 14
+          }, {
+            "item" : "22953",
+            "count" : 13
+          }, {
+            "item" : "23114",
+            "count" : 12
+          }, {
+            "item" : "3460",
+            "count" : 11
+          }, {
+            "item" : "13462",
+            "count" : 10
+          } ],
+          "smallest" : "0",
+          "sum" : "19417639"
+        },
+        "format" : { }
+      }, {
+        "id" : 53272268,
+        "name" : "Total",
+        "dataTypeName" : "number",
+        "fieldName" : "total",
+        "position" : 5,
+        "renderTypeName" : "number",
+        "tableColumnId" : 6012363,
+        "width" : 160,
+        "cachedContents" : {
+          "non_null" : 316,
+          "average" : "122183.8512658228",
+          "largest" : "1144416",
+          "null" : 0,
+          "top" : [ {
+            "item" : "0",
+            "count" : 20
+          }, {
+            "item" : "12780",
+            "count" : 19
+          }, {
+            "item" : "94453",
+            "count" : 18
+          }, {
+            "item" : "97727",
+            "count" : 17
+          }, {
+            "item" : "62190",
+            "count" : 16
+          }, {
+            "item" : "34249",
+            "count" : 15
+          }, {
+            "item" : "10077",
+            "count" : 14
+          }, {
+            "item" : "44338",
+            "count" : 13
+          }, {
+            "item" : "45129",
+            "count" : 12
+          }, {
+            "item" : "6561",
+            "count" : 11
+          }, {
+            "item" : "26162",
+            "count" : 10
+          } ],
+          "smallest" : "0",
+          "sum" : "38610097"
+        },
+        "format" : { }
+      }, {
+        "id" : 53272269,
+        "name" : "Households",
+        "dataTypeName" : "number",
+        "fieldName" : "households",
+        "position" : 6,
+        "renderTypeName" : "number",
+        "tableColumnId" : 6012364,
+        "width" : 220,
+        "cachedContents" : {
+          "non_null" : 316,
+          "average" : "27746.68987341772",
+          "largest" : "369866",
+          "null" : 0,
+          "top" : [ {
+            "item" : "0",
+            "count" : 20
+          }, {
+            "item" : "2923",
+            "count" : 19
+          }, {
+            "item" : "22015",
+            "count" : 18
+          }, {
+            "item" : "19571",
+            "count" : 17
+          }, {
+            "item" : "13973",
+            "count" : 16
+          }, {
+            "item" : "7491",
+            "count" : 15
+          }, {
+            "item" : "2296",
+            "count" : 14
+          }, {
+            "item" : "10571",
+            "count" : 13
+          }, {
+            "item" : "9941",
+            "count" : 12
+          }, {
+            "item" : "1710",
+            "count" : 11
+          }, {
+            "item" : "6026",
+            "count" : 10
+          } ],
+          "smallest" : "0",
+          "sum" : "8767954"
+        },
+        "format" : { }
+      }, {
+        "id" : 53272270,
+        "name" : "Area in Sq. Km.",
+        "dataTypeName" : "number",
+        "fieldName" : "area_in_sq_km",
+        "position" : 7,
+        "renderTypeName" : "number",
+        "tableColumnId" : 6012365,
+        "width" : 280,
+        "cachedContents" : {
+          "non_null" : 316,
+          "average" : "1839.598607594937",
+          "largest" : "39248.03",
+          "null" : 0,
+          "top" : [ {
+            "item" : "0",
+            "count" : 20
+          }, {
+            "item" : "11.64",
+            "count" : 19
+          }, {
+            "item" : "87.42",
+            "count" : 18
+          }, {
+            "item" : "138.78",
+            "count" : 17
+          }, {
+            "item" : "77",
+            "count" : 16
+          }, {
+            "item" : "57.61",
+            "count" : 15
+          }, {
+            "item" : "8.75",
+            "count" : 14
+          }, {
+            "item" : "30.9",
+            "count" : 13
+          }, {
+            "item" : "78.56",
+            "count" : 12
+          }, {
+            "item" : "2.96",
+            "count" : 11
+          }, {
+            "item" : "22.07",
+            "count" : 10
+          } ],
+          "smallest" : "0",
+          "sum" : "581313.16"
+        },
+        "format" : { }
+      }, {
+        "id" : 53272271,
+        "name" : " Household Density ",
+        "dataTypeName" : "number",
+        "fieldName" : "household_density",
+        "position" : 8,
+        "renderTypeName" : "number",
+        "tableColumnId" : 6012366,
+        "width" : 328,
+        "cachedContents" : {
+          "non_null" : 290,
+          "average" : "601.9435517241379",
+          "largest" : "9720.77",
+          "null" : 26,
+          "top" : [ {
+            "item" : "574.48",
+            "count" : 20
+          }, {
+            "item" : "2217",
+            "count" : 19
+          }, {
+            "item" : "1185.36",
+            "count" : 18
+          } ],
+          "smallest" : "0.4",
+          "sum" : "174563.63"
+        },
+        "format" : { }
+      }, {
+        "id" : 53272272,
+        "name" : "Population Density",
+        "dataTypeName" : "number",
+        "fieldName" : "population_density",
+        "position" : 9,
+        "renderTypeName" : "number",
+        "tableColumnId" : 6012367,
+        "width" : 316,
+        "cachedContents" : {
+          "non_null" : 290,
+          "average" : "67302.79230761172",
+          "largest" : "564431.8266",
+          "null" : 26,
+          "top" : [ {
+            "item" : "23394.23167",
+            "count" : 20
+          }, {
+            "item" : "4507.635135",
+            "count" : 19
+          }, {
+            "item" : "14037.44178",
+            "count" : 18
+          } ],
+          "smallest" : "486.7029289",
+          "sum" : "19517809.7692074"
+        },
+        "format" : { }
+      }, {
+        "id" : 53272273,
+        "name" : "Gender Index",
+        "dataTypeName" : "number",
+        "fieldName" : "gender_index",
+        "position" : 10,
+        "renderTypeName" : "number",
+        "tableColumnId" : 6012368,
+        "width" : 244,
+        "cachedContents" : {
+          "non_null" : 290,
+          "average" : "1.014161417713793",
+          "largest" : "1.428571429",
+          "null" : 26,
+          "top" : [ {
+            "item" : "1.049920509",
+            "count" : 20
+          }, {
+            "item" : "1.115769107",
+            "count" : 19
+          }, {
+            "item" : "1.06",
+            "count" : 18
+          } ],
+          "smallest" : "0.770335139",
+          "sum" : "294.106811137"
+        },
+        "format" : { }
+      }, {
+        "id" : 53272274,
+        "name" : "County",
+        "dataTypeName" : "text",
+        "fieldName" : "county",
+        "position" : 11,
+        "renderTypeName" : "text",
+        "tableColumnId" : 6012369,
+        "width" : 172,
+        "cachedContents" : {
+          "non_null" : 316,
+          "largest" : "WESTERN",
+          "null" : 0,
+          "top" : [ {
+            "item" : "NAIROBI",
+            "count" : 20
+          }, {
+            "item" : "CENTRAL",
+            "count" : 19
+          }, {
+            "item" : "COAST",
+            "count" : 18
+          }, {
+            "item" : "EASTERN",
+            "count" : 17
+          }, {
+            "item" : "NORTH EASTERN",
+            "count" : 16
+          }, {
+            "item" : "NYANZA",
+            "count" : 15
+          }, {
+            "item" : "RIFT VALLEY",
+            "count" : 14
+          }, {
+            "item" : "WESTERN",
+            "count" : 13
+          } ],
+          "smallest" : "CENTRAL"
+        },
+        "format" : { }
+      }, {
+        "id" : 53272275,
+        "name" : "Location",
+        "dataTypeName" : "location",
+        "fieldName" : "location",
+        "position" : 12,
+        "renderTypeName" : "location",
+        "tableColumnId" : 6012370,
+        "width" : 196,
+        "cachedContents" : {
+          "non_null" : 316,
+          "largest" : {
+            "human_address" : "{\"address\":\"\",\"city\":\"YATTA\",\"state\":\"EASTERN\",\"zip\":\"Kenya\"}"
+          },
+          "null" : 0,
+          "top" : [ {
+            "item" : {
+              "human_address" : "{\"address\":\"\",\"city\":\"TRANS MARA\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}"
+            },
+            "count" : 20
+          }, {
+            "item" : {
+              "human_address" : "{\"address\":\"\",\"city\":\"KAJIADO CENTRAL\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}"
+            },
+            "count" : 19
+          }, {
+            "item" : {
+              "human_address" : "{\"address\":\"\",\"city\":\"LOITOKITOK\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}"
+            },
+            "count" : 18
+          }, {
+            "item" : {
+              "human_address" : "{\"address\":\"\",\"city\":\"KERICHO\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}"
+            },
+            "count" : 17
+          }, {
+            "item" : {
+              "human_address" : "{\"address\":\"\",\"city\":\"KIPKELION\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}"
+            },
+            "count" : 16
+          }, {
+            "item" : {
+              "human_address" : "{\"address\":\"\",\"city\":\"BURET\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}"
+            },
+            "count" : 15
+          }, {
+            "item" : {
+              "human_address" : "{\"address\":\"\",\"city\":\"SOTIK\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}"
+            },
+            "count" : 14
+          }, {
+            "item" : {
+              "human_address" : "{\"address\":\"\",\"city\":\"BOMET\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}"
+            },
+            "count" : 13
+          }, {
+            "item" : {
+              "human_address" : "{\"address\":\"\",\"city\":\"KAJIADO NORTH\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}"
+            },
+            "count" : 12
+          }, {
+            "item" : {
+              "human_address" : "{\"address\":\"\",\"city\":\"KAKAMEGA CENTRAL\",\"state\":\"WESTERN\",\"zip\":\"Kenya\"}"
+            },
+            "count" : 11
+          }, {
+            "item" : {
+              "human_address" : "{\"address\":\"\",\"city\":\"KAKAMEGA SOUTH\",\"state\":\"WESTERN\",\"zip\":\"Kenya\"}"
+            },
+            "count" : 10
+          }, {
+            "item" : {
+              "human_address" : "{\"address\":\"\",\"city\":\"KAKAMEGA NORTH\",\"state\":\"WESTERN\",\"zip\":\"Kenya\"}"
+            },
+            "count" : 9
+          }, {
+            "item" : {
+              "human_address" : "{\"address\":\"\",\"city\":\"KAKAMEGA EAST\",\"state\":\"WESTERN\",\"zip\":\"Kenya\"}"
+            },
+            "count" : 8
+          }, {
+            "item" : {
+              "human_address" : "{\"address\":\"\",\"city\":\"LUGARI\",\"state\":\"WESTERN\",\"zip\":\"Kenya\"}"
+            },
+            "count" : 7
+          }, {
+            "item" : {
+              "human_address" : "{\"address\":\"\",\"city\":\"VIHIGA\",\"state\":\"WESTERN\",\"zip\":\"Kenya\"}"
+            },
+            "count" : 6
+          }, {
+            "item" : {
+              "human_address" : "{\"address\":\"\",\"city\":\"EMUHAYA\",\"state\":\"WESTERN\",\"zip\":\"Kenya\"}"
+            },
+            "count" : 5
+          }, {
+            "item" : {
+              "human_address" : "{\"address\":\"\",\"city\":\"HAMISI\",\"state\":\"WESTERN\",\"zip\":\"Kenya\"}"
+            },
+            "count" : 4
+          }, {
+            "item" : {
+              "human_address" : "{\"address\":\"\",\"city\":\"MUMIAS\",\"state\":\"WESTERN\",\"zip\":\"Kenya\"}"
+            },
+            "count" : 3
+          }, {
+            "item" : {
+              "human_address" : "{\"address\":\"\",\"city\":\"BUTERE\",\"state\":\"WESTERN\",\"zip\":\"Kenya\"}"
+            },
+            "count" : 2
+          }, {
+            "item" : {
+              "human_address" : "{\"address\":\"\",\"city\":\"BUNGOMA SOUTH\",\"state\":\"WESTERN\",\"zip\":\"Kenya\"}"
+            },
+            "count" : 1
+          } ],
+          "smallest" : {
+            "human_address" : "{\"address\":\"\",\"city\":\"BARINGO NORTH\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}"
+          }
+        },
+        "format" : { },
+        "subColumnTypes" : [ "human_address", "latitude", "longitude", "machine_address", "needs_recoding" ]
+      }, {
+        "id" : 53272276,
+        "name" : "Location 1",
+        "dataTypeName" : "text",
+        "fieldName" : "location_1",
+        "position" : 13,
+        "renderTypeName" : "text",
+        "tableColumnId" : 6012371,
+        "width" : 220,
+        "cachedContents" : {
+          "non_null" : 0,
+          "null" : 316
+        },
+        "format" : { }
+      }, {
+        "id" : 53272277,
+        "name" : "Province",
+        "dataTypeName" : "number",
+        "fieldName" : "province",
+        "position" : 14,
+        "renderTypeName" : "number",
+        "tableColumnId" : 6012372,
+        "width" : 196,
+        "cachedContents" : {
+          "non_null" : 316,
+          "average" : "36.58375904506329",
+          "largest" : "41.29294811",
+          "null" : 0,
+          "top" : [ {
+            "item" : "34.89742997",
+            "count" : 20
+          }, {
+            "item" : "36.89341002",
+            "count" : 19
+          }, {
+            "item" : "37.47875865",
+            "count" : 18
+          }, {
+            "item" : "35.21130866",
+            "count" : 17
+          }, {
+            "item" : "35.47881562",
+            "count" : 16
+          }, {
+            "item" : "35.3033778",
+            "count" : 15
+          }, {
+            "item" : "35.1490337",
+            "count" : 14
+          }, {
+            "item" : "35.31899335",
+            "count" : 13
+          }, {
+            "item" : "36.44660994",
+            "count" : 12
+          }, {
+            "item" : "34.6856109",
+            "count" : 11
+          }, {
+            "item" : "34.7077479",
+            "count" : 10
+          }, {
+            "item" : "34.82641205",
+            "count" : 9
+          }, {
+            "item" : "34.85789384",
+            "count" : 8
+          }, {
+            "item" : "35.02947866",
+            "count" : 7
+          }, {
+            "item" : "34.72682968",
+            "count" : 6
+          }, {
+            "item" : "34.60778185",
+            "count" : 5
+          }, {
+            "item" : "34.82143608",
+            "count" : 4
+          }, {
+            "item" : "34.48762031",
+            "count" : 3
+          }, {
+            "item" : "34.54564535",
+            "count" : 2
+          }, {
+            "item" : "34.52131934",
+            "count" : 1
+          } ],
+          "smallest" : "34.02046792",
+          "sum" : "11560.46785824"
+        },
+        "format" : { }
+      } ],
+      "grants" : [ {
+        "inherited" : false,
+        "type" : "viewer",
+        "flags" : [ "public" ]
+      } ],
+      "license" : {
+        "name" : "Creative Commons 1.0 Universal (Public Domain Dedication)",
+        "logoUrl" : "images/licenses/ccZero.png",
+        "termsLink" : "http://creativecommons.org/publicdomain/zero/1.0/legalcode"
+      },
+      "metadata" : {
+        "custom_fields" : {
+          "Locality" : {
+            "County" : "",
+            "District" : ""
+          }
+        }
+      },
+      "owner" : {
+        "id" : "tm4c-rqum",
+        "displayName" : "Lilia Gutnik",
+        "profileImageUrlLarge" : "/api/users/tm4c-rqum/profile_images/LARGE",
+        "profileImageUrlMedium" : "/api/users/tm4c-rqum/profile_images/THUMB",
+        "profileImageUrlSmall" : "/api/users/tm4c-rqum/profile_images/TINY",
+        "screenName" : "Lilia Gutnik"
+      },
+      "query" : { },
+      "rights" : [ "read" ],
+      "tableAuthor" : {
+        "id" : "tm4c-rqum",
+        "displayName" : "Lilia Gutnik",
+        "profileImageUrlLarge" : "/api/users/tm4c-rqum/profile_images/LARGE",
+        "profileImageUrlMedium" : "/api/users/tm4c-rqum/profile_images/THUMB",
+        "profileImageUrlSmall" : "/api/users/tm4c-rqum/profile_images/TINY",
+        "screenName" : "Lilia Gutnik"
+      },
+      "flags" : [ "default", "restorable", "restorePossibleForType" ]
+    }
+  },
+  "data" : [ [ 1, "6F034AA6-95FF-45DB-B926-2ECAC75A241D", 1, 1355298879, "591599", 1355298879, "591599", "{\n}", "NAIROBI WEST", "Rural", "0", "0", "0", "0", "0", null, null, null, "NAIROBI", [ "{\"address\":\"\",\"city\":\"NAIROBI WEST\",\"state\":\"NAIROBI\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "36.79920201" ]
+, [ 2, "1358683D-D9E7-4580-A352-BBB3EA63860B", 2, 1355298879, "591599", 1355298879, "591599", "{\n}", "NAIROBI EAST", "Rural", "0", "0", "0", "0", "0", null, null, null, "NAIROBI", [ "{\"address\":\"\",\"city\":\"NAIROBI EAST\",\"state\":\"NAIROBI\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "36.967484" ]
+, [ 3, "F8AE50CD-89B5-4E84-AE9A-E83CB6F84FCD", 3, 1355298879, "591599", 1355298879, "591599", "{\n}", "NAIROBI NORTH", "Rural", "0", "0", "0", "0", "0", null, null, null, "NAIROBI", [ "{\"address\":\"\",\"city\":\"NAIROBI NORTH\",\"state\":\"NAIROBI\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "36.8911257" ]
+, [ 4, "E8FE3009-4383-43CC-9172-29D0FE9465B9", 4, 1355298879, "591599", 1355298879, "591599", "{\n}", "WESTLANDS", "Rural", "0", "0", "0", "0", "0", null, null, null, "NAIROBI", [ "{\"address\":\"\",\"city\":\"WESTLANDS\",\"state\":\"NAIROBI\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "36.7882561" ]
+, [ 5, "AEC9B13E-2DA4-488D-9ECD-6E2C69698DEE", 5, 1355298879, "591599", 1355298879, "591599", "{\n}", "NYANDARUA NORTH", "Rural", "106111", "109785", "215896", "52503", "1394.69", "37.64", "109861.0821", "1.03462412", "CENTRAL", [ "{\"address\":\"\",\"city\":\"NYANDARUA NORTH\",\"state\":\"CENTRAL\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "36.42343108" ]
+, [ 6, "4C0C78B0-5B52-4F71-B602-02C13C0F899C", 6, 1355298879, "591599", 1355298879, "591599", "{\n}", "NYANDARUA SOUTH", "Rural", "131872", "137982", "269854", "61936", "1472.58", "42.06", "138071.5517", "1.046332808", "CENTRAL", [ "{\"address\":\"\",\"city\":\"NYANDARUA SOUTH\",\"state\":\"CENTRAL\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "36.55651343" ]
+, [ 7, "1CE14124-93F9-45FB-A481-853C81544DBE", 7, 1355298879, "591599", 1355298879, "591599", "{\n}", "NYERI NORTH", "Rural", "141423", "143971", "285394", "81307", "2253.47", "36.08", "144033.7579", "1.018016871", "CENTRAL", [ "{\"address\":\"\",\"city\":\"NYERI NORTH\",\"state\":\"CENTRAL\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "36.9811441" ]
+, [ 8, "D6D8E932-FF5E-4F37-B112-A673939E31E6", 8, 1355298879, "591599", 1355298879, "591599", "{\n}", "NYERI SOUTH", "Rural", "114557", "123990", "238547", "66028", "874.13", "75.54", "124121.0526", "1.082343288", "CENTRAL", [ "{\"address\":\"\",\"city\":\"NYERI SOUTH\",\"state\":\"CENTRAL\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "36.89927916" ]
+, [ 9, "58AA8E98-FFA7-4013-8865-686ACB3206BD", 9, 1355298879, "591599", 1355298879, "591599", "{\n}", "KIRINYAGA", "Rural", "220494", "224156", "444650", "126665", "1402.71", "90.3", "224313.1914", "1.016608162", "CENTRAL", [ "{\"address\":\"\",\"city\":\"KIRINYAGA\",\"state\":\"CENTRAL\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "37.32018369" ]
+, [ 10, "1450D4DB-E2E3-4505-9118-6E5CD9971D11", 10, 1355298879, "591599", 1355298879, "591599", "{\n}", "MURANGA NORTH", "Rural", "151033", "163375", "314408", "87030", "913.79", "95.24", "163540.282", "1.081717241", "CENTRAL", [ "{\"address\":\"\",\"city\":\"MURANGA NORTH\",\"state\":\"CENTRAL\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "36.98118146" ]
+, [ 11, "CF675394-A56F-4106-BA36-4D1C3ACF0084", 11, 1355298879, "591599", 1355298879, "591599", "{\n}", "MURANGA SOUTH", "Rural", "156115", "165195", "321310", "84114", "762.77", "110.27", "165399.6685", "1.058162252", "CENTRAL", [ "{\"address\":\"\",\"city\":\"MURANGA SOUTH\",\"state\":\"CENTRAL\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "37.05522802" ]
+, [ 12, "07F6D14F-2EA6-4BEF-887B-1F020E740C72", 12, 1355298879, "591599", 1355298879, "591599", "{\n}", "KIAMBU EAST(KIAMBAA)", "Rural", "22768", "22306", "45074", "12468", "100.4", "124.18", "22532.77291", "0.979708363", "CENTRAL", [ "{\"address\":\"\",\"city\":\"KIAMBU EAST(KIAMBAA)\",\"state\":\"CENTRAL\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "36.80546766" ]
+, [ 13, "39331B40-B2F0-4D2C-B4E1-A9FF1BC7FCE1", 13, 1355298879, "591599", 1355298879, "591599", "{\n}", "KIKUYU", "Rural", "424", "398", "822", "251", "4.78", "52.51", "486.7029289", "0.938679245", "CENTRAL", [ "{\"address\":\"\",\"city\":\"KIKUYU\",\"state\":\"CENTRAL\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "36.63360077" ]
+, [ 14, "B50C60CD-E47B-4103-9C4B-4B3DD764CCE0", 14, 1355298879, "591599", 1355298879, "591599", "{\n}", "KIAMBU WEST", "Rural", "25493", "25508", "51001", "13465", "197.39", "68.22", "25637.15041", "1.000588397", "CENTRAL", [ "{\"address\":\"\",\"city\":\"KIAMBU WEST\",\"state\":\"CENTRAL\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "36.62625892" ]
+, [ 15, "0C328A5A-CA41-4DA0-AF7F-64A6C2098212", 15, 1355298879, "591599", 1355298879, "591599", "{\n}", "LARI", "Rural", "60632", "63263", "123895", "30779", "439.16", "70.09", "63401.06358", "1.043392928", "CENTRAL", [ "{\"address\":\"\",\"city\":\"LARI\",\"state\":\"CENTRAL\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "36.67684469" ]
+, [ 16, "E84F684E-6BB2-4628-9B94-BB58F700E387", 16, 1355298879, "591599", 1355298879, "591599", "{\n}", "GITHUNGURI", "Rural", "63591", "65052", "128643", "33301", "166.58", "199.91", "65433.74451", "1.022974949", "CENTRAL", [ "{\"address\":\"\",\"city\":\"GITHUNGURI\",\"state\":\"CENTRAL\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "36.79433274" ]
+, [ 17, "1A229BF5-A358-4A13-854D-0330F4FB26ED", 17, 1355298879, "591599", 1355298879, "591599", "{\n}", "THIKA EAST", "Rural", "36828", "36775", "73603", "19226", "398.18", "48.28", "36867.49083", "0.998560878", "CENTRAL", [ "{\"address\":\"\",\"city\":\"THIKA EAST\",\"state\":\"CENTRAL\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "37.23100647" ]
+, [ 18, "66C51728-4366-430E-9515-98B544D3DF04", 18, 1355298879, "591599", 1355298879, "591599", "{\n}", "THIKA WEST", "Rural", "12299", "12188", "24487", "7283", "207.31", "35.13", "12247.32661", "0.990974876", "CENTRAL", [ "{\"address\":\"\",\"city\":\"THIKA WEST\",\"state\":\"CENTRAL\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "37.04502993" ]
+, [ 19, "332CD757-2CBD-44E2-87C0-AF7DD636075E", 19, 1355298879, "591599", 1355298879, "591599", "{\n}", "RUIRU", "Rural", "0", "0", "0", "0", "0", null, null, null, "CENTRAL", [ "{\"address\":\"\",\"city\":\"RUIRU\",\"state\":\"CENTRAL\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "36.99460397" ]
+, [ 20, "9CFC3627-6201-4E4B-9F1B-5FDD7E7DD5F5", 20, 1355298879, "591599", 1355298879, "591599", "{\n}", "GATANGA", "Rural", "54783", "56375", "111158", "29664", "307.15", "96.58", "56553.35911", "1.02906011", "CENTRAL", [ "{\"address\":\"\",\"city\":\"GATANGA\",\"state\":\"CENTRAL\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "36.88791928" ]
+, [ 21, "A27942FA-2DDA-475C-BEA5-A5B1E04E27C0", 21, 1355298879, "591599", 1355298879, "591599", "{\n}", "GATUNDU", "Rural", "100939", "107845", "208784", "53749", "476.47", "112.81", "108056.8475", "1.068417559", "CENTRAL", [ "{\"address\":\"\",\"city\":\"GATUNDU\",\"state\":\"CENTRAL\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "36.85558237" ]
+, [ 22, "C1FCA00E-309C-4D46-B3D7-EC7AA807D449", 22, 1355298879, "591599", 1355298879, "591599", "{\n}", "MOMBASA", "Rural", "0", "0", "0", "0", "0", null, null, null, "COAST", [ "{\"address\":\"\",\"city\":\"MOMBASA\",\"state\":\"COAST\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "39.6977" ]
+, [ 23, "13E34AA1-FE63-43F0-AE3A-D1B31EEBA9D1", 23, 1355298879, "591599", 1355298879, "591599", "{\n}", "KILINDINI", "Rural", "0", "0", "0", "0", "0", null, null, null, "COAST", [ "{\"address\":\"\",\"city\":\"KILINDINI\",\"state\":\"COAST\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "39.6365" ]
+, [ 24, "83B3B3DF-8CFF-4F41-BBB5-F100614AE8E1", 24, 1355298879, "591599", 1355298879, "591599", "{\n}", "KWALE", "Rural", "64649", "67449", "132098", "24506", "947.88", "25.85", "67517.20378", "1.043310801", "COAST", [ "{\"address\":\"\",\"city\":\"KWALE\",\"state\":\"COAST\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "39.40753681" ]
+, [ 25, "079B64EA-9E26-4790-856D-A14727E9A466", 25, 1355298879, "591599", 1355298879, "591599", "{\n}", "KINANGO", "Rural", "95472", "106099", "201571", "32394", "3973.04", "8.15", "106123.03", "1.111310122", "COAST", [ "{\"address\":\"\",\"city\":\"KINANGO\",\"state\":\"COAST\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "39.10335046" ]
+, [ 26, "C8620016-D21D-4C58-817A-5D11B5F912A1", 26, 1355298879, "591599", 1355298879, "591599", "{\n}", "MSAMBWENI", "Rural", "96815", "101771", "198586", "36059", "3112.07", "11.59", "101802.1095", "1.051190415", "COAST", [ "{\"address\":\"\",\"city\":\"MSAMBWENI\",\"state\":\"COAST\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "39.16173404" ]
+, [ 27, "298F174E-28B7-4600-B01D-7994AF0B9211", 27, 1355298879, "591599", 1355298879, "591599", "{\n}", "KILIFI", "Rural", "165217", "182876", "348093", "55663", "3839.68", "14.5", "182919.0288", "1.106883674", "COAST", [ "{\"address\":\"\",\"city\":\"KILIFI\",\"state\":\"COAST\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "39.60114414" ]
+, [ 28, "FEF26CC1-376E-4A41-8680-4842F4DE5AD1", 28, 1355298879, "591599", 1355298879, "591599", "{\n}", "KALOLENI", "Rural", "102163", "114222", "216385", "33158", "871.56", "38.04", "114339.2186", "1.118036863", "COAST", [ "{\"address\":\"\",\"city\":\"KALOLENI\",\"state\":\"COAST\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "39.54477529" ]
+, [ 29, "4545B297-6C2C-47DE-BCB1-1BAFF60E9854", 29, 1355298879, "591599", 1355298879, "591599", "{\n}", "MALINDI", "Rural", "126308", "133467", "259775", "38704", "7696.93", "5.03", "133483.4102", "1.056678912", "COAST", [ "{\"address\":\"\",\"city\":\"MALINDI\",\"state\":\"COAST\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "39.74330931" ]
+, [ 30, "2A884ADC-F4E4-490A-A5FC-66C745280942", 30, 1355298879, "591599", 1355298879, "591599", "{\n}", "TANA RIVER", "Rural", "54531", "55719", "110250", "21389", "22270.52", "0.96", "55721.44857", "1.021785773", "COAST", [ "{\"address\":\"\",\"city\":\"TANA RIVER\",\"state\":\"COAST\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "39.34922935" ]
+, [ 31, "A6118B5E-3381-4883-9CA6-C59193F81DE0", 31, 1355298879, "591599", 1355298879, "591599", "{\n}", "TANA DELTA", "Rural", "47216", "46544", "93760", "18146", "15613.04", "1.16", "46547.02414", "0.985767536", "COAST", [ "{\"address\":\"\",\"city\":\"TANA DELTA\",\"state\":\"COAST\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "39.51654731" ]
+, [ 32, "5083077D-0B93-4A1A-88E1-85B83CBB8231", 32, 1355298879, "591599", 1355298879, "591599", "{\n}", "LAMU", "Rural", "42813", "38488", "81301", "17391", "6258.46", "2.78", "38494.84082", "0.898979282", "COAST", [ "{\"address\":\"\",\"city\":\"LAMU\",\"state\":\"COAST\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "40.74388079" ]
+, [ 33, "30F337B4-3F38-44DE-8032-E238ADC428AE", 33, 1355298879, "591599", 1355298879, "591599", "{\n}", "TAITA", "Rural", "87996", "84572", "172568", "41936", "13547.51", "3.1", "84578.49536", "0.96108914", "COAST", [ "{\"address\":\"\",\"city\":\"TAITA\",\"state\":\"COAST\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "38.56492447" ]
+, [ 34, "AF8A3B80-77B9-4762-997A-219E6F717BB8", 34, 1355298879, "591599", 1355298879, "591599", "{\n}", "TAVETA", "Rural", "24971", "22829", "47800", "10816", "3488.47", "3.1", "22836.15815", "0.914220496", "COAST", [ "{\"address\":\"\",\"city\":\"TAVETA\",\"state\":\"COAST\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "37.97519351" ]
+, [ 35, "FE17616F-18FC-4D15-B56D-D5B2B7891758", 35, 1355298879, "591599", 1355298879, "591599", "{\n}", "MARSABIT", "Rural", "15780", "15815", "31595", "6558", "2045.73", "3.21", "15822.71363", "1.002217997", "EASTERN", [ "{\"address\":\"\",\"city\":\"MARSABIT\",\"state\":\"EASTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "37.94495682" ]
+, [ 36, "848707DD-7B8A-499B-9D43-8906BAB11397", 36, 1355298879, "591599", 1355298879, "591599", "{\n}", "CHALBI", "Rural", "41318", "33878", "75196", "15586", "39248.03", "0.4", "33879.05274", "0.819933201", "EASTERN", [ "{\"address\":\"\",\"city\":\"CHALBI\",\"state\":\"EASTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "37.36288736" ]
+, [ 37, "CF1E050E-5EAC-4FDB-8C35-59CE3CA2D35C", 37, 1355298879, "591599", 1355298879, "591599", "{\n}", "LAISAMIS", "Rural", "29088", "29971", "59059", "13248", "20133.42", "0.66", "29972.44476", "1.030356161", "EASTERN", [ "{\"address\":\"\",\"city\":\"LAISAMIS\",\"state\":\"EASTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "37.48344825" ]
+, [ 38, "7500B24B-7A3F-4EE8-939F-16C42B7FC4AB", 38, 1355298879, "591599", 1355298879, "591599", "{\n}", "MOYALE", "Rural", "32832", "28475", "61307", "9752", "9310.32", "1.05", "28478.52641", "0.867294103", "EASTERN", [ "{\"address\":\"\",\"city\":\"MOYALE\",\"state\":\"EASTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "38.80269655" ]
+, [ 39, "35B9CEFF-947A-4753-BE78-27AC20A48E00", 39, 1355298879, "591599", 1355298879, "591599", "{\n}", "ISIOLO", "Rural", "23997", "22539", "46536", "9745", "15477.82", "0.63", "22540.55041", "0.939242405", "EASTERN", [ "{\"address\":\"\",\"city\":\"ISIOLO\",\"state\":\"EASTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "38.46170147" ]
+, [ 40, "E083785A-042A-4025-ADDC-162E4271878A", 40, 1355298879, "591599", 1355298879, "591599", "{\n}", "GARBATULLA", "Rural", "18863", "15521", "34384", "7076", "9608.11", "0.74", "15522.96324", "0.822827758", "EASTERN", [ "{\"address\":\"\",\"city\":\"GARBATULLA\",\"state\":\"EASTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "38.65180184" ]
+, [ 41, "D6FD7DA3-FC41-40FB-837D-E148282D729C", 41, 1355298879, "591599", 1355298879, "591599", "{\n}", "MERU CENTRAL", "Rural", "70315", "71453", "141768", "37209", "790.15", "47.09", "71541.98943", "1.016184313", "EASTERN", [ "{\"address\":\"\",\"city\":\"MERU CENTRAL\",\"state\":\"EASTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "37.58330732" ]
+, [ 42, "5137AE25-F2C5-4F6F-849C-BFF84B3EADA6", 42, 1355298879, "591599", 1355298879, "591599", "{\n}", "IMENTI NORTH", "Rural", "96455", "94604", "191059", "51419", "1515.94", "33.92", "94667.62719", "0.980809704", "EASTERN", [ "{\"address\":\"\",\"city\":\"IMENTI NORTH\",\"state\":\"EASTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "37.43552549" ]
+, [ 43, "B7474DF6-D473-4CA9-B56A-76013E1347D9", 43, 1355298879, "591599", 1355298879, "591599", "{\n}", "IMENTI SOUTH", "Rural", "83596", "82722", "166318", "42793", "657.31", "65.1", "82849.17896", "0.989544954", "EASTERN", [ "{\"address\":\"\",\"city\":\"IMENTI SOUTH\",\"state\":\"EASTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "37.60133849" ]
+, [ 44, "48D40112-4851-4959-84E7-C66B658C172B", 44, 1355298879, "591599", 1355298879, "591599", "{\n}", "MERU SOUTH", "Rural", "40911", "43726", "84637", "21157", "557.98", "37.92", "43799.31983", "1.0688079", "EASTERN", [ "{\"address\":\"\",\"city\":\"MERU SOUTH\",\"state\":\"EASTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "37.67297626" ]
+, [ 45, "C41C0F8A-E175-4B35-8BDD-EE10134EDFC1", 45, 1355298879, "591599", 1355298879, "591599", "{\n}", "MAARA", "Rural", "37364", "37767", "75131", "19509", "408.58", "47.75", "37858.44843", "1.010785783", "EASTERN", [ "{\"address\":\"\",\"city\":\"MAARA\",\"state\":\"EASTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "37.62522793" ]
+, [ 46, "8BB01B1D-F56B-4956-834E-463388F17944", 46, 1355298879, "591599", 1355298879, "591599", "{\n}", "IGEMBE", "Rural", "223950", "228586", "452536", "91130", "2805.76", "32.48", "228665.8179", "1.020701049", "EASTERN", [ "{\"address\":\"\",\"city\":\"IGEMBE\",\"state\":\"EASTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "38.05720532" ]
+, [ 47, "9050E61E-4994-416D-9D10-A756DAD14F1A", 47, 1355298879, "591599", 1355298879, "591599", "{\n}", "TIGANIA", "Rural", "139371", "150216", "289587", "61666", "1122.88", "54.92", "150340.1192", "1.077813892", "EASTERN", [ "{\"address\":\"\",\"city\":\"TIGANIA\",\"state\":\"EASTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "37.77333779" ]
+, [ 48, "DEE411D3-0DF7-47A0-B9E7-D2BEFFFC8355", 48, 1355298879, "591599", 1355298879, "591599", "{\n}", "THARAKA", "Rural", "58691", "62872", "121563", "25227", "1462.16", "17.25", "62912.13993", "1.071237498", "EASTERN", [ "{\"address\":\"\",\"city\":\"THARAKA\",\"state\":\"EASTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "38.01828449" ]
+, [ 49, "CE60A1B7-CD6E-4D9D-8B92-08F494FCFB11", 49, 1355298879, "591599", 1355298879, "591599", "{\n}", "EMBU", "Rural", "106708", "110074", "216782", "56173", "630.06", "89.16", "110243.3616", "1.031544027", "EASTERN", [ "{\"address\":\"\",\"city\":\"EMBU\",\"state\":\"EASTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "37.50475286" ]
+, [ 50, "E716EDBC-BC27-4595-A304-012C7FA59981", 50, 1355298879, "591599", 1355298879, "591599", "{\n}", "MBEERE", "Rural", "106932", "109577", "216509", "50579", "2090.86", "24.19", "109628.1426", "1.024735346", "EASTERN", [ "{\"address\":\"\",\"city\":\"MBEERE\",\"state\":\"EASTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "37.66541038" ]
+, [ 51, "69CE0E34-4B5E-4DFE-ADF8-2FAA70490907", 51, 1355298879, "591599", 1355298879, "591599", "{\n}", "KITUI", "Rural", "155446", "171802", "327248", "67254", "7172.26", "9.38", "171823.6732", "1.105219819", "EASTERN", [ "{\"address\":\"\",\"city\":\"KITUI\",\"state\":\"EASTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "38.30094003" ]
+, [ 52, "66B6CBD4-EFCE-427D-86E2-D07A9203989E", 52, 1355298879, "591599", 1355298879, "591599", "{\n}", "MUTOMO", "Rural", "85554", "93098", "178652", "32427", "12833.65", "2.53", "93104.66638", "1.088178227", "EASTERN", [ "{\"address\":\"\",\"city\":\"MUTOMO\",\"state\":\"EASTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "38.53912323" ]
+, [ 53, "C9BF634A-5433-4516-BFA7-FBAF121F4045", 53, 1355298879, "591599", 1355298879, "591599", "{\n}", "MWINGI", "Rural", "107186", "120692", "227878", "45445", "5217.1", "8.71", "120712.5451", "1.126005262", "EASTERN", [ "{\"address\":\"\",\"city\":\"MWINGI\",\"state\":\"EASTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "38.36852014" ]
+, [ 54, "1922AE66-9D88-44D5-9780-9B8A77D00C64", 54, 1355298879, "591599", 1355298879, "591599", "{\n}", "KYUSO", "Rural", "64719", "74303", "139022", "26498", "4820.1", "5.5", "74316.4269", "1.148086342", "EASTERN", [ "{\"address\":\"\",\"city\":\"KYUSO\",\"state\":\"EASTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "38.27042885" ]
+, [ 55, "05FE048E-469A-4FDC-843A-A01F23870E7C", 55, 1355298879, "591599", 1355298879, "591599", "{\n}", "MACHAKOS", "Rural", "71438", "78058", "149496", "33559", "564.55", "59.44", "78184.53972", "1.092667768", "EASTERN", [ "{\"address\":\"\",\"city\":\"MACHAKOS\",\"state\":\"EASTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "37.16409824" ]
+, [ 56, "B784BB34-85F0-4C72-AA11-6400A0197E87", 56, 1355298879, "591599", 1355298879, "591599", "{\n}", "MWALA", "Rural", "76334", "81342", "157676", "33760", "1014.01", "33.29", "81417.27934", "1.065606414", "EASTERN", [ "{\"address\":\"\",\"city\":\"MWALA\",\"state\":\"EASTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "37.52391049" ]
+, [ 57, "F330C1DD-423E-449A-A490-832E749F3B14", 57, 1355298879, "591599", 1355298879, "591599", "{\n}", "YATTA", "Rural", "106094", "113963", "220057", "46905", "2214.83", "21.18", "114010.9016", "1.074170076", "EASTERN", [ "{\"address\":\"\",\"city\":\"YATTA\",\"state\":\"EASTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "37.60220541" ]
+, [ 58, "A78798C3-0F27-4268-A9FD-E903B5219B07", 58, 1355298879, "591599", 1355298879, "591599", "{\n}", "KANGUNDO", "Rural", "0", "0", "0", "0", "0", null, null, null, "EASTERN", [ "{\"address\":\"\",\"city\":\"KANGUNDO\",\"state\":\"EASTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "37.27203719" ]
+, [ 59, "77AF4C61-3C2F-4A3D-B3CC-ABB2BD19E50D", 59, 1355298879, "591599", 1355298879, "591599", "{\n}", "MAKUENI", "Rural", "87571", "96177", "183748", "36541", "1249.27", "29.25", "96247.09774", "1.098274543", "EASTERN", [ "{\"address\":\"\",\"city\":\"MAKUENI\",\"state\":\"EASTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "37.67253055" ]
+, [ 60, "031D4EB4-BFB0-4342-8933-E5EE03D6954D", 60, 1355298879, "591599", 1355298879, "591599", "{\n}", "MBOONI", "Rural", "83997", "92292", "176289", "36765", "892.62", "41.19", "92386.10163", "1.098753527", "EASTERN", [ "{\"address\":\"\",\"city\":\"MBOONI\",\"state\":\"EASTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "37.60666503" ]
+, [ 61, "6D6029FD-780B-4CE9-BD6C-2A6F1EAF63A9", 61, 1355298879, "591599", 1355298879, "591599", "{\n}", "KIBWEZI", "Rural", "111813", "114038", "225851", "45843", "3894.48", "11.77", "114066.7106", "1.019899296", "EASTERN", [ "{\"address\":\"\",\"city\":\"KIBWEZI\",\"state\":\"EASTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "38.02538524" ]
+, [ 62, "E2BCF326-BD9B-440B-9177-6BEFA623DD2B", 62, 1355298879, "591599", 1355298879, "591599", "{\n}", "NZAUI", "Rural", "94961", "99381", "194342", "40654", "1378.37", "29.49", "99449.89369", "1.046545424", "EASTERN", [ "{\"address\":\"\",\"city\":\"NZAUI\",\"state\":\"EASTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "37.41612392" ]
+, [ 63, "68F093AD-3ED9-49D2-A63B-BE5EDE5FAD2D", 63, 1355298879, "591599", 1355298879, "591599", "{\n}", "GARISSA", "Rural", "40733", "32376", "73109", "11189", "4901.58", "2.28", "32384.31018", "0.794834655", "NORTH EASTERN", [ "{\"address\":\"\",\"city\":\"GARISSA\",\"state\":\"NORTH EASTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "39.56855753" ]
+, [ 64, "48C1042E-FEBF-4837-9379-3C37861319FC", 64, 1355298879, "591599", 1355298879, "591599", "{\n}", "LAGDERA", "Rural", "126612", "106205", "232817", "35534", "13285.02", "2.67", "106214.5304", "0.838822544", "NORTH EASTERN", [ "{\"address\":\"\",\"city\":\"LAGDERA\",\"state\":\"NORTH EASTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "39.89717479" ]
+, [ 65, "39AE7C9D-0A22-4C60-BE07-FB171943406E", 65, 1355298879, "591599", 1355298879, "591599", "{\n}", "FAFI", "Rural", "49621", "44099", "93720", "15583", "15419.55", "1.01", "44102.21806", "0.888716471", "NORTH EASTERN", [ "{\"address\":\"\",\"city\":\"FAFI\",\"state\":\"NORTH EASTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "40.43908059" ]
+, [ 66, "1D5ED613-1FD5-4E8D-A687-2DA1FB7B59A5", 66, 1355298879, "591599", 1355298879, "591599", "{\n}", "IJARA", "Rural", "41782", "34964", "76746", "10701", "9778.17", "1.09", "34968.27299", "0.836819683", "NORTH EASTERN", [ "{\"address\":\"\",\"city\":\"IJARA\",\"state\":\"NORTH EASTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "40.73455516" ]
+, [ 67, "A491D2DE-470E-4F61-BD6A-82FB5B7F3A0B", 67, 1355298879, "591599", 1355298879, "591599", "{\n}", "WAJIR SOUTH", "Rural", "66842", "54728", "121570", "17030", "21540.15", "0.79", "54731.10314", "0.818766644", "NORTH EASTERN", [ "{\"address\":\"\",\"city\":\"WAJIR SOUTH\",\"state\":\"NORTH EASTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "40.34314459" ]
+, [ 68, "4DE9684A-7A2E-4B62-9546-B558BC67D94D", 68, 1355298879, "591599", 1355298879, "591599", "{\n}", "WAJIR NORTH", "Rural", "73628", "61877", "135505", "17592", "8554.59", "2.06", "61885.60684", "0.840400391", "NORTH EASTERN", [ "{\"address\":\"\",\"city\":\"WAJIR NORTH\",\"state\":\"NORTH EASTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "39.5873795" ]
+, [ 69, "2B8F390D-75A8-4F8D-A919-76A6D4CC8CBF", 69, 1355298879, "591599", 1355298879, "591599", "{\n}", "WAJIR EAST", "Rural", "78399", "63219", "141618", "18414", "13307.77", "1.38", "63224.89122", "0.806375081", "NORTH EASTERN", [ "{\"address\":\"\",\"city\":\"WAJIR EAST\",\"state\":\"NORTH EASTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "40.36685178" ]
+, [ 70, "CD164BC0-1330-4D7F-9069-086020CFDEB7", 70, 1355298879, "591599", 1355298879, "591599", "{\n}", "WAJIR WEST", "Rural", "93597", "72796", "166393", "20716", "13067.21", "1.59", "72803.16274", "0.777759971", "NORTH EASTERN", [ "{\"address\":\"\",\"city\":\"WAJIR WEST\",\"state\":\"NORTH EASTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "39.5240015" ]
+, [ 71, "BDDA628F-6660-413F-B4AF-3EBDD3C8600A", 71, 1355298879, "591599", 1355298879, "591599", "{\n}", "MANDERA CENTRAL", "Rural", "184891", "158652", "343543", "42017", "11606.68", "3.62", "158667.9297", "0.858083952", "NORTH EASTERN", [ "{\"address\":\"\",\"city\":\"MANDERA CENTRAL\",\"state\":\"NORTH EASTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "40.72748791" ]
+, [ 72, "A6CD8C2C-73FC-4669-A48B-91B358E973D0", 72, 1355298879, "591599", 1355298879, "591599", "{\n}", "MANDERA EAST", "Rural", "113535", "87460", "200995", "25892", "6069.16", "4.27", "87478.70687", "0.770335139", "NORTH EASTERN", [ "{\"address\":\"\",\"city\":\"MANDERA EAST\",\"state\":\"NORTH EASTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "41.29294811" ]
+, [ 73, "1D9E8A26-1197-4705-8442-5045E5160A66", 73, 1355298879, "591599", 1355298879, "591599", "{\n}", "MANDERA WEST", "Rural", "161628", "134022", "295650", "34273", "8120.05", "4.22", "134041.9048", "0.829200386", "NORTH EASTERN", [ "{\"address\":\"\",\"city\":\"MANDERA WEST\",\"state\":\"NORTH EASTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "40.2334622" ]
+, [ 74, "62BD3B3F-59EC-44E1-8E0D-CEC4EF4DF1BF", 74, 1355298879, "591599", 1355298879, "591599", "{\n}", "SIAYA", "Rural", "238253", "271416", "509669", "120471", "1504.63", "80.07", "271574.3466", "1.139192371", "NYANZA", [ "{\"address\":\"\",\"city\":\"SIAYA\",\"state\":\"NYANZA\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "34.3043068" ]
+, [ 75, "4474C4EA-AC12-496E-9A91-B834AECA341D", 75, 1355298879, "591599", 1355298879, "591599", "{\n}", "BONDO", "Rural", "53823", "56643", "110466", "26023", "497.69", "52.29", "56751.14563", "1.052393958", "NYANZA", [ "{\"address\":\"\",\"city\":\"BONDO\",\"state\":\"NYANZA\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "34.19064437" ]
+, [ 76, "FB9BC8FE-B760-44D5-A14A-762C5D9842C5", 76, 1355298879, "591599", 1355298879, "591599", "{\n}", "RARIEDA", "Rural", "63020", "68522", "131542", "30178", "400.42", "75.37", "68679.38475", "1.087305617", "NYANZA", [ "{\"address\":\"\",\"city\":\"RARIEDA\",\"state\":\"NYANZA\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "34.33792037" ]
+, [ 77, "4D4FD0A7-2037-4626-AB62-612C9FA52AC3", 77, 1355298879, "591599", 1355298879, "591599", "{\n}", "KISUMU EAST", "Rural", "41091", "42394", "83485", "18041", "284.35", "63.45", "42538.50853", "1.031710107", "NYANZA", [ "{\"address\":\"\",\"city\":\"KISUMU EAST\",\"state\":\"NYANZA\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "34.80473358" ]
+, [ 78, "02735257-1E7E-4DBF-915B-190506D8B4B5", 78, 1355298879, "591599", 1355298879, "591599", "{\n}", "KISUMU WEST", "Rural", "65384", "72591", "137975", "31608", "352.23", "89.74", "72776.62871", "1.110225743", "NYANZA", [ "{\"address\":\"\",\"city\":\"KISUMU WEST\",\"state\":\"NYANZA\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "34.53285818" ]
+, [ 79, "373856D6-9B98-401E-86B3-19BCE75ED44F", 79, 1355298879, "591599", 1355298879, "591599", "{\n}", "NYANDO", "Rural", "115314", "124415", "239729", "52448", "847.6", "61.88", "124551.0477", "1.078923635", "NYANZA", [ "{\"address\":\"\",\"city\":\"NYANDO\",\"state\":\"NYANZA\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "35.02991504" ]
+, [ 80, "02E17508-A6D3-4E50-948C-CE54F64CA777", 80, 1355298879, "591599", 1355298879, "591599", "{\n}", "HOMA BAY", "Rural", "145981", "161346", "307327", "65649", "1067.59", "61.49", "161482.7388", "1.105253423", "NYANZA", [ "{\"address\":\"\",\"city\":\"HOMA BAY\",\"state\":\"NYANZA\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "34.44445584" ]
+, [ 81, "C0F5B3AD-C536-4322-A71E-F2B726F6CB74", 81, 1355298879, "591599", 1355298879, "591599", "{\n}", "SUBA", "Rural", "96328", "99785", "196113", "40405", "1057.37", "38.21", "99876.10151", "1.0358878", "NYANZA", [ "{\"address\":\"\",\"city\":\"SUBA\",\"state\":\"NYANZA\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "34.20665004" ]
+, [ 82, "A5A97C58-25C3-4934-949F-A1A9D6F3CD5F", 82, 1355298879, "591599", 1355298879, "591599", "{\n}", "RACHUONYO", "Rural", "154325", "167978", "322303", "67930", "860.23", "78.97", "168157.3997", "1.08846914", "NYANZA", [ "{\"address\":\"\",\"city\":\"RACHUONYO\",\"state\":\"NYANZA\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "34.70386182" ]
+, [ 83, "581988E1-1B62-42CC-9EEE-52139C0190DF", 83, 1355298879, "591599", 1355298879, "591599", "{\n}", "MIGORI", "Rural", "121181", "132228", "253409", "51951", "1092.16", "47.57", "132338.9554", "1.091161156", "NYANZA", [ "{\"address\":\"\",\"city\":\"MIGORI\",\"state\":\"NYANZA\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "34.30280979" ]
+, [ 84, "2C63273A-FAE9-4609-A8E7-FD00409121AF", 84, 1355298879, "591599", 1355298879, "591599", "{\n}", "RONGO", "Rural", "65240", "68914", "134154", "26880", "429.94", "62.52", "69065.7421", "1.056315144", "NYANZA", [ "{\"address\":\"\",\"city\":\"RONGO\",\"state\":\"NYANZA\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "34.51455638" ]
+, [ 85, "147A91C1-C9A5-4F8A-A205-BE7E9C5BD716", 85, 1355298879, "591599", 1355298879, "591599", "{\n}", "KURIA WEST", "Rural", "66766", "69496", "136262", "21501", "365.93", "58.76", "69678.45566", "1.040889075", "NYANZA", [ "{\"address\":\"\",\"city\":\"KURIA WEST\",\"state\":\"NYANZA\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "34.51983447" ]
+, [ 86, "167178E4-5FE7-4221-8765-0D64081DDA13", 86, 1355298879, "591599", 1355298879, "591599", "{\n}", "KURIA EAST", "Rural", "40248", "41585", "81833", "13513", "188.03", "71.87", "41799.05095", "1.033219042", "NYANZA", [ "{\"address\":\"\",\"city\":\"KURIA EAST\",\"state\":\"NYANZA\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "34.65699509" ]
+, [ 87, "8EB52960-B782-4CAD-AD0C-3F9FC8D90B6B", 87, 1355298879, "591599", 1355298879, "591599", "{\n}", "KISII CENTRAL", "Rural", "133883", "149234", "283117", "60739", "335.51", "181.03", "149633.0432", "1.114659815", "NYANZA", [ "{\"address\":\"\",\"city\":\"KISII CENTRAL\",\"state\":\"NYANZA\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "34.79181187" ]
+, [ 88, "4E803998-0160-462E-940B-99DA3BA4F8B4", 88, 1355298879, "591599", 1355298879, "591599", "{\n}", "KISII SOUTH", "Rural", "25973", "28996", "54969", "11355", "78.43", "144.78", "29327.16155", "1.116390097", "NYANZA", [ "{\"address\":\"\",\"city\":\"KISII SOUTH\",\"state\":\"NYANZA\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "34.6895693" ]
+, [ 89, "44167FBE-A85B-4AF6-9450-E58243F0F204", 89, 1355298879, "591599", 1355298879, "591599", "{\n}", "MASABA", "Rural", "67399", "75588", "142987", "31121", "193.37", "160.94", "75936.54941", "1.121500319", "NYANZA", [ "{\"address\":\"\",\"city\":\"MASABA\",\"state\":\"NYANZA\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "34.88253143" ]
+, [ 90, "F091E806-9443-4AE5-914F-3C45FEE8A311", 90, 1355298879, "591599", 1355298879, "591599", "{\n}", "GUCHA", "Rural", "173472", "190988", "364460", "75379", "444.13", "169.72", "191378.5883", "1.100973068", "NYANZA", [ "{\"address\":\"\",\"city\":\"GUCHA\",\"state\":\"NYANZA\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "34.77186075" ]
+, [ 91, "736223EF-A0B5-49D4-9AFB-3A0F68370871", 91, 1355298879, "591599", 1355298879, "591599", "{\n}", "GUCHA SOUTH", "Rural", "70458", "75849", "146307", "29032", "192.6", "150.74", "76214.82555", "1.076513668", "NYANZA", [ "{\"address\":\"\",\"city\":\"GUCHA SOUTH\",\"state\":\"NYANZA\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "34.65567846" ]
+, [ 92, "41443A8D-1AE0-4600-AACA-36ECAC2B75FD", 92, 1355298879, "591599", 1355298879, "591599", "{\n}", "NYAMIRA", "Rural", "125744", "137457", "263201", "56063", "337.9", "165.92", "137829.1338", "1.093149574", "NYANZA", [ "{\"address\":\"\",\"city\":\"NYAMIRA\",\"state\":\"NYANZA\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "34.96346861" ]
+, [ 93, "D1EC59C6-AF02-4C19-AC72-C306931D4551", 93, 1355298879, "591599", 1355298879, "591599", "{\n}", "MANGA", "Rural", "41678", "46181", "87859", "19295", "111.32", "173.33", "46555.39813", "1.108042612", "NYANZA", [ "{\"address\":\"\",\"city\":\"MANGA\",\"state\":\"NYANZA\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "34.90211779" ]
+, [ 94, "55B45F1E-A848-42E4-99D0-4FBF8B22BB0C", 94, 1355298879, "591599", 1355298879, "591599", "{\n}", "BORABU", "Rural", "34151", "33461", "67612", "15615", "246.55", "63.33", "33599.51551", "0.979795614", "NYANZA", [ "{\"address\":\"\",\"city\":\"BORABU\",\"state\":\"NYANZA\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "35.02803793" ]
+, [ 95, "B4E485AB-198D-42B8-8ED5-197790A6A00B", 95, 1355298879, "591599", 1355298879, "591599", "{\n}", "TURKANA CENTRAL", "Rural", "101846", "102536", "204382", "31217", "13990.49", "2.23", "102543.2797", "1.006774935", "RIFT VALLEY", [ "{\"address\":\"\",\"city\":\"TURKANA CENTRAL\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "35.44299468" ]
+, [ 96, "D2C15470-37BA-4839-9697-45C706E5C648", 96, 1355298879, "591599", 1355298879, "591599", "{\n}", "TURKANA NORTH", "Rural", "159941", "142978", "302919", "40422", "35091.54", "1.15", "142982.5578", "0.893942141", "RIFT VALLEY", [ "{\"address\":\"\",\"city\":\"TURKANA NORTH\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "35.09717514" ]
+, [ 97, "7DF9F9DA-DCE8-40AF-BA68-276BF689EC1C", 97, 1355298879, "591599", 1355298879, "591599", "{\n}", "TURKANA SOUTH", "Rural", "121022", "105357", "226379", "28437", "18670.82", "1.52", "105363.4819", "0.870560724", "RIFT VALLEY", [ "{\"address\":\"\",\"city\":\"TURKANA SOUTH\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "35.99979492" ]
+, [ 98, "ECFCBE78-35D0-48A4-823A-3BB59ACC02D8", 98, 1355298879, "591599", 1355298879, "591599", "{\n}", "WEST POKOT", "Rural", "68488", "69879", "138367", "26209", "2189.2", "11.97", "69910.28449", "1.020310127", "RIFT VALLEY", [ "{\"address\":\"\",\"city\":\"WEST POKOT\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "35.16354392" ]
+, [ 99, "03D9AF8B-3886-4314-9B0C-DC4042AF80EB", 99, 1355298879, "591599", 1355298879, "591599", "{\n}", "POKOT NORTH", "Rural", "77959", "78052", "156011", "25966", "3953.21", "6.57", "78071.72043", "1.001192935", "RIFT VALLEY", [ "{\"address\":\"\",\"city\":\"POKOT NORTH\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "35.10600361" ]
+, [ 100, "DD44F2BE-DBF8-4CB3-8325-3F1149B841C8", 100, 1355298879, "591599", 1355298879, "591599", "{\n}", "POKOT CENTRAL", "Rural", "87199", "88417", "175616", "32548", "2898.74", "11.23", "88447.08169", "1.01396805", "RIFT VALLEY", [ "{\"address\":\"\",\"city\":\"POKOT CENTRAL\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "35.49402215" ]
+, [ 101, "629F6E09-0407-4902-A759-A46AB7259FBF", 101, 1355298879, "591599", 1355298879, "591599", "{\n}", "SAMBURU CENTRAL", "Rural", "42524", "44378", "86902", "18300", "3924.43", "4.66", "44388.83571", "1.043598909", "RIFT VALLEY", [ "{\"address\":\"\",\"city\":\"SAMBURU CENTRAL\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "36.71442163" ]
+, [ 102, "0703B961-A3E7-4995-ACBD-5B9F915CA79D", 102, 1355298879, "591599", 1355298879, "591599", "{\n}", "SAMBURU EAST", "Rural", "22641", "23931", "46572", "9976", "9783.15", "1.02", "23933.31429", "1.056976282", "RIFT VALLEY", [ "{\"address\":\"\",\"city\":\"SAMBURU EAST\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "37.47389892" ]
+, [ 103, "E19A1B48-57EC-4CAB-AE91-95BBC54079EB", 103, 1355298879, "591599", 1355298879, "591599", "{\n}", "SAMBURU NORTH", "Rural", "27646", "24163", "51809", "10051", "7017.61", "1.43", "24166.93952", "0.874014324", "RIFT VALLEY", [ "{\"address\":\"\",\"city\":\"SAMBURU NORTH\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "36.83086912" ]
+, [ 104, "DBE96A2D-BAAB-4E0D-B55F-A525E66F10A8", 104, 1355298879, "591599", 1355298879, "591599", "{\n}", "TRANS NZOIA WEST", "Rural", "117754", "121100", "238854", "47146", "622.05", "75.79", "121289.2999", "1.028415171", "RIFT VALLEY", [ "{\"address\":\"\",\"city\":\"TRANS NZOIA WEST\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "34.89426897" ]
+, [ 105, "A8C527B9-3C51-4F37-B427-AE00FDB15947", 105, 1355298879, "591599", 1355298879, "591599", "{\n}", "TRANS NZOIA EAST", "Rural", "96596", "98577", "195173", "39119", "629.78", "62.12", "98730.38055", "1.020508096", "RIFT VALLEY", [ "{\"address\":\"\",\"city\":\"TRANS NZOIA EAST\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "35.18029104" ]
+, [ 106, "7DDC69EE-9C11-4821-8D82-8DC143609169", 106, 1355298879, "591599", 1355298879, "591599", "{\n}", "KWANZA", "Rural", "108501", "108809", "217310", "42605", "1106.59", "38.5", "108907.0499", "1.002838684", "RIFT VALLEY", [ "{\"address\":\"\",\"city\":\"KWANZA\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "34.85810469" ]
+, [ 107, "4D50F851-0543-47FD-BE95-66A62529BA5C", 107, 1355298879, "591599", 1355298879, "591599", "{\n}", "BARINGO", "Rural", "65136", "66242", "131378", "27309", "2420.16", "11.28", "66268.91392", "1.016979858", "RIFT VALLEY", [ "{\"address\":\"\",\"city\":\"BARINGO\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "35.97415916" ]
+, [ 108, "E061B24D-D985-4FFF-8ADA-4F6FC9919D00", 108, 1355298879, "591599", 1355298879, "591599", "{\n}", "BARINGO NORTH", "Rural", "46228", "47561", "93789", "19734", "1703.49", "11.58", "47588.13723", "1.028835338", "RIFT VALLEY", [ "{\"address\":\"\",\"city\":\"BARINGO NORTH\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "35.80555092" ]
+, [ 109, "5ACAD677-AC3C-4870-A0F7-74F97577C9AD", 109, 1355298879, "591599", 1355298879, "591599", "{\n}", "EAST POKOT", "Rural", "69889", "63300", "133189", "21291", "4516.81", "4.71", "63315.47309", "0.90572193", "RIFT VALLEY", [ "{\"address\":\"\",\"city\":\"EAST POKOT\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "36.01860317" ]
+, [ 110, "D16B6047-4F68-4F57-8658-67E87A0A7D97", 110, 1355298879, "591599", 1355298879, "591599", "{\n}", "KOIBATEK", "Rural", "68064", "67590", "135654", "26523", "2273.55", "11.67", "67619.93732", "0.993035966", "RIFT VALLEY", [ "{\"address\":\"\",\"city\":\"KOIBATEK\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "35.86953085" ]
+, [ 111, "BEBA82E4-6783-4B58-AD90-01414978A223", 111, 1355298879, "591599", 1355298879, "591599", "{\n}", "ELDORET WEST", "Rural", "123499", "123933", "247432", "47151", "1018.49", "46.3", "124054.257", "1.003514198", "RIFT VALLEY", [ "{\"address\":\"\",\"city\":\"ELDORET WEST\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "35.19163187" ]
+, [ 112, "F188E9CF-3E51-417D-B2E5-7B476258F52B", 112, 1355298879, "591599", 1355298879, "591599", "{\n}", "ELDORET EAST", "Rural", "80374", "80348", "160722", "30873", "1182.97", "26.1", "80415.94255", "0.999676512", "RIFT VALLEY", [ "{\"address\":\"\",\"city\":\"ELDORET EAST\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "35.41893944" ]
+, [ 113, "529022FA-C9E4-4C91-AB74-3F13CE41A1C0", 113, 1355298879, "591599", 1355298879, "591599", "{\n}", "WARENG", "Rural", "70614", "69852", "140466", "27773", "832.61", "33.36", "69936.81042", "0.989208939", "RIFT VALLEY", [ "{\"address\":\"\",\"city\":\"WARENG\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "35.33850049" ]
+, [ 114, "E41B6FC8-D759-437A-A808-5C2E79B9561C", 114, 1355298879, "591599", 1355298879, "591599", "{\n}", "MARAKWET", "Rural", "89136", "90322", "179458", "37581", "1583.88", "23.73", "90378.27699", "1.013305511", "RIFT VALLEY", [ "{\"address\":\"\",\"city\":\"MARAKWET\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "35.50699822" ]
+, [ 115, "44F5F3C9-5909-47EE-896E-8D077F42A89D", 115, 1355298879, "591599", 1355298879, "591599", "{\n}", "KEIYO", "Rural", "68649", "68705", "137354", "28369", "1290", "21.99", "68758.21628", "1.000815744", "RIFT VALLEY", [ "{\"address\":\"\",\"city\":\"KEIYO\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "35.57039657" ]
+, [ 116, "947D0B08-8AFD-4965-94BB-536636AE4D9E", 116, 1355298879, "591599", 1355298879, "591599", "{\n}", "NANDI NORTH", "Rural", "80199", "80406", "160605", "31106", "730.87", "42.56", "80515.73087", "1.00258108", "RIFT VALLEY", [ "{\"address\":\"\",\"city\":\"NANDI NORTH\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "35.06077368" ]
+, [ 117, "9FA71657-1762-4599-92C8-0346D9BD6E30", 117, 1355298879, "591599", 1355298879, "591599", "{\n}", "NANDI CENTRAL", "Rural", "70344", "72075", "142419", "28367", "506.18", "56.04", "72213.97033", "1.024607642", "RIFT VALLEY", [ "{\"address\":\"\",\"city\":\"NANDI CENTRAL\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "35.08490348" ]
+, [ 118, "76FB7BF3-F838-4712-892A-8511719B0867", 118, 1355298879, "591599", 1355298879, "591599", "{\n}", "NANDI EAST", "Rural", "57741", "54897", "112638", "25598", "528.57", "48.43", "55006.24002", "0.950745571", "RIFT VALLEY", [ "{\"address\":\"\",\"city\":\"NANDI EAST\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "35.23779105" ]
+, [ 119, "57EB9CA0-0BE6-42DF-A888-38A1607B51B9", 119, 1355298879, "591599", 1355298879, "591599", "{\n}", "NANDI SOUTH", "Rural", "78209", "79758", "157967", "30768", "525.45", "58.56", "79906.84194", "1.019805905", "RIFT VALLEY", [ "{\"address\":\"\",\"city\":\"NANDI SOUTH\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "34.96800793" ]
+, [ 120, "ECCC1978-2D2B-4A5F-B920-482064E81B9B", 120, 1355298879, "591599", 1355298879, "591599", "{\n}", "TINDERET", "Rural", "39109", "37946", "77055", "14489", "379.67", "38.16", "38049.00788", "0.970262599", "RIFT VALLEY", [ "{\"address\":\"\",\"city\":\"TINDERET\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "35.3167413" ]
+, [ 121, "F66B246A-68F1-4F2C-A9CB-717CB7D0EA9D", 121, 1355298879, "591599", 1355298879, "591599", "{\n}", "LAIKIPIA NORTH", "Rural", "16158", "15181", "31339", "6360", "2598.1", "2.45", "15187.21916", "0.939534596", "RIFT VALLEY", [ "{\"address\":\"\",\"city\":\"LAIKIPIA NORTH\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "36.99627658" ]
+, [ 122, "F03D4D8C-3C5F-499B-A811-2DCC0BF5DA1D", 122, 1355298879, "591599", 1355298879, "591599", "{\n}", "LAIKIPIA EAST", "Rural", "47846", "47497", "95343", "26516", "2846.76", "9.31", "47513.80718", "0.992705764", "RIFT VALLEY", [ "{\"address\":\"\",\"city\":\"LAIKIPIA EAST\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "36.95183375" ]
+, [ 123, "A71136FC-88C5-4D08-8AF2-51456659DA47", 123, 1355298879, "591599", 1355298879, "591599", "{\n}", "LAIKIPIA WEST", "Rural", "85278", "88150", "173428", "40973", "3769.61", "10.87", "88172.6225", "1.033678088", "RIFT VALLEY", [ "{\"address\":\"\",\"city\":\"LAIKIPIA WEST\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "36.5181069" ]
+, [ 124, "C0C62428-C3DD-4B7E-8173-640029FAE252", 124, 1355298879, "591599", 1355298879, "591599", "{\n}", "NAKURU", "Rural", "74315", "72848", "147163", "33709", "1150.95", "29.29", "72912.5684", "0.980259705", "RIFT VALLEY", [ "{\"address\":\"\",\"city\":\"NAKURU\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "36.03461164" ]
+, [ 125, "B5022CC5-B6D2-4689-BAD2-255571FAE4B4", 125, 1355298879, "591599", 1355298879, "591599", "{\n}", "NAKURU NORTH", "Rural", "68149", "70909", "139058", "31938", "526", "60.72", "71038.56084", "1.040499494", "RIFT VALLEY", [ "{\"address\":\"\",\"city\":\"NAKURU NORTH\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "36.16401596" ]
+, [ 126, "28A72052-BDC8-41FE-A966-A363B1C07D88", 126, 1355298879, "591599", 1355298879, "591599", "{\n}", "NAIVASHA", "Rural", "73424", "73433", "146857", "36293", "2201.08", "16.49", "73466.35817", "1.000122576", "RIFT VALLEY", [ "{\"address\":\"\",\"city\":\"NAIVASHA\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "36.33344468" ]
+, [ 127, "C5471944-6839-4C12-8636-ECE2A735C29D", 127, 1355298879, "591599", 1355298879, "591599", "{\n}", "MOLO", "Rural", "219216", "216006", "435222", "94283", "2276.9", "41.41", "216102.2783", "0.985356908", "RIFT VALLEY", [ "{\"address\":\"\",\"city\":\"MOLO\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "35.75756717" ]
+, [ 128, "5038D832-3472-4736-8AC8-145C92DBFB9E", 128, 1355298879, "591599", 1355298879, "591599", "{\n}", "NAROK NORTH", "Rural", "109966", "103800", "213766", "42982", "4639.41", "9.26", "103823.7026", "0.943928123", "RIFT VALLEY", [ "{\"address\":\"\",\"city\":\"NAROK NORTH\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "35.99464674" ]
+, [ 129, "A9B2F336-83CA-4D8E-A671-F298EA79FFA7", 129, 1355298879, "591599", 1355298879, "591599", "{\n}", "NAROK SOUTH", "Rural", "158947", "158897", "317844", "62412", "10412.05", "5.99", "158912.2657", "0.99968543", "RIFT VALLEY", [ "{\"address\":\"\",\"city\":\"NAROK SOUTH\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "35.5807782" ]
+, [ 130, "0AAC91F7-D95D-4189-B3EA-886DCCF267CF", 130, 1355298879, "591599", 1355298879, "591599", "{\n}", "TRANS MARA", "Rural", "130323", "130493", "260816", "47324", "2845.99", "16.63", "130538.7918", "1.001304451", "RIFT VALLEY", [ "{\"address\":\"\",\"city\":\"TRANS MARA\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "34.89742997" ]
+, [ 131, "D1EDD859-2ECE-4839-8FD0-DC58C6E64679", 131, 1355298879, "591599", 1355298879, "591599", "{\n}", "KAJIADO CENTRAL", "Rural", "63652", "65373", "129025", "26352", "8056.43", "3.27", "65380.90077", "1.027037642", "RIFT VALLEY", [ "{\"address\":\"\",\"city\":\"KAJIADO CENTRAL\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "36.89341002" ]
+, [ 132, "BCAC9AC6-C79B-4FB2-B960-AE1D4BC6E670", 132, 1355298879, "591599", 1355298879, "591599", "{\n}", "LOITOKITOK", "Rural", "61472", "61277", "122749", "25565", "6389.1", "4", "61286.62139", "0.996827824", "RIFT VALLEY", [ "{\"address\":\"\",\"city\":\"LOITOKITOK\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "37.47875865" ]
+, [ 133, "E7804A9E-9F2F-4523-9E7D-EFBC6B1481C6", 133, 1355298879, "591599", 1355298879, "591599", "{\n}", "KERICHO", "Rural", "126197", "122741", "248938", "53136", "877.8", "60.53", "122884.7651", "0.972614246", "RIFT VALLEY", [ "{\"address\":\"\",\"city\":\"KERICHO\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "35.21130866" ]
+, [ 134, "80826FE0-D63B-4C34-BD14-C856FC5C61AE", 134, 1355298879, "591599", 1355298879, "591599", "{\n}", "KIPKELION", "Rural", "57546", "55888", "113434", "23675", "676.11", "35.02", "55973.11337", "0.971188267", "RIFT VALLEY", [ "{\"address\":\"\",\"city\":\"KIPKELION\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "35.47881562" ]
+, [ 135, "D509E9A2-5AA1-4E44-A580-8F779091FC92", 135, 1355298879, "591599", 1355298879, "591599", "{\n}", "BURET", "Rural", "142728", "138653", "281381", "58138", "1166.86", "49.82", "138775.318", "0.97144919", "RIFT VALLEY", [ "{\"address\":\"\",\"city\":\"BURET\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "35.3033778" ]
+, [ 136, "B277CA51-4CFA-4DCF-B96B-560051F0AE28", 136, 1355298879, "591599", 1355298879, "591599", "{\n}", "SOTIK", "Rural", "88445", "91157", "179602", "33625", "535.32", "62.81", "91322.21893", "1.030663124", "RIFT VALLEY", [ "{\"address\":\"\",\"city\":\"SOTIK\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "35.1490337" ]
+, [ 137, "F336AD10-40EE-438A-9ABE-B60F8FDA3B8D", 137, 1355298879, "591599", 1355298879, "591599", "{\n}", "BOMET", "Rural", "145925", "152672", "298597", "56084", "824.56", "68.02", "152848.9732", "1.04623608", "RIFT VALLEY", [ "{\"address\":\"\",\"city\":\"BOMET\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "35.31899335" ]
+, [ 138, "415F8FC1-B5DB-4F06-9483-D5A58C300500", 138, 1355298879, "591599", 1355298879, "591599", "{\n}", "KAJIADO NORTH", "Rural", "76387", "74289", "150676", "34427", "6973.34", "4.94", "74299.95415", "0.972534594", "RIFT VALLEY", [ "{\"address\":\"\",\"city\":\"KAJIADO NORTH\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "36.44660994" ]
+, [ 139, "BCE184C0-EBE7-4930-BF8A-53FCE81EA06B", 139, 1355298879, "591599", 1355298879, "591599", "{\n}", "KAKAMEGA CENTRAL", "Rural", "98023", "105490", "203513", "41352", "370.93", "111.48", "105754.2628", "1.076176", "WESTERN", [ "{\"address\":\"\",\"city\":\"KAKAMEGA CENTRAL\",\"state\":\"WESTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "34.6856109" ]
+, [ 140, "2340D525-4B72-4DF6-AA82-9FA4C95B6CD2", 140, 1355298879, "591599", 1355298879, "591599", "{\n}", "KAKAMEGA SOUTH", "Rural", "49260", "55409", "104669", "23144", "143.56", "161.21", "55752.13179", "1.124827446", "WESTERN", [ "{\"address\":\"\",\"city\":\"KAKAMEGA SOUTH\",\"state\":\"WESTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "34.7077479" ]
+, [ 141, "3C561B5B-F6CF-4209-B0F1-83E5A3DD0903", 141, 1355298879, "591599", 1355298879, "591599", "{\n}", "KAKAMEGA NORTH", "Rural", "97351", "102925", "200276", "39404", "423.8", "92.98", "103154.7098", "1.057256731", "WESTERN", [ "{\"address\":\"\",\"city\":\"KAKAMEGA NORTH\",\"state\":\"WESTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "34.82641205" ]
+, [ 142, "3A04560A-C13D-4E4B-8591-47C0CF22A08D", 142, 1355298879, "591599", 1355298879, "591599", "{\n}", "KAKAMEGA EAST", "Rural", "75699", "81476", "157175", "33661", "443.24", "75.94", "81646.78558", "1.076315407", "WESTERN", [ "{\"address\":\"\",\"city\":\"KAKAMEGA EAST\",\"state\":\"WESTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "34.85789384" ]
+, [ 143, "B0CCED21-C1F5-45FF-84F0-9D118662D684", 143, 1355298879, "591599", 1355298879, "591599", "{\n}", "LUGARI", "Rural", "131855", "139845", "271700", "54680", "641.62", "85.22", "140050.5033", "1.060596868", "WESTERN", [ "{\"address\":\"\",\"city\":\"LUGARI\",\"state\":\"WESTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "35.02947866" ]
+, [ 144, "90110832-343A-436F-A4DD-76CB1DA2E127", 144, 1355298879, "591599", 1355298879, "591599", "{\n}", "VIHIGA", "Rural", "45400", "51135", "96535", "20645", "103.69", "199.1", "51572.84357", "1.126321586", "WESTERN", [ "{\"address\":\"\",\"city\":\"VIHIGA\",\"state\":\"WESTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "34.72682968" ]
+, [ 145, "5967EB24-407D-4334-B7A2-90EE2707361A", 145, 1355298879, "591599", 1355298879, "591599", "{\n}", "EMUHAYA", "Rural", "63402", "72321", "135723", "31382", "134.34", "233.6", "72792.95176", "1.140673796", "WESTERN", [ "{\"address\":\"\",\"city\":\"EMUHAYA\",\"state\":\"WESTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "34.60778185" ]
+, [ 146, "1DF12F12-EF46-4481-933A-DDDEEC2B78AD", 146, 1355298879, "591599", 1355298879, "591599", "{\n}", "HAMISI", "Rural", "70469", "77790", "148259", "32096", "156.43", "205.18", "78240.48264", "1.103889654", "WESTERN", [ "{\"address\":\"\",\"city\":\"HAMISI\",\"state\":\"WESTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "34.82143608" ]
+, [ 147, "4F93A65A-C5A4-42B0-A86E-E352874857C6", 147, 1355298879, "591599", 1355298879, "591599", "{\n}", "MUMIAS", "Rural", "115328", "125744", "241072", "50730", "428.68", "118.34", "126013.0305", "1.090316315", "WESTERN", [ "{\"address\":\"\",\"city\":\"MUMIAS\",\"state\":\"WESTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "34.48762031" ]
+, [ 148, "A75CFCFE-DA9F-4378-B6A9-21B5C8531638", 148, 1355298879, "591599", 1355298879, "591599", "{\n}", "BUTERE", "Rural", "109084", "120551", "229635", "51518", "344.46", "149.56", "120867.6812", "1.105120824", "WESTERN", [ "{\"address\":\"\",\"city\":\"BUTERE\",\"state\":\"WESTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "34.54564535" ]
+, [ 149, "65E5FE7E-3DB5-407D-AB11-D5CEE928B4AB", 149, 1355298879, "591599", 1355298879, "591599", "{\n}", "BUNGOMA SOUTH", "Rural", "152157", "161988", "314145", "61280", "578.93", "105.85", "162250.8245", "1.064610895", "WESTERN", [ "{\"address\":\"\",\"city\":\"BUNGOMA SOUTH\",\"state\":\"WESTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "34.52131934" ]
+, [ 150, "1622E3EA-010D-4C4B-8160-AD531E616D6E", 150, 1355298879, "591599", 1355298879, "591599", "{\n}", "BUNGOMA NORTH", "Rural", "108417", "114156", "222573", "41915", "420.75", "99.62", "114413.6756", "1.052934503", "WESTERN", [ "{\"address\":\"\",\"city\":\"BUNGOMA NORTH\",\"state\":\"WESTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "34.86452529" ]
+, [ 151, "5C6A9BB8-EA37-42DB-AF65-5D665BA7F4A3", 151, 1355298879, "591599", 1355298879, "591599", "{\n}", "BUNGOMA EAST", "Rural", "81861", "86202", "168063", "31961", "327.26", "97.66", "86452.14056", "1.053028915", "WESTERN", [ "{\"address\":\"\",\"city\":\"BUNGOMA EAST\",\"state\":\"WESTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "34.73645726" ]
+, [ 152, "1C2D65F0-24C1-4F2A-8119-07C1A5AF7D20", 152, 1355298879, "591599", 1355298879, "591599", "{\n}", "BUNGOMA WEST", "Rural", "102129", "107157", "209286", "40157", "387.85", "103.54", "107420.3209", "1.049231854", "WESTERN", [ "{\"address\":\"\",\"city\":\"BUNGOMA WEST\",\"state\":\"WESTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "34.54143282" ]
+, [ 153, "2DB33964-613B-41FB-9207-563646856C59", 153, 1355298879, "591599", 1355298879, "591599", "{\n}", "MT. ELGON", "Rural", "81232", "81068", "162300", "30165", "947.8", "31.83", "81153.70585", "0.997981091", "WESTERN", [ "{\"address\":\"\",\"city\":\"MT. ELGON\",\"state\":\"WESTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "34.59729929" ]
+, [ 154, "3F40EFAD-1448-46A5-BB91-17E6C82B9BCF", 154, 1355298879, "591599", 1355298879, "591599", "{\n}", "BUSIA", "Rural", "134705", "148809", "283514", "58210", "650.11", "89.54", "149016.2034", "1.104702869", "WESTERN", [ "{\"address\":\"\",\"city\":\"BUSIA\",\"state\":\"WESTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "34.26474625" ]
+, [ 155, "304B517C-15D9-470F-9823-F8975BD47A56", 155, 1355298879, "591599", 1355298879, "591599", "{\n}", "TESO NORTH", "Rural", "35403", "37415", "72818", "13491", "182.44", "73.95", "37609.05284", "1.056831342", "WESTERN", [ "{\"address\":\"\",\"city\":\"TESO NORTH\",\"state\":\"WESTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "34.34692124" ]
+, [ 156, "F11E5845-A5F7-4818-B86B-05CAB6282B98", 156, 1355298879, "591599", 1355298879, "591599", "{\n}", "SAMIA", "Rural", "44267", "49233", "93500", "19395", "265.12", "73.16", "49399.96967", "1.11218289", "WESTERN", [ "{\"address\":\"\",\"city\":\"SAMIA\",\"state\":\"WESTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "34.08114406" ]
+, [ 157, "DEB92276-4B75-4712-AF1A-ED24D170DD51", 157, 1355298879, "591599", 1355298879, "591599", "{\n}", "BUNYALA", "Rural", "28617", "31545", "60162", "13535", "185.33", "73.03", "31699.41105", "1.102316805", "WESTERN", [ "{\"address\":\"\",\"city\":\"BUNYALA\",\"state\":\"WESTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "34.02046792" ]
+, [ 158, "A57B22A5-430B-4757-8831-F962B103A59E", 158, 1355298879, "591599", 1355298879, "591599", "{\n}", "TESO SOUTH", "Rural", "53929", "57833", "111762", "21346", "277.54", "76.91", "58027.31073", "1.072391478", "WESTERN", [ "{\"address\":\"\",\"city\":\"TESO SOUTH\",\"state\":\"WESTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "34.22063324" ]
+, [ 159, "BD09B609-9547-48D2-87E1-226C2D47C663", 159, 1355298879, "591599", 1355298879, "591599", "{\n}", "NAIROBI WEST", "urban", "352227", "332538", "684765", "212295", "261.78", "2615.81", "333883.5077", "0.944101389", "NAIROBI", [ "{\"address\":\"\",\"city\":\"NAIROBI WEST\",\"state\":\"NAIROBI\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "36.79920201" ]
+, [ 160, "15A4E0A8-58AA-4314-BD53-48C8B9C1BBD9", 160, 1355298879, "591599", 1355298879, "591599", "{\n}", "NAIROBI EAST", "urban", "582554", "561862", "1144416", "369866", "226.69", "5048.46", "564431.8266", "0.964480546", "NAIROBI", [ "{\"address\":\"\",\"city\":\"NAIROBI EAST\",\"state\":\"NAIROBI\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "36.967484" ]
+, [ 161, "67BC40C1-3ECC-4A9B-873B-34942014AABA", 161, 1355298879, "591599", 1355298879, "591599", "{\n}", "NAIROBI NORTH", "urban", "545701", "516385", "1062086", "327428", "109.26", "9720.77", "521379.5177", "0.946278273", "NAIROBI", [ "{\"address\":\"\",\"city\":\"NAIROBI NORTH\",\"state\":\"NAIROBI\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "36.8911257" ]
+, [ 162, "6665CFAC-31CE-42DA-940D-62461BA1C8FC", 162, 1355298879, "591599", 1355298879, "591599", "{\n}", "WESTLANDS", "urban", "124748", "122354", "247102", "75427", "97.38", "2537.52", "123635.0433", "0.980809312", "NAIROBI", [ "{\"address\":\"\",\"city\":\"WESTLANDS\",\"state\":\"NAIROBI\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "36.7882561" ]
+, [ 163, "76420DEF-0FD5-4691-AF17-908158B1841B", 163, 1355298879, "591599", 1355298879, "591599", "{\n}", "NYANDARUA NORTH", "urban", "45400", "47255", "92655", "24094", "367.44", "252.16", "47378.55759", "1.040859031", "CENTRAL", [ "{\"address\":\"\",\"city\":\"NYANDARUA NORTH\",\"state\":\"CENTRAL\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "36.42343108" ]
+, [ 164, "8053B1B1-DD08-4E11-8A29-1D67AB321D18", 164, 1355298879, "591599", 1355298879, "591599", "{\n}", "NYANDARUA SOUTH", "urban", "8772", "9091", "17863", "5346", "10.54", "1695.23", "9923.258065", "1.036365709", "CENTRAL", [ "{\"address\":\"\",\"city\":\"NYANDARUA SOUTH\",\"state\":\"CENTRAL\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "36.55651343" ]
+, [ 165, "03D45E31-D2D8-4C95-BF23-28708F14840D", 165, 1355298879, "591599", 1355298879, "591599", "{\n}", "NYERI NORTH", "urban", "18698", "20567", "39265", "14301", "33.38", "1176.36", "21127.15578", "1.099957215", "CENTRAL", [ "{\"address\":\"\",\"city\":\"NYERI NORTH\",\"state\":\"CENTRAL\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "36.9811441" ]
+, [ 166, "22F3019F-69E4-443B-A47F-AB3741918398", 166, 1355298879, "591599", 1355298879, "591599", "{\n}", "NYERI SOUTH", "urban", "65047", "65305", "130352", "40067", "176.12", "740.14", "65674.33341", "1.003966363", "CENTRAL", [ "{\"address\":\"\",\"city\":\"NYERI SOUTH\",\"state\":\"CENTRAL\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "36.89927916" ]
+, [ 167, "7DECBF5A-A5BB-4E35-8C24-6A6098EBF21D", 167, 1355298879, "591599", 1355298879, "591599", "{\n}", "KIRINYAGA", "urban", "40136", "43268", "83404", "27555", "76.38", "1092.01", "43793.47787", "1.078034682", "CENTRAL", [ "{\"address\":\"\",\"city\":\"KIRINYAGA\",\"state\":\"CENTRAL\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "37.32018369" ]
+, [ 168, "728DE7CF-8567-49FE-96F2-F7F5D0AD724F", 168, 1355298879, "591599", 1355298879, "591599", "{\n}", "MURANGA NORTH", "urban", "15489", "16386", "31875", "10671", "20.88", "1526.66", "17127.81034", "1.057912067", "CENTRAL", [ "{\"address\":\"\",\"city\":\"MURANGA NORTH\",\"state\":\"CENTRAL\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "36.98118146" ]
+, [ 169, "337BE001-73B2-4A1E-BAC7-10D4D268F6C1", 169, 1355298879, "591599", 1355298879, "591599", "{\n}", "MURANGA SOUTH", "urban", "54240", "57151", "111391", "30464", "262.39", "424.53", "57357.71519", "1.053668879", "CENTRAL", [ "{\"address\":\"\",\"city\":\"MURANGA SOUTH\",\"state\":\"CENTRAL\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "37.05522802" ]
+, [ 170, "52CF81F5-EEF0-48E9-B5CD-5D563E5EB9CA", 170, 1355298879, "591599", 1355298879, "591599", "{\n}", "KIAMBU EAST(KIAMBAA)", "urban", "103028", "105649", "208677", "62874", "88.66", "2353.76", "106811.0573", "1.025439686", "CENTRAL", [ "{\"address\":\"\",\"city\":\"KIAMBU EAST(KIAMBAA)\",\"state\":\"CENTRAL\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "36.80546766" ]
+, [ 171, "B4ECDD47-5568-4C67-81DD-A0274CB83A97", 171, 1355298879, "591599", 1355298879, "591599", "{\n}", "KIKUYU", "urban", "129946", "135061", "265007", "76794", "231.28", "1145.84", "135622.8558", "1.039362504", "CENTRAL", [ "{\"address\":\"\",\"city\":\"KIKUYU\",\"state\":\"CENTRAL\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "36.63360077" ]
+, [ 172, "B525444E-7D14-4E7F-8F86-548DC3357C6D", 172, 1355298879, "591599", 1355298879, "591599", "{\n}", "KIAMBU WEST", "urban", "39700", "40431", "80131", "23077", "84.31", "950.47", "40901.88127", "1.018413098", "CENTRAL", [ "{\"address\":\"\",\"city\":\"KIAMBU WEST\",\"state\":\"CENTRAL\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "36.62625892" ]
+, [ 173, "EDF45543-F773-47C1-A3A5-30F3DEF48F71", 173, 1355298879, "591599", 1355298879, "591599", "{\n  \"invalidCells\" : {\n    \"6012366\" : \" -   \"\n  }\n}", "LARI", "urban", "0", "0", "0", "0", "0", null, null, null, "CENTRAL", [ "{\"address\":\"\",\"city\":\"LARI\",\"state\":\"CENTRAL\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "36.67684469" ]
+, [ 174, "C4762B86-82A4-4506-8081-B5F769365CF8", 174, 1355298879, "591599", 1355298879, "591599", "{\n}", "GITHUNGURI", "urban", "9254", "9866", "19120", "6049", "6.88", "2779.88", "11211.05814", "1.066133564", "CENTRAL", [ "{\"address\":\"\",\"city\":\"GITHUNGURI\",\"state\":\"CENTRAL\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "36.79433274" ]
+, [ 175, "EC2E770B-7BAE-4BEB-80CE-3F3FA503AE3F", 175, 1355298879, "591599", 1355298879, "591599", "{\n}", "THIKA EAST", "urban", "1950", "1520", "3470", "1215", "14.85", "233.62", "1651.313131", "0.779487179", "CENTRAL", [ "{\"address\":\"\",\"city\":\"THIKA EAST\",\"state\":\"CENTRAL\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "37.23100647" ]
+, [ 176, "3641FED4-2142-4F08-8BAB-B40F6521AFEE", 176, 1355298879, "591599", 1355298879, "591599", "{\n}", "THIKA WEST", "urban", "97615", "96442", "194057", "64768", "119.76", "1620.35", "97257.08851", "0.987983404", "CENTRAL", [ "{\"address\":\"\",\"city\":\"THIKA WEST\",\"state\":\"CENTRAL\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "37.04502993" ]
+, [ 177, "1622A284-9353-479E-A2EC-12C3D742D711", 177, 1355298879, "591599", 1355298879, "591599", "{\n}", "RUIRU", "urban", "120550", "120457", "241007", "75184", "291.98", "825.42", "120869.8707", "0.999228536", "CENTRAL", [ "{\"address\":\"\",\"city\":\"RUIRU\",\"state\":\"CENTRAL\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "36.99460397" ]
+, [ 178, "0B311D10-9B8B-4C47-B75C-4F78001943A5", 178, 1355298879, "591599", 1355298879, "591599", "{\n}", "GATANGA", "urban", "1013", "923", "1936", "547", "5.28", "366.68", "1114.856061", "0.911154985", "CENTRAL", [ "{\"address\":\"\",\"city\":\"GATANGA\",\"state\":\"CENTRAL\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "36.88791928" ]
+, [ 179, "8721C9E5-F055-45CB-BD37-9DF289D30836", 179, 1355298879, "591599", 1355298879, "591599", "{\n}", "GATUNDU", "urban", "2783", "3224", "6007", "1967", "1.97", "3052.8", "4636.690355", "1.158462091", "CENTRAL", [ "{\"address\":\"\",\"city\":\"GATUNDU\",\"state\":\"CENTRAL\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "36.85558237" ]
+, [ 180, "A433D2BD-44A3-47C3-ACBF-9762746EC404", 180, 1355298879, "591599", 1355298879, "591599", "{\n}", "MOMBASA", "urban", "268038", "255145", "523183", "140535", "126.24", "4144.4", "257268.2414", "0.951898611", "COAST", [ "{\"address\":\"\",\"city\":\"MOMBASA\",\"state\":\"COAST\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "39.6977" ]
+, [ 181, "3114A09F-5A5B-482E-A1D5-41EFA78A0801", 181, 1355298879, "591599", 1355298879, "591599", "{\n}", "KILINDINI", "urban", "218886", "197301", "416187", "128165", "92.62", "4493.4", "199664.2693", "0.901387023", "COAST", [ "{\"address\":\"\",\"city\":\"KILINDINI\",\"state\":\"COAST\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "39.6365" ]
+, [ 182, "EF872394-EB82-409E-BA0A-108859E34DE4", 182, 1355298879, "591599", 1355298879, "591599", "{\n}", "KWALE", "urban", "9674", "10206", "19880", "4053", "83.32", "238.59", "10322.10658", "1.054992764", "COAST", [ "{\"address\":\"\",\"city\":\"KWALE\",\"state\":\"COAST\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "39.40753681" ]
+, [ 183, "4CDFE962-CEC6-428E-BFA7-24F85D2B2015", 183, 1355298879, "591599", 1355298879, "591599", "{\n}", "KINANGO", "urban", "3897", "4092", "7989", "1610", "38.67", "206.59", "4192.775795", "1.050038491", "COAST", [ "{\"address\":\"\",\"city\":\"KINANGO\",\"state\":\"COAST\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "39.10335046" ]
+, [ 184, "8B4C2DC1-3F64-46C1-8837-232970CA596E", 184, 1355298879, "591599", 1355298879, "591599", "{\n}", "MSAMBWENI", "urban", "45490", "44317", "89807", "23425", "115.17", "779.76", "44711.98133", "0.974214113", "COAST", [ "{\"address\":\"\",\"city\":\"MSAMBWENI\",\"state\":\"COAST\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "39.16173404" ]
+, [ 185, "1099E176-9D6C-410E-AA5C-09B4FD2F63F0", 185, 1355298879, "591599", 1355298879, "591599", "{\n}", "KILIFI", "urban", "53269", "54935", "108204", "28079", "85.74", "1262.03", "55556.28528", "1.031275226", "COAST", [ "{\"address\":\"\",\"city\":\"KILIFI\",\"state\":\"COAST\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "39.60114414" ]
+, [ 186, "CA69CB6C-D2FD-4675-9A09-92E3E7817A51", 186, 1355298879, "591599", 1355298879, "591599", "{\n}", "KALOLENI", "urban", "18196", "18343", "36539", "9534", "20.58", "1775.86", "19227.15938", "1.008078699", "COAST", [ "{\"address\":\"\",\"city\":\"KALOLENI\",\"state\":\"COAST\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "39.54477529" ]
+, [ 187, "B64BD2DA-C830-449E-9913-1F40A10B2BA0", 187, 1355298879, "591599", 1355298879, "591599", "{\n}", "MALINDI", "urban", "70373", "70366", "140739", "34626", "95.25", "1477.54", "71104.82415", "0.99990053", "COAST", [ "{\"address\":\"\",\"city\":\"MALINDI\",\"state\":\"COAST\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "39.74330931" ]
+, [ 188, "34FB867E-8020-4383-8ABB-F832CE7F5872", 188, 1355298879, "591599", 1355298879, "591599", "{\n}", "TANA RIVER", "urban", "16622", "16539", "33161", "7235", "552.36", "60.04", "16569.09269", "0.995006618", "COAST", [ "{\"address\":\"\",\"city\":\"TANA RIVER\",\"state\":\"COAST\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "39.34922935" ]
+, [ 189, "F874E33E-683A-419D-A2B7-4B3E9CD0CB7A", 189, 1355298879, "591599", 1355298879, "591599", "{\n}", "TANA DELTA", "urban", "1484", "1420", "2904", "644", "0.99", "2933.63", "2918.989899", "0.956873315", "COAST", [ "{\"address\":\"\",\"city\":\"TANA DELTA\",\"state\":\"COAST\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "39.51654731" ]
+, [ 190, "251C4082-8BBB-4F55-BC77-D9CCDE7266BA", 190, 1355298879, "591599", 1355298879, "591599", "{\n}", "LAMU", "urban", "10232", "10006", "20238", "4793", "14.66", "1380.85", "10703.95362", "0.977912432", "COAST", [ "{\"address\":\"\",\"city\":\"LAMU\",\"state\":\"COAST\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "40.74388079" ]
+, [ 191, "88C47BA6-78FB-4842-8B6E-C70C71CE59F5", 191, 1355298879, "591599", 1355298879, "591599", "{\n}", "TAITA", "urban", "22319", "22105", "44424", "12796", "34.65", "1282.15", "22749.12698", "0.990411757", "COAST", [ "{\"address\":\"\",\"city\":\"TAITA\",\"state\":\"COAST\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "38.56492447" ]
+, [ 192, "4FD6C447-4CD6-4558-A95E-0F12C89613D7", 192, 1355298879, "591599", 1355298879, "591599", "{\n}", "TAVETA", "urban", "10048", "9817", "19865", "5542", "13.41", "1481.06", "10566.29157", "0.97701035", "COAST", [ "{\"address\":\"\",\"city\":\"TAVETA\",\"state\":\"COAST\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "37.97519351" ]
+, [ 193, "62CDE624-F70E-47A1-A3F0-956DB28B3B04", 193, 1355298879, "591599", 1355298879, "591599", "{\n}", "MARSABIT", "urban", "7525", "7382", "14907", "3447", "6.22", "2395.55", "8591.807074", "0.980996678", "EASTERN", [ "{\"address\":\"\",\"city\":\"MARSABIT\",\"state\":\"EASTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "37.94495682" ]
+, [ 194, "7728B2E0-DE19-40A0-B9B1-1421F7F222B5", 194, 1355298879, "591599", 1355298879, "591599", "{\n  \"invalidCells\" : {\n    \"6012366\" : \" -   \"\n  }\n}", "CHALBI", "urban", "0", "0", "0", "0", "0", null, null, null, "EASTERN", [ "{\"address\":\"\",\"city\":\"CHALBI\",\"state\":\"EASTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "37.36288736" ]
+, [ 195, "4164B99C-BFCC-43B8-A4A4-FBAD9E2C6DBF", 195, 1355298879, "591599", 1355298879, "591599", "{\n}", "LAISAMIS", "urban", "3110", "3500", "6610", "1494", "157.03", "42.09", "3519.805133", "1.125401929", "EASTERN", [ "{\"address\":\"\",\"city\":\"LAISAMIS\",\"state\":\"EASTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "37.48344825" ]
+, [ 196, "0918777C-AAA8-4A92-9511-A81A0E0D58BA", 196, 1355298879, "591599", 1355298879, "591599", "{\n}", "MOYALE", "urban", "21459", "21033", "42492", "6856", "60.44", "703.02", "21388.04633", "0.98014819", "EASTERN", [ "{\"address\":\"\",\"city\":\"MOYALE\",\"state\":\"EASTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "38.80269655" ]
+, [ 197, "6F43D6EC-3F39-4703-8FCC-6EA6E90B1BD2", 197, 1355298879, "591599", 1355298879, "591599", "{\n}", "ISIOLO", "urban", "26383", "27257", "53640", "12718", "39.37", "1362.62", "27927.12954", "1.033127393", "EASTERN", [ "{\"address\":\"\",\"city\":\"ISIOLO\",\"state\":\"EASTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "38.46170147" ]
+, [ 198, "B6303CAD-1EE0-46FD-AC4D-F2A764A22607", 198, 1355298879, "591599", 1355298879, "591599", "{\n}", "GARBATULLA", "urban", "4451", "4283", "8734", "1787", "210.77", "41.44", "4304.117806", "0.962255673", "EASTERN", [ "{\"address\":\"\",\"city\":\"GARBATULLA\",\"state\":\"EASTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "38.65180184" ]
+, [ 199, "DD9569CA-6C34-4FAB-92FC-249FC3653738", 199, 1355298879, "591599", 1355298879, "591599", "{\n  \"invalidCells\" : {\n    \"6012366\" : \" -   \"\n  }\n}", "MERU CENTRAL", "urban", "0", "0", "0", "0", "0", null, null, null, "EASTERN", [ "{\"address\":\"\",\"city\":\"MERU CENTRAL\",\"state\":\"EASTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "37.58330732" ]
+, [ 200, "5BA71040-1D96-46D3-9755-195F2872C822", 200, 1355298879, "591599", 1355298879, "591599", "{\n}", "IMENTI NORTH", "urban", "33460", "34428", "67888", "21881", "24.77", "2740.25", "35778.82761", "1.028930066", "EASTERN", [ "{\"address\":\"\",\"city\":\"IMENTI NORTH\",\"state\":\"EASTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "37.43552549" ]
+, [ 201, "7A0294FA-1239-4F62-8939-47DEB53A2AC3", 201, 1355298879, "591599", 1355298879, "591599", "{\n}", "IMENTI SOUTH", "urban", "6695", "6591", "13286", "4404", "4.12", "3226.95", "8216", "0.984466019", "EASTERN", [ "{\"address\":\"\",\"city\":\"IMENTI SOUTH\",\"state\":\"EASTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "37.60133849" ]
+, [ 202, "CD263422-D234-47D9-B8D6-874F463B78CB", 202, 1355298879, "591599", 1355298879, "591599", "{\n}", "MERU SOUTH", "urban", "21266", "22204", "43470", "12102", "66.02", "658.46", "22526.11451", "1.044107966", "EASTERN", [ "{\"address\":\"\",\"city\":\"MERU SOUTH\",\"state\":\"EASTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "37.67297626" ]
+, [ 203, "78C4B457-0E20-45D0-BFBB-C4E2CC1A87F4", 203, 1355298879, "591599", 1355298879, "591599", "{\n}", "MAARA", "urban", "16023", "15971", "31994", "8642", "56.71", "564.2", "16253.54276", "0.996754665", "EASTERN", [ "{\"address\":\"\",\"city\":\"MAARA\",\"state\":\"EASTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "37.62522793" ]
+, [ 204, "40FE0799-85E6-43E9-9BA8-7D4F88B4C245", 204, 1355298879, "591599", 1355298879, "591599", "{\n}", "IGEMBE", "urban", "15008", "15212", "30220", "8160", "13.25", "2279.95", "16344.67925", "1.013592751", "EASTERN", [ "{\"address\":\"\",\"city\":\"IGEMBE\",\"state\":\"EASTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "38.05720532" ]
+, [ 205, "29D5375A-2FBC-4651-B6CA-F607EAB7BA00", 205, 1355298879, "591599", 1355298879, "591599", "{\n}", "TIGANIA", "urban", "1806", "1833", "3639", "954", "2.06", "1767.36", "2709.699029", "1.014950166", "EASTERN", [ "{\"address\":\"\",\"city\":\"TIGANIA\",\"state\":\"EASTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "37.77333779" ]
+, [ 206, "05008D00-A227-4782-9C44-D19AC398796B", 206, 1355298879, "591599", 1355298879, "591599", "{\n}", "THARAKA", "urban", "4196", "4339", "8535", "2166", "87.38", "97.68", "4387.020142", "1.034080076", "EASTERN", [ "{\"address\":\"\",\"city\":\"THARAKA\",\"state\":\"EASTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "38.01828449" ]
+, [ 207, "CDF1924F-D16A-4600-B865-74F2CE45E858", 207, 1355298879, "591599", 1355298879, "591599", "{\n}", "EMBU", "urban", "39335", "40875", "80210", "23965", "95.46", "840.22", "41287.05741", "1.039150883", "EASTERN", [ "{\"address\":\"\",\"city\":\"EMBU\",\"state\":\"EASTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "37.50475286" ]
+, [ 208, "7A020503-9619-486F-97F6-29C681C7B09F", 208, 1355298879, "591599", 1355298879, "591599", "{\n}", "MBEERE", "urban", "1328", "1383", "2711", "966", "1.65", "1647.92", "2187.848485", "1.041415663", "EASTERN", [ "{\"address\":\"\",\"city\":\"MBEERE\",\"state\":\"EASTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "37.66541038" ]
+, [ 209, "006F7572-E966-4D4D-B830-1F7CBD2C7E92", 209, 1355298879, "591599", 1355298879, "591599", "{\n}", "KITUI", "urban", "58808", "61557", "120365", "27526", "443.75", "271.25", "61689.52507", "1.046745341", "EASTERN", [ "{\"address\":\"\",\"city\":\"KITUI\",\"state\":\"EASTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "38.30094003" ]
+, [ 210, "DE0F669F-CBB3-4E02-932A-5F8FA322BD96", 210, 1355298879, "591599", 1355298879, "591599", "{\n}", "MUTOMO", "urban", "616", "880", "1496", "469", "1.07", "1398.65", "1455.700935", "1.428571429", "EASTERN", [ "{\"address\":\"\",\"city\":\"MUTOMO\",\"state\":\"EASTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "38.53912323" ]
+, [ 211, "DEC3D08C-0BAF-4891-8DD4-809ADA8C2830", 211, 1355298879, "591599", 1355298879, "591599", "{\n}", "MWINGI", "urban", "8485", "8618", "17103", "5522", "7.24", "2362.72", "9789.961326", "1.01567472", "EASTERN", [ "{\"address\":\"\",\"city\":\"MWINGI\",\"state\":\"EASTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "38.36852014" ]
+, [ 212, "9B4B3A91-6C6F-47CD-8207-B7878F725B0E", 212, 1355298879, "591599", 1355298879, "591599", "{\n}", "KYUSO", "urban", "468", "477", "945", "350", "1.34", "706.54", "826.2537313", "1.019230769", "EASTERN", [ "{\"address\":\"\",\"city\":\"KYUSO\",\"state\":\"EASTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "38.27042885" ]
+, [ 213, "8CD9CF57-69AF-422A-B371-825F9A70018E", 213, 1355298879, "591599", 1355298879, "591599", "{\n}", "MACHAKOS", "urban", "152083", "141351", "293434", "84314", "1410.98", "207.96", "141458.7854", "0.92943327", "EASTERN", [ "{\"address\":\"\",\"city\":\"MACHAKOS\",\"state\":\"EASTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "37.16409824" ]
+, [ 214, "E22E7ED1-FFD0-41DF-9170-614797A76B97", 214, 1355298879, "591599", 1355298879, "591599", "{\n}", "MWALA", "urban", "2608", "2748", "5356", "1833", "3.88", "1381.02", "3420.164948", "1.053680982", "EASTERN", [ "{\"address\":\"\",\"city\":\"MWALA\",\"state\":\"EASTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "37.52391049" ]
+, [ 215, "9B75F849-A6F5-45F6-AF63-D8987F66904F", 215, 1355298879, "591599", 1355298879, "591599", "{\n}", "YATTA", "urban", "26350", "27112", "53462", "13307", "245.25", "217.99", "27219.44139", "1.028918406", "EASTERN", [ "{\"address\":\"\",\"city\":\"YATTA\",\"state\":\"EASTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "37.60220541" ]
+, [ 216, "A34335A7-A1DF-4286-A69B-904F25B50DAB", 216, 1355298879, "591599", 1355298879, "591599", "{\n}", "KANGUNDO", "urban", "108232", "110871", "219103", "50822", "754.73", "290.31", "111014.4049", "1.024382807", "EASTERN", [ "{\"address\":\"\",\"city\":\"KANGUNDO\",\"state\":\"EASTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "37.27203719" ]
+, [ 217, "AA9F8071-B847-4E1D-AA1D-41E1222A117C", 217, 1355298879, "591599", 1355298879, "591599", "{\n}", "MAKUENI", "urban", "34872", "34696", "69568", "15463", "460.97", "150.92", "34771.64917", "0.994952971", "EASTERN", [ "{\"address\":\"\",\"city\":\"MAKUENI\",\"state\":\"EASTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "37.67253055" ]
+, [ 218, "193EB56E-BA22-401C-93B6-13779ADC0182", 218, 1355298879, "591599", 1355298879, "591599", "{\n}", "MBOONI", "urban", "791", "752", "1543", "537", "1.97", "783.97", "1153.522843", "0.950695322", "EASTERN", [ "{\"address\":\"\",\"city\":\"MBOONI\",\"state\":\"EASTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "37.60666503" ]
+, [ 219, "61522174-B078-45CB-90DD-1049C80A65C7", 219, 1355298879, "591599", 1355298879, "591599", "{\n}", "KIBWEZI", "urban", "11256", "11597", "22853", "7136", "90.83", "251.6", "11720.92381", "1.030294954", "EASTERN", [ "{\"address\":\"\",\"city\":\"KIBWEZI\",\"state\":\"EASTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "38.02538524" ]
+, [ 220, "286E79AB-158E-482B-8388-A18EE0AE9280", 220, 1355298879, "591599", 1355298879, "591599", "{\n}", "NZAUI", "urban", "5449", "4884", "10333", "3539", "40.23", "256.88", "5019.446184", "0.89631125", "EASTERN", [ "{\"address\":\"\",\"city\":\"NZAUI\",\"state\":\"EASTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "37.41612392" ]
+, [ 221, "50C5FC65-2E49-4D89-BD9D-8BEADB3AEA62", 221, 1355298879, "591599", 1355298879, "591599", "{\n}", "GARISSA", "urban", "60469", "56484", "116953", "20929", "687.09", "170.21", "56572.00739", "0.934098464", "NORTH EASTERN", [ "{\"address\":\"\",\"city\":\"GARISSA\",\"state\":\"NORTH EASTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "39.56855753" ]
+, [ 222, "DCA0AB6A-E2E0-4CAE-A385-9F178BAFE5BD", 222, 1355298879, "591599", 1355298879, "591599", "{\n}", "LAGDERA", "urban", "6552", "5754", "12306", "1849", "14.98", "821.53", "6191.383178", "0.878205128", "NORTH EASTERN", [ "{\"address\":\"\",\"city\":\"LAGDERA\",\"state\":\"NORTH EASTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "39.89717479" ]
+, [ 223, "89905FF2-8E57-4F9F-94A5-9880884D8128", 223, 1355298879, "591599", 1355298879, "591599", "{\n}", "FAFI", "urban", "787", "705", "1492", "326", "49.43", "30.18", "720.9215052", "0.895806861", "NORTH EASTERN", [ "{\"address\":\"\",\"city\":\"FAFI\",\"state\":\"NORTH EASTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "40.43908059" ]
+, [ 224, "940BAA37-0954-411B-9A1A-15B679D2E3B1", 224, 1355298879, "591599", 1355298879, "591599", "{\n}", "IJARA", "urban", "8383", "7534", "15917", "2479", "39.2", "406", "7747.852041", "0.898723607", "NORTH EASTERN", [ "{\"address\":\"\",\"city\":\"IJARA\",\"state\":\"NORTH EASTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "40.73455516" ]
+, [ 225, "23D2AF75-2965-40D4-B9C7-DB775CCF62B6", 225, 1355298879, "591599", 1355298879, "591599", "{\n}", "WAJIR SOUTH", "urban", "4594", "3906", "8500", "1474", "55.58", "152.93", "3988.655632", "0.850239443", "NORTH EASTERN", [ "{\"address\":\"\",\"city\":\"WAJIR SOUTH\",\"state\":\"NORTH EASTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "40.34314459" ]
+, [ 226, "0675533C-CF8F-4331-921D-87D3167B13D8", 226, 1355298879, "591599", 1355298879, "591599", "{\n  \"invalidCells\" : {\n    \"6012366\" : \" -   \"\n  }\n}", "WAJIR NORTH", "urban", "0", "0", "0", "0", "0", null, null, null, "NORTH EASTERN", [ "{\"address\":\"\",\"city\":\"WAJIR NORTH\",\"state\":\"NORTH EASTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "39.5873795" ]
+, [ 227, "9EF78C9F-C14A-46FF-AC13-0453F1CF5864", 227, 1355298879, "591599", 1355298879, "591599", "{\n}", "WAJIR EAST", "urban", "43684", "39116", "82800", "12689", "139.25", "594.6", "39429.70916", "0.895430821", "NORTH EASTERN", [ "{\"address\":\"\",\"city\":\"WAJIR EAST\",\"state\":\"NORTH EASTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "40.36685178" ]
+, [ 228, "8BF6E50C-11B7-40C2-AF07-3A537FA18937", 228, 1355298879, "591599", 1355298879, "591599", "{\n}", "WAJIR WEST", "urban", "3022", "2533", "5555", "659", "21.28", "261", "2675.011278", "0.838186631", "NORTH EASTERN", [ "{\"address\":\"\",\"city\":\"WAJIR WEST\",\"state\":\"NORTH EASTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "39.5240015" ]
+, [ 229, "F6EB46E7-222F-4FE5-AAEF-BE7421F046D9", 229, 1355298879, "591599", 1355298879, "591599", "{\n}", "MANDERA CENTRAL", "urban", "40688", "33063", "73751", "8209", "75.98", "970.71", "33598.50934", "0.812598309", "NORTH EASTERN", [ "{\"address\":\"\",\"city\":\"MANDERA CENTRAL\",\"state\":\"NORTH EASTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "40.72748791" ]
+, [ 230, "14F42DC5-4750-41C1-AFF3-92E878A426D4", 230, 1355298879, "591599", 1355298879, "591599", "{\n}", "MANDERA EAST", "urban", "46022", "41670", "87692", "12580", "104.98", "835.31", "42108.38826", "0.90543653", "NORTH EASTERN", [ "{\"address\":\"\",\"city\":\"MANDERA EAST\",\"state\":\"NORTH EASTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "41.29294811" ]
+, [ 231, "43FFA881-BC63-4408-8904-86DC4020FF86", 231, 1355298879, "591599", 1355298879, "591599", "{\n}", "MANDERA WEST", "urban", "13179", "10946", "24125", "2526", "14.63", "1648.74", "11846.82023", "0.830563776", "NORTH EASTERN", [ "{\"address\":\"\",\"city\":\"MANDERA WEST\",\"state\":\"NORTH EASTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "40.2334622" ]
+, [ 232, "3C6C8FFE-827F-4753-AECE-BAF339AAE6BF", 232, 1355298879, "591599", 1355298879, "591599", "{\n}", "SIAYA", "urban", "19458", "21097", "40555", "10234", "29.39", "1379.78", "21759.06193", "1.084232706", "NYANZA", [ "{\"address\":\"\",\"city\":\"SIAYA\",\"state\":\"NYANZA\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "34.3043068" ]
+, [ 233, "6D660562-2598-497C-AF78-061ED8D1C704", 233, 1355298879, "591599", 1355298879, "591599", "{\n}", "BONDO", "urban", "22645", "24411", "47056", "11273", "95.32", "493.66", "24648.56819", "1.07798631", "NYANZA", [ "{\"address\":\"\",\"city\":\"BONDO\",\"state\":\"NYANZA\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "34.19064437" ]
+, [ 234, "E9E1E37F-E939-43A2-A10D-E5A3ACCB979B", 234, 1355298879, "591599", 1355298879, "591599", "{\n}", "RARIEDA", "urban", "1453", "1563", "3016", "855", "2.93", "1027.81", "2058.904437", "1.075705437", "NYANZA", [ "{\"address\":\"\",\"city\":\"RARIEDA\",\"state\":\"NYANZA\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "34.33792037" ]
+, [ 235, "B0D59B05-88BD-407F-B03E-8EA980C1401F", 235, 1355298879, "591599", 1355298879, "591599", "{\n}", "KISUMU EAST", "urban", "194585", "195579", "390164", "97461", "274.85", "1419.53", "196286.968", "1.005108307", "NYANZA", [ "{\"address\":\"\",\"city\":\"KISUMU EAST\",\"state\":\"NYANZA\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "34.80473358" ]
+, [ 236, "3AE1B30A-7162-4AFE-9301-EAC8E8BBE3AC", 236, 1355298879, "591599", 1355298879, "591599", "{\n}", "KISUMU WEST", "urban", "3430", "3502", "6932", "1384", "6.46", "1073.58", "4032.959752", "1.020991254", "NYANZA", [ "{\"address\":\"\",\"city\":\"KISUMU WEST\",\"state\":\"NYANZA\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "34.53285818" ]
+, [ 237, "64064E1F-B9A2-48BD-872A-920328A87350", 237, 1355298879, "591599", 1355298879, "591599", "{\n}", "NYANDO", "urban", "54956", "55668", "110624", "25777", "320.43", "345.23", "55839.50704", "1.012955819", "NYANZA", [ "{\"address\":\"\",\"city\":\"NYANDO\",\"state\":\"NYANZA\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "35.02991504" ]
+, [ 238, "A0976B3D-7A3D-49AE-901F-2BBC25EBB956", 238, 1355298879, "591599", 1355298879, "591599", "{\n}", "HOMA BAY", "urban", "28325", "30968", "59293", "13891", "102.28", "579.71", "31244.93586", "1.093309797", "NYANZA", [ "{\"address\":\"\",\"city\":\"HOMA BAY\",\"state\":\"NYANZA\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "34.44445584" ]
+, [ 239, "25C9C0EB-8B5C-4119-9119-6AD786C5EFB1", 239, 1355298879, "591599", 1355298879, "591599", "{\n}", "SUBA", "urban", "8853", "9497", "18350", "4915", "5.31", "3455.09", "11164.23164", "1.072743703", "NYANZA", [ "{\"address\":\"\",\"city\":\"SUBA\",\"state\":\"NYANZA\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "34.20665004" ]
+, [ 240, "0D1B5EAB-F701-418A-ABC5-CDB953B4F6F1", 240, 1355298879, "591599", 1355298879, "591599", "{\n}", "RACHUONYO", "urban", "28642", "31766", "60408", "13465", "90.51", "667.41", "32082.45122", "1.109070596", "NYANZA", [ "{\"address\":\"\",\"city\":\"RACHUONYO\",\"state\":\"NYANZA\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "34.70386182" ]
+, [ 241, "113B5673-77BE-4C93-967E-F67E801CD8DD", 241, 1355298879, "591599", 1355298879, "591599", "{\n}", "MIGORI", "urban", "39902", "42562", "82464", "18565", "75.49", "1092.39", "43090.57332", "1.066663325", "NYANZA", [ "{\"address\":\"\",\"city\":\"MIGORI\",\"state\":\"NYANZA\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "34.30280979" ]
+, [ 242, "EE87CE87-9B69-4CD7-B96B-A95B4DDC4088", 242, 1355298879, "591599", 1355298879, "591599", "{\n}", "RONGO", "urban", "92095", "98962", "191057", "41015", "416.16", "459.1", "99183.2971", "1.074564309", "NYANZA", [ "{\"address\":\"\",\"city\":\"RONGO\",\"state\":\"NYANZA\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "34.51455638" ]
+, [ 243, "5EBF610D-C29F-4F05-8B06-AFFDEF81EAFB", 243, 1355298879, "591599", 1355298879, "591599", "{\n}", "KURIA WEST", "urban", "18924", "19067", "37991", "6786", "28.73", "1322.5", "19725.6843", "1.007556542", "NYANZA", [ "{\"address\":\"\",\"city\":\"KURIA WEST\",\"state\":\"NYANZA\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "34.51983447" ]
+, [ 244, "4F9E7995-2E8C-47D7-8D38-72367A4B55CD", 244, 1355298879, "591599", 1355298879, "591599", "{\n  \"invalidCells\" : {\n    \"6012366\" : \" -   \"\n  }\n}", "KURIA EAST", "urban", "0", "0", "0", "0", "0", null, null, null, "NYANZA", [ "{\"address\":\"\",\"city\":\"KURIA EAST\",\"state\":\"NYANZA\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "34.65699509" ]
+, [ 245, "C0180F9B-56B8-4920-B836-AB49A77EF4CD", 245, 1355298879, "591599", 1355298879, "591599", "{\n}", "KISII CENTRAL", "urban", "41520", "41108", "82628", "20687", "27", "3060.39", "42645.77778", "0.990077071", "NYANZA", [ "{\"address\":\"\",\"city\":\"KISII CENTRAL\",\"state\":\"NYANZA\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "34.79181187" ]
+, [ 246, "E61EBAC8-A22B-4A56-8919-7E2038DCFD11", 246, 1355298879, "591599", 1355298879, "591599", "{\n}", "KISII SOUTH", "urban", "28609", "31037", "59646", "12694", "48.58", "1227.69", "31625.9049", "1.084868398", "NYANZA", [ "{\"address\":\"\",\"city\":\"KISII SOUTH\",\"state\":\"NYANZA\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "34.6895693" ]
+, [ 247, "BA0A692A-A497-48FA-9E7A-63E6CE8F57A7", 247, 1355298879, "591599", 1355298879, "591599", "{\n}", "MASABA", "urban", "42737", "47623", "90360", "19665", "110.06", "820.98", "48011.30638", "1.114327164", "NYANZA", [ "{\"address\":\"\",\"city\":\"MASABA\",\"state\":\"NYANZA\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "34.88253143" ]
+, [ 248, "1D6E68ED-D849-4DB0-A998-37CC6E194C35", 248, 1355298879, "591599", 1355298879, "591599", "{\n}", "GUCHA", "urban", "12788", "13555", "26343", "6197", "17.72", "1486.71", "14276.67043", "1.059978104", "NYANZA", [ "{\"address\":\"\",\"city\":\"GUCHA\",\"state\":\"NYANZA\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "34.77186075" ]
+, [ 249, "AFB7336D-9209-49A1-965C-9BD2EA97F450", 249, 1355298879, "591599", 1355298879, "591599", "{\n}", "GUCHA SOUTH", "urban", "6108", "6634", "12742", "2814", "11.63", "1095.85", "7159.193465", "1.086116568", "NYANZA", [ "{\"address\":\"\",\"city\":\"GUCHA SOUTH\",\"state\":\"NYANZA\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "34.65567846" ]
+, [ 250, "C5D02066-C67D-4DC2-981E-2C8DEABBA575", 250, 1355298879, "591599", 1355298879, "591599", "{\n}", "NYAMIRA", "urban", "30064", "32425", "62489", "13876", "60.35", "1035.47", "32923.16073", "1.078532464", "NYANZA", [ "{\"address\":\"\",\"city\":\"NYAMIRA\",\"state\":\"NYANZA\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "34.96346861" ]
+, [ 251, "1B9667E2-80C5-4958-BA72-C050439D4E16", 251, 1355298879, "591599", 1355298879, "591599", "{\n  \"invalidCells\" : {\n    \"6012366\" : \" -   \"\n  }\n}", "MANGA", "urban", "0", "0", "0", "0", "0", null, null, null, "NYANZA", [ "{\"address\":\"\",\"city\":\"MANGA\",\"state\":\"NYANZA\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "34.90211779" ]
+, [ 252, "D55964BC-CFE8-4A08-A3B6-2A6B7653BBCF", 252, 1355298879, "591599", 1355298879, "591599", "{\n}", "BORABU", "urban", "2928", "2886", "5814", "1536", "1.71", "3402.19", "4598.280702", "0.985655738", "NYANZA", [ "{\"address\":\"\",\"city\":\"BORABU\",\"state\":\"NYANZA\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "35.02803793" ]
+, [ 253, "30AC7985-AA4B-4FC0-B3B6-730A0CCBB554", 253, 1355298879, "591599", 1355298879, "591599", "{\n}", "TURKANA CENTRAL", "urban", "24693", "25531", "50224", "9903", "600.17", "83.68", "25572.14334", "1.033936743", "RIFT VALLEY", [ "{\"address\":\"\",\"city\":\"TURKANA CENTRAL\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "35.44299468" ]
+, [ 254, "8E9AABEB-F751-47CD-9EA1-3AE70A62E2A1", 254, 1355298879, "591599", 1355298879, "591599", "{\n}", "TURKANA NORTH", "urban", "37567", "33928", "71495", "13212", "327.27", "218.46", "34042.78901", "0.903133069", "RIFT VALLEY", [ "{\"address\":\"\",\"city\":\"TURKANA NORTH\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "35.09717514" ]
+, [ 255, "892CC55C-990B-4BBD-928D-399F041C0EAF", 255, 1355298879, "591599", 1355298879, "591599", "{\n  \"invalidCells\" : {\n    \"6012366\" : \" -   \"\n  }\n}", "TURKANA SOUTH", "urban", "0", "0", "0", "0", "0", null, null, null, "RIFT VALLEY", [ "{\"address\":\"\",\"city\":\"TURKANA SOUTH\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "35.99979492" ]
+, [ 256, "6353DA08-62F0-40CB-AA23-8C342E4CE603", 256, 1355298879, "591599", 1355298879, "591599", "{\n}", "WEST POKOT", "urban", "21181", "21515", "42696", "9054", "128.26", "332.88", "21680.14112", "1.015768849", "RIFT VALLEY", [ "{\"address\":\"\",\"city\":\"WEST POKOT\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "35.16354392" ]
+, [ 257, "EFED7D53-0DD6-480D-B4BB-C3F188E34E09", 257, 1355298879, "591599", 1355298879, "591599", "{\n  \"invalidCells\" : {\n    \"6012366\" : \" -   \"\n  }\n}", "POKOT NORTH", "urban", "0", "0", "0", "0", "0", null, null, null, "RIFT VALLEY", [ "{\"address\":\"\",\"city\":\"POKOT NORTH\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "35.10600361" ]
+, [ 258, "5B656D8A-3B81-4D60-909D-05365E2C5594", 258, 1355298879, "591599", 1355298879, "591599", "{\n  \"invalidCells\" : {\n    \"6012366\" : \" -   \"\n  }\n}", "POKOT CENTRAL", "urban", "0", "0", "0", "0", "0", null, null, null, "RIFT VALLEY", [ "{\"address\":\"\",\"city\":\"POKOT CENTRAL\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "35.49402215" ]
+, [ 259, "BC6121A8-D634-44ED-A8A6-520D1C98A9AF", 259, 1355298879, "591599", 1355298879, "591599", "{\n}", "SAMBURU CENTRAL", "urban", "9001", "9149", "18150", "4520", "13.02", "1393.98", "9840.321045", "1.016442617", "RIFT VALLEY", [ "{\"address\":\"\",\"city\":\"SAMBURU CENTRAL\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "36.71442163" ]
+, [ 260, "09A48467-204E-4EEC-A72A-1EA4787D49AA", 260, 1355298879, "591599", 1355298879, "591599", "{\n}", "SAMBURU EAST", "urban", "6370", "6152", "12522", "2859", "266.51", "46.99", "6175.901542", "0.96577708", "RIFT VALLEY", [ "{\"address\":\"\",\"city\":\"SAMBURU EAST\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "37.47389892" ]
+, [ 261, "2C33C8D5-8020-45E7-B480-2120F275F1D2", 261, 1355298879, "591599", 1355298879, "591599", "{\n}", "SAMBURU NORTH", "urban", "3825", "4167", "7992", "1648", "17.44", "458.18", "4386.323394", "1.089411765", "RIFT VALLEY", [ "{\"address\":\"\",\"city\":\"SAMBURU NORTH\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "36.83086912" ]
+, [ 262, "94A1A634-B251-4B6A-B281-E44232713D62", 262, 1355298879, "591599", 1355298879, "591599", "{\n}", "TRANS NZOIA WEST", "urban", "74784", "73728", "148512", "37131", "123.42", "1203.3", "74333.93097", "0.985879332", "RIFT VALLEY", [ "{\"address\":\"\",\"city\":\"TRANS NZOIA WEST\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "34.89426897" ]
+, [ 263, "28C76FCC-90FA-402A-AB93-820EEF9348DC", 263, 1355298879, "591599", 1355298879, "591599", "{\n  \"invalidCells\" : {\n    \"6012366\" : \" -   \"\n  }\n}", "TRANS NZOIA EAST", "urban", "0", "0", "0", "0", "0", null, null, null, "RIFT VALLEY", [ "{\"address\":\"\",\"city\":\"TRANS NZOIA EAST\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "35.18029104" ]
+, [ 264, "36FF805C-4547-4916-B5F6-DE1FC3E6BC1B", 264, 1355298879, "591599", 1355298879, "591599", "{\n}", "KWANZA", "urban", "9537", "9371", "18908", "4116", "13.68", "1382.59", "10068.14912", "0.982594107", "RIFT VALLEY", [ "{\"address\":\"\",\"city\":\"KWANZA\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "34.85810469" ]
+, [ 265, "10917C30-21D4-4F9E-9246-C975ABCEB5FF", 265, 1355298879, "591599", 1355298879, "591599", "{\n}", "BARINGO", "urban", "14776", "16197", "30973", "7629", "57.78", "536.06", "16452.72863", "1.096169464", "RIFT VALLEY", [ "{\"address\":\"\",\"city\":\"BARINGO\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "35.97415916" ]
+, [ 266, "DD55E092-DB35-4767-97AF-43F21C959B1E", 266, 1355298879, "591599", 1355298879, "591599", "{\n  \"invalidCells\" : {\n    \"6012366\" : \" -   \"\n  }\n}", "BARINGO NORTH", "urban", "0", "0", "0", "0", "0", null, null, null, "RIFT VALLEY", [ "{\"address\":\"\",\"city\":\"BARINGO NORTH\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "35.80555092" ]
+, [ 267, "09BDA4B1-DAAE-4AEF-8193-36129B926F2C", 267, 1355298879, "591599", 1355298879, "591599", "{\n  \"invalidCells\" : {\n    \"6012366\" : \" -   \"\n  }\n}", "EAST POKOT", "urban", "0", "0", "0", "0", "0", null, null, null, "RIFT VALLEY", [ "{\"address\":\"\",\"city\":\"EAST POKOT\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "36.01860317" ]
+, [ 268, "09FEFE7A-B9FA-4EFD-A931-BFE0F9CCD5D6", 268, 1355298879, "591599", 1355298879, "591599", "{\n}", "KOIBATEK", "urban", "14988", "15590", "30578", "8163", "43.54", "702.35", "15934.23519", "1.040165466", "RIFT VALLEY", [ "{\"address\":\"\",\"city\":\"KOIBATEK\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "35.86953085" ]
+, [ 269, "66663F77-CDD9-45BF-B5BC-9FA11D4B7966", 269, 1355298879, "591599", 1355298879, "591599", "{\n}", "ELDORET WEST", "urban", "72733", "71490", "144223", "41805", "72.27", "1995.68", "72496.40653", "0.982910096", "RIFT VALLEY", [ "{\"address\":\"\",\"city\":\"ELDORET WEST\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "35.19163187" ]
+, [ 270, "0E9003DC-1ECB-49EA-8473-F3BF8157CF46", 270, 1355298879, "591599", 1355298879, "591599", "{\n}", "ELDORET EAST", "urban", "40478", "40251", "80729", "20596", "74.04", "1090.3", "40797.70448", "0.994392015", "RIFT VALLEY", [ "{\"address\":\"\",\"city\":\"ELDORET EAST\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "35.41893944" ]
+, [ 271, "F14453B2-D1C9-407F-A386-59F032FD70F6", 271, 1355298879, "591599", 1355298879, "591599", "{\n}", "WARENG", "urban", "61296", "59311", "120607", "34093", "164.83", "731.7", "59682.87405", "0.967616158", "RIFT VALLEY", [ "{\"address\":\"\",\"city\":\"WARENG\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "35.33850049" ]
+, [ 272, "6ECAAF8B-29E9-435E-98F1-F4385715DAFA", 272, 1355298879, "591599", 1355298879, "591599", "{\n}", "MARAKWET", "urban", "3753", "3912", "7665", "1916", "5.04", "1520.83", "4656.642857", "1.042366107", "RIFT VALLEY", [ "{\"address\":\"\",\"city\":\"MARAKWET\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "35.50699822" ]
+, [ 273, "ED40068D-425A-4982-A1CB-39D84B2D622F", 273, 1355298879, "591599", 1355298879, "591599", "{\n}", "KEIYO", "urban", "22200", "23321", "45521", "9689", "150.86", "301.74", "23468.1563", "1.050495495", "RIFT VALLEY", [ "{\"address\":\"\",\"city\":\"KEIYO\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "35.57039657" ]
+, [ 274, "9C9D129A-E645-4897-AB00-577B242CF85E", 274, 1355298879, "591599", 1355298879, "591599", "{\n}", "NANDI NORTH", "urban", "1885", "1940", "3825", "980", "6.68", "572.59", "2222.185629", "1.029177719", "RIFT VALLEY", [ "{\"address\":\"\",\"city\":\"NANDI NORTH\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "35.06077368" ]
+, [ 275, "A881648E-4A77-4C96-AB22-009ADBC6F66E", 275, 1355298879, "591599", 1355298879, "591599", "{\n}", "NANDI CENTRAL", "urban", "44049", "44586", "88635", "19992", "198.27", "447.04", "44808.16674", "1.012190969", "RIFT VALLEY", [ "{\"address\":\"\",\"city\":\"NANDI CENTRAL\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "35.08490348" ]
+, [ 276, "BBAB8984-7D8B-4772-948F-53BA656BE404", 276, 1355298879, "591599", 1355298879, "591599", "{\n}", "NANDI EAST", "urban", "4952", "4869", "9821", "2773", "8.49", "1156.69", "5452.274441", "0.983239095", "RIFT VALLEY", [ "{\"address\":\"\",\"city\":\"NANDI EAST\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "35.23779105" ]
+, [ 277, "641F792A-3ECB-41BC-B63D-89FC88034D2B", 277, 1355298879, "591599", 1355298879, "591599", "{\n  \"invalidCells\" : {\n    \"6012366\" : \" -   \"\n  }\n}", "NANDI SOUTH", "urban", "0", "0", "0", "0", "0", null, null, null, "RIFT VALLEY", [ "{\"address\":\"\",\"city\":\"NANDI SOUTH\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "34.96800793" ]
+, [ 278, "F3288EAC-FCE0-4942-BD19-CE06811D91D9", 278, 1355298879, "591599", 1355298879, "591599", "{\n  \"invalidCells\" : {\n    \"6012366\" : \" -   \"\n  }\n}", "TINDERET", "urban", "0", "0", "0", "0", "0", null, null, null, "RIFT VALLEY", [ "{\"address\":\"\",\"city\":\"TINDERET\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "35.3167413" ]
+, [ 279, "499CF736-1045-499B-A9D6-25D0C1687512", 279, 1355298879, "591599", 1355298879, "591599", "{\n}", "LAIKIPIA NORTH", "urban", "770", "653", "1423", "373", "2.07", "689.04", "1024.980676", "0.848051948", "RIFT VALLEY", [ "{\"address\":\"\",\"city\":\"LAIKIPIA NORTH\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "36.99627658" ]
+, [ 280, "075A1CAB-1A5D-4C0D-B50B-CA55A7A0F7D2", 280, 1355298879, "591599", 1355298879, "591599", "{\n}", "LAIKIPIA EAST", "urban", "23802", "22889", "46691", "14160", "123.62", "377.71", "23081.54166", "0.961641879", "RIFT VALLEY", [ "{\"address\":\"\",\"city\":\"LAIKIPIA EAST\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "36.95183375" ]
+, [ 281, "6A3EE549-2809-482A-83FA-85AE1A7897C1", 281, 1355298879, "591599", 1355298879, "591599", "{\n}", "LAIKIPIA WEST", "urban", "24771", "26232", "51003", "14732", "121.76", "418.89", "26435.4412", "1.058980259", "RIFT VALLEY", [ "{\"address\":\"\",\"city\":\"LAIKIPIA WEST\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "36.5181069" ]
+, [ 282, "732D2291-3A42-4A0A-83B7-1532287DBFBA", 282, 1355298879, "591599", 1355298879, "591599", "{\n}", "NAKURU", "urban", "164915", "161210", "326125", "96132", "344.33", "947.12", "161688.9446", "0.977533881", "RIFT VALLEY", [ "{\"address\":\"\",\"city\":\"NAKURU\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "36.03461164" ]
+, [ 283, "A52FB5CE-4C76-4618-ADF8-43F08991391F", 283, 1355298879, "591599", 1355298879, "591599", "{\n}", "NAKURU NORTH", "urban", "35167", "37466", "72633", "19286", "67.31", "1079.06", "37988.46323", "1.065373788", "RIFT VALLEY", [ "{\"address\":\"\",\"city\":\"NAKURU NORTH\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "36.16401596" ]
+, [ 284, "7EBC435B-3419-4118-BBFE-C74B6580119D", 284, 1355298879, "591599", 1355298879, "591599", "{\n}", "NAIVASHA", "urban", "116658", "112728", "229386", "69025", "833.54", "275.2", "112867.9549", "0.966311783", "RIFT VALLEY", [ "{\"address\":\"\",\"city\":\"NAIVASHA\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "36.33344468" ]
+, [ 285, "17B8F4A8-FEFA-4B90-9201-88725A428775", 285, 1355298879, "591599", 1355298879, "591599", "{\n}", "MOLO", "urban", "52738", "54143", "106881", "29170", "94.97", "1125.37", "54698.3122", "1.026641132", "RIFT VALLEY", [ "{\"address\":\"\",\"city\":\"MOLO\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "35.75756717" ]
+, [ 286, "1FF2ED21-F089-44D9-A3DF-FAAF197C4B02", 286, 1355298879, "591599", 1355298879, "591599", "{\n}", "NAROK NORTH", "urban", "22945", "21833", "44778", "12903", "23.26", "1924.83", "22819.45744", "0.951536282", "RIFT VALLEY", [ "{\"address\":\"\",\"city\":\"NAROK NORTH\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "35.99464674" ]
+, [ 287, "8AFACC3A-A69F-4277-BE74-29EB3CBCD88E", 287, 1355298879, "591599", 1355298879, "591599", "{\n  \"invalidCells\" : {\n    \"6012366\" : \" -   \"\n  }\n}", "NAROK SOUTH", "urban", "0", "0", "0", "0", "0", null, null, null, "RIFT VALLEY", [ "{\"address\":\"\",\"city\":\"NAROK SOUTH\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "35.5807782" ]
+, [ 288, "2554B280-D80F-48EB-851B-5CB4491D7A24", 288, 1355298879, "591599", 1355298879, "591599", "{\n}", "TRANS MARA", "urban", "6845", "6871", "13716", "3599", "12.34", "1111.61", "7425.700162", "1.003798393", "RIFT VALLEY", [ "{\"address\":\"\",\"city\":\"TRANS MARA\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "34.89742997" ]
+, [ 289, "DB5B3E6B-96CF-4CC5-A34D-3271EB2784FA", 289, 1355298879, "591599", 1355298879, "591599", "{\n}", "KAJIADO CENTRAL", "urban", "16702", "16551", "33253", "9051", "32.61", "1019.63", "17063.17418", "0.990959167", "RIFT VALLEY", [ "{\"address\":\"\",\"city\":\"KAJIADO CENTRAL\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "36.89341002" ]
+, [ 290, "EED83C0C-6B3D-4886-8638-199B48EA12FA", 290, 1355298879, "591599", 1355298879, "591599", "{\n}", "LOITOKITOK", "urban", "7365", "7382", "14747", "4138", "21.9", "673.27", "7718.30137", "1.002308215", "RIFT VALLEY", [ "{\"address\":\"\",\"city\":\"LOITOKITOK\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "37.47875865" ]
+, [ 291, "1FA1A4A6-CC53-4C52-ADA3-10084CC4D7CA", 291, 1355298879, "591599", 1355298879, "591599", "{\n}", "KERICHO", "urban", "68811", "66351", "135162", "32135", "172.78", "782.29", "66749.2579", "0.964249902", "RIFT VALLEY", [ "{\"address\":\"\",\"city\":\"KERICHO\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "35.21130866" ]
+, [ 292, "D1D93208-06FB-4E30-A11F-AACB1C7D8B8A", 292, 1355298879, "591599", 1355298879, "591599", "{\n}", "KIPKELION", "urban", "46323", "46833", "93156", "18635", "431.21", "216.03", "46940.42562", "1.01100965", "RIFT VALLEY", [ "{\"address\":\"\",\"city\":\"KIPKELION\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "35.47881562" ]
+, [ 293, "7B524525-350F-4D7B-9421-D381C0E85DD9", 293, 1355298879, "591599", 1355298879, "591599", "{\n}", "BURET", "urban", "12458", "12924", "25382", "5518", "33.2", "764.42", "13299.24096", "1.037405683", "RIFT VALLEY", [ "{\"address\":\"\",\"city\":\"BURET\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "35.3033778" ]
+, [ 294, "BF188E90-5228-4D41-9E9E-1AC3BF27CEE0", 294, 1355298879, "591599", 1355298879, "591599", "{\n}", "SOTIK", "urban", "4337", "4029", "8366", "2311", "5.45", "1536.43", "4824.779817", "0.928983168", "RIFT VALLEY", [ "{\"address\":\"\",\"city\":\"SOTIK\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "35.1490337" ]
+, [ 295, "C1F5A836-6FCA-4027-9CB2-88AD74562D10", 295, 1355298879, "591599", 1355298879, "591599", "{\n}", "BOMET", "urban", "48937", "49570", "98507", "19238", "227.01", "433.93", "49785.572", "1.012934998", "RIFT VALLEY", [ "{\"address\":\"\",\"city\":\"BOMET\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "35.31899335" ]
+, [ 296, "3413F8BD-1B5C-4470-8D1F-FCA6FFB07348", 296, 1355298879, "591599", 1355298879, "591599", "{\n}", "KAJIADO NORTH", "urban", "119568", "117294", "236862", "73931", "427.58", "553.96", "117573.6389", "0.980981534", "RIFT VALLEY", [ "{\"address\":\"\",\"city\":\"KAJIADO NORTH\",\"state\":\"RIFT VALLEY\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "36.44660994" ]
+, [ 297, "FDEDEB26-B402-4DF1-9924-99A58BB61B91", 297, 1355298879, "591599", 1355298879, "591599", "{\n}", "KAKAMEGA CENTRAL", "urban", "47257", "46624", "93881", "23769", "48.73", "1926.62", "47593.77221", "0.986605159", "WESTERN", [ "{\"address\":\"\",\"city\":\"KAKAMEGA CENTRAL\",\"state\":\"WESTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "34.6856109" ]
+, [ 298, "6E28F931-51A5-42DE-B094-A57B25F58477", 298, 1355298879, "591599", 1355298879, "591599", "{\n  \"invalidCells\" : {\n    \"6012366\" : \" -   \"\n  }\n}", "KAKAMEGA SOUTH", "urban", "0", "0", "0", "0", "0", null, null, null, "WESTERN", [ "{\"address\":\"\",\"city\":\"KAKAMEGA SOUTH\",\"state\":\"WESTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "34.7077479" ]
+, [ 299, "6A56C3AC-E497-43B3-B3CA-AE10E1811E25", 299, 1355298879, "591599", 1355298879, "591599", "{\n}", "KAKAMEGA NORTH", "urban", "2365", "2525", "4890", "1231", "3.59", "1362.69", "3183.774373", "1.067653277", "WESTERN", [ "{\"address\":\"\",\"city\":\"KAKAMEGA NORTH\",\"state\":\"WESTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "34.82641205" ]
+, [ 300, "10352657-D925-4359-A7C3-EA1DE6C25F43", 300, 1355298879, "591599", 1355298879, "591599", "{\n}", "KAKAMEGA EAST", "urban", "1110", "1190", "2300", "516", "2.21", "1042.28", "1692.262443", "1.072072072", "WESTERN", [ "{\"address\":\"\",\"city\":\"KAKAMEGA EAST\",\"state\":\"WESTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "34.85789384" ]
+, [ 301, "D849D3F5-DC7B-435F-8810-8B8FED130493", 301, 1355298879, "591599", 1355298879, "591599", "{\n}", "LUGARI", "urban", "9968", "10483", "20451", "4796", "27.24", "750.78", "10848.93245", "1.051665329", "WESTERN", [ "{\"address\":\"\",\"city\":\"LUGARI\",\"state\":\"WESTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "35.02947866" ]
+, [ 302, "3DFD7996-AA91-46D5-A3B4-9108C3F6B20D", 302, 1355298879, "591599", 1355298879, "591599", "{\n}", "VIHIGA", "urban", "59711", "65048", "124759", "27576", "97.32", "1282.01", "65661.55323", "1.089380516", "WESTERN", [ "{\"address\":\"\",\"city\":\"VIHIGA\",\"state\":\"WESTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "34.72682968" ]
+, [ 303, "4A5AA8BA-EB02-4B59-A638-544EBDE2E190", 303, 1355298879, "591599", 1355298879, "591599", "{\n}", "EMUHAYA", "urban", "23734", "25612", "49346", "11648", "39.12", "1261.43", "26218.69734", "1.079126991", "WESTERN", [ "{\"address\":\"\",\"city\":\"EMUHAYA\",\"state\":\"WESTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "34.60778185" ]
+, [ 304, "84150D46-8C3D-49B8-8376-3CFC2A1A9A1E", 304, 1355298879, "591599", 1355298879, "591599", "{\n  \"invalidCells\" : {\n    \"6012366\" : \" -   \"\n  }\n}", "HAMISI", "urban", "0", "0", "0", "0", "0", null, null, null, "WESTERN", [ "{\"address\":\"\",\"city\":\"HAMISI\",\"state\":\"WESTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "34.82143608" ]
+, [ 305, "54672D01-0EC8-44E6-9550-9B79ECDF89A8", 305, 1355298879, "591599", 1355298879, "591599", "{\n}", "MUMIAS", "urban", "57691", "60618", "118309", "27955", "161.54", "732.36", "60975.13136", "1.050735817", "WESTERN", [ "{\"address\":\"\",\"city\":\"MUMIAS\",\"state\":\"WESTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "34.48762031" ]
+, [ 306, "1ED518CA-D17B-4CB0-B97D-71FFC8770B98", 306, 1355298879, "591599", 1355298879, "591599", "{\n}", "BUTERE", "urban", "5998", "6782", "12780", "2923", "11.64", "1098.08", "7297.292096", "1.130710237", "WESTERN", [ "{\"address\":\"\",\"city\":\"BUTERE\",\"state\":\"WESTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "34.54564535" ]
+, [ 307, "08B5C3BA-6B5E-417B-B2AD-240F934D312E", 307, 1355298879, "591599", 1355298879, "591599", "{\n}", "BUNGOMA SOUTH", "urban", "46556", "47897", "94453", "22015", "87.42", "1080.5", "48429.55548", "1.028804021", "WESTERN", [ "{\"address\":\"\",\"city\":\"BUNGOMA SOUTH\",\"state\":\"WESTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "34.52131934" ]
+, [ 308, "108274C6-5F7B-464F-971B-ECF8FB346B0C", 308, 1355298879, "591599", 1355298879, "591599", "{\n}", "BUNGOMA NORTH", "urban", "47354", "50373", "97727", "19571", "138.78", "704.18", "50714.21631", "1.063753854", "WESTERN", [ "{\"address\":\"\",\"city\":\"BUNGOMA NORTH\",\"state\":\"WESTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "34.86452529" ]
+, [ 309, "EB03E489-E01A-4389-9DCA-157DC835998C", 309, 1355298879, "591599", 1355298879, "591599", "{\n}", "BUNGOMA EAST", "urban", "30516", "31674", "62190", "13973", "77", "807.7", "32070.31169", "1.037947306", "WESTERN", [ "{\"address\":\"\",\"city\":\"BUNGOMA EAST\",\"state\":\"WESTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "34.73645726" ]
+, [ 310, "AB564C17-E457-4DEB-9B1A-A61CE05D8FC5", 310, 1355298879, "591599", 1355298879, "591599", "{\n}", "BUNGOMA WEST", "urban", "16439", "17810", "34249", "7491", "57.61", "594.47", "18095.34977", "1.083399234", "WESTERN", [ "{\"address\":\"\",\"city\":\"BUNGOMA WEST\",\"state\":\"WESTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "34.54143282" ]
+, [ 311, "B1EF84CC-2DFC-4809-9A01-E2EFA68181E5", 311, 1355298879, "591599", 1355298879, "591599", "{\n}", "MT. ELGON", "urban", "4887", "5190", "10077", "2296", "8.75", "1151.58", "5748.514286", "1.062001228", "WESTERN", [ "{\"address\":\"\",\"city\":\"MT. ELGON\",\"state\":\"WESTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "34.59729929" ]
+, [ 312, "50FC3EF6-3E13-45B3-BCB6-4DAF870F201E", 312, 1355298879, "591599", 1355298879, "591599", "{\n}", "BUSIA", "urban", "21385", "22953", "44338", "10571", "30.9", "1434.66", "23645.0712", "1.073322422", "WESTERN", [ "{\"address\":\"\",\"city\":\"BUSIA\",\"state\":\"WESTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "34.26474625" ]
+, [ 313, "53450ECD-C367-4093-9B89-D1F8F50269B6", 313, 1355298879, "591599", 1355298879, "591599", "{\n}", "TESO NORTH", "urban", "22015", "23114", "45129", "9941", "78.56", "574.48", "23394.23167", "1.049920509", "WESTERN", [ "{\"address\":\"\",\"city\":\"TESO NORTH\",\"state\":\"WESTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "34.34692124" ]
+, [ 314, "A6413DA9-380F-4954-83BF-5A388C9086B4", 314, 1355298879, "591599", 1355298879, "591599", "{\n  \"invalidCells\" : {\n    \"6012366\" : \" -   \"\n  }\n}", "SAMIA", "urban", "0", "0", "0", "0", "0", null, null, null, "WESTERN", [ "{\"address\":\"\",\"city\":\"SAMIA\",\"state\":\"WESTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "34.08114406" ]
+, [ 315, "24488BCE-065F-42FD-8D63-162CB5F129DA", 315, 1355298879, "591599", 1355298879, "591599", "{\n}", "BUNYALA", "urban", "3101", "3460", "6561", "1710", "2.96", "2217", "4507.635135", "1.115769107", "WESTERN", [ "{\"address\":\"\",\"city\":\"BUNYALA\",\"state\":\"WESTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "34.02046792" ]
+, [ 316, "162A68DE-7615-4435-AC92-64404C8E9249", 316, 1355298879, "591599", 1355298879, "591599", "{\n}", "TESO SOUTH", "urban", "12700", "13462", "26162", "6026", "22.07", "1185.36", "14037.44178", "1.06", "WESTERN", [ "{\"address\":\"\",\"city\":\"TESO SOUTH\",\"state\":\"WESTERN\",\"zip\":\"Kenya\"}", null, null, null, true ], null, "34.22063324" ]
+ ]
+}
