@@ -34,7 +34,7 @@
             margin: 0;
             color: whitesmoke;
             font-size: 1.5em;
-            background: blue;
+            background: #3d3d3d;
             border-radius: 5px;
         }
         #map {
@@ -111,7 +111,8 @@
             background: #616161;
             box-shadow: 0 0 15px rgba(0,0,0,0.2);
             border-radius: 5px;
-            text-align: center;   
+            text-align: left;   
+			width: 120px;
         }
         .info h3 {
             margin: 0;
@@ -309,7 +310,7 @@
         }
         
         // create function to build the information box
-        function drawInfo(breaks) {
+        function drawInfo() {
             // creates an information box in the top right corner of map frame
             var info = L.control({position: 'topright'});
             info.onAdd = function(map) {
@@ -331,21 +332,30 @@
          function updateInfo(layer) {
             // create function to update the information associated with each county so that the data can be populated in the information box
             var props = layer.feature.properties;
-            var html = "<h3>"+ props['NAME'] +" County</h3>"+
-                "2000: " + props['2000']+"%<br>"+
-                "2001: " + props['2001']+"%<br>"+
-                "2002: " + props['2002']+"%<br>"+
-                "2003: " + props['2003']+"%<br>"+
-                "2004: " + props['2004']+"%<br>"+
-                "2005: " + props['2005']+"%<br>"+
-                "2007: " + props['2006']+"%<br>"+
-                "2008: " + props['2007']+"%<br>"+
-                "2009: " + props['2008']+"%<br>"+
-                "2010: " + props['2010']+"%<br>"+
-                "2011: " + props['2011']+"%<br>"+
-                "2012: " + props['2012']+"%<br>"+
-                "2013: " + props['2013']+"%"
-            $(".info").html(html);
+//            var html = "<h3>"+ props['NAME'] +" County</h3>"+
+//                "2000: " + props['2000']+"%<br>"+
+//                "2001: " + props['2001']+"%<br>"+
+//                "2002: " + props['2002']+"%<br>"+
+//                "2003: " + props['2003']+"%<br>"+
+//                "2004: " + props['2004']+"%<br>"+
+//                "2005: " + props['2005']+"%<br>"+
+//                "2007: " + props['2006']+"%<br>"+
+//                "2008: " + props['2007']+"%<br>"+
+//                "2009: " + props['2008']+"%<br>"+
+//                "2010: " + props['2010']+"%<br>"+
+//                "2011: " + props['2011']+"%<br>"+
+//                "2012: " + props['2012']+"%<br>"+
+//                "2013: " + props['2013']+"%"
+			 
+			 var html = "<h3>"+ props['NAME'] +" County</h3>";
+			 
+			 for(var i = 2000; i <= 2013; i++) {
+				 var year = String(i);
+				 html+= year + ": " + props[year]+"%<br>"
+			 }
+            
+			
+			$(".info").html(html);
         }
         
            function onEachFeature(feature, layer) {
