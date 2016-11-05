@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset=utf-8 />
-    <title>A simple map</title>
+    <title>MAP 673 Lesson 05</title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 
 	<link href='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.css' rel='stylesheet' />
@@ -15,23 +15,160 @@
           background: whitesmoke;
           font-family: "Work Sans", sans-serif;
       }
+      #side-panel {
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 33%;
+            background: orange;
+            border-right: 2px solid #1c9976;
+            overflow-y: scroll;
+      }
+      h1 {
+            padding: 8px 25px 8px 15px;
+            margin: 0;
+            background: green;
+            color: whitesmoke;
+            font-weight: 400;
+            font-size: 1.5em;
+            text-align: left;
+        }
+        h2 {
+            margin: 0;
+            padding: 8px 25px 8px 15px;
+            color: green;
+            font-weight: 500;
+            font-size: 1.2em;
+            text-align: left;
+        }
+        #side-panel p {
+            margin: 8px 0 4px; 
+            padding: 0 25px 0 15px;
+            color: #3d3d3d;
+            text-align: left;
+            font-size: 1em; 
+        }
+        #side-panel p:after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+        #side-panel img {
+            float: right;
+            margin: 0 0 15px 15px;
+        }
       #map {
-          position:absolute;
+          position: absolute;
           top:0;
           bottom:0;
           right: 0;
-          width: 100%;
-          border-left: 3px solid #d3d3d3;
+          width: 67%;
       }
+      #ui-slider {
+            position: absolute;
+            bottom: 20px;
+            left: 35%;
+            width: 200px;
+            padding: 8px 15px 4px;
+            background: orange;
+            border-radius: 3px;
+            color: green;
+      }
+        .slider{
+            width: 100%;
+        }
+    #grade {
+        position: absolute;
+        left: 35%;
+        bottom: 60px;
+        padding: 6px 15px 8px;
+        background: green;
+        border: 2px solid white;
+        padding: 6px 15px 8px;
+        border-radius: 3px;
+        color: white;
+        font-size: 1em;
+      }
+    #grade span {
+        font-size: 1.3em;
+        font-weight: 500;
+        }
+      #legend {
+        position: absolute;
+        background: whitesmoke;
+        right: 15px;
+        padding: 8px 15px;
+        bottom: 20px;
+        width: 160px;
+        color: black;
+        border: 1px solid black;
+        border-radius: 3px;
+      }
+        #legend h3 {
+            text-align: center;
+            font-weight: 500;
+            margin: 10px 0 20px;
+        }
 		#side-panel {
-			width: 36%;
-		}
+            
+      }
+      #info {
+          padding: 8px 15px;
+          position: absolute;
+          color: #1c9976
+          max-width: 200px;
+          font-size: 1em;
+          background: whitesmoke;
+          border: 2px solid #000000;
+          border-radius: 3px;
+      }
+      #info p {
+        margin: 3px 0 4px;
+      }
+      .girls {
+            color: orange;
+      }
+      .boys {
+            color: green;      
+        }
+        .info span:last-child {
+            font-size:  1.3em;
+            font-weight: 500;
+        }
     </style>
 </head>
 <body>
-
     <div id='map'></div>
+    <div id='side-panel'>
+    <h1>Student Attrition Rates in Kenya</h1>
+    <h2>2014 Enrollment Rates for Boys and Girls</h2>
+    <p>This map displays the number of boys and girls enrolled in school, by both grade and by county, for the school year 2014.  Green circles represent males, orange circles represent females.</p>
+    <p><img src="images/legend.png" alt="legend"></p>
+    <p>The viewer can ascertain that with each passing grade there is a dropoff in student enrollment as children leave school to enter the workforce.  The viewer will also see that the dropoff among female students is sharper than that of males after Grade 6, highlighting the gender inequities with Kenyan society when it comes to higher education.  The viewer can also see there is a greater imbalance between males and females in the eastern counties of Kenya where the influence of Islam from neighboring Somalia provides a barrier for the education and empowerment of young women.</p>
+    <h2><i>About This Map</i></h2>
+    <p>This map was created Sunday, November 6, 2016 by Ryan Kelly</p>
+    <h2><i>About the Data</i></h2>
+    <p>The data were furnished from the Kenyan Open Data Portal located at the following URL:  https://opendata.go.ke/</p>
+    </div>
+    <div id="ui-slider">
+    <input type="range" min="1", max="8", value="1", step="1" class="slider">
+    </div>
+    
+    <div id="grade">Grade: <span>1</span></div>
+    
+    <div id="legend">
+    <h3>2014 School Enrollment per County</h3>
+    <svg class="legend" width="200" height="200"></svg>
+    </div>
 	
+    <div id="info">
+    <p>County: <span></span></p>
+    <p class="girls">girls <span></span>: <span></span></p>
+    <p class="boys">boys <span></span>: <span></span></p>
+    </div>
+    
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/simple-statistics/1.0.1/simple_statistics.min.js'></script>
 	<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.js'></script>
 	<script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.2.0/leaflet-omnivore.min.js'></script>
@@ -46,8 +183,147 @@
             maxBounds: L.latLngBounds([-6.22, 27.72],[5.76, 47.83])
         });
         
-        var countyCentroids = omnivore.csv('kenya_education_2014.csv').addTo(map);
+        //var countyCentroids = omnivore.csv('kenya_education_2014.csv').addTo(map);
+        
+        omnivore.csv('kenya_education_2014.csv')
+            .on('ready', function(e) {
+                drawMap(e.target.toGeoJSON())
+        })
+            .on('error', function(e) {
+                console.log(e.error[0].message);
+        });
+        
+        var currentGrade = 1;
+        var scaleFactor = 0.6;
+        
+        function drawMap(schoolData) {
+            var girls = L.geoJson(schoolData, {
+                pointToLayer: function(feature, layer){
+                    return L.circleMarker(layer, {
+                        color: 'orange',
+                        opacity: 1,
+                        weight: 2,
+                        fillOpacity: 0,         
+                });
+            }
+        }).addTo(map);
 
+            var boys = L.geoJson(schoolData, {
+                pointToLayer: function(feature, layer){
+                    return L.circleMarker(layer, {
+                        color: 'green',
+                        opacity: 1,
+                        weight: 2,
+                        fillOpacity: 0,
+                });
+            }
+        }).addTo(map);
+        
+        updateSymbols(girls,boys);
+        sequenceUI(girls,boys);
+        infoWindow(girls,boys);
+        
+        }
+
+        function calcRadius(val) {
+            var radius = Math.sqrt(val/Math.PI);
+                return radius * .6;
+        }
+        
+        function updateSymbols(girls,boys) {
+            var radius,
+                allRadii = [];
+            girls.eachLayer(function(layer) {
+                radius = (calcRadius(Number(layer.feature.properties['G'+String(currentGrade)])));
+                layer.setRadius(radius);
+                allRadii.push(radius);
+            });
+            boys.eachLayer(function(layer) {
+                radius = (calcRadius(Number(layer.feature.properties['B'+String(currentGrade)])));
+                layer.setRadius(radius);
+                allRadii.push(radius);
+            });
+            
+        drawLegend(allRadii);
+            
+        }
+        
+        function sequenceUI(girls, boys) {
+            
+            var output = $('#grade span');
+
+            $('.slider')
+                .on('input change', function() {
+                    currentGrade = $(this).val();
+                    updateSymbols(girls,boys,currentGrade);
+                    output.html(currentGrade);
+                });
+        }
+        
+        function drawLegend(allRadii){
+            var legend = $('.legend');
+
+            var circles = {
+                max: ss.max(allRadii),
+                median: ss.median(allRadii),
+                min: ss.min(allRadii)
+            }
+
+            var svgCircles = '';
+
+            var reverseCalc = function(radius) {
+                return Math.round((Math.pow(radius/scaleFactor, 2) * Math.PI));
+            }
+
+            for (var circle in circles) {
+
+                svgCircles += '<circle cx="'+ 100 +'" cy="'+ (circles[circle] - 180) * -1 +'" r="'+ circles[circle] +'" stroke="green" stroke-width="1" fill="ghostwhite" />';
+
+                svgCircles += '<text x="'+ 80 +'" y = "'+ (circles[circle] - 160) * -1 +'" fill= "orange">'+ reverseCalc(circles[circle]) +'</text>'
+            }
+
+            legend.html(svgCircles)
+            
+        }
+        
+        function infoWindow(girls,boys) {
+
+            var info = $('#info');
+            
+            boys.on('mouseover', function(e) {
+                var props = e.layer.feature.properties;
+                info.show();
+                $('#info span').text(props.COUNTY);
+                $(".girls span:first-child").text('(Grade '+String(currentGrade)+')');
+                $(".boys span:first-child").text('(Grade '+String(currentGrade)+')');
+                $(".girls span:last-child").text(props['G'+String(currentGrade)].toLocaleString());
+                $(".boys span:last-child").text(props['B'+String(currentGrade)].toLocaleString());
+
+            e.layer.setStyle({ fillOpacity: .6 });
+
+        });
+
+            boys.on('mouseout', function(e) {
+                info.hide();
+                e.layer.setStyle({ fillOpacity: 0 });
+        });
+
+            $(document).mousemove(function(e){
+            // first offset from the mouse position of the info window
+            info.css({"left": e.pageX + 6, "top": e.pageY - info.height() - 15}); 
+
+            // if it crashes into the top, flip it lower right
+            if(info.offset().top < 4) {
+                info.css({"top": e.pageY + 15});
+            }
+            // do the same for crashing into the right
+            if(info.offset().left + info.width() >= $(document).width() - 40) {
+                info.css({"left": e.pageX - info.width() - 30});
+            }
+            });
+        
+        }
+        
     </script>
 </body>
 </html>
