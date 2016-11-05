@@ -9,10 +9,10 @@
 
     <style>
       body {
-          margin:0;
-          padding:0;
-          background: whitesmoke;
-          font-family: "Work Sans", sans-serif;
+            margin:0;
+            padding:0;
+            background: whitesmoke;
+            font-family: "Work Sans", sans-serif;
       }
       #side-panel {
             position: absolute;
@@ -33,7 +33,7 @@
             font-size: 1.5em;
             text-align: left;
         }
-        h2 {
+      h2 {
             margin: 0;
             padding: 8px 25px 8px 15px;
             color: green;
@@ -58,11 +58,11 @@
             margin: 0 0 15px 15px;
         }
       #map {
-          position: absolute;
-          top:0;
-          bottom:0;
-          right: 0;
-          width: 67%;
+            position: absolute;
+            top:0;
+            bottom:0;
+            right: 0;
+            width: 67%;
       }
       #ui-slider {
             position: absolute;
@@ -77,42 +77,42 @@
         .slider{
             width: 100%;
         }
-    #grade {
-        position: absolute;
-        left: 35%;
-        bottom: 60px;
-        padding: 6px 15px 8px;
-        background: green;
-        border: 2px solid white;
-        padding: 6px 15px 8px;
-        border-radius: 3px;
-        color: white;
-        font-size: 1em;
+     #grade {
+            position: absolute;
+            left: 35%;
+            bottom: 60px;
+            padding: 6px 15px 8px;
+            background: green;
+            border: 2px solid white;
+            padding: 6px 15px 8px;
+            border-radius: 3px;
+            color: white;
+            font-size: 1em;
       }
-    #grade span {
-        font-size: 1.3em;
-        font-weight: 500;
+     #grade span {
+            font-size: 1.3em;
+            font-weight: 500;
         }
-      #legend {
-        position: absolute;
-        background: whitesmoke;
-        right: 15px;
-        padding: 8px 15px;
-        bottom: 20px;
-        width: 160px;
-        color: black;
-        border: 1px solid black;
-        border-radius: 3px;
+     #legend {
+            position: absolute;
+            background: whitesmoke;
+            right: 15px;
+            padding: 8px 15px;
+            bottom: 20px;
+            width: 160px;
+            color: black;
+            border: 1px solid black;
+            border-radius: 3px;
       }
-        #legend h3 {
+    #legend h3 {
             text-align: center;
             font-weight: 500;
             margin: 10px 0 20px;
         }
-		#side-panel {
+    #side-panel {
             
-      }
-      #info {
+        }
+    #info {
           padding: 8px 15px;
           position: absolute;
           color: #1c9976
@@ -122,20 +122,21 @@
           border: 2px solid #000000;
           border-radius: 3px;
       }
-      #info p {
-        margin: 3px 0 4px;
+    #info p {
+          margin: 3px 0 4px;
       }
-      .girls {
-            color: orange;
+    .girls {
+          color: orange;
       }
-      .boys {
-            color: green;      
+    .boys {
+          color: green;      
         }
-        .info span:last-child {
-            font-size:  1.3em;
-            font-weight: 500;
+    .info span:last-child {
+          font-size:  1.3em;
+          font-weight: 500;
         }
     </style>
+    
 </head>
 <body>
     <div id='map'></div>
@@ -172,7 +173,8 @@
 	<script src='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.js'></script>
 	<script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.2.0/leaflet-omnivore.min.js'></script>
     <script>
-        L.mapbox.accessToken = 'pk.eyJ1Ijoicmdkb25vaHVlIiwiYSI6Im5Ua3F4UzgifQ.PClcVzU5OUj17kuxqsY_Dg';
+        
+    L.mapbox.accessToken = 'pk.eyJ1Ijoicmdkb25vaHVlIiwiYSI6Im5Ua3F4UzgifQ.PClcVzU5OUj17kuxqsY_Dg';
 
         var map = L.mapbox.map('map', 'mapbox.light', {
             center: [-.23, 37.8],
@@ -181,8 +183,6 @@
             maxZoom: 9,
             maxBounds: L.latLngBounds([-6.22, 27.72],[5.76, 47.83])
         });
-        
-        //var countyCentroids = omnivore.csv('kenya_education_2014.csv').addTo(map);
         
         omnivore.csv('kenya_education_2014.csv')
             .on('ready', function(e) {
@@ -195,6 +195,7 @@
         var currentGrade = 1;
         var scaleFactor = 0.6;
         
+        // create the main function to draw orange and green circles for male and female students
         function drawMap(schoolData) {
             var girls = L.geoJson(schoolData, {
                 pointToLayer: function(feature, layer){
@@ -225,11 +226,13 @@
         
         }
 
+        // build the function to calculate radii
         function calcRadius(val) {
             var radius = Math.sqrt(val/Math.PI);
                 return radius * .6;
         }
         
+        // create the function to update symbology based on data generated from slider
         function updateSymbols(girls,boys) {
             var radius,
                 allRadii = [];
@@ -248,6 +251,7 @@
             
         }
         
+        // create the function to build the main user interface
         function sequenceUI(girls, boys) {
             
             var output = $('#grade span');
@@ -260,6 +264,7 @@
                 });
         }
         
+        // create the function to build a legend with circles of varying radii
         function drawLegend(allRadii){
             var legend = $('.legend');
 
@@ -286,6 +291,7 @@
             
         }
         
+        // create the function to build the information window
         function infoWindow(girls,boys) {
 
             var info = $('#info');
