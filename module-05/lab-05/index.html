@@ -142,8 +142,8 @@
         var map = L.mapbox.map('map', 'mapbox.streets', {
             center: [-.23, 37.8],
             zoom: 7,
-            minZoom: 6,
-            maxZoom: 9,
+            minZoom: 5,
+            maxZoom: 10,
             maxBounds: L.latLngBounds([-6.22, 27.72],[5.76, 47.83])
         });
         
@@ -155,7 +155,7 @@
                 onEachFeature: onEachFeature,
                 style: function (feature) { // style each feature of GeoJson layer
 				    return {
-				        color: 'blue', // set stroke color
+				        color: 'gray', // set stroke color
 				        weight: 0.5, // set stroke weight
 				        fillOpacity: 0, // override defautl fill opacity
 					   };
@@ -282,7 +282,7 @@
                 var dataLayer = leafletEvent.target;
                 dataLayer.setStyle({
                     weight: 0.5,
-                    color: 'blue',
+                    color: 'gray',
                     fillOpacity: 0,
             });
             drawMap();
