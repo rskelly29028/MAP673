@@ -113,7 +113,7 @@
     <h2>2009 Census Data for Males and Females</h2>
         <p><i>This map displays the number of males and females by county in Kenya in 2009.  Red circles represent males, blue circles represent females.</i></p>
     <p><img src="lab-05-graphics/Flag_of_Kenya.svg.png" alt="legend"></p>
-    <p>Kenya, like the majority of nations around the world, has more females in its population than it does males.  That said, the viewer can see that the sex distribution by county reveals discrepancies.  There are more males than females in the rural frontier counties bordering both Sudan and Somalia. This can be attributed to the fact that these poor rural regions of Kenya tend to be dominated by both the energy industry as well as being overrepresented by military personnel protecting the porous frontiers of the nation from the political turmoil of Sudan and the threat of Islamic militants from Somalia.  The urban areas of Kenya, in particular the capital of Nairobi, contain significantly more males as men are more apt to migrate to urban areas to find work in construction and/or other urban service occupations, leaving women behind to tend to family and agricutlrual responsibilities in rural regions, most notably in the western Lake District adjacent to Lake Victoria and the Tanzanian border.</p>
+    <p>Kenya, like the majority of nations around the world, has more females in its general population than it does males. Several counties in Kenya contradict the general sex ratio found across the nation. There are more males than females in the rural frontier counties bordering both Sudan and Somalia. This can be attributed to the fact that these poor rural regions of Kenya tend to be dominated by both the energy industry as well as being overrepresented by military personnel protecting the porous frontiers of the nation from the political turmoil of Sudan and the threat of Islamic militants from Somalia.  The urban areas of Kenya, in particular the capital of Nairobi, contain significantly more males as men are more apt to migrate to urban areas to find work in construction and/or other urban service occupations, leaving women behind to tend to family and agricutlrual responsibilities in rural regions, most notably in the western Lake District adjacent to Lake Victoria and the Tanzanian border.</p>
         <h2><u>About This Map</u></h2>
         <p><i>This map was created Friday, November 11, 2016 by Ryan Kelly</i></p>
     <h2><u>About the Data</u></h2>
@@ -292,26 +292,21 @@
         }
         
             function drawLegend() {
-
 			// create a new Leaflet control object, and position it top left
-			var legend = L.control({
-				position: 'topleft'
+			     var legend = L.control({
+				    position: 'topleft'
 			});
-
-			// when the legend is added to the map
-			legend.onAdd = function (map) {
-
-				// create a new HTML <div> element and give it a class name of "legend"
-				var div = L.DomUtil.create('div', 'legend');
-
-				return div;
-                createSymbols();
-
+            // when the legend is added to the map
+			     legend.onAdd = function (map) {
+            // create a new HTML <div> element and give it a class name of "legend"
+				    var div = L.DomUtil.create('div', 'legend');
+				    return div;
+                    createSymbols();
 			};
-
 			// add the legend to the map
 			legend.addTo(map);
 		}   
+    
     </script>
 </body>
 </html>
