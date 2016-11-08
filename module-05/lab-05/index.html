@@ -56,6 +56,7 @@
         #side-panel img {
             float: center;
             margin: 0 0 15px 15px;
+            border: 1px solid white;
         }
       #map {
             position: absolute;
@@ -64,7 +65,6 @@
             right: 0;
             width: 67%;
       }
-      
      #legend {
             position: absolute;
             background: whitesmoke;
@@ -126,9 +126,9 @@
     </div>
 	
     <div id="info">
-    <p>County: <span></span></p>
-    <p class="Males">Males: <span></span></p>
-    <p class="Females">Females: <span></span></p>
+    <p>County: <span> </span></p>
+    <p>Males: <span1> </span1></p>
+    <p>Females: <span2> </span2></p>
     </div>
     
     <script src='https://cdnjs.cloudflare.com/ajax/libs/simple-statistics/1.0.1/simple_statistics.min.js'></script>
@@ -147,6 +147,26 @@
             maxBounds: L.latLngBounds([-6.22, 27.72],[5.76, 47.83])
         });
         
+        var dataLayer;
+        
+        $.getJSON("kenyan-counties.geojson",function(data){
+            console.log(data);
+            dataLayer = L.geoJson(data, {
+                onEachFeature: onEachFeature,
+                style: function (feature) { // style each feature of GeoJson layer
+				    return {
+				        color: 'blue', // set stroke color
+				        weight: 0.5, // set stroke weight
+				        fillOpacity: 0, // override defautl fill opacity
+					   };
+				    }
+        
+            }).addTo(map); // add the Leaflet GeoJson layer to the map
+            
+            
+            
+            }); 
+        
         omnivore.csv('Kenya_Population.csv')
             .on('ready', function(e) {
                 drawMap(e.target.toGeoJSON())
@@ -156,7 +176,7 @@
         });
         
         var scaleFactor = 0.6;
-        
+        	
         // create the main function to draw orange and green circles for male and female students
         function drawMap(popData) {
             var females = L.geoJson(popData, {
@@ -164,29 +184,31 @@
                     return L.circleMarker(layer, {
                         color: 'red',
                         opacity: 1,
-                        weight: 2,
+                        weight: 4,
                         fillOpacity: 0,         
                 });
             }
                 
         }).addTo(map);
-
+            
             var males = L.geoJson(popData, {
                 pointToLayer: function(feature, layer){
                     return L.circleMarker(layer, {
                         color: 'blue',
                         opacity: 1,
-                        weight: 1,
+                        weight: 2,
                         fillOpacity: 0,
                 });
             }
+                
         }).addTo(map);
         
         createSymbols(males,females);
         infoWindow(males,females);
+        drawLegend();
         
         }
-
+        
         // build the function to calculate radii
         function calcRadius(val) {
             var radius = Math.sqrt(val/Math.PI);
@@ -219,11 +241,11 @@
                 var props = e.layer.feature.properties;
                 info.show();
                 $('#info span').text(props.County);
-                $(".females").text(props.Female);
-                $(".males").val(props.Male);
+                $('#info span1').text(props.Male);
+                $('#info span2').text(props.Female);
 
-            e.layer.setStyle({ fillOpacity: .6 });
-
+                e.layer.setStyle({ fillOpacity: 0.6 });
+                
         });
 
             males.on('mouseout', function(e) {
@@ -244,9 +266,54 @@
                 info.css({"left": e.pageX - info.width() - 30});
             }
             });
+          
+        };
         
+            function onEachFeature(feature,layer) {
+            // changes color of layer to magenta with mouseover and returns back to original color settings with mouseout
+            layer.on('mouseover', function pointMouseover(leafletEvent) {
+                var dataLayer = leafletEvent.target;
+                dataLayer.setStyle({
+                    weight: 3,
+                    color: 'white',
+                    fillColor: 'green',
+                    fillOpacity: 0.5,
+            });
+            layer.on('mouseout', function pointMouseover(leafletEvent){
+                var dataLayer = leafletEvent.target;
+                dataLayer.setStyle({
+                    weight: 0.5,
+                    color: 'blue',
+                    fillOpacity: 0,
+            });
+            drawMap();
+            
+            })
+        }          
+            )
         }
         
+            function drawLegend() {
+
+			// create a new Leaflet control object, and position it top left
+			var legend = L.control({
+				position: 'topleft'
+			});
+
+			// when the legend is added to the map
+			legend.onAdd = function (map) {
+
+				// create a new HTML <div> element and give it a class name of "legend"
+				var div = L.DomUtil.create('div', 'legend');
+
+				return div;
+                createSymbols();
+
+			};
+
+			// add the legend to the map
+			legend.addTo(map);
+		}   
     </script>
 </body>
 </html>
