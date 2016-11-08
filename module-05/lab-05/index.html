@@ -87,7 +87,7 @@
     #info {
           padding: 8px 15px;
           position: absolute;
-          color: red
+          color: black
           max-width: 200px;
           font-size: 1em;
           background: whitesmoke;
@@ -203,7 +203,7 @@
         
         createSymbols(males,females);
         infoWindow(males,females);
-        drawLegend();
+        
         
         }
         
@@ -227,7 +227,8 @@
                 layer.setRadius(radius);
                 allRadii.push(radius);
             });
-            
+         
+            drawLegend(allRadii);
         }
         
         // create the function to build the information window
@@ -277,6 +278,7 @@
                     fillColor: 'green',
                     fillOpacity: 0.5,
             });
+                
             layer.on('mouseout', function pointMouseover(leafletEvent){
                 var dataLayer = leafletEvent.target;
                 dataLayer.setStyle({
@@ -291,22 +293,37 @@
             )
         }
         
-            function drawLegend() {
-			// create a new Leaflet control object, and position it top left
-			     var legend = L.control({
-				    position: 'topleft'
-			});
-            // when the legend is added to the map
-			     legend.onAdd = function (map) {
-            // create a new HTML <div> element and give it a class name of "legend"
-				    var div = L.DomUtil.create('div', 'legend');
-				    return div;
-                    createSymbols();
-			};
-			// add the legend to the map
-			legend.addTo(map);
-		}   
-    
+            function drawLegend(allRadii){
+                var legend = $('.legend');
+            
+                var circles = {
+                    males: ss.max(allRadii),
+                    females: ss.mean(allRadii)
+                }
+
+            var mvgCircles = '';
+            var fvgCircles = '';
+
+            var reverseCalc = function(radius) {
+                return Math.round((Math.pow(radius/scaleFactor, 2) * Math.PI));
+            }
+
+            for (var circle in circles) {
+
+                mvgCircles += '<circle cx="'+ 100 +'" cy="'+ (circles[circle] - 180) * -1 +'" r="'+ circles[circle] +'" stroke="white" stroke-width="3" fill="blue" />';
+
+                mvgCircles += '<text x="'+ 80 +'" y = "'+ (circles[circle] - 160) * -1 +'" fill= "white">'+ reverseCalc(circles[circle]) +'</text>'
+                
+                fvgCircles += '<circle cx="'+ 100 +'" cy="'+ (circles[circle] - 180) * -1 +'" r="'+ circles[circle] +'" stroke="white" stroke-width="3" fill="red" />';
+
+                fvgCircles += '<text x="'+ 80 +'" y = "'+ (circles[circle] - 160) * -1 +'" fill= "white">'+ reverseCalc(circles[circle]) +'</text>'
+            }
+
+            legend.html(mvgCircles,fvgCircles)
+            
+            
+        }      
+                
     </script>
 </body>
 </html>
