@@ -168,17 +168,17 @@
         $.getJSON("kenyan-counties.geojson", function(data) {
             console.log(data);
             dataLayer = L.geoJson(data, {
-                onEachFeature: onEachFeature,
-                style: function(feature) { // style each feature of GeoJson layer
-                    return {
-                        color: 'gray', // set stroke color
-                        weight: 0.5, // set stroke weight
-                        fillOpacity: 0, // override defautl fill opacity
-                    };
-                }
+                    //onEachFeature: onEachFeature,
+                    style: function(feature) { // style each feature of GeoJson layer
+                        return {
+                            color: 'gray', // set stroke color
+                            weight: 0.5, // set stroke weight
+                            fillOpacity: 0, // override defautl fill opacity
+                        };
+                    }
 
-            })
-            .addTo(map); // add the Leaflet GeoJson layer to the map
+                })
+                .addTo(map); // add the Leaflet GeoJson layer to the map
 
             omnivore.csv('Kenya_Population.csv')
                 .on('ready', function(e) {
@@ -216,6 +216,32 @@
                         weight: 2,
                         fillOpacity: 0,
                     });
+                },
+                onEachFeature: function(feature, layer) {
+                    layer.on('mouseover', function(e) {
+
+                        dataLayer.eachLayer(function(l) {
+                            if (layer.feature.properties.County == l.feature.properties.COUNTY) {
+                                l.setStyle({
+                                    weight: 6,
+                                    color: 'yellow',
+                                    fillColor: 'green',
+                                    fillOpacity: 0.5,
+                                });
+                            }
+                        })
+                    });
+
+                    layer.on('mouseout', function(e) {
+
+                        dataLayer.setStyle({
+                          weight: 0.5,
+                          color: 'gray',
+                          fillOpacity: 0,
+                        })
+
+                    });
+
                 }
 
             }).addTo(map);
@@ -299,7 +325,7 @@
 
         function onEachFeature(feature, layer) {
             // changes color of layer to magenta with mouseover and returns back to original color settings with mouseout
-            layer.on('mouseover', function pointMouseover(leafletEvent) {
+            layer.on('mouseover', function(leafletEvent) {
                 var dataLayer = leafletEvent.target;
                 dataLayer.setStyle({
                     weight: 6,
@@ -308,7 +334,7 @@
                     fillOpacity: 0.5,
                 });
 
-                layer.on('mouseout', function pointMouseover(leafletEvent) {
+                layer.on('mouseout', function(leafletEvent) {
                     var dataLayer = leafletEvent.target;
                     dataLayer.setStyle({
                         weight: 0.5,
@@ -347,7 +373,7 @@
                 fvgCircles += '<text x="' + 80 + '" y = "' + (circles[circle] - 160) * -1 + '" fill= "white">' + reverseCalc(circles[circle]) + '</text>'
             }
 
-            legend.html(mvgCircles)
+            legend.html(mvgCircles, fvgCircles)
 
         }
     </script>
