@@ -177,17 +177,20 @@
                     };
                 }
 
-            }).addTo(map); // add the Leaflet GeoJson layer to the map
+            })
+            .addTo(map); // add the Leaflet GeoJson layer to the map
+
+            omnivore.csv('Kenya_Population.csv')
+                .on('ready', function(e) {
+                    drawMap(e.target.toGeoJSON())
+                })
+                .on('error', function(e) {
+                    console.log(e.error[0].message);
+                });
 
         });
 
-        omnivore.csv('Kenya_Population.csv')
-            .on('ready', function(e) {
-                drawMap(e.target.toGeoJSON())
-            })
-            .on('error', function(e) {
-                console.log(e.error[0].message);
-            });
+
 
         var scaleFactor = 0.6;
 
@@ -344,7 +347,7 @@
                 fvgCircles += '<text x="' + 80 + '" y = "' + (circles[circle] - 160) * -1 + '" fill= "white">' + reverseCalc(circles[circle]) + '</text>'
             }
 
-            //legend.html(mvgCircles,fvgCircles)
+            legend.html(mvgCircles)
 
         }
     </script>
