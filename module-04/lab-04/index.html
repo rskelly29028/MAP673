@@ -42,10 +42,28 @@
         maxBounds: L.latLngBounds([-6.22, 27.72],[5.76, 47.83])
     });
     
-  
     
-    omnivore.csv('Kenya_Health_Facilities.csv').addTo(map);
     
+    omnivore.csv('Kenya_Health_Facilities.csv')
+             .on('ready', function(e) {
+                drawMap(e.target.toGeoJSON())
+        })
+            .on('error', function(e) {
+                console.log(e.error[0].message);
+        });
+    
+        function drawMap(healthData) {
+            var hospitals = L.geoJson(healthData, {
+                pointToLayer: function(feature, layer){
+                    return L.circleMarker(layer, {
+                        color: 'red',
+                        opacity: 1,
+                        weight: 1,
+                        fillOpacity: 0.1,         
+                });
+            }
+        }).addTo(map);
+        }
   
 </script>
 
