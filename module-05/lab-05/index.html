@@ -9,8 +9,8 @@
 
     <style>
       body {
-            margin:0;
-            padding:0;
+            margin: 0;
+            padding: 0;
             background: whitesmoke;
             font-family: "Work Sans", sans-serif;
       }
@@ -144,7 +144,7 @@
             zoom: 7,
             minZoom: 5,
             maxZoom: 10,
-            maxBounds: L.latLngBounds([-6.22, 27.72],[5.76, 47.83])
+            maxBounds: L.latLngBounds([-6.22, 27.72], [5.76, 47.83])
         });
         
         var dataLayer;
@@ -162,8 +162,6 @@
 				    }
         
             }).addTo(map); // add the Leaflet GeoJson layer to the map
-            
-            }); 
         
         omnivore.csv('Kenya_Population.csv')
             .on('ready', function(e) {
@@ -171,6 +169,8 @@
         })
             .on('error', function(e) {
                 console.log(e.error[0].message);
+        });
+            
         });
         
         var scaleFactor = 0.6;
@@ -197,9 +197,33 @@
                         weight: 2,
                         fillOpacity: 0,
                 });
-            }
+            },
                 
-        }).addTo(map);
+            onEachFeature: function(feature, layer) {
+                    layer.on('mouseover', function(e) {
+                        dataLayer.eachLayer(function(l) {
+                            if (layer.feature.properties.County == l.feature.properties.COUNTY) {
+                                l.setStyle({
+                                    weight: 6,
+                                    color: 'yellow',
+                                    fillColor: 'green',
+                                    fillOpacity: 0.5,
+                                });
+                            }
+                        })
+                    });
+                    layer.on('mouseout', function(e) {
+                        dataLayer.setStyle({
+                          weight: 0.5,
+                          color: 'gray',
+                          fillOpacity: 0,
+                        })
+                    });
+                }
+                
+            }).addTo(map);
+                
+        
         
         createSymbols(males,females);
         infoWindow(males,females);
@@ -242,14 +266,19 @@
                 $('#info span1').text(props.Male);
                 $('#info span2').text(props.Female);
 
-                e.layer.setStyle({ fillOpacity: 0.6 });
+                e.layer.setStyle({
+                    fillOpacity: 0.6 
+                });
                 
         });
 
             males.on('mouseout', function(e) {
                 info.hide();
-                e.layer.setStyle({ fillOpacity: 0 });
+                e.layer.setStyle({
+                    fillOpacity: 0 });
         });
+        
+        
 
             $(document).mousemove(function(e){
             // first offset from the mouse position of the info window
@@ -261,7 +290,9 @@
             }
             // do the same for crashing into the right
             if(info.offset().left + info.width() >= $(document).width() - 40) {
-                info.css({"left": e.pageX - info.width() - 30});
+                info.css({
+                    "left": e.pageX - info.width() - 30
+                });
             }
             });
           
@@ -269,7 +300,7 @@
         
             function onEachFeature(feature,layer) {
             // changes color of layer to magenta with mouseover and returns back to original color settings with mouseout
-            layer.on('mouseover', function pointMouseover(leafletEvent) {
+            layer.on('mouseover', function (leafletEvent) {
                 var dataLayer = leafletEvent.target;
                 dataLayer.setStyle({
                     weight: 6,
@@ -278,7 +309,7 @@
                     fillOpacity: 0.5,
             });
                 
-            layer.on('mouseout', function pointMouseover(leafletEvent){
+            layer.on('mouseout', function (leafletEvent){
                 var dataLayer = leafletEvent.target;
                 dataLayer.setStyle({
                     weight: 0.5,
