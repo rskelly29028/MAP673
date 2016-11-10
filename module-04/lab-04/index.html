@@ -27,7 +27,7 @@
 </style>
 </head>
 <body>
-<h1>Kenyan Health Facilities</h1>   
+<h1>Kenyan Health Facilities - Ministry of Health Hospitals</h1>
 <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.2.0/leaflet-omnivore.min.js'></script>  
 
 <div id='map'></div>
@@ -42,8 +42,11 @@
         maxBounds: L.latLngBounds([-6.22, 27.72],[5.76, 47.83])
     });
     
+  
+    
     omnivore.csv('Kenya_Health_Facilities.csv').addTo(map);
     
+  
 </script>
 
 </body>
