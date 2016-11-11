@@ -117,6 +117,7 @@
         .males {
             font color: blue;
         }
+        
     </style>
 
 </head>
@@ -194,7 +195,7 @@
         
         var scaleFactor = 0.6;
 
-        // create the main function to draw blue and red circles for male and female students
+        // create the main function to draw blue and red circles for males and females
         function drawMap(popData) {
             var females = L.geoJson(popData, {
                 pointToLayer: function(feature, layer) {
@@ -258,7 +259,7 @@
             return radius * .075;
         }
 
-        // create the function to create symbology based Excel data
+        // create the function to create symbology based on CSV data
         function createSymbols(males, females) {
             var radius,
                 allRadii = [];
@@ -273,7 +274,6 @@
                 allRadii.push(radius);
             });
 
-            //drawLegend(allRadii);
         }
 
         // create the function to build the information window
@@ -307,18 +307,6 @@
                     "left": e.pageX + 6,
                     "top": e.pageY - info.height() - 15
                 });
-
- 
-            // if it crashes into the top, flip it lower right
-            if(info.offset().top < 4) {
-                info.css({"top": e.pageY + 15});
-            }
-            // do the same for crashing into the right
-            if(info.offset().left + info.width() >= $(document).width() - 40) {
-                info.css({
-                    "left": e.pageX - info.width() - 30
-                });
-            }
  
                 // if it crashes into the top, flip it lower right
                 if (info.offset().top < 4) {
