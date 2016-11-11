@@ -9,11 +9,8 @@
     <link href='https://fonts.googleapis.com/css?family=Work+Sans:400,500,600' rel='stylesheet' type='text/css'>
 
     <style>
-<<<<<<< HEAD
+
       body {
-=======
-        body {
->>>>>>> origin/master
             margin: 0;
             padding: 0;
             background: whitesmoke;
@@ -26,8 +23,8 @@
             top: 0;
             bottom: 0;
             width: 33%;
-            background: blue;
-            border-right: 2px solid blue;
+            background: navy;
+            border-right: 2px solid navy;
             overflow-y: scroll;
         }
 
@@ -38,7 +35,7 @@
             color: whitesmoke;
             font-weight: 400;
             font-size: 1.5em;
-            text-align: left;
+            text-align: center;
         }
 
         h2 {
@@ -88,6 +85,7 @@
             color: black;
             border: 1px solid black;
             border-radius: 3px;
+            text-align: center
         }
 
         #legend h3 {
@@ -128,9 +126,9 @@
     <div id='side-panel'>
         <h1>Gender Distribution in Kenya</h1>
         <h2>2009 Census Data for Males and Females</h2>
-        <p><i>This map displays the number of males and females by county in Kenya in 2009.  Red circles represent males, blue circles represent females.</i></p>
+        <p><i>This map displays the number of males and females by county in Kenya in 2009.  Blue circles represent males, red circles represent females.</i></p>
         <p><img src="lab-05-graphics/Flag_of_Kenya.svg.png" alt="legend"></p>
-        <p><i>Kenya, like the majority of nations around the world, has more females in its general population than it does males. Several counties in Kenya contradict the general sex ratio found across the nation. There are more males than females in the rural frontier counties bordering both Sudan and Somalia. This can be attributed to the fact that these poor rural regions of Kenya tend to be dominated by both the energy industry as well as being overrepresented by military personnel protecting the porous frontiers of the nation from the political turmoil of Sudan and the threat of Islamic militants from Somalia.  The urban areas of Kenya, in particular the capital of Nairobi, contain significantly more males as men are more apt to migrate to urban areas to find work in construction and/or other urban service occupations, leaving women behind to tend to family and agricutlrual responsibilities in rural regions, most notably in the western Lake District adjacent to Lake Victoria and the Tanzanian border.</i></p>
+        <p><i>Kenya, like the majority of nations around the world, has more females in its general population than it does males. Several counties in Kenya contradict the general sex ratio found across the nation. There are more males than females in the rural frontier counties bordering both Sudan and Somalia. This can be attributed to the fact that these poor rural regions of Kenya tend to be dominated by both the energy industry as well as being overrepresented by military personnel protecting the porous frontiers of the nation from the political turmoil of Sudan and the threat of Islamic militants from Somalia.  The urban areas of Kenya, in particular the capital of Nairobi, contain significantly more males as men are more apt to migrate to urban areas to find work in construction and/or other urban service occupations, leaving women behind to tend to family and agricultural responsibilities in rural regions, most notably in the western Lake District adjacent to Lake Victoria and the Tanzanian border.</i></p>
         <h2><u>About This Map</u></h2>
         <p><i>This map was created Friday, November 11, 2016 by Ryan Kelly</i></p>
         <h2><u>About the Data</u></h2>
@@ -139,6 +137,7 @@
 
     <div id="legend">
         <h3>Males and Females Per County in Kenya</h3>
+        <p><i>Blue Circles Correspond to Males, Red Circles to Females</i></p>
         <svg class="legend" width="200" height="200"></svg>
     </div>
 
@@ -161,7 +160,7 @@
 
         var map = L.mapbox.map('map', 'mapbox.streets', {
             center: [-.23, 37.8],
-            zoom: 7,
+            zoom: 6,
             minZoom: 5,
             maxZoom: 10,
             maxBounds: L.latLngBounds([-6.22, 27.72], [5.76, 47.83])
@@ -172,7 +171,6 @@
         $.getJSON("kenyan-counties.geojson", function(data) {
             console.log(data);
             dataLayer = L.geoJson(data, {
-<<<<<<< HEAD
                 onEachFeature: onEachFeature,
                 style: function (feature) { // style each feature of GeoJson layer
 				    return {
@@ -194,35 +192,9 @@
             
         });
         
-=======
-                    //onEachFeature: onEachFeature,
-                    style: function(feature) { // style each feature of GeoJson layer
-                        return {
-                            color: 'gray', // set stroke color
-                            weight: 0.5, // set stroke weight
-                            fillOpacity: 0, // override defautl fill opacity
-                        };
-                    }
-
-                })
-                .addTo(map); // add the Leaflet GeoJson layer to the map
-
-            omnivore.csv('Kenya_Population.csv')
-                .on('ready', function(e) {
-                    drawMap(e.target.toGeoJSON())
-                })
-                .on('error', function(e) {
-                    console.log(e.error[0].message);
-                });
-
-        });
-
-
-
->>>>>>> origin/master
         var scaleFactor = 0.6;
 
-        // create the main function to draw orange and green circles for male and female students
+        // create the main function to draw blue and red circles for male and female students
         function drawMap(popData) {
             var females = L.geoJson(popData, {
                 pointToLayer: function(feature, layer) {
@@ -243,19 +215,13 @@
                         opacity: 1,
                         weight: 2,
                         fillOpacity: 0,
-<<<<<<< HEAD
+
                 });
             },
                 
-            onEachFeature: function(feature, layer) {
-                    layer.on('mouseover', function(e) {
-=======
-                    });
-                },
                 onEachFeature: function(feature, layer) {
                     layer.on('mouseover', function(e) {
 
->>>>>>> origin/master
                         dataLayer.eachLayer(function(l) {
                             if (layer.feature.properties.County == l.feature.properties.COUNTY) {
                                 l.setStyle({
@@ -267,42 +233,24 @@
                             }
                         })
                     });
-<<<<<<< HEAD
-                    layer.on('mouseout', function(e) {
-=======
 
                     layer.on('mouseout', function(e) {
 
->>>>>>> origin/master
                         dataLayer.setStyle({
                           weight: 0.5,
                           color: 'gray',
                           fillOpacity: 0,
                         })
-<<<<<<< HEAD
                     });
                 }
                 
             }).addTo(map);
-                
-        
-        
+              
         createSymbols(males,females);
         infoWindow(males,females);
-        
-=======
-
-                    });
-
-                }
-
-            }).addTo(map);
-
-            createSymbols(males, females);
-            infoWindow(males, females);
-
->>>>>>> origin/master
-        }
+        drawLegend();
+       
+                    };
 
         // build the function to calculate radii
         function calcRadius(val) {
@@ -325,7 +273,7 @@
                 allRadii.push(radius);
             });
 
-            drawLegend(allRadii);
+            //drawLegend(allRadii);
         }
 
         // create the function to build the information window
@@ -341,32 +289,18 @@
                 $('#info span2').text(props.Female);
 
                 e.layer.setStyle({
-<<<<<<< HEAD
+ 
                     fillOpacity: 0.6 
                 });
                 
         });
-=======
-                    fillOpacity: 0.6
-                });
-
-            });
->>>>>>> origin/master
-
+ 
             males.on('mouseout', function(e) {
                 info.hide();
                 e.layer.setStyle({
-<<<<<<< HEAD
                     fillOpacity: 0 });
-        });
-        
-        
-=======
-                    fillOpacity: 0
                 });
-            });
->>>>>>> origin/master
-
+            
             $(document).mousemove(function(e) {
                 // first offset from the mouse position of the info window
                 info.css({
@@ -374,7 +308,7 @@
                     "top": e.pageY - info.height() - 15
                 });
 
-<<<<<<< HEAD
+ 
             // if it crashes into the top, flip it lower right
             if(info.offset().top < 4) {
                 info.css({"top": e.pageY + 15});
@@ -385,7 +319,7 @@
                     "left": e.pageX - info.width() - 30
                 });
             }
-=======
+ 
                 // if it crashes into the top, flip it lower right
                 if (info.offset().top < 4) {
                     info.css({
@@ -398,25 +332,23 @@
                         "left": e.pageX - info.width() - 30
                     });
                 }
->>>>>>> origin/master
+ 
             });
-
         };
 
+        
         function onEachFeature(feature, layer) {
-            // changes color of layer to magenta with mouseover and returns back to original color settings with mouseout
-<<<<<<< HEAD
-            layer.on('mouseover', function (leafletEvent) {
-=======
+            // changes color of layer to green with mouseover and returns back to original color settings with mouseout
+ 
             layer.on('mouseover', function(leafletEvent) {
->>>>>>> origin/master
+ 
                 var dataLayer = leafletEvent.target;
                 dataLayer.setStyle({
                     weight: 6,
                     color: 'yellow',
                     fillColor: 'green',
                     fillOpacity: 0.5,
-<<<<<<< HEAD
+ 
             });
                 
             layer.on('mouseout', function (leafletEvent){
@@ -428,20 +360,8 @@
             });
             drawMap();
             
-=======
-                });
-
-                layer.on('mouseout', function(leafletEvent) {
-                    var dataLayer = leafletEvent.target;
-                    dataLayer.setStyle({
-                        weight: 0.5,
-                        color: 'gray',
-                        fillOpacity: 0,
-                    });
-                    drawMap();
-
                 })
->>>>>>> origin/master
+ 
             })
         }
 
@@ -449,8 +369,8 @@
             var legend = $('.legend');
 
             var circles = {
-                males: ss.max(allRadii),
-                females: ss.mean(allRadii)
+                males: 65,
+                females: 40
             }
 
             var mvgCircles = '';
@@ -462,18 +382,19 @@
 
             for (var circle in circles) {
 
-                mvgCircles += '<circle cx="' + 100 + '" cy="' + (circles[circle] - 180) * -1 + '" r="' + circles[circle] + '" stroke="white" stroke-width="3" fill="blue" />';
+                mvgCircles += '<circle cx="' + 100 + '" cy="' + (circles[circle] - 180) * -1 + '" r="' + circles[circle] + '" stroke="blue" stroke-width="3" fill="whitesmoke"/>';
 
-                mvgCircles += '<text x="' + 80 + '" y = "' + (circles[circle] - 160) * -1 + '" fill= "white">' + reverseCalc(circles[circle]) + '</text>'
+                mvgCircles += '<text x="' + 80 + '" y = "' + (circles[circle] - 160) * -1 + '" fill= "blue">' + reverseCalc(circles[circle]) + '</text>'
+                
+                fvgCircles += '<circle cx="' + 100 + '" cy="' + (circles[circle] - 180) * -1 + '" r="' + circles[circle] + '" stroke="red" stroke-width="3" fill="whitesmoke"/>';
 
-                fvgCircles += '<circle cx="' + 100 + '" cy="' + (circles[circle] - 180) * -1 + '" r="' + circles[circle] + '" stroke="white" stroke-width="3" fill="red" />';
-
-                fvgCircles += '<text x="' + 80 + '" y = "' + (circles[circle] - 160) * -1 + '" fill= "white">' + reverseCalc(circles[circle]) + '</text>'
+                fvgCircles += '<text x="' + 80 + '" y = "' + (circles[circle] - 160) * -1 + '" fill= "red">' + reverseCalc(circles[circle]) + '</text>'
             }
 
             legend.html(mvgCircles, fvgCircles)
 
-        }
+            }
+        
     </script>
 </body>
 
