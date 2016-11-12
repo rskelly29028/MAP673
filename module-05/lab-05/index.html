@@ -23,15 +23,15 @@
             top: 0;
             bottom: 0;
             width: 33%;
-            background: navy;
-            border-right: 2px solid navy;
+            background: #404040;
+            border-right: 2px solid #404040;
             overflow-y: scroll;
         }
 
         h1 {
             padding: 8px 25px 8px 15px;
             margin: 0;
-            background: red;
+            background: #ff3118;
             color: whitesmoke;
             font-weight: 400;
             font-size: 1.5em;
@@ -127,13 +127,13 @@
     <div id='side-panel'>
         <h1>Gender Distribution in Kenya</h1>
         <h2>2009 Census Data for Males and Females</h2>
-        <p><i>This map displays the number of males and females by county in Kenya in 2009.  Blue circles represent males, red circles represent females.</i></p>
+        <p>This map displays the number of males and females by county in Kenya in 2009.  Blue circles represent males, red circles represent females.</p>
         <p><img src="lab-05-graphics/Flag_of_Kenya.svg.png" alt="legend"></p>
-        <p><i>Kenya, like the majority of nations around the world, has more females in its general population than it does males. Several counties in Kenya contradict the general sex ratio found across the nation. There are more males than females in the rural frontier counties bordering both Sudan and Somalia. This can be attributed to the fact that these poor rural regions of Kenya tend to be dominated by both the energy industry as well as being overrepresented by military personnel protecting the porous frontiers of the nation from the political turmoil of Sudan and the threat of Islamic militants from Somalia.  The urban areas of Kenya, in particular the capital of Nairobi, contain significantly more males as men are more apt to migrate to urban areas to find work in construction and/or other urban service occupations, leaving women behind to tend to family and agricultural responsibilities in rural regions, most notably in the western Lake District adjacent to Lake Victoria and the Tanzanian border.</i></p>
+        <p>Kenya, like the majority of nations around the world, has more females in its general population than it does males. Several counties in Kenya contradict the general sex ratio found across the nation. There are more males than females in the rural frontier counties bordering both Sudan and Somalia. This can be attributed to the fact that these poor rural regions of Kenya tend to be dominated by both the energy industry as well as being overrepresented by military personnel protecting the porous frontiers of the nation from the political turmoil of Sudan and the threat of Islamic militants from Somalia.  The urban areas of Kenya, in particular the capital of Nairobi, contain significantly more males as men are more apt to migrate to urban areas to find work in construction and/or other urban service occupations, leaving women behind to tend to family and agricultural responsibilities in rural regions, most notably in the western Lake District adjacent to Lake Victoria and the Tanzanian border.</p>
         <h2><u>About This Map</u></h2>
-        <p><i>This map was created Friday, November 11, 2016 by Ryan Kelly</i></p>
+        <p>This map was created Friday, November 11, 2016 by Ryan Kelly</p>
         <h2><u>About the Data</u></h2>
-        <p><i>The data were furnished from the Kenyan Open Data Portal located at the following URL:  https://opendata.go.ke/</i></p>
+        <p>The data were furnished from the Kenyan Open Data Portal located at the following URL:  https://opendata.go.ke/</p>
     </div>
 
     <div id="legend">
@@ -249,7 +249,7 @@
               
         createSymbols(males,females);
         infoWindow(males,females);
-        drawLegend();
+        drawLegend()
        
                     };
 
@@ -346,6 +346,7 @@
                     color: 'gray',
                     fillOpacity: 0,
             });
+            
             drawMap();
             
                 })
@@ -357,8 +358,8 @@
             var legend = $('.legend');
 
             var circles = {
-                males: 65,
-                females: 40
+                males: 68,
+                females: 42
             }
 
             var mvgCircles = '';
@@ -370,13 +371,13 @@
 
             for (var circle in circles) {
 
-                mvgCircles += '<circle cx="' + 100 + '" cy="' + (circles[circle] - 180) * -1 + '" r="' + circles[circle] + '" stroke="blue" stroke-width="3" fill="whitesmoke"/>';
+                mvgCircles += '<circle cx="' + 100 + '" cy="' + (circles[circle] - 180) * -1 + '" r="' + circles[circle] + '" stroke="black" stroke-width="3" fill="whitesmoke"/>';
 
-                mvgCircles += '<text x="' + 80 + '" y = "' + (circles[circle] - 160) * -1 + '" fill= "blue">' + reverseCalc(circles[circle]) + '</text>'
+                mvgCircles += '<text x="' + 80 + '" y = "' + (circles[circle] - 160) * -1 + '" fill= "black">' + reverseCalc(circles[circle]) + '</text>'
                 
-                fvgCircles += '<circle cx="' + 100 + '" cy="' + (circles[circle] - 180) * -1 + '" r="' + circles[circle] + '" stroke="red" stroke-width="3" fill="whitesmoke"/>';
+                fvgCircles += '<circle cx="' + 100 + '" cy="' + (circles[circle] - 180) * -1 + '" r="' + circles[circle-15] + '" stroke="black" stroke-width="3" fill="whitesmoke"/>';
 
-                fvgCircles += '<text x="' + 80 + '" y = "' + (circles[circle] - 160) * -1 + '" fill= "red">' + reverseCalc(circles[circle]) + '</text>'
+                fvgCircles += '<text x="' + 80 + '" y = "' + (circles[circle] - 160) * -1 + '" fill= "black">' + reverseCalc(circles[circle-15]) + '</text>'
             }
 
             legend.html(mvgCircles, fvgCircles)
