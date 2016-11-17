@@ -1,0 +1,126 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Map 673 Lesson 06 Choropleth Option</title>
+
+    <link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+            background: whitesmoke;
+            font-family: Montserrat, sans-serif;
+        }
+        .county {
+            stroke: #fff;
+        }
+        .hover {
+            fill: yellow;
+        }
+        .land {
+            fill: green;
+        }
+        .emitter {
+            fill: red;
+            opacity: 0.5;
+        }
+        .slider {
+            width: 300px;
+            margin-left: 223px;
+        }
+        #emission-value {
+            margin-left: 223px;
+        }
+        h1, h2 {
+            position: absolute;
+            left: 20px;
+            top: 10px;
+            font-size: 2em;
+            font-weight: 100;
+            color: black;
+        }
+        h2 {
+            top: 60px;
+            font-size: 1.2em;
+        }
+        #map {
+            width: 900px;
+            height: 600px;
+            margin: 10px auto;
+            border: 1px solid #d3d3d3;
+        }
+    </style>
+</head>
+<body>
+    <h1>US Counties</h1>
+    <h2></h2>
+    <div id="map"></div>
+    <input type="range" class="slider">
+    <div id="emissions-value"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/queue-async/1.0.7/queue.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/1.6.19/topojson.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/simple-statistics/0.9.0/simple_statistics.min.js"></script>
+<script src="us-counties.js"></script>
+<script>
+    
+    var width = 900, height = 600;
+    
+    var svg = d3.select("#map")
+                .append("svg")
+                .attr("width", width)
+                .attr("height", height);
+    
+    var projection = d3.geo.albersUsa()     // create a new d3 projection function, albers equal area
+                .scale(800)                     // play with the scale until it's 'zoomed' about right
+                .translate([width/2, height/2]);   // center the svg (0,0 is top, left)
+   
+    var geoPath = d3.geo.path()        //  create a new geo path generator
+                .projection(projection);        // assign the project we just created to it
+    
+    queue()
+        .defer(d3.json, "https://rgdonohue.cartodb.com/api/v2/sql?format=GeoJSON&q=SELECT * FROM uninsured_adults_county")
+        .defer(d3.json, 'na_land_clipped.json')
+        .await(makeMap);
+    
+    function makeMap(error, counties, na_land_clipped){
+        
+        var breaks = ss.jenks(counties.features.map(function(d) {
+            return d.properties.uninsured;
+            }), 5);
+
+        breaks.shift(); // remove min value from breaks Array before applying to domain
+        breaks.pop(); // same for max
+
+        var colors = ["#feedde","#fdbe85","#fd8d3c","#e6550d","#a63603"];
+
+        var jenks = d3.scale.threshold()
+            .domain(breaks)
+            .range(colors);
+        
+        svg.append("g")
+            .selectAll("path")
+            .data(na_land_clipped.features)
+            .enter()
+            .append("path")
+            .attr("d", geoPath)
+            .attr("class", "land")
+        
+        svg.append("g")            // create and append a new SVG 'g' element to the svg
+                .selectAll("path")     // selectAll the path features that haven't been created yet
+                .data(counties.features)  // bind the GeoJSON features data to them
+                .enter()                    // prepare to
+                .append("path")        // append the newly create path elements to the 'g'
+                .attr("d", geoPath)  // define the screen coordinates of the new path(s)
+                .attr("class", "county")  // give each a class name of 'county'
+                .attr("fill", function(d) {
+                    return jenks(d.properties.uninsured);
+                });
+    
+            }
+</script>
+    
+    
+</body>
+</html>
