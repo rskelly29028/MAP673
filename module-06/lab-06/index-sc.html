@@ -4,11 +4,13 @@
     <title>Map 673 Lab 06 South Carolina Election</title>
 
     <link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+    
+    
     <style>
         body {
             padding: 0;
             margin: 0;
-            background: whitesmoke;
+            background: black;
             font-family: Montserrat, sans-serif;
         }
         .county {
@@ -17,105 +19,111 @@
         .hover {
             fill: yellow;
         }
-        .land {
-            fill: green;
-        }
-        .emitter {
-            fill: red;
-            opacity: 0.5;
-        }
-        .slider {
-            width: 300px;
-            margin-left: 223px;
-        }
-        #emission-value {
-            margin-left: 223px;
-        }
-        h1, h2 {
+        h1   {
             position: absolute;
             left: 20px;
             top: 10px;
             font-size: 2em;
             font-weight: 100;
-            color: black;
+            color: white;
         }
         h2 {
+            position: absolute;
+            left: 20px;
             top: 60px;
-            font-size: 1.2em;
+            font-size: 1.5em;
+            font-weight: 100;
+            color: white;
+        }
+        h3 {
+            position: absolute;
+            left: 20px;
+            top: 110px;
+            font-size: 1.25em;
+            font-weight: 10;
+            color: blue;
+        }
+        h4 {
+            position: absolute;
+            left: 20px;
+            top: 140px;
+            font-size: 1.25em;
+            font-weight: 10;
+            color: red;
         }
         #map {
             width: 900px;
             height: 600px;
             margin: 10px auto;
-            border: 1px solid #d3d3d3;
+            border: 1px solid black;
         }
     </style>
 </head>
 <body>
     <h1>South Carolina - General Election 2016</h1>
     <h2></h2>
+    <h3></h3>
+    <h4></h4>
     <div id="map"></div>
-    <input type="range" class="slider">
-    <div id="emissions-value"></div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+    
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/queue-async/1.0.7/queue.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/1.6.19/topojson.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/simple-statistics/0.9.0/simple_statistics.min.js"></script>
-<script src="us-counties.js"></script>
+
 <script>
     
     var width = 900, height = 600;
+    
+    var color = ["#ff0000","#ff6342","#ff9473","#c6eff7","#63c6de","#0000ff"]
     
     var svg = d3.select("#map")
                 .append("svg")
                 .attr("width", width)
                 .attr("height", height);
     
-    var projection = d3.geo.albersUsa()     // create a new d3 projection function, albers equal area
-                .scale(800)                     // play with the scale until it's 'zoomed' about right
-                .translate([width/2, height/2]);   // center the svg (0,0 is top, left)
+    var projection = d3.geo.albers()
+        .center([0, 33.7])  // centering the project with lat value
+        .rotate([80.9,0])  // rotating the earth to lon value
+        .scale(7000)
+        .translate([width / 2, height / 2]);
    
     var geoPath = d3.geo.path()        //  create a new geo path generator
-                .projection(projection);        // assign the project we just created to it
+                  .projection(projection);        // assign the project we just created to it
     
     queue()
-        .defer(d3.json, "http://catalog.civicdashboards.com/dataset/cafbe057-c9ac-42ab-b42c-a9cef4af7940/resource/04a2c2f2-3382-4b20-a225-c873ad7678ca/download/3fa69238710d4af3a1f55325756a2e73temp.geojson")
+        .defer(d3.json, "https://rkelly0007.carto.com/api/v2/sql?format=GeoJSON&q=SELECT * FROM south_carolina")
         .await(makeMap);
     
-    function makeMap(error, counties, na_land_clipped){
+    function makeMap(error, counties){
         
-        var breaks = ss.jenks(counties.features.map(function(d) {
-            return d.properties.uninsured;
-            }), 5);
-
-        breaks.shift(); // remove min value from breaks Array before applying to domain
-        breaks.pop(); // same for max
-
-        var colors = ["#feedde","#fdbe85","#fd8d3c","#e6550d","#a63603"];
-
-        var jenks = d3.scale.threshold()
-            .domain(breaks)
-            .range(colors);
-        
-        svg.append("g")
-            .selectAll("path")
-            .data(na_land_clipped.features)
-            .enter()
-            .append("path")
-            .attr("d", geoPath)
-            .attr("class", "land")
+        console.log(counties);   
         
         svg.append("g")            // create and append a new SVG 'g' element to the svg
                 .selectAll("path")     // selectAll the path features that haven't been created yet
                 .data(counties.features)  // bind the GeoJSON features data to them
-                .enter()                    // prepare to
-                .append("path")        // append the newly create path elements to the 'g'
+                .enter()                    
+                .append("path")        // append the newly create path elements to the 'g' 
                 .attr("d", geoPath)  // define the screen coordinates of the new path(s)
-                .attr("class", "county")  // give each a class name of 'county'
-                .attr("fill", function(d) {
-                    return jenks(d.properties.uninsured);
-                });
+                .attr("class", "county") // give each a class name of 'county'
+                .style ("fill", function(d) {
+                    if ((d.properties.clinton/[d.properties.clinton+d.properties.trump])>0.6) {return "#0000ff"}
+                    if ((d.properties.clinton/[d.properties.clinton+d.properties.trump])>0.55) {return "#63c6de"}
+                    if ((d.properties.clinton/[d.properties.clinton+d.properties.trump])>0.50) {return "#c6eff7"}
+                    if ((d.properties.clinton/[d.properties.clinton+d.properties.trump])>0.45) {return "#ff9473"}
+                    if ((d.properties.clinton/[d.properties.clinton+d.properties.trump])>0.40) {return "#ff6342"}
+                        else {return "#ff0000"}
+                }) // create the color bars for the election data
+                .on("mouseover", function(d){
+                    d3.select("h2").text(d.properties.name + ' county');
+                    d3.select("h3").text(d.properties.clinton + ' votes for Hillary Clinton');
+                    d3.select("h4").text(d.properties.trump + ' votes for Donald Trump');
+                    d3.select(this).attr('class', 'hover');
+                }) // generate text on mouseover
+                .on ("mouseout", function(d){
+                    d3.select("h2").text('');
+                    d3.select("h3").text('');
+                    d3.select("h4").text('');
+                    d3.select(this).attr('class', 'county');
+                });  // return to default on mouseout
     
             }
     
