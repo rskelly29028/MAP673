@@ -8,7 +8,7 @@
         body {
             padding: 0;
             margin: 0;
-            background: whitesmoke;
+            background: black;
             font-family: Montserrat, sans-serif;
         }
         .county {
@@ -17,31 +17,21 @@
         .hover {
             fill: yellow;
         }
-        .land {
-            fill: green;
-        }
-        .emitter {
-            fill: red;
-            opacity: 0.5;
-        }
-        .slider {
-            width: 300px;
-            margin-left: 223px;
-        }
-        #emission-value {
-            margin-left: 223px;
-        }
         h1, h2 {
             position: absolute;
             left: 20px;
             top: 10px;
             font-size: 2em;
             font-weight: 100;
-            color: black;
+            color: white;
         }
         h2 {
+            position: absolute;
+            left: 20px;
             top: 60px;
             font-size: 1.2em;
+            font-weight: 100;
+            color: white;
         }
         #map {
             width: 900px;
@@ -55,8 +45,7 @@
     <h1>US Counties</h1>
     <h2></h2>
     <div id="map"></div>
-    <input type="range" class="slider">
-    <div id="emissions-value"></div>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/queue-async/1.0.7/queue.min.js"></script>
@@ -81,7 +70,6 @@
     
     queue()
         .defer(d3.json, "https://rgdonohue.cartodb.com/api/v2/sql?format=GeoJSON&q=SELECT * FROM uninsured_adults_county")
-        .defer(d3.json, 'na_land_clipped.json')
         .await(makeMap);
     
     function makeMap(error, counties, na_land_clipped){
@@ -98,15 +86,7 @@
         var jenks = d3.scale.threshold()
             .domain(breaks)
             .range(colors);
-        
-        svg.append("g")
-            .selectAll("path")
-            .data(na_land_clipped.features)
-            .enter()
-            .append("path")
-            .attr("d", geoPath)
-            .attr("class", "land")
-        
+       
         svg.append("g")            // create and append a new SVG 'g' element to the svg
                 .selectAll("path")     // selectAll the path features that haven't been created yet
                 .data(counties.features)  // bind the GeoJSON features data to them
@@ -116,6 +96,14 @@
                 .attr("class", "county")  // give each a class name of 'county'
                 .attr("fill", function(d) {
                     return jenks(d.properties.uninsured);
+                })
+                .on("mouseover", function(d){
+                    d3.select("h2").text(d.properties.name + ' County');
+                    d3.select(this).attr('class', 'county hover');
+                })
+                .on ("mouseout", function(d){
+                    d3.select("h2").text('');
+                    d3.select(this).attr('class', 'county');
                 });
     
             }
