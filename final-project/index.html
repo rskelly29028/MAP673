@@ -175,7 +175,7 @@
             zoom: 4,
             minZoom: 2,
             maxZoom: 12,
-            maxBounds: L.latLngBounds([70, -166],[10, -40])
+            maxBounds: L.latLngBounds([70, -166],[10, -40]),
         });
         
         var dataLayer;
@@ -225,7 +225,7 @@
 				        return {
 				            color: 'white', // set stroke color
 				            weight: 0.5, // set stroke weight
-				            fillOpacity: 0, // override defautl fill opacity
+				            fillOpacity: 0.2, // override defautl fill opacity
 					       };
 				        }
         
@@ -238,7 +238,7 @@
 	            complete: function(data) {
                    
             processcountyData(counties, data);
-            drawCountyLegend(counties);
+            countyinfoWindow(counties);
                     
 	        }
                 
@@ -293,17 +293,20 @@
             
             }
         
+        
+        
+        
         // create the function to build the information window
         function stateinfoWindow(e, states) {
 
             var info = $('#info');
 
             dataLayer.on('mouseover', function(e) {
-                var props = e.layer.feature.properties;
+                var stateprops = e.layer.features.properties;
                 info.show();
-                $('#info span').text(props.STATE);
-                $('#info span1').text(props.CLINTON);
-                $('#info span2').text(props.TRUMP);
+                $('#info span').text(stateprops.STATE);
+                $('#info span1').text(stateprops.CLINTON);
+                $('#info span2').text(stateprops.TRUMP);
 
                 e.layer.setStyle({
  
@@ -341,7 +344,7 @@
             });
         };
         
-        function drawCountyLegend(counties){
+        function countyinfoWindow(e, counties){
             var legend = $('.legend');
 
             var legendinfo = $('#legendinfo');
@@ -351,19 +354,19 @@
                 info.show();
                 $('#legendinfo span').text(countyprops.name);
                 $('#legendinfo span1').text(countyprops.clinton);
-                $('#legendinfo span2').text(props.trump);
+                $('#legendinfo span2').text(countyprops.trump);
                 $('#legendinfo span3').text(countyprops.Pop_Total);
                 $('#legendinfo span4').text(countyprops.Pop_Males);
-                $('#legendinfo span5').text(props.Pop_Females);
+                $('#legendinfo span5').text(countyprops.Pop_Females);
                 $('#legendinfo span6').text(countyprops.Pop_White);
                 $('#legendinfo span7').text(countyprops.Pop_Black);
-                $('#legendinfo span8').text(props.Pop_Latino);
+                $('#legendinfo span8').text(countyprops.Pop_Latino);
                 $('#legendinfo span9').text(countyprops.Pop_Asian);
                 $('#legendinfo span10').text(countyprops.Pop_Amrind);
-                $('#legendinfo span11').text(props.Income);
+                $('#legendinfo span11').text(countyprops.Income);
                 $('#legendinfo span12').text(countyprops.Median_HI);
                 $('#legendinfo span13').text(countyprops.Under18_POV);
-                $('#legendinfo span14').text(props.Bachelor);
+                $('#legendinfo span14').text(countyprops.Bachelor);
                 $('#legendinfo span').text(countyprops.Master_PhD);
                 e.layer.setStyle({
  
@@ -380,7 +383,7 @@
 
             
         }
-        
+     
     </script>
 </body>
 </html>
