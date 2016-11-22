@@ -95,7 +95,7 @@
           color: white
           max-width: 200px;
           font-size: 1em;
-          background: gray;
+          background: black;
           border: 2px solid white;
           border-radius: 3px;
       }
@@ -159,6 +159,7 @@
     <p>State: <span> </span></p>
     <p>Clinton: <span1> </span1></p>
     <p>Trump: <span2> </span2></p>
+    <p>Electoral Votes: <span3> </span3></p>
     </div>
     
     <script src='https://cdnjs.cloudflare.com/ajax/libs/simple-statistics/1.0.1/simple_statistics.min.js'></script>
@@ -185,11 +186,11 @@
             console.log(states);
             
             var states = L.geoJson(states, {
-                
+                onEachFeature: onEachFeature,
                 style: function (feature) { // style each feature of GeoJson layer
                     
 				        return { 
-                            color: 'yellow', // set stroke color
+                            color: 'white', // set stroke color
 				            weight: 1.5, // set stroke weight
 				            fillOpacity: 0, // override defautl fill opacity
 					   }
@@ -205,7 +206,8 @@
 	            complete: function(data) {
                    
             processstateData(states, data);
-            stateinfoWindow(states, data);
+            //stateinfoWindow(states, data);
+            //drawMap();
                     
 	        }
                 
@@ -220,7 +222,7 @@
                 console.log(counties);
                 
                 dataLayer = L.geoJson(counties, {
-                
+                    onEachFeature: onEachFeature,
                     style: function (feature) { // style each feature of GeoJson layer
 				        return {
 				            color: 'white', // set stroke color
@@ -238,7 +240,7 @@
 	            complete: function(data) {
                    
             processcountyData(counties, data);
-            countyinfoWindow(counties);
+            //countyinfoWindow(counties, data);
                     
 	        }
                 
@@ -293,20 +295,18 @@
             
             }
         
-        
-        
-        
         // create the function to build the information window
         function stateinfoWindow(e, states) {
-
+            
             var info = $('#info');
 
             dataLayer.on('mouseover', function(e) {
-                var stateprops = e.layer.features.properties;
+                var props = e.layer.features.properties;
                 info.show();
-                $('#info span').text(stateprops.STATE);
-                $('#info span1').text(stateprops.CLINTON);
-                $('#info span2').text(stateprops.TRUMP);
+                $('#info span').text(props.name);
+                $('#info span1').text(props.clinton);
+                $('#info span2').text(props.trump);
+                $('#info span3').text(props.elec_votes);
 
                 e.layer.setStyle({
  
@@ -315,6 +315,8 @@
                 
         });
  
+            console.log("hello");
+            
             dataLayer.on('mouseout', function(e) {
                 info.hide();
                 e.layer.setStyle({
@@ -351,7 +353,7 @@
 
             dataLayer.on('mouseclick', function(e) {
                 var countyprops = e.layer.feature.properties;
-                info.show();
+                legendinfo.show();
                 $('#legendinfo span').text(countyprops.name);
                 $('#legendinfo span1').text(countyprops.clinton);
                 $('#legendinfo span2').text(countyprops.trump);
@@ -367,7 +369,7 @@
                 $('#legendinfo span12').text(countyprops.Median_HI);
                 $('#legendinfo span13').text(countyprops.Under18_POV);
                 $('#legendinfo span14').text(countyprops.Bachelor);
-                $('#legendinfo span').text(countyprops.Master_PhD);
+                $('#legendinfo span15').text(countyprops.Master_PhD);
                 e.layer.setStyle({
  
                     fillOpacity: 0.6 
@@ -384,6 +386,95 @@
             
         }
      
+        // create the main function to draw blue and red states for Clinton & Trump
+        function drawMap(voteData) {
+            var states = L.geoJson(voteData, {
+                style: function(feature) {
+                    return  {
+                        color: 'red',
+                        opacity: 1,
+                        weight: 4,
+                        fillOpacity: 0,
+                    };
+                }
+
+            }).addTo(map);
+
+            var counties = L.geoJson(voteData, {
+                    style: function(feature) {
+                    return  {
+                        color: 'blue',
+                        opacity: 1,
+                        weight: 2,
+                        fillOpacity: 0,
+
+                };
+            },
+                
+                onEachFeature: function(feature, layer) {
+                    layer.on('mouseover', function(e) {
+
+                        dataLayer.eachLayer(function(l) {
+                            if (layer.feature.properties.CLNTON > layer.feature.properties.TRUMP) {
+                                l.setStyle({
+                                    weight: 6,
+                                    color: 'white',
+                                    fillColor: 'blue',
+                                    fillOpacity: 0.5,
+                                });
+                            }
+                        })
+                    });
+
+                    layer.on('mouseout', function(e) {
+
+                        dataLayer.setStyle({
+                          weight: 0.5,
+                          color: 'gray',
+                          fillOpacity: 0,
+                        })
+                    
+                });
+                    
+                }
+                
+            }).addTo(map);
+              
+        
+        stateinfoWindow(states);
+        //countyinfoWindow(counties);
+        
+       
+        };
+
+        function onEachFeature(feature, layer) {
+            // changes color of layer to green with mouseover and returns back to original color settings with mouseout
+ 
+            layer.on('mouseover', function(leafletEvent) {
+ 
+                var dataLayer = leafletEvent.target;
+                dataLayer.setStyle({
+                    weight: 6,
+                    color: 'yellow',
+                    fillColor: 'green',
+                    fillOpacity: 0.5,
+ 
+            });
+                
+            layer.on('mouseout', function (leafletEvent){
+                var dataLayer = leafletEvent.target;
+                dataLayer.setStyle({
+                    weight: 1.5,
+                    color: 'white',
+                    fillOpacity: 0,
+            });
+                
+            drawMap();
+            
+                })
+ 
+            })
+        }
     </script>
 </body>
 </html>
