@@ -32,10 +32,10 @@
             padding: 8px 25px 8px 15px;
             margin: 0;
             background: red;
-            color: whitesmoke;
-            font-weight: 400;
-            font-size: 1.5em;
-            text-align: left;
+            color: white;
+            font-weight: 500;
+            font-size: 2.5em;
+            text-align: center;
         }
       h2 {
             margin: 0;
@@ -109,8 +109,8 @@
     <div id='side-panel'>
     <h1>THE CHOICE</h1>
     <h2>The 2016 US Presidential Election</h2>
-        <p><i>This map displays the number of males and females by county in Kenya in 2009.  Red circles represent males, blue circles represent females.</i></p>
-    <p><img src="final-project/donald-trump-hillary-clinton-impossible-choice.png" alt="legend"></p>
+        <p>This map displays voting data by state for the 2016 general election, and displays both 2016 voting and selected 2010 census data by county.</p>
+    <p><img src="donald-trump-hillary-clinton-impossible-choice.png" alt="legend"></p>
         <p><i>Kenya, like the majority of nations around the world, has more females in its general population than it does males. Several counties in Kenya contradict the general sex ratio found across the nation. There are more males than females in the rural frontier counties bordering both Sudan and Somalia. This can be attributed to the fact that these poor rural regions of Kenya tend to be dominated by both the energy industry as well as being overrepresented by military personnel protecting the porous frontiers of the nation from the political turmoil of Sudan and the threat of Islamic militants from Somalia.  The urban areas of Kenya, in particular the capital of Nairobi, contain significantly more males as men are more apt to migrate to urban areas to find work in construction and/or other urban service occupations, leaving women behind to tend to family and agricutlrual responsibilities in rural regions, most notably in the western Lake District adjacent to Lake Victoria and the Tanzanian border.</i></p>
         <h2><u>About This Map</u></h2>
         <p><i>This map was created Friday, November 11, 2016 by Ryan Kelly</i></p>
@@ -138,6 +138,8 @@
         
     L.mapbox.accessToken = 'pk.eyJ1Ijoicmdkb25vaHVlIiwiYSI6Im5Ua3F4UzgifQ.PClcVzU5OUj17kuxqsY_Dg';
 
+    L.Projection.Albers;
+        
         var map = L.mapbox.map('map', 'mapbox.streets', {
             center: [38, -97.5],
             zoom: 4,
@@ -145,6 +147,8 @@
             maxZoom: 12
             //maxBounds: L.latLngBounds([-6.22, 27.72],[5.76, 47.83])
         });
+    
+    
         
         var dataLayer;
         
@@ -164,7 +168,6 @@
                 
             }).addTo(map); // add the Leaflet GeoJson layer to the map
             
-            drawInfo();
             
             Papa.parse("Election-States.csv", {
             
@@ -180,7 +183,7 @@
             
             }); 
     
-        $.getJSON("US-Counties.json",function(counties){
+            $.getJSON("US-Counties.json",function(counties){
                 
                 console.log(counties);
                 
@@ -229,8 +232,6 @@
                     }
                 }
                 
-                getStateColor(states);
-
                 }
             
             }
@@ -254,63 +255,9 @@
                     }
                 }
 
-                
                 }   
             
             }
-        
-        
-        // function to get the color values
-
-        function getStateColor(states) {
-            
-                 if (states.features.data.clinton > states.features.data.trump) {
-				        return {
-                            color: "#0000ff"
-                        }
-			     } else  {
-				        return {
-                            color: "#ff0000"
-                        }
-			     
-                 }
-			};
-        
-            function drawInfo() {
-            // creates an information box in the top right corner of map frame
-            var info = L.control({position: 'topright'});
-            
-            info.onAdd = function(map) {
-
-                var div = L.DomUtil.create('div', 'info');
-
-                return div;  
-
-            }
-            
-            info.addTo(map);
-            // adds data to information box upon mouseover event
-            dataLayer.on('mouseover', function() {
-                $(".info").show();
-            });
-            // removes data from information box upon mouseout event
-            dataLayer.on('mouseout', function() {
-                $(".info").hide();    
-            });
-    
-            }
-          
-            function updateInfo(layer) {
-            // updates the information associated with each county so that the data can be populated in the information box
-            var props = layer.feature.properties;
-
-            var html = "<h3>"+props['NAME']+" County</h3>"+
-                    "Total # of Vacant Units: <b>"+ props["clinton"]+"</b><br>"+
-                    "# of Vacant Units for Rent: <b>"+ props["trump"]+"</b><br>"
-
-            $(".info").html(html);
-        }
-        
         
     </script>
 </body>
