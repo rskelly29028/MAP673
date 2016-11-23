@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>673 Module 07 Carto Starter Template</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+
+    <link rel="stylesheet" href="https://cartodb-libs.global.ssl.fastly.net/cartodb.js/v3/3.15/themes/css/cartodb.css" />
+
+    <style>
+        html,
+        body,
+        #map {
+            height: 100%;
+            padding: 0;
+            margin: 0;
+            background: navy;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="map"></div>
+
+    <script src="https://cartodb-libs.global.ssl.fastly.net/cartodb.js/v3/3.15/cartodb.js"></script>
+    <script type="cartocss/html" id="counties-styles">
+        #layer {
+            polygon-fill: ramp([uninsured], (#ffffb2, #fecc5c, #fd8d3c, #f03b20, #bd0026), jenks);
+            line-width: 1;
+            line-color: #FFF;
+            line-opacity: 0.5;
+            }
+    </script>
+    
+    <script type="cartocss/html" id="land-styles">
+        #na_land_clipped['mapnik::geometry_type'=1] {
+            marker-width: 7;
+            marker-fill: #FFB927;
+            marker-fill-opacity: 0.9;
+            marker-line-color: #FFF;
+            marker-line-width: 1;
+            marker-line-opacity: 1;
+            marker-placement: point;
+            marker-type: ellipse;
+            marker-allow-overlap: true;
+            }
+            
+        #na_land_clipped['mapnik::geometry_type'=2] {
+            line-color: #3EBCAE;
+            line-width: 1.5;
+            line-opacity: 1;
+            }
+            
+        #na_land_clipped['mapnik::geometry_type'=3] {
+            polygon-fill: green;
+            polygon-opacity: 0.9;
+            polygon-gamma: 0.5;
+            line-color: #FFF;
+            line-width: 1;
+            line-opacity: 0.5;
+            line-comp-op: soft-light;
+            }
+</script>
+
+<script type="cartocss/html" id="grat-styles">
+        #na_grat_clipped{
+            line-width: 1.5;
+            line-color: #c4cccb;
+            line-opacity: 0.16;
+            }
+            
+</script>
+    
+    <script>
+
+        var map = L.map('map', {
+        center: [-10, 0],
+        zoom: 4
+        });
+        
+        var sourceObject = {
+            user_name: 'rkelly0007',
+            type: 'carto',
+            sublayers: [
+            {
+              sql: "SELECT ST_Transform(the_geom, 2163) AS the_geom_webmercator, cartodb_id FROM na_grat_clipped",
+              cartocss : $("#grat-styles").text()
+            },
+            {
+              sql: "SELECT ST_Transform(the_geom, 2163) AS the_geom_webmercator, cartodb_id FROM na_land_clipped",
+              cartocss : $("#land-styles").text()
+            },
+            {
+              sql: "SELECT ST_Transform(the_geom, 2163) AS the_geom_webmercator, cartodb_id, uninsured FROM uninsured_adults_county",
+              cartocss: $("#counties-styles").text()
+            }
+            ]
+        }
+
+        cartodb.createLayer(map, sourceObject).addTo(map);
+
+        
+    </script>
+</body>
+
+</html>
