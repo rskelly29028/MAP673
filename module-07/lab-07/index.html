@@ -8,41 +8,102 @@
 
     <link rel="stylesheet" href="https://cartodb-libs.global.ssl.fastly.net/cartodb.js/v3/3.15/themes/css/cartodb.css" />
 
+    <script type='html' id="legend_template">
+ 
+    <div id="title"></div>
+        <h1>GENERAL ELECTION 2016</h1>
+        <h2><i>South Carolina by County 2016</i></h2>
+ 
+    <div class='cartodb-legend density'>  
+    <ul>
+    <li class="min">
+    Support for Candidate
+    </li>
+  
+    <li class="graph leg" style="border-radius: 0; border:none">
+    <div class="colors">
+    <div class="quartile" style="background-color:#E40800"></div>
+    <div class="quartile" style="background-color:#E18189"></div>
+    <div class="quartile" style="background-color:#E7AFBA"></div>
+    <div class="quartile" style="background-color:#BBCEE1"></div>
+    <div class="quartile" style="background-color:#4980D7"></div>
+    <div class="quartile" style="background-color:#0903AE"></div>
+    </div>
+    <div class="colors" style="font-weight:normal; text-align: center">
+    <div class="quartile" style="padding-top: 5px" >TRUMP</div>
+    <div class="quartile" style="padding-top: 5px" > </div>
+    <div class="quartile" style="padding-top: 5px" > </div>
+    <div class="quartile" style="padding-top: 5px" > </div>
+    <div class="quartile" style="padding-top: 5px" > </div>
+    <div class="quartile" style="padding-top: 5px" >CLINTON</div>
+  </div>
+  </li>
+</ul>
+</div>
+
+ 
+ </script>
+    
     <style>
         html,
         body,
+        
         #map {
             height: 100%;
             padding: 0;
             margin: 0;
             background: gray;
         }
+        
+        h1 {
+            padding: 8px 25px 8px 15px;
+            margin: 0;
+            background: gray;
+            color: whitesmoke;
+            font-weight: 400;
+            font-size: 3.5em;
+            text-align: left;
+        }
+
+        h2 {
+            margin: 0;
+            padding: 8px 25px 8px 15px;
+            color: white;
+            background: gray;
+            font-weight: 500;
+            font-size: 2em;
+            text-align: left;
+        }
+        
     </style>
 </head>
 
 <body>
 
     <div id="map"></div>
-
+    <div id="title"></div>
+        <h1>GENERAL ELECTION 2016</h1>
+        <h2><i>South Carolina by County 2016</i></h2>
+    
     <script src="https://cartodb-libs.global.ssl.fastly.net/cartodb.js/v3/3.15/cartodb.js"></script>
     <script type="cartocss/html" id="counties-styles">
-      
-    
+     
     </script>
     
     <script>
 
     var map = L.map('map', {
         center: [33.5,-81],
-        zoom: 7.5
+        zoom: 7.5,
+        maxZoom: 8,
+        minZoom: 7
     });
-
-    var cartoCSS = "#layer {" + "polygon-fill: ramp([perc_clinton], (#e40800, #e18189, #e7afba, #bbcee1, #4d80d7, #0903ae) jenks);" +
+        
+    var cartoCSS = "#layer {" + "polygon-fill: ramp([perc_clinton], (#e40800, #e18189, #e7afba, #bbcee1, #4d80d7, #0903ae) quantiles);" +
     "line-width: 2;" +
     "line-color: #FFF;" +
     "line-opacity: 0.5;" +
     "}";
-
 
     var sourceObject = {
         user_name: 'rkelly0007',
@@ -55,6 +116,16 @@
         ]
     }
 
+    var legend = new cdb.geo.ui.Legend({
+            type: "custom",
+            show_title: false,
+            title: "",
+            template: $('#legend_template').html(),
+            visible: true
+            });
+        
+        $('#map').append(legend.render().el);
+    
     cartodb.createLayer(map, sourceObject).addTo(map);
 
         
