@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>MAP 673 Lab 07 Carto DB South Carolina</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+
+    <link rel="stylesheet" href="https://cartodb-libs.global.ssl.fastly.net/cartodb.js/v3/3.15/themes/css/cartodb.css" />
+
+    <style>
+        html,
+        body,
+        #map {
+            height: 100%;
+            padding: 0;
+            margin: 0;
+            background: gray;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="map"></div>
+
+    <script src="https://cartodb-libs.global.ssl.fastly.net/cartodb.js/v3/3.15/cartodb.js"></script>
+    <script type="cartocss/html" id="counties-styles">
+      
+    
+    </script>
+    
+    <script>
+
+    var map = L.map('map', {
+        center: [33.5,-81],
+        zoom: 7.5
+    });
+
+    var cartoCSS = "#layer {" + "polygon-fill: ramp([perc_clinton], (#e40800, #e18189, #e7afba, #bbcee1, #4d80d7, #0903ae) jenks);" +
+    "line-width: 2;" +
+    "line-color: #FFF;" +
+    "line-opacity: 0.5;" +
+    "}";
+
+
+    var sourceObject = {
+        user_name: 'rkelly0007',
+        type: 'cartodb',
+        sublayers: [
+        {
+            sql: "SELECT * FROM south_carolina",
+            cartocss: cartoCSS
+        }
+        ]
+    }
+
+    cartodb.createLayer(map, sourceObject).addTo(map);
+
+        
+    </script>
+</body>
+
+</html>
