@@ -2,27 +2,57 @@
 <html>
 
 <head>
-    <title>South Carolina</title>
+    <title>MAP 673 Lab 07</title>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
     <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
     <link rel="shortcut icon" href="http://cartodb.com/assets/favicon.ico" />
     <style>
-      html, body, #map {
-        height: 100%;
-        padding: 5;
-        margin: 5;
-      }
+        html, 
+        body, 
+        #map {
+            height: 100%;
+            padding: 0;
+            margin: 0;
+            background: black;
+        }
+        
+        #title {
+            position: absolute;
+            font-family: "Work Sans", sans-serif;
+            left: 5px;
+            top: 10px;
+        }
+        
+        h1 {
+            padding: 8px 25px 8px 15px;
+            margin: 0;
+            background: none;
+            color: white;
+            font-weight: 400;
+            font-size: 2em;
+            text-align: left;
+        }
+      
+        h2 {
+            padding: 8px 25px 8px 15px;
+            margin: 0;
+            background: none;
+            color: white;
+            font-weight: 200;
+            font-size: 1.5em;
+            text-align: left;
+        }
 
-      body > div.cartodb-header{
-      display: none;
-      position: absolute;
-      top: 55%;
-      left: 5%;
-      width: 20%;
-      background-color: rgba(0,0,0,0);
-      line-height: normal;
-      font-weight: 500;
-      }
+        body > div.cartodb-header {
+            display: none;
+            position: absolute;
+            top: 55%;
+            left: 1%;
+            width: 35%;
+            background-color: rgba(0,0,0,0);
+            line-height: normal;
+            font-family: "Work Sans", sans-serif;
+        }
     
   </style> 
     
@@ -57,34 +87,24 @@
 </ul>
 </div>
 
- </script>
+</script>
     
-    <style>
-        html,
-        body,
-        
-        #map {
-            height: 100%;
-            padding: 0;
-            margin: 0;
-            background: black;
-        }
-        
-    </style>
-</head>
+    </head>
 
-<body>
+    <body>
 
     <div id="map"></div>
-    
-    
+    <div id="title">
+        <h1>GENERAL ELECTION 2016</h1>
+        <h2><i>South Carolina by County</i></h2>
+        
+    </div>  
     
     <script src="https://cartodb-libs.global.ssl.fastly.net/cartodb.js/v3/3.15/cartodb.js"></script>
     <script type="cartocss/html" id="counties-styles">
      
     </script>
 
-    
     <script>
 
     var map = L.map('map', {
@@ -124,26 +144,27 @@
         
     cartodb.createLayer(map, sourceObject).addTo(map);
 
-      var i = new cdb.geo.ui.Header({
+    var i = new cdb.geo.ui.Header({
 
-        model: new cdb.core.Model({
-        extra: {
-        title: "GENERAL ELECTION 2016",
-        description: "South Carolina by County 2016, Data From State Board of Elections at http://www.enr-scvotes.org/SC/64658/183653/en/select-county.html,                    South Carolina JSON file at http://catalog.opendata.city/dataset/south-carolina-counties-polygon/resource/04a2c2f2-3382-4b20-a225-c873ad7678ca",
-        show_title: true,
-        show_description: true,
-       }
-     }),
+            model: new cdb.core.Model({
+            extra: {
+            title: "NOTES ABOUT THE DATA",
+            description: "Data From State Board of Elections at http://www.enr-scvotes.org/SC/64658/183653/en/select-county.html, South Carolina JSON file at http://catalog.opendata.city/dataset/south-carolina-counties-polygon/resource/04a2c2f2-3382-4b20-a225-c873ad7678ca",
+            show_title: true,
+            show_description: true,
+            }
+        }),
           
      template: cdb.core.Template.compile(' \
-     <div class="content">\
-     <div class="title">{{{ title }}}</div>\
-     <div class="description">{{{ description }}}</div>\
-     </div>',
-     'mustache'
-    )
+        <div class="content">\
+        <div class="title">{{{ title }}}</div>\
+        <div class="description">{{{ description }}}</div>\
+        </div>',
+        'mustache'
+        )
       });
-      $('body').append(i.render().el);
+      
+        $('body').append(i.render().el);
 
     </script>
     
