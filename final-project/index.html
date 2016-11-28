@@ -99,8 +99,6 @@
             margin: 10px 0 20px;
         }
         
-        #side-panel {}
-        
         #info {
           padding: 8px 15px;
           position: absolute;
@@ -232,9 +230,8 @@
             maxBounds: L.latLngBounds([70, -166], [10, -40]),
         });
         
-        // Load the map data using queue
         
-       
+        // Load the map data using queue
         
         queue()
             .defer(d3.json, "us-states.json")
@@ -242,14 +239,12 @@
             .defer(d3.csv, "Election-States.csv")
             .defer(d3.csv, "Master.csv")
             .await(processData)
-            .await(drawMap);
+            .await(drawMap)
+            
             
         
         // create a function to loop through the counties data and grab the county FIPS code to ensure a match for each county
         function processData(e, states, counties, statesData, countiesData){
-            
-            console.log(counties);
-            console.log(states);
             
             for (var state in states.features) {
                 
@@ -257,12 +252,13 @@
                 
                 for (var d in statesData) {
                     
+                    var statesDataFP = statesData[d].state_fp;
                     if (stateFIP === statesData[d].state_fp) {
                         states.features[state].properties = statesData[d];
                         break;
                     }
                 }
-                
+                    
             }
             
             for (var county in counties.features) {
@@ -282,13 +278,12 @@
             
             }
 
-
             }   
             
         function drawMap(states, counties) {
             
-            L.geoJson(states).addTo(map)
-           
+            L.geoJson(states,counties).addTo(map);
+        
             dataLayer = L.geoJson(counties, {
                onEachFeature: onEachFeature,
                style: function(feature) { // style each feature of GeoJson layer
@@ -298,16 +293,17 @@
                        fillOpacity: 0, // override defautl fill opacity
                    };
                }
-                                  
+                
             }).addTo(map); 
-        
+            
+            
         }
+    
         
         function onEachFeature(feature, layer) {
             // changes color of layer to green with mouseover and returns back to original color settings with mouseout
  
                 layer.on('mouseover', function(leafletEvent) {
- 
                     var dataLayer = leafletEvent.target;
                     dataLayer.setStyle({
                         weight: 6,
@@ -332,7 +328,61 @@
             })
         }
         
-     drawMap();
+        
+        // create the function to build the information window
+        function stateinfoWindow(e, statesData) {
+            
+            var info = $('#info');
+
+            dataLayer.on('mouseover', function(e) {
+                var stateFIP = states.features[state].properties.STATEFP;
+                info.show();
+                $('#info span').text(statesData[d].stste_fp.name);
+                $('#info span1').text(props.clinton);
+                $('#info span2').text(props.trump);
+                $('#info span3').text(props.elec_votes);
+
+                e.layer.setStyle({
+ 
+                    fillOpacity: 0 
+                });
+                
+        });
+ 
+            console.log("hello");
+            
+            dataLayer.on('mouseout', function(e) {
+                info.hide();
+                e.layer.setStyle({
+                    fillOpacity: 0 });
+                });
+            
+            $(document).mousemove(function(e) {
+                // first offset from the mouse position of the info window
+                info.css({
+                    "left": e.pageX + 6,
+                    "top": e.pageY - info.height() - 15
+                });
+ 
+                // if it crashes into the top, flip it lower right
+                if (info.offset().top < 4) {
+                    info.css({
+                        "top": e.pageY + 15
+                    });
+                }
+                // do the same for crashing into the right
+                if (info.offset().left + info.width() >= $(document).width() - 40) {
+                    info.css({
+                        "left": e.pageX - info.width() - 30
+                    });
+                }
+ 
+            });
+        };
+        
+        drawMap();
+        stateinfoWindow();
+     
             
     </script>
 </body>
