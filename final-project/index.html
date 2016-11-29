@@ -244,15 +244,13 @@
             
         
         // create a function to loop through the counties data and grab the county FIPS code to ensure a match for each county
-        function processData(e, states, counties, statesData, countiesData){
+        function processData(e, states, counties, statesData, countiesData) {
             
             for (var state in states.features) {
                 
                 var stateFIP = states.features[state].properties.STATEFP;
                 
                 for (var d in statesData) {
-                    
-                    var statesDataFP = statesData[d].state_fp;
                     if (stateFIP === statesData[d].state_fp) {
                         states.features[state].properties = statesData[d];
                         break;
@@ -260,6 +258,7 @@
                 }
                     
             }
+            
             
             for (var county in counties.features) {
                  
@@ -277,20 +276,23 @@
                 }
             
             }
-
+            
+            drawMap(states, counties);
+            
             }   
             
         function drawMap(states, counties) {
             
-            L.geoJson(states,counties).addTo(map);
+            L.geoJson(states).addTo(map)
+            //L.geoJson(counties).addTo(map)
         
             dataLayer = L.geoJson(counties, {
                onEachFeature: onEachFeature,
                style: function(feature) { // style each feature of GeoJson layer
                    return {
                        color: 'white', // set stroke color
-                       weight: 1.5, // set stroke weight
-                       fillOpacity: 0, // override defautl fill opacity
+                       weight: 0.5, // set stroke weight
+                       fillOpacity: 0.2, // override defautl fill opacity
                    };
                }
                 
@@ -378,8 +380,8 @@
             });
         };
         
-        drawMap();
-        stateinfoWindow();
+        
+        //stateinfoWindow();
         
     </script>
 </body>
