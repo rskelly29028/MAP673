@@ -22,6 +22,15 @@
             font-family: "Work Sans", sans-serif;
         }
         
+
+       
+
+        .states  {
+            fill: red;
+            stroke: black;
+            stroke-width: 0.50px
+        }
+        
         #side-panel {
             position: absolute;
             left: 0;
@@ -231,17 +240,56 @@
         });
         
         
-        // Load the map data using queue
+        var path = d3.geo.path();
+
+        var zoom = d3.behavior.zoom()
+            .on("zoom", zoomed);
+
+        var svg = d3.select("county").append("svg")
+            .call(zoom)
+            .append("g");
         
+        var county = svg.append("g")
+            .attr("id", "county");
+        
+        var state = svg.append("g")
+            .attr("id", "state");
+        
+        // Load the map data using queue
         queue()
-            .defer(d3.json, "us-states.json")
             .defer(d3.json, "US-Counties.json")
+            .defer(d3.json, "us-states.json")
             .defer(d3.csv, "Election-States.csv")
             .defer(d3.csv, "Master.csv")
             .await(processData)
             .await(drawMap)
+        
+        function ready(error, county, state) {
+            var countyFeatures = county.features;
+            var stateFeatures = state.features;
+        
+        svg.append("g")
+            .attr("class", "counties")
+            .selectAll("path")
+            .data(countyFeatures)
+            .enter().append("path")
+            //.attr("class", function(d) {return quantize(crashDataMap.get(d.id));})
+            .attr("d", path);
+
+
+         svg.append("g")
+            .attr("class", "states")
+            .selectAll("path")
+            .data(stateFeatures)
+            .enter().append("path")
+            .attr("d", path);   
+
+        }    
             
-            
+        
+        function zoomed() {
+            svg.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+        };    
         
         // create a function to loop through the counties data and grab the county FIPS code to ensure a match for each county
         function processData(e, states, counties, statesData, countiesData) {
@@ -284,7 +332,6 @@
         function drawMap(states, counties) {
             
             L.geoJson(states).addTo(map)
-            //L.geoJson(counties).addTo(map)
         
             dataLayer = L.geoJson(counties, {
                onEachFeature: onEachFeature,
@@ -292,7 +339,7 @@
                    return {
                        color: 'white', // set stroke color
                        weight: 0.5, // set stroke weight
-                       fillOpacity: 0.2, // override defautl fill opacity
+                       fillOpacity: 0, // override defautl fill opacity
                    };
                }
                 
@@ -314,11 +361,13 @@
                         fillOpacity: 0.5,
  
                     });
+                  
+                stateinfoWindow(states);    
                     
                 layer.on('mouseout', function (leafletEvent){
                     var dataLayer = leafletEvent.target;
                     dataLayer.setStyle({
-                        weight: 1.5,
+                        weight: 0.5,
                         color: 'white',
                         fillOpacity: 0,
                     });
@@ -381,7 +430,7 @@
         };
         
         
-        //stateinfoWindow();
+        
         
     </script>
 </body>
