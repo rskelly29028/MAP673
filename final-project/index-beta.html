@@ -190,34 +190,42 @@
                 else if ( map.getZoom() <= 5 ){ map.addLayer(states)}
             });
             
-            var states = L.geoJson(states, {
-                
-                onEachFeature: onEachFeature,
-                style: function (feature) { // style each feature of GeoJson layer
-                    
-				        return { 
-                            color: 'red', // set stroke color
-				            weight: 1.5, // set stroke weight
-				            fillOpacity: 1, // override defautl fill opacity
-					   }
-                }
-                
-                }).addTo(map); // add the Leaflet GeoJson layer to the map
-            
-            
-            Papa.parse("Election-States.csv", {
+             Papa.parse("Election-States.csv", {
             
                 download: true,
                 header: true,
 	            complete: function(data) {
                    
             processstateData(states, data);
-            
-            
-                    
+                   
 	        }
                 
             });
+            
+            var states = L.geoJson(states, {
+                
+                onEachFeature: onEachFeature,
+                style: function (feature) { // style each feature of GeoJson layer
+                        if (states.features.properties = states.features.properties)
+				            return { 
+                                color: 'white', // set stroke color
+                                fillColor: 'blue',
+				                weight: 1.5, // set stroke weight
+				                fillOpacity: 1, // override defautl fill opacity
+					       }
+                        else
+                            return { 
+                                color: 'white', // set stroke color
+                                fillColor: 'red',
+				                weight: 1.5, // set stroke weight
+				                fillOpacity: 1, // override defautl fill opacity
+					       }
+                }
+                
+                }).addTo(map); // add the Leaflet GeoJson layer to the map
+            
+            
+           
             
             }); 
     
