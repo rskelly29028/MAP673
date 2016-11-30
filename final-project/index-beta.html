@@ -185,11 +185,6 @@
         
         $.getJSON("us-states.json",function(states){
             
-            map.on('zoomend ', function(e) {
-                if ( map.getZoom() > 5 ){ map.removeLayer(states)}
-                else if ( map.getZoom() <= 5 ){ map.addLayer(states)}
-            });
-            
              Papa.parse("Election-States.csv", {
             
                 download: true,
@@ -206,20 +201,12 @@
                 
                 onEachFeature: onEachFeature,
                 style: function (feature) { // style each feature of GeoJson layer
-                        if (states.features.properties = states.features.properties)
 				            return { 
-                                color: 'white', // set stroke color
-                                fillColor: 'blue',
+                                color: 'blue', // set stroke color
 				                weight: 1.5, // set stroke weight
-				                fillOpacity: 1, // override defautl fill opacity
+				                fillOpacity: 0, // override defautl fill opacity
 					       }
-                        else
-                            return { 
-                                color: 'white', // set stroke color
-                                fillColor: 'red',
-				                weight: 1.5, // set stroke weight
-				                fillOpacity: 1, // override defautl fill opacity
-					       }
+                        
                 }
                 
                 }).addTo(map); // add the Leaflet GeoJson layer to the map
@@ -229,12 +216,17 @@
     
             $.getJSON("US-Counties.json",function(counties){
                 
+                map.on('zoomend ', function(e) {
+                if ( map.getZoom() > 5 ){ map.addLayer(counties)}
+                else { map.removeLayer(counties)}
+            });
+                
                 var counties = L.geoJson(counties, {
                     
                     onEachFeature: onEachFeature,
                     style: function (feature) { // style each feature of GeoJson layer
 				        return {
-				            color: 'blue', // set stroke color
+				            color: 'yellow', // set stroke color
 				            weight: 0.5, // set stroke weight
 				            fillOpacity: 0, // override defautl fill opacity
 					       };
@@ -473,7 +465,7 @@
                 var dataLayer = leafletEvent.target;
                 dataLayer.setStyle({
                     weight: 1.5,
-                    color: 'white',
+                    color: 'blue',
                     fillOpacity: 0,
             });
                 
