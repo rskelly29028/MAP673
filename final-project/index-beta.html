@@ -467,8 +467,7 @@
 				    values.push(layer.feature.properties[clinton] / ((layer.feature.properties[clinton]) + (layer.feature.properties[trump])));
                  })
 				// push that value into the array
-                
-                                     
+                                    
 			// use simple statistics to create 5 class ranges (5 arrays of values)
 			var clusters = ss.ckmeans(values, 5);
 			// JS map method returns an array of the low and high values from each cluster
