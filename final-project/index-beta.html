@@ -49,7 +49,7 @@
             margin: 8px 0 4px; 
             padding: 0 25px 0 15px;
             color: white;
-            text-align: left;
+            text-align: center;
             font-size: 1em; 
         }
         #side-panel p:after {
@@ -115,6 +115,21 @@
           margin: 3px 0 4px;
           color: black;
         }
+        #voting {
+            color: white;
+            background-color: darkslategray;
+        }
+        #ui-controls {   
+            position: absolute;
+            margin-left: 33%;
+            margin-top: 1%;
+            background-color: black;
+        }
+        #ui-controls label {
+            font-size: 1em;
+            color: white;
+            margin-right: 5px;
+        }
     </style>
     
 </head>
@@ -123,13 +138,14 @@
     <div id='side-panel'>
     <h1>THE CHOICE</h1>
     <h2>The 2016 US Presidential Election</h2>
-        <p>This map displays voting data by state for the 2016 general election, and displays both 2016 voting and selected 2010 census data by county.</p>
+        <p>This map displays voting data by county for the 2016 general election, as well as select demographic, income and education data by county.</p>
     <p><img src="donald-trump-hillary-clinton-impossible-choice.png" alt="legend"></p>
+        <p>306............................................................................232</p><p><img src="red-blue.png" alt="legend"></p>
         <p>Map Text Goes Here</p>
         <h2><u>About This Map</u></h2>
-        <p><i>This map was created TBA, 2016 by Ryan Kelly</i></p>
+        <p><i>Map created December 10, 2016, by Ryan Kelly, Professor of Geography, GISP, Bluegrass Community and Technical College</i></p>
     <h2><u>About the Data</u></h2>
-        <p><i>The data were furnished from the 2010 United States Census and David Leip's Presidential Atlas 2016 located at the following URL:  TBA/</i></p>
+        <p><i>The data were furnished from the 2010 US Census (http://www.census.gov/2010census/) and David Leip's Presidential Atlas 2016 (http://uselectionatlas.org)</i></p>
     </div>
     
     <div id="legend">
@@ -160,6 +176,16 @@
     <p>Electoral Votes: <span3> </span3></p>
     </div>
     
+    <div id='ui-controls'>
+        <select id="voting">
+            <option value="OWNED_MORT" selected>Voting Data 2016 General Election</option>
+            <option value="OWNED_FREE">Race Data (2010 US Census)</option> 
+            <option value="RENTER">Gender Data (2010 US Census)</option>
+            <option value="WAWA">Income Data (2010 US Census)</option>
+            <option value="ZAZA">Education Data (2010 US Census)</option>
+        </select>
+    </div>
+    
     <script src='https://cdnjs.cloudflare.com/ajax/libs/simple-statistics/1.0.1/simple_statistics.min.js'></script>
 	<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.js'></script>
@@ -172,7 +198,7 @@
         var map = L.mapbox.map('map', 'mapbox.dark', {
             zoomControl: true,
             center: [38, -97.5],
-            zoom: 4,
+            zoom: 5,
             minZoom: 2,
             maxZoom: 12,
             maxBounds: L.latLngBounds([70, -166],[10, -40]),
@@ -199,11 +225,10 @@
             
             var states = L.geoJson(states, {
                 
-                onEachFeature: onEachFeature,
                 style: function (feature) { // style each feature of GeoJson layer
 				            return { 
-                                color: 'blue', // set stroke color
-				                weight: 1.5, // set stroke weight
+                                color: 'white', // set stroke color
+				                weight: 2, // set stroke weight
 				                fillOpacity: 0, // override defautl fill opacity
 					       }
                         
@@ -215,10 +240,10 @@
     
             $.getJSON("US-Counties.json",function(counties){
                 
-                map.on('zoomend ', function(e) {
-                if ( map.getZoom() > 5 ){ map.addLayer(counties)}
-                else { map.removeLayer(counties)}
-            });
+                //map.on('zoomend ', function(e) {
+                //if ( map.getZoom() >= 6 ){ map.addLayer(counties)}
+                //else { map.removeLayer(counties)}
+              //});
                 
                 var counties = L.geoJson(counties, {
                     
@@ -248,6 +273,23 @@
             
             });   
         
+        
+        $.getJSON("Great-Lakes.json",function(lakes){
+                
+                var lakes = L.geoJson(lakes, {
+                
+                    style: function (feature) { // style each feature of GeoJson layer
+				        return {
+				            color: 'navy', // set stroke color
+                            fillColor: 'blue', // set main color
+				            weight: 2, // set stroke weight
+				            fillOpacity: 1, // override defautl fill opacity
+					       };
+				        }
+        
+            }).addTo(map); // add the Leaflet GeoJson layer to the map
+            
+        });
         
         // create a function to loop through the states data and grab the state FIPS code to ensure a match for each state
         function processstateData(d, states){
@@ -300,7 +342,7 @@
             
             var info = $('#info');
 
-            dataLayer.on('mouseover', function(e) {
+            states.on('mouseover', function(e) {
                 var stateprops = e.layer.feature.properties;
                 info.show();
                 $('#info span').text(stateprops.name);
@@ -308,7 +350,7 @@
                 $('#info span2').text(stateprops.trump);
                 $('#info span3').text(stateprops.elec_votes);
 
-                e.layer.setStyle({
+                e.layer.setStyle( {
  
                     fillOpacity: 0.6 
                 });
@@ -317,7 +359,7 @@
  
             console.log("hello");
             
-            dataLayer.on('mouseout', function(e) {
+            states.on('mouseout', function(e) {
                 info.hide();
                 e.layer.setStyle({
                     fillOpacity: 0 });
@@ -386,10 +428,10 @@
             
         }
      
-        // create the main function to draw blue and red states for Clinton & Trump
+        // create the main function to draw states for Clinton & Trump
         function drawMap(voteData) {
             var states = L.geoJson(voteData, {
-                style: function(feature) {
+                function(feature, layer) {
                     return  {
                         color: 'red',
                         opacity: 1,
@@ -399,53 +441,11 @@
                 }
 
             }).addTo(map);
-
-            var counties = L.geoJson(voteData, {
-                    style: function(feature) {
-                    return  {
-                        color: 'blue',
-                        opacity: 1,
-                        weight: 2,
-                        fillOpacity: 0,
-
-                };
-            },
-                
-                onEachFeature: function(feature, layer) {
-                    layer.on('mouseover', function(e) {
-
-                        dataLayer.eachLayer(function(l) {
-                            if (layer.feature.properties.CLNTON > layer.feature.properties.TRUMP) {
-                                l.setStyle({
-                                    weight: 6,
-                                    color: 'white',
-                                    fillColor: 'blue',
-                                    fillOpacity: 0.5,
-                                });
-                            }
-                        })
-                    });
-
-                    layer.on('mouseout', function(e) {
-
-                        dataLayer.setStyle({
-                          weight: 0.5,
-                          color: 'gray',
-                          fillOpacity: 0,
-                        })
-                    
-                });
-                    
-                }
-                
-            }).addTo(map);
-              
         
+            //countyinfoWindow(counties);
         
-        
-       
-        };
-
+            };
+               
         function onEachFeature(feature, layer) {
             // changes color of layer to green with mouseover and returns back to original color settings with mouseout
  
@@ -463,19 +463,65 @@
             layer.on('mouseout', function (leafletEvent){
                 var dataLayer = leafletEvent.target;
                 dataLayer.setStyle({
-                    weight: 1.5,
-                    color: 'blue',
+                    weight: 0.5,
+                    color: 'gray',
                     fillOpacity: 0,
             });
                 
-            //drawMap(voteData);
-            
+            drawMap();
+                
                 })
  
             })
-        }
+        };
         
-        stateinfoWindow();
+        
+        function getClassBreaks() {
+
+			// create empty array to hold range of data values
+			var values = [];
+
+			// loop through each layer
+			dataLayer.eachLayer(function (layer) {
+
+				// calculate the normalized value of the layer's data attribute
+				var value = layer.feature.properties[clinton] / ((layer.feature.properties[clinton]) + (layer.feature.properties[trump]));
+
+				// push that value into the array
+				values.push(value);
+			});
+
+			// use simple statistics to create 5 class ranges (5 arrays of values)
+			var clusters = ss.ckmeans(values, 5);
+
+			// JS map method returns an array of the low and high values from each cluster
+			var breaks = clusters.map(function (cluster) {
+				return [cluster[0], cluster.pop()];
+			});
+
+			//return array of arrays, e.g., [[0.24,0.25], [0.26, 0.37], etc]
+			return breaks;
+
+		}
+
+		function getColor(d, breaks) {
+			// function accepts a single normalized data attribute value 
+			// and uses a series of conditional statements to determine which 
+			// which color value to return to return to the function caller
+
+			if (d <= breaks[0][1]) {
+				return '#f1eef6';
+			} else if (d <= breaks[1][1]) {
+				return '#def38d';
+			} else if (d <= breaks[2][1]) {
+				return '#adde63';
+			} else if (d <= breaks[3][1]) {
+				return '#299c39'
+			} else if (d <= breaks[4][1]) {
+				return '#186321'
+			}
+		}
+    
     </script>
 </body>
 </html>
