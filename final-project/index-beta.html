@@ -316,7 +316,7 @@
                     }
                 }
                 }   
-                drawMap(counties);
+                //drawMap(counties);
             }
         
         // create the function to build the information window
@@ -428,9 +428,10 @@
                
         function onEachFeature(feature, layer) {
             // changes color of layer to green with mouseover and returns back to original color settings with mouseout
- 
+            
+            
             layer.on('mouseover', function(leafletEvent) {
- 
+                
                 var dataLayer = leafletEvent.target;
                 dataLayer.setStyle({
                     weight: 6,
@@ -440,17 +441,25 @@
  
             });
             
+            layer.on('mouseover',function(){
+                layer.bindPopup("Name:  <b>"+ (layer.features) +
+                            " County</b><br>").openPopup(layer.features);
+                });
+            
             console.log("hello");
+            
             
             layer.on('mouseout', function (leafletEvent){
                 var dataLayer = leafletEvent.target;
                 dataLayer.setStyle({
                     weight: 0.5,
-                    color: 'gray',
+                    color: 'yellow',
                     fillOpacity: 0,
             });
+            
+            
                 
-            drawMap();
+            //drawMap();
                 
                 })
  
@@ -464,7 +473,7 @@
 			// loop through each layer
 			     dataLayer.eachLayer(function (layer) {
 				// calculate the normalized value of the layer's data attribute
-				    values.push(layer.feature.properties[clinton] / ((layer.feature.properties[clinton]) + (layer.feature.properties[trump])));
+				    values.push(layer.feature.properties[clinton]);
                  })
 				// push that value into the array
                                     
@@ -498,6 +507,8 @@
 				return '#186321'
 			}
 		}
+        
+        
     
     </script>
 </body>

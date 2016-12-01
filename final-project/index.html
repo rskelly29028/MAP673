@@ -252,14 +252,19 @@
         var state = svg.append("g")
             .attr("id", "state");
         
+        var lakes = svg.append("g")
+            .attr("id", "lakes");
+        
         // Load the map data using queue
         queue()
             .defer(d3.json, "US-Counties.json")
             .defer(d3.json, "us-states.json")
+            .defer(d3.json, "Great-Lakes.json")
             .defer(d3.csv, "Election-States.csv")
             .defer(d3.csv, "Master.csv")
             .await(processData)
-            .await(drawMap)
+            .await(drawstateMap)
+            .await(drawcountyMap)
         
         function ready(error, county, state) {
             var countyFeatures = county.features;
@@ -322,20 +327,20 @@
             
             }
             
-            drawMap(states, counties);
+            drawstateMap(states);
             
             }   
             
-        function drawMap(states, counties) {
+        function drawstateMap(states) {
             
             L.geoJson(states).addTo(map)
         
-            dataLayer = L.geoJson(counties, {
+            dataLayer = L.geoJson(states, {
                onEachFeature: onEachFeature,
                style: function(feature) { // style each feature of GeoJson layer
                    return {
                        color: 'white', // set stroke color
-                       weight: 0.5, // set stroke weight
+                       weight: 1.5, // set stroke weight
                        fillOpacity: 0, // override defautl fill opacity
                    };
                }
@@ -345,6 +350,25 @@
             
         }
     
+        
+         function drawcountyMap(counties) {
+            
+            L.geoJson(counties).addTo(map)
+        
+            dataLayer = L.geoJson(counties, {
+               onEachFeature: onEachFeature,
+               style: function(feature) { // style each feature of GeoJson layer
+                   return {
+                       color: 'yellow', // set stroke color
+                       weight: 0.5, // set stroke weight
+                       fillOpacity: 0, // override defautl fill opacity
+                   };
+               }
+                
+            }).addTo(map); 
+            
+            
+        }
         
         function onEachFeature(feature, layer) {
             // changes color of layer to green with mouseover and returns back to original color settings with mouseout
