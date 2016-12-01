@@ -87,20 +87,7 @@
             margin: 10px 0 20px;
         }
         
-        #info {
-          padding: 8px 15px;
-          position: absolute;
-          color: white
-          max-width: 200px;
-          font-size: 1em;
-          background: black;
-          border: 2px solid white;
-          border-radius: 3px;
-        }
-        #info p {
-          margin: 3px 0 4px;
-          color: white;
-        }
+        
         #legendinfo {
           padding: 1px 2px;
           position: absolute;
@@ -122,7 +109,7 @@
         #ui-controls {   
             position: absolute;
             margin-left: 33%;
-            margin-top: 1%;
+            margin-top: -10%;
             background-color: black;
         }
         #ui-controls label {
@@ -140,8 +127,9 @@
     <h2>The 2016 US Presidential Election</h2>
         <p>This map displays voting data by county for the 2016 general election, as well as select demographic, income and education data by county.</p>
     <p><img src="graphics/donald-trump-hillary-clinton-impossible-choice.png" alt="legend"></p>
-        <p>306..............................................................................232</p><p><img src="graphics/red-blue.png" alt="legend"></p>
-        <p>Map Text Goes Here</p>
+        <p>306.....................Electoral Votes.................232</p><p><img src="graphics/red-blue.png" alt="legend"></p>
+        <p>The 58th quadrennial Presidetial Election, held on November 8, 2016, saw Republican nominee Donald Trump score a stunning upset over Democratic nominee Hillary Clinton to become the 45th President of the United States of America.  This was the fourth election in U.S. history - and the second of the 21st century - to see the candidate who won the Electoral College lose the popular vote.  The 2016 election further saw the widening gap in American political preferences with the Democratic nominee winning by wide margins in heavily urban counties and the GOP nominee winning by huge margins in rural counties.  Demographic data clearly indicate well-defined voting patterns that follow both racial and educational lines, with Clinton faring well among mnority populations and those holding college degrees, and with Trump winning counties by large margins where the majority of the population was white and did not hold college degrees.</p>
+        <p>The user is encouraged to browse the map data by selecting from the dropdown tab in the upper left corner of the map.  The selected data of each county will populate the information box at the right of the screen as the user scrolls the mouse over the selected county.</p>
         <h2><u>About This Map</u></h2>
         <p><i>Map created December 10, 2016, by Ryan Kelly, Professor of Geography, GISP, Bluegrass Community and Technical College</i></p>
     <h2><u>About the Data</u></h2>
@@ -296,9 +284,7 @@
             console.log(states);
             
             for (var state in states.features) {
-
                 var stateprops = states.features[state].properties.name;
-
                 for(var d in data.data) {
                     var state_FIP = states.features[state].properties.name,
                         state_fp = data.data[d].name
@@ -319,9 +305,7 @@
             console.log(counties);
             
             for (var county in counties.features) {
-
                 var countyprops = counties.features[county].properties.name;
-
                 for(var d in data.data) {
                     var county_FIPS = counties.features[county].properties.name,
                         fips = data.data[d].name
@@ -331,16 +315,14 @@
                         break;
                     }
                 }
-
                 }   
-            
+                drawMap(counties);
             }
         
         // create the function to build the information window
         function stateinfoWindow(states) {
             
             var info = $('#info');
-
             states.on('mouseover', function(e) {
                 var stateprops = e.layer.feature.properties;
                 info.show();
@@ -348,7 +330,6 @@
                 $('#info span1').text(stateprops.clinton);
                 $('#info span2').text(stateprops.trump);
                 $('#info span3').text(stateprops.elec_votes);
-
                 e.layer.setStyle( {
  
                     fillOpacity: 0.6 
@@ -389,9 +370,7 @@
         
         function countyinfoWindow(e, counties){
             var legend = $('.legend');
-
             var legendinfo = $('#legendinfo');
-
             dataLayer.on('mouseclick', function(e) {
                 var countyprops = e.layer.feature.properties;
                 legendinfo.show();
@@ -423,27 +402,29 @@
                 e.layer.setStyle({
                     fillOpacity: 0 });
                 });
-
             
         }
      
         // create the main function to draw states for Clinton & Trump
-        function drawMap(voteData) {
-            var states = L.geoJson(voteData, {
-                function(feature, layer) {
-                    return  {
-                        color: 'red',
-                        opacity: 1,
-                        weight: 4,
-                        fillOpacity: 0,
-                    };
-                }
-
-            }).addTo(map);
-        
-            //countyinfoWindow(counties);
-        
-            };
+        function drawMap(counties){
+            
+                dataLayer = L.geoJson(counties, {
+                    style: function (feature) {
+					   return {
+						  color: 'black', // set stroke color
+						  weight: 1.25, // set stroke weight
+						  fillOpacity: 1, // override defautl fill opacity
+						  fillColor: '#1f78b4' // set fill color
+					   };
+                    }
+				}).addTo(map);
+                
+                var breaks = getClassBreaks();
+                
+                
+                
+                
+            }
                
         function onEachFeature(feature, layer) {
             // changes color of layer to green with mouseover and returns back to original color settings with mouseout
@@ -458,7 +439,9 @@
                     fillOpacity: 0.5,
  
             });
-                
+            
+            console.log("hello");
+            
             layer.on('mouseout', function (leafletEvent){
                 var dataLayer = leafletEvent.target;
                 dataLayer.setStyle({
@@ -476,38 +459,34 @@
         
         
         function getClassBreaks() {
-
 			// create empty array to hold range of data values
 			var values = [];
-
 			// loop through each layer
-			dataLayer.eachLayer(function (layer) {
-
+			     dataLayer.eachLayer(function (layer) {
 				// calculate the normalized value of the layer's data attribute
-				var value = layer.feature.properties[clinton] / ((layer.feature.properties[clinton]) + (layer.feature.properties[trump]));
-
+				    values.push(layer.feature.properties[clinton] / ((layer.feature.properties[clinton]) + (layer.feature.properties[trump])));
+                 })
 				// push that value into the array
-				values.push(value);
-			});
-
+                
+                                     
 			// use simple statistics to create 5 class ranges (5 arrays of values)
 			var clusters = ss.ckmeans(values, 5);
-
 			// JS map method returns an array of the low and high values from each cluster
 			var breaks = clusters.map(function (cluster) {
 				return [cluster[0], cluster.pop()];
 			});
-
 			//return array of arrays, e.g., [[0.24,0.25], [0.26, 0.37], etc]
 			return breaks;
-
-		}
-
+                
+            }
+        
+        
+        
+        
 		function getColor(d, breaks) {
 			// function accepts a single normalized data attribute value 
 			// and uses a series of conditional statements to determine which 
 			// which color value to return to return to the function caller
-
 			if (d <= breaks[0][1]) {
 				return '#f1eef6';
 			} else if (d <= breaks[1][1]) {
