@@ -101,6 +101,7 @@
             margin-left: 33%;
             margin-top: 1%;
             background-color: black;
+            z-index: 800;
         }
         #ui-controls label {
             font-size: 1em;
@@ -248,8 +249,10 @@
               },
               onEachFeature: function(feature, layer) {
 
-                  console.log(feature.properties)
-                  layer.bindTooltip('hi');
+                  var tooltip = 'trump: ' + feature.properties.trump + '<br>' +
+                                'clinton: ' + feature.properties.clinton ;
+
+                  layer.bindTooltip(tooltip, {sticky: true});
 
               }
 
@@ -274,18 +277,13 @@
 
           L.control.layers(null, sourcesLayers, { collapsed:false }).addTo(map);
 
-
-
         }
 
         function getStateColor(feature) {
 
             var clinton = Number(feature.properties.clinton);
             var trump = Number(feature.properties.trump);
-            if(feature.properties.name == "Arkansas") {
-              console.log(clinton, trump)
-              console.log(clinton > trump)
-            }
+
             if(clinton > trump) {
               return "blue";
             } else if(trump > clinton) {
@@ -397,7 +395,7 @@
         //     //     });
 
 
-        }
+        // }
 
     </script>
 </body>
