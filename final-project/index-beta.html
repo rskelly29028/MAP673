@@ -17,7 +17,7 @@
             padding:0;
             background: whitesmoke;
             font-family: "Work Sans", sans-serif;
-      }
+        }
       #side-panel {
             position: absolute;
             left: 0;
@@ -27,7 +27,7 @@
             background: navy;
             border-right: 2px solid navy;
             overflow-y: scroll;
-      }
+        }
       h1 {
             padding: 8px 25px 8px 15px;
             margin: 0;
@@ -69,26 +69,25 @@
             right: 0;
             width: 68%;
         }
-        #legend {
+        #info {
             position: absolute;
             background: whitesmoke;
             right: 15px;
             padding: 8px 15px;
-            top: 25px;
+            top: 75px;
             bottom: 25px;
             width: 250px;
+            height: 275px;
             color: black;
             border: 1px solid black;
             border-radius: 3px;
         }
-        #legend h3 {
+        #info h3 {
             text-align: center;
             font-weight: 100;
             margin: 10px 0 20px;
         }
-        
-        
-        #legendinfo {
+        #info info {
           padding: 1px 2px;
           position: absolute;
           color: black
@@ -98,7 +97,7 @@
           border: 2px solid red;
           border-radius: 3px;
         }
-        #legendinfo p {
+        #info info p {
           margin: 3px 0 4px;
           color: black;
         }
@@ -109,13 +108,31 @@
         #ui-controls {   
             position: absolute;
             margin-left: 33%;
-            margin-top: -10%;
+            margin-top: 1%;
             background-color: black;
         }
         #ui-controls label {
             font-size: 1em;
             color: white;
             margin-right: 5px;
+        }
+        .legend {
+            padding: 6px 8px;
+            font-size: 1em;
+            background: white;
+            border-radius: 5px;
+        }
+        .legend h3 {
+            font-size: 1.1em;
+            font-weight: normal;
+            color: black;
+            margin:10 0 10px 0;
+        }
+        .legend span {
+            width: 20px;
+            height: 20px;
+            float: left;
+            margin: 0 10px 10px 0;
         }
     </style>
     
@@ -136,32 +153,15 @@
         <p><i>The data were furnished from the 2010 US Census (http://www.census.gov/2010census/) and David Leip's Presidential Atlas 2016 (http://uselectionatlas.org)</i></p>
     </div>
     
-    <div id="legend">
-    <h3>County Information</h3>
+    <div id="info">
+    <h3><b><u>County Voting Information</u></b></h3>
     <p>County: <span> </span></p>
     <p>Clinton: <span1> </span1></p>
     <p>Trump: <span2> </span2></p>
-    <p>Population in 2010: <span3> </span3></p>
-    <p>Males: <span4> </span4></p>
-    <p>Females: <span5> </span5></p>
-    <p>White: <span6> </span6></p>
-    <p>Black: <span7> </span7></p>
-    <p>Hispanic: <span8> </span8></p>
-    <p>Asian: <span9> </span9></p>
-    <p>Native American: <span10> </span10></p>
-    <p>Per Capita Income in 2010: <span11> </span11></p>
-    <p>Median Household Income in 2010: <span12> </span12></p>
-    <p>Percent in Poverty in 2010: <span13> </span13></p>
-    <p>Percent with Bachelor Degree in 2010: <span14> </span14></p>
-    <p>Percent with Masters or PhD in 2010: <span15> </span15></p>
-    <svg class="legend" width="200" height="200"></svg>
-    </div>
-	
-    <div id="info">
-    <p>State: <span> </span></p>
-    <p>Clinton: <span1> </span1></p>
-    <p>Trump: <span2> </span2></p>
-    <p>Electoral Votes: <span3> </span3></p>
+    <p>Johnson: <span3> </span3></p>
+    <p>Stein: <span4> </span4></p>
+    <p>McMullin: <span5> </span5></p>
+    <svg class="info" width="200" height="50"></svg>
     </div>
     
     <div id='ui-controls'>
@@ -194,7 +194,37 @@
         
         map.zoomControl.setPosition('topright');
         
-        var dataLayer;
+        var dataLayer; //declare a global variable for map units
+        
+        var democrat = "CLINTON";
+        var republican = "TRUMP";
+        var libertarian = "JOHNSON";
+        var green = "STEIN";
+        var other = "MCMULLIN";
+        var total = "TOTAL VOTES";
+        var population = "TOTAL POPULATION";
+        var males = "MALES";
+        var females = "FEMALES";
+        var white = "WHITE";
+        var black = "BLACK";
+        var latino = "LATINO";
+        var asian = "ASIAN";
+        var native = "NATIVE AMERICAN";
+        var pci = "PER CAPITA INCOME IN 2010";
+        var mhi = "MEDIAN HOUSEHOLD INCOME IN 2010";
+        var poverty = "POVERTY";
+        var bachelor = "BACHELOR DEGREE";
+        var phd = "MASTERS OR PHD";
+        
+        var labels = {
+            "CLINTON": "Votes for Hillary Clinton",
+            "TRUMP": "Votes for Donald Trump",
+            "JOHNSON": "Votes for Gary Johnson",
+            "STEIN": "Votes for Jill Stein",
+            "OTHER": "Votes for Evan McMullin",
+            "TOTAL": "Total Votes Cast"    
+        }
+            
         
         $.getJSON("us-states.json",function(states){
             
@@ -252,8 +282,10 @@
 	            complete: function(data) {
                    
             processcountyData(counties, data);
-            //countyinfoWindow(counties, data);
-                    
+            drawLegend();
+            drawInfo();
+            //updateinfoWindow();
+                  
 	        }
                 
             });
@@ -321,77 +353,28 @@
            
         }
         
-        // create the function to build the information window
-        function stateinfoWindow(states) {
-            
-            var info = $('#info');
-            states.on('mouseover', function(e) {
-                var stateprops = e.layer.feature.properties;
-                info.show();
-                $('#info span').text(stateprops.name);
-                $('#info span1').text(stateprops.clinton);
-                $('#info span2').text(stateprops.trump);
-                $('#info span3').text(stateprops.elec_votes);
-                e.layer.setStyle( {
- 
-                    fillOpacity: 0.6 
-                });
-                
-        });
- 
-            console.log("hello");
-            
-            states.on('mouseout', function(e) {
-                info.hide();
-                e.layer.setStyle({
-                    fillOpacity: 0 });
-                });
-            
-            $(document).mousemove(function(e) {
-                // first offset from the mouse position of the info window
-                info.css({
-                    "left": e.pageX + 6,
-                    "top": e.pageY - info.height() - 15
-                });
- 
-                // if it crashes into the top, flip it lower right
-                if (info.offset().top < 4) {
-                    info.css({
-                        "top": e.pageY + 15
-                    });
-                }
-                // do the same for crashing into the right
-                if (info.offset().left + info.width() >= $(document).width() - 40) {
-                    info.css({
-                        "left": e.pageX - info.width() - 30
-                    });
-                }
- 
-            });
-        };
-        
-        function updateinfoWindow(e, counties){
-            var legend = $('.legend');
-            var legendinfo = $('#legendinfo');
+        function updateinfoWindow(e, counties, layer){
+            var info = $('.info');
+            var infoinfo = $('.infoinfo');
             layer.on('mouseclick', function(e) {
                 var props = e.layer.feature.properties;
-                legendinfo.show();
-                $('#legendinfo span').text(countyprops.name);
-                $('#legendinfo span1').text(countyprops.clinton);
-                $('#legendinfo span2').text(countyprops.trump);
-                $('#legendinfo span3').text(countyprops.Pop_Total);
-                $('#legendinfo span4').text(countyprops.Pop_Males);
-                $('#legendinfo span5').text(countyprops.Pop_Females);
-                $('#legendinfo span6').text(countyprops.Pop_White);
-                $('#legendinfo span7').text(countyprops.Pop_Black);
-                $('#legendinfo span8').text(countyprops.Pop_Latino);
-                $('#legendinfo span9').text(countyprops.Pop_Asian);
-                $('#legendinfo span10').text(countyprops.Pop_Amrind);
-                $('#legendinfo span11').text(countyprops.Income);
-                $('#legendinfo span12').text(countyprops.Median_HI);
-                $('#legendinfo span13').text(countyprops.Under18_POV);
-                $('#legendinfo span14').text(countyprops.Bachelor);
-                $('#legendinfo span15').text(countyprops.Master_PhD);
+                infoinfo.show();
+                $('#legendinfo span').text(props.name);
+                $('#legendinfo span1').text(props.clinton);
+                $('#legendinfo span2').text(props.trump);
+                $('#legendinfo span3').text(props.Pop_Total);
+                $('#legendinfo span4').text(props.Pop_Males);
+                $('#legendinfo span5').text(props.Pop_Females);
+                $('#legendinfo span6').text(props.Pop_White);
+                $('#legendinfo span7').text(props.Pop_Black);
+                $('#legendinfo span8').text(props.Pop_Latino);
+                $('#legendinfo span9').text(props.Pop_Asian);
+                $('#legendinfo span10').text(props.Pop_Amrind);
+                $('#legendinfo span11').text(props.Income);
+                $('#legendinfo span12').text(props.Median_HI);
+                $('#legendinfo span13').text(props.Under18_POV);
+                $('#legendinfo span14').text(props.Bachelor);
+                $('#legendinfo span15').text(props.Master_PhD);
                 e.layer.setStyle({
  
                     fillOpacity: 0.6 
@@ -428,9 +411,8 @@
         function onEachFeature(feature, layer) {
             // changes color of layer to green with mouseover and returns back to original color settings with mouseout
             
-            
             layer.on('mouseover', function pointMouseover(leafletEvent) {
-                updateinfoWindow(layer);
+                //updateinfoWindow(layer);
                 var dataLayer = leafletEvent.target;
                 dataLayer.setStyle({
                     weight: 6,
@@ -449,7 +431,6 @@
             
             console.log("hello");
             
-            
             layer.on('mouseout', function (leafletEvent){
                 var dataLayer = leafletEvent.target;
                 dataLayer.setStyle({
@@ -457,16 +438,11 @@
                     color: 'yellow',
                     fillOpacity: 0,
             });
-            
-            
-                
-            
                 
                 })
  
             })
         };
-        
         
         function getClassBreaks() {
 			// create empty array to hold range of data values
@@ -489,9 +465,6 @@
                 
             }
         
-        
-        
-        
 		function getColor(d, breaks) {
 			// function accepts a single normalized data attribute value 
 			// and uses a series of conditional statements to determine which 
@@ -509,8 +482,43 @@
 			}
 		}
         
+        function drawLegend() {
+            
+            var legend = L.control({
+                position: 'bottomleft'
+            });
+            
+            legend.onAdd = function(map) {
+                
+                var div = L.DomUtil.create('div', 'legend');
+                return div;
+                
+            };
+            
+            legend.addTo(map);
+        }
         
-    
+        function drawInfo() {
+            
+            var info = L.control({position: 'bottomright'});
+            
+            info.onAdd = function (map) {
+                
+                var div = L.DomUtil.create('div', 'info');
+                
+                return div;
+            }
+            
+            info.addTo(map);
+            
+            dataLayer.on('mouseover', function() {
+                $(".info").show();
+            });
+            dataLayer.on('mouseout', function() {
+                $(".info").hide();
+            });
+        }
+        
     </script>
 </body>
 </html>
