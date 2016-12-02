@@ -62,7 +62,7 @@
             margin: 8px 0 4px; 
             padding: 0 25px 0 15px;
             color: white;
-            text-align: left;
+            text-align: center;
             font-size: 1em; 
         }
         
@@ -106,22 +106,25 @@
         }
         
         #info {
-          padding: 8px 15px;
-          position: absolute;
-          color: white
-          max-width: 200px;
-          font-size: 1em;
-          background: black;
-          border: 2px solid white;
-          border-radius: 3px;
+            position: absolute;
+            background: whitesmoke;
+            right: 15px;
+            padding: 8px 15px;
+            top: 75px;
+            bottom: 25px;
+            width: 400px;
+            height: 500px;
+            color: black;
+            border: 1px solid black;
+            border-radius: 3px;
         }
         
         #info p {
-          margin: 3px 0 4px;
-          color: white;
+          margin: 1px 0 4px;
+          color: black;
         }
         
-        #legendinfo {
+        #infoinfo {
           padding: 1px 2px;
           position: absolute;
           color: black
@@ -136,7 +139,21 @@
           margin: 3px 0 4px;
           color: black;
         }
-        
+        #voting {
+            color: white;
+            background-color: darkslategray;
+        }
+        #ui-controls {   
+            position: absolute;
+            margin-left: 33%;
+            margin-top: 1%;
+            background-color: black;
+        }
+        #ui-controls label {
+            font-size: 1em;
+            color: white;
+            margin-right: 5px;
+        }
     </style>
     
 </head>
@@ -145,77 +162,85 @@
     <div id='side-panel'>
         <h1>THE CHOICE</h1>
         <h2>The 2016 US Presidential Election</h2>
-        <p>This map displays voting data by state for the 2016 general election, and displays both 2016 voting and selected 2010 census data by county.</p>
-        <p><img src="donald-trump-hillary-clinton-impossible-choice.png" alt="legend"></p>
-        <p>Map Text Goes Here</p>
+        <p>This map displays voting data by county for the 2016 general election, as well as select demographic, income and education data by county.</p>
+    <p><img src="graphics/donald-trump-hillary-clinton-impossible-choice.png" alt="legend"></p>
+        <p>306.....................Electoral Votes.................232</p><p><img src="graphics/red-blue.png" alt="legend"></p>
+        <p>The 58th quadrennial Presidetial Election, held on November 8, 2016, saw GOP candidate Donald Trump score a stunning upset over Democratic nominee Hillary Clinton to become the 45th President of the United States of America.  This was the fourth election in U.S. history - and the second of the 21st century - to see the candidate who won the Electoral College lose the popular vote.  The 2016 election further saw the widening gap in American political preferences with the Democratic nominee winning by wide margins in heavily urban counties and the GOP nominee winning by huge margins in rural counties.  Demographic data clearly indicate well-defined voting patterns that follow both racial and educational lines, with Clinton faring well among mnority populations and those holding college degrees, and with Trump winning counties by large margins where the majority of the population was white and did not hold college degrees.</p>
+        <p>The user is encouraged to browse the map data by selecting from the dropdown tab in the upper left corner of the map.  The selected data of each county will populate the information box at the right of the screen as the user scrolls the mouse over the selected county.</p>
         <h2><u>About This Map</u></h2>
-        <p><i>This map was created TBA, 2016 by Ryan Kelly</i></p>
-        <h2><u>About the Data</u></h2>
-        <p><i>The data were furnished from the 2010 United States Census and David Leip's Presidential Atlas 2016 located at the following URL:  TBA/</i></p>
+        <p><i>Map created December 10, 2016, by Ryan Kelly, Professor of Geography, GISP, Bluegrass Community and Technical College</i></p>
+    <h2><u>About the Data</u></h2>
+        <p><i>The data were furnished from the 2010 US Census (http://www.census.gov/2010census/) and David Leip's Presidential Atlas 2016 (http://uselectionatlas.org)</i></p>
     </div>
     
-    <div id="legend">
-        <h3>County Information</h3>
-        <p>County: <span> </span></p>
+    <div id="info">
+        <h3><b><u>County Information</u></b></h3>
+        <p>Name: <span> </span></p>
         <p>Clinton: 
             <span1> </span1>
         </p>
         <p>Trump: 
             <span2> </span2>
         </p>
-        <p>Population in 2010: 
+        <p>Johnson:
             <span3> </span3>
         </p>
-        <p>Males: 
+        <p>Stein:
             <span4> </span4>
         </p>
-        <p>Females: 
+        <p>McMullin:
             <span5> </span5>
         </p>
-        <p>White: 
+        <p>Population in 2010: 
             <span6> </span6>
         </p>
-        <p>Black: 
+        <p>Males: 
             <span7> </span7>
         </p>
-        <p>Hispanic: 
+        <p>Females: 
             <span8> </span8>
         </p>
-        <p>Asian: 
+        <p>White: 
             <span9> </span9>
         </p>
-        <p>Native American: 
+        <p>Black: 
             <span10> </span10>
         </p>
-        <p>Per Capita Income in 2010: 
+        <p>Hispanic: 
             <span11> </span11>
         </p>
-        <p>Median Household Income in 2010: 
+        <p>Asian: 
             <span12> </span12>
         </p>
-        <p>Percent in Poverty in 2010: 
+        <p>Native American: 
             <span13> </span13>
         </p>
-        <p>Percent with Bachelor Degree in 2010: 
+        <p>Per Capita Income in 2010: 
             <span14> </span14>
         </p>
-        <p>Percent with Masters or PhD in 2010: 
+        <p>Median Household Income in 2010: 
             <span15> </span15>
         </p>
-        <svg class="legend" width="200" height="200"></svg>
+        <p>Percent in Poverty in 2010: 
+            <span16> </span16>
+        </p>
+        <p>Percent with Bachelor Degree in 2010: 
+            <span17> </span17>
+        </p>
+        <p>Percent with Masters or PhD in 2010: 
+            <span18> </span18>
+        </p>
+        <svg class="info" width="200" height="200"></svg>
     </div>
-	
-    <div id="info">
-        <p>State: <span> </span></p>
-        <p>Clinton: 
-            <span1> </span1>
-        </p>
-        <p>Trump: 
-            <span2> </span2>
-        </p>
-        <p>Electoral Votes: 
-            <span3> </span3>
-        </p>
+    
+    <div id='ui-controls'>
+        <select id="voting">
+            <option value="OWNED_MORT" selected>Voting Data 2016 General Election</option>
+            <option value="OWNED_FREE">Race Data (2010 US Census)</option> 
+            <option value="RENTER">Gender Data (2010 US Census)</option>
+            <option value="WAWA">Income Data (2010 US Census)</option>
+            <option value="ZAZA">Education Data (2010 US Census)</option>
+        </select>
     </div>
     
     <script src='https://cdnjs.cloudflare.com/ajax/libs/simple-statistics/1.0.1/simple_statistics.min.js'></script>
@@ -236,6 +261,7 @@
             maxBounds: L.latLngBounds([70, -166], [10, -40]),
         });
         
+        map.zoomControl.setPosition('topright');
         
         var path = d3.geo.path();
 
@@ -402,55 +428,45 @@
         }
         
         
-        // create the function to build the information window
-        function stateinfoWindow(e, statesData) {
-            
-            var info = $('#info');
+function countyinfoWindow(e, counties){
+            var infoWindow = $('#info');
 
-            dataLayer.on('mouseover', function(e) {
-                var props = states.features[state].properties.STATEFP;
-                info.show();
-                $('#info span').text(props.stateData.name);
-                $('#info span1').text(props.clinton);
-                $('#info span2').text(props.trump);
-                $('#info span3').text(props.elec_votes);
+            var infowindowInfo = $('#infoinfo');
 
+            dataLayer.on('mouseclick', function(e) {
+                var countyprops = e.layer.feature.properties;
+                infoinfo.show();
+                $('#legendinfo span').text(countyprops.name);
+                $('#legendinfo span1').text(countyprops.clinton);
+                $('#legendinfo span2').text(countyprops.trump);
+                $('#legendinfo span3').text(countyprops.Pop_Total);
+                $('#legendinfo span4').text(countyprops.Pop_Males);
+                $('#legendinfo span5').text(countyprops.Pop_Females);
+                $('#legendinfo span6').text(countyprops.Pop_White);
+                $('#legendinfo span7').text(countyprops.Pop_Black);
+                $('#legendinfo span8').text(countyprops.Pop_Latino);
+                $('#legendinfo span9').text(countyprops.Pop_Asian);
+                $('#legendinfo span10').text(countyprops.Pop_Amrind);
+                $('#legendinfo span11').text(countyprops.Income);
+                $('#legendinfo span12').text(countyprops.Median_HI);
+                $('#legendinfo span13').text(countyprops.Under18_POV);
+                $('#legendinfo span14').text(countyprops.Bachelor);
+                $('#legendinfo span15').text(countyprops.Master_PhD);
                 e.layer.setStyle({
  
-                    fillOpacity: 0 
+                    fillOpacity: 0.6 
                 });
                 
         });
-            
+ 
             dataLayer.on('mouseout', function(e) {
                 info.hide();
                 e.layer.setStyle({
                     fillOpacity: 0 });
                 });
+
             
-            $(document).mousemove(function(e) {
-                // first offset from the mouse position of the info window
-                info.css({
-                    "left": e.pageX + 6,
-                    "top": e.pageY - info.height() - 15
-                });
- 
-                // if it crashes into the top, flip it lower right
-                if (info.offset().top < 4) {
-                    info.css({
-                        "top": e.pageY + 15
-                    });
-                }
-                // do the same for crashing into the right
-                if (info.offset().left + info.width() >= $(document).width() - 40) {
-                    info.css({
-                        "left": e.pageX - info.width() - 30
-                    });
-                }
- 
-            });
-            
-        };
+        }
         
         
         
