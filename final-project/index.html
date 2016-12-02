@@ -7,9 +7,6 @@
     <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/4.1.2/papaparse.min.js"></script>
     <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/queue-async/1.0.7/queue.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/simple-statistics/1.0.0/simple_statistics.min.js"></script>
 	<link href='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.css' rel='stylesheet' />
     <link href='https://fonts.googleapis.com/css?family=Work+Sans:400,500,600' rel='stylesheet' type='text/css'>
@@ -235,19 +232,19 @@
     
     <div id='ui-controls'>
         <select id="voting">
-            <option value="OWNED_MORT" selected>Voting Data 2016 General Election</option>
-            <option value="OWNED_FREE">Race Data (2010 US Census)</option> 
-            <option value="RENTER">Gender Data (2010 US Census)</option>
-            <option value="WAWA">Income Data (2010 US Census)</option>
-            <option value="ZAZA">Education Data (2010 US Census)</option>
+            <option value="VOTE" selected>Voting Data 2016 General Election</option>
+            <option value="RACE">Race Data (2010 US Census)</option> 
+            <option value="GENDER">Gender Data (2010 US Census)</option>
+            <option value="INCOME">Income Data (2010 US Census)</option>
+            <option value="EDUCATION">Education Data (2010 US Census)</option>
         </select>
     </div>
     
     <script src='https://cdnjs.cloudflare.com/ajax/libs/simple-statistics/1.0.1/simple_statistics.min.js'></script>
 	<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.js'></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/4.1.2/papaparse.min.js"></script>
-	<script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.2.0/leaflet-omnivore.min.js'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/queue-async/1.0.7/queue.min.js"></script>
     
     <script>
         
@@ -263,24 +260,6 @@
         
         map.zoomControl.setPosition('topright');
         
-        var path = d3.geo.path();
-
-        var zoom = d3.behavior.zoom()
-            .on("zoom", zoomed);
-
-        var svg = d3.select("county").append("svg")
-            .call(zoom)
-            .append("g");
-        
-        var county = svg.append("g")
-            .attr("id", "county");
-        
-        var state = svg.append("g")
-            .attr("id", "state");
-        
-        var lakes = svg.append("g")
-            .attr("id", "lakes");
-        
         // Load the map data using queue
         queue()
             .defer(d3.json, "US-Counties.json")
@@ -288,36 +267,7 @@
             .defer(d3.json, "Great-Lakes.json")
             .defer(d3.csv, "Election-States.csv")
             .defer(d3.csv, "Master.csv")
-            .await(processData)
-            .await(drawstateMap)
-            .await(drawcountyMap)
-        
-        function ready(error, county, state) {
-            var countyFeatures = county.features;
-            var stateFeatures = state.features;
-        
-        svg.append("g")
-            .attr("class", "counties")
-            .selectAll("path")
-            .data(countyFeatures)
-            .enter().append("path")
-            //.attr("class", function(d) {return quantize(crashDataMap.get(d.id));})
-            .attr("d", path);
-
-
-         svg.append("g")
-            .attr("class", "states")
-            .selectAll("path")
-            .data(stateFeatures)
-            .enter().append("path")
-            .attr("d", path);   
-
-        }    
-            
-        
-        function zoomed() {
-            svg.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
-        };    
+            .await(processData);
         
         // create a function to loop through the counties data and grab the county FIPS code to ensure a match for each county
         function processData(e, states, counties, statesData, countiesData) {
@@ -342,10 +292,12 @@
                 
                 for (var d in countiesData) {
                     
-                    var countiesDataFIP = countiesData[d].fips;
+                    var countiesDataFip = countiesData[d].fips;
+                    
                     // need to slice off last five characters for FIPS code
-                    countiesDataFIP = countiesDataFIP.slice(-5,countiesDataFIP.length);
-                    if (countyFIP === countiesDataFIP) {
+                    countiesDataFip = countiesDataFip.slice(-5,countiesDataFip.length);
+                    if (countyFIP === countiesDataFip) {
+                        
                         counties.features[county].properties = countiesData[d];
                         break;
                     }
@@ -353,22 +305,25 @@
             
             }
             
-            drawstateMap(states);
-            drawcountyMap(counties);
+            drawMap(states, counties, lakes);
+            
             
             }   
             
-        function drawstateMap(states) {
+        function drawMap(states, counties, lakes) {
             
-            L.geoJson(states).addTo(map)
+            // add the states and lakes
+            L.geoJson(states).addTo(map);
+            L.geoJson(lakes).addTo(map);
+                
         
-            dataLayer = L.geoJson(states, {
+            dataLayer = L.geoJson(counties, {
                onEachFeature: onEachFeature,
                style: function(feature) { // style each feature of GeoJson layer
                    return {
-                       color: 'blue', // set stroke color
-                       weight: 1.5, // set stroke weight
-                       fillOpacity: 1, // override defautl fill opacity
+                       color: 'yellow', // set stroke color
+                       weight: 0.5, // set stroke weight
+                       fillOpacity: 0.2, // override defautl fill opacity
                    };
                }
                 
@@ -378,24 +333,7 @@
         }
     
         
-         function drawcountyMap(counties) {
-            
-            L.geoJson(counties).addTo(map)
-        
-            dataLayer = L.geoJson(counties, {
-               onEachFeature: onEachFeature,
-               style: function(feature) { // style each feature of GeoJson layer
-                   return {
-                       color: 'yellow', // set stroke color
-                       weight: 0.5, // set stroke weight
-                       fillOpacity: 0, // override defautl fill opacity
-                   };
-               }
-                
-            }).addTo(map); 
-            
-            
-        }
+         
         
         function onEachFeature(feature, layer) {
             // changes color of layer to green with mouseover and returns back to original color settings with mouseout
@@ -410,7 +348,7 @@
  
                     });
                   
-                stateinfoWindow(states);    
+                //stateinfoWindow(states);    
                     
                 layer.on('mouseout', function (leafletEvent){
                     var dataLayer = leafletEvent.target;
@@ -420,7 +358,7 @@
                         fillOpacity: 0,
                     });
                 
-                    
+                    drawMap();
             
                 })
  
@@ -428,7 +366,7 @@
         }
         
         
-function countyinfoWindow(e, counties){
+        function countyinfoWindow(e, counties){
             var infoWindow = $('#info');
 
             var infowindowInfo = $('#infoinfo');
