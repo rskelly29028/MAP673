@@ -328,6 +328,7 @@
             }
             
             drawstateMap(states);
+            drawcountyMap(counties);
             
             }   
             
@@ -339,9 +340,9 @@
                onEachFeature: onEachFeature,
                style: function(feature) { // style each feature of GeoJson layer
                    return {
-                       color: 'white', // set stroke color
+                       color: 'blue', // set stroke color
                        weight: 1.5, // set stroke weight
-                       fillOpacity: 0, // override defautl fill opacity
+                       fillOpacity: 1, // override defautl fill opacity
                    };
                }
                 
@@ -448,6 +449,7 @@
                 }
  
             });
+            
         };
         
         
