@@ -305,7 +305,7 @@
             console.log(counties);
             
             for (var county in counties.features) {
-                var countyprops = counties.features[county].properties.name;
+                var props = counties.features[county].properties.name;
                 for(var d in data.data) {
                     var county_FIPS = counties.features[county].properties.name,
                         fips = data.data[d].name
@@ -316,8 +316,10 @@
                     }
                 }
                 }   
-                //drawMap(counties);
-            }
+                
+            //drawMap(counties);
+           
+        }
         
         // create the function to build the information window
         function stateinfoWindow(states) {
@@ -368,11 +370,11 @@
             });
         };
         
-        function countyinfoWindow(e, counties){
+        function updateinfoWindow(e, counties){
             var legend = $('.legend');
             var legendinfo = $('#legendinfo');
-            dataLayer.on('mouseclick', function(e) {
-                var countyprops = e.layer.feature.properties;
+            layer.on('mouseclick', function(e) {
+                var props = e.layer.feature.properties;
                 legendinfo.show();
                 $('#legendinfo span').text(countyprops.name);
                 $('#legendinfo span1').text(countyprops.clinton);
@@ -421,17 +423,14 @@
                 
                 var breaks = getClassBreaks();
                 
-                
-                
-                
             }
                
         function onEachFeature(feature, layer) {
             // changes color of layer to green with mouseover and returns back to original color settings with mouseout
             
             
-            layer.on('mouseover', function(leafletEvent) {
-                
+            layer.on('mouseover', function pointMouseover(leafletEvent) {
+                updateinfoWindow(layer);
                 var dataLayer = leafletEvent.target;
                 dataLayer.setStyle({
                     weight: 6,
@@ -441,9 +440,11 @@
  
             });
             
-            layer.on('mouseover',function(){
-                layer.bindPopup("Name:  <b>"+ (layer.features) +
-                            " County</b><br>").openPopup(layer.features);
+            layer.on('click',function pointMouseclick(leafletEvent){
+                var dataLayer = leafletEvent.target;
+                var props = layer.feature.properties;
+                layer.bindPopup(feature.properties.name + " Name:  <b>"+ (props[name]) +
+                            " County</b><br>").openPopup;
                 });
             
             console.log("hello");
@@ -459,7 +460,7 @@
             
             
                 
-            //drawMap();
+            
                 
                 })
  
