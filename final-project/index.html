@@ -127,8 +127,6 @@
         <p><i>The data were furnished from the 2010 US Census (http://www.census.gov/2010census/) and David Leip's Presidential Atlas 2016 (http://uselectionatlas.org)</i></p>
     </div>
 
-
-
     <div id='ui-controls'>
         <select id="voting">
             <option value="VOTE" selected>Voting Data 2016 General Election</option>
@@ -146,7 +144,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/queue-async/1.0.7/queue.min.js"></script>
 
     <script>
-
 
         var map = L.map('map', {
             center: [38, -97.5],
@@ -176,8 +173,6 @@
             .defer(d3.csv, "Master.csv")
             .defer(d3.json, "Great-Lakes.json")
             .await(processData);
-
-
 
         // create a function to loop through the counties data and grab the county FIPS code to ensure a match for each county
         function processData(e, counties, states, statesData, countiesData, lakes) {
@@ -226,11 +221,11 @@
         function drawMap(states, counties, lakes) {
 
             countiesLayer = L.geoJson(counties, {
-              //  onEachFeature: onEachFeature,
+               onEachFeature: onEachFeature,
                style: function(feature) { // style each feature of GeoJson layer
                    return {
-                       color: 'yellow', // set stroke color
-                       fillColor: 'red',
+                       color: 'white', // set stroke color
+                       fillColor: getCountyColor(feature),
                        weight: 0.5, // set stroke weight
                        fillOpacity: 1, // override defautl fill opacity
                    };
@@ -261,8 +256,8 @@
             lakesLayer = L.geoJson(lakes, {
               style: function(feature) { // style each feature of GeoJson layer
                   return {
-                      color: 'darkblue', // set stroke color
-                      fillColor: 'blue',
+                      color: 'white', // set stroke color
+                      fillColor: 'navy',
                       weight: 0.5, // set stroke weight
                       fillOpacity: 1, // override defautl fill opacity
                   };
@@ -291,35 +286,56 @@
             }
 
         }
-        //
-        //
-        // function onEachFeature(feature, layer) {
-        //     // changes color of layer to green with mouseover and returns back to original color settings with mouseout
-        //
-        //         layer.on('mouseover', function(leafletEvent) {
-        //             var dataLayer = leafletEvent.target;
-        //             dataLayer.setStyle({
-        //                 weight: 6,
-        //                 color: 'yellow',
-        //                 fillColor: 'green',
-        //                 fillOpacity: 0.75,
-        //
-        //             });
-        //
-        //         layer.on('mouseout', function (leafletEvent){
-        //             var dataLayer = leafletEvent.target;
-        //             dataLayer.setStyle({
-        //                 weight: 0.5,
-        //                 color: 'yellow',
-        //                 fillOpacity: 0,
-        //             });
-        //
-        //         })
-        //
-        //     })
-        // }
-        //
-        //
+        
+        function getCountyColor(feature) {
+
+            var clinton = Number(feature.properties.clinton);
+            var trump = Number(feature.properties.trump);
+            var totalvote = Number(feature.properties.totalvote);
+
+            if (clinton/totalvote >= 0.6) {
+                return "#08088A";
+            } else if (clinton/totalvote >= 0.55) {
+                return "#0101df";
+            } else if (clinton/totalvote >= 0.5) {
+                return "#81BEF7";
+            } else if (clinton/totalvote >= 0.45) {
+                return "#f5a9a9";
+            } else if (clinton/totalvote >= 0.40) {
+                return "#fe2e2e";
+            } else {
+                return "#df0101"
+            }
+
+        }
+        
+        function onEachFeature(feature, layer) {
+            // changes color of layer to green with mouseover and returns back to original color settings with mouseout
+        
+                layer.on('mouseover', function(leafletEvent) {
+                     var dataLayer = leafletEvent.target;
+                     dataLayer.setStyle({
+                        weight: 6,
+                        color: 'yellow',
+                        fillColor: 'green',
+                        fillOpacity: 0.75,
+    
+                     });
+        
+                layer.on('mouseout', function (leafletEvent){
+                     var dataLayer = leafletEvent.target;
+                     dataLayer.setStyle({
+                         weight: 0.5,
+                         color: 'white',
+                         fillOpacity: 1,
+                     });
+        
+                 })
+        
+             })
+         }
+        
+    
         // function drawInfo() {
         //     // creates an information box in the top right corner of map frame
         //     var info = L.control({position: 'topright'});
