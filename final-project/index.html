@@ -18,12 +18,6 @@
             background: whitesmoke;
             font-family: "Work Sans", sans-serif;
         }
-    
-        .states  {
-            fill: red;
-            stroke: black;
-            stroke-width: 0.50px
-        }
         
         #side-panel {
             position: absolute;
@@ -82,59 +76,25 @@
             right: 0;
             width: 68%;
         }
-        
-        #legend {
-            position: absolute;
-            background: whitesmoke;
-            right: 15px;
-            padding: 8px 15px;
-            top: 25px;
-            bottom: 25px;
-            width: 250px;
-            color: black;
-            border: 1px solid black;
-            border-radius: 3px;
-        }
-        
-        #legend h3 {
-            text-align: center;
-            font-weight: 100;
-            margin: 10px 0 20px;
-        }
-        
-        #info {
+        .info {
             position: absolute;
             background: whitesmoke;
             right: 15px;
             padding: 8px 15px;
             top: 75px;
             bottom: 25px;
-            width: 400px;
-            height: 500px;
+            width: 100px;
+            height: 200px;
             color: black;
             border: 1px solid black;
-            border-radius: 3px;
+            border-radius: 1px;
         }
         
-        #info p {
+        .info p {
           margin: 1px 0 4px;
           color: black;
         }
         
-        #infoinfo {
-          padding: 1px 2px;
-          position: absolute;
-          color: black
-          max-width: 250px;
-          font-size: 1em;
-          background: whitesmoke;
-          border: 2px solid red;
-          border-radius: 3px;
-        }
-        
-        #legendinfo p {
-          margin: 3px 0 4px;
-          color: black;
         }
         #voting {
             color: white;
@@ -170,65 +130,7 @@
         <p><i>The data were furnished from the 2010 US Census (http://www.census.gov/2010census/) and David Leip's Presidential Atlas 2016 (http://uselectionatlas.org)</i></p>
     </div>
     
-    <div id="info">
-        <h3><b><u>County Information</u></b></h3>
-        <p>Name: <span> </span></p>
-        <p>Clinton: 
-            <span1> </span1>
-        </p>
-        <p>Trump: 
-            <span2> </span2>
-        </p>
-        <p>Johnson:
-            <span3> </span3>
-        </p>
-        <p>Stein:
-            <span4> </span4>
-        </p>
-        <p>McMullin:
-            <span5> </span5>
-        </p>
-        <p>Population in 2010: 
-            <span6> </span6>
-        </p>
-        <p>Males: 
-            <span7> </span7>
-        </p>
-        <p>Females: 
-            <span8> </span8>
-        </p>
-        <p>White: 
-            <span9> </span9>
-        </p>
-        <p>Black: 
-            <span10> </span10>
-        </p>
-        <p>Hispanic: 
-            <span11> </span11>
-        </p>
-        <p>Asian: 
-            <span12> </span12>
-        </p>
-        <p>Native American: 
-            <span13> </span13>
-        </p>
-        <p>Per Capita Income in 2010: 
-            <span14> </span14>
-        </p>
-        <p>Median Household Income in 2010: 
-            <span15> </span15>
-        </p>
-        <p>Percent in Poverty in 2010: 
-            <span16> </span16>
-        </p>
-        <p>Percent with Bachelor Degree in 2010: 
-            <span17> </span17>
-        </p>
-        <p>Percent with Masters or PhD in 2010: 
-            <span18> </span18>
-        </p>
-        <svg class="info" width="200" height="200"></svg>
-    </div>
+    
     
     <div id='ui-controls'>
         <select id="voting">
@@ -267,7 +169,10 @@
             .defer(d3.json, "Great-Lakes.json")
             .defer(d3.csv, "Election-States.csv")
             .defer(d3.csv, "Master.csv")
-            .await(processData);
+            .await(processData)
+            .await(drawMap);
+        
+        
         
         // create a function to loop through the counties data and grab the county FIPS code to ensure a match for each county
         function processData(e, states, counties, statesData, countiesData) {
@@ -285,7 +190,6 @@
                     
             }
             
-            
             for (var county in counties.features) {
                  
                 var countyFIP = counties.features[county].properties.GEOID;
@@ -293,7 +197,6 @@
                 for (var d in countiesData) {
                     
                     var countiesDataFip = countiesData[d].fips;
-                    
                     // need to slice off last five characters for FIPS code
                     countiesDataFip = countiesDataFip.slice(-5,countiesDataFip.length);
                     if (countyFIP === countiesDataFip) {
@@ -307,33 +210,28 @@
             
             drawMap(states, counties, lakes);
             
-            
             }   
             
         function drawMap(states, counties, lakes) {
             
-            // add the states and lakes
+             // add the states and lakes
             L.geoJson(states).addTo(map);
             L.geoJson(lakes).addTo(map);
-                
-        
+            
             dataLayer = L.geoJson(counties, {
                onEachFeature: onEachFeature,
                style: function(feature) { // style each feature of GeoJson layer
                    return {
                        color: 'yellow', // set stroke color
                        weight: 0.5, // set stroke weight
-                       fillOpacity: 0.2, // override defautl fill opacity
+                       fillOpacity: 0, // override defautl fill opacity
                    };
                }
                 
             }).addTo(map); 
             
-            
         }
     
-        
-         
         
         function onEachFeature(feature, layer) {
             // changes color of layer to green with mouseover and returns back to original color settings with mouseout
@@ -344,27 +242,64 @@
                         weight: 6,
                         color: 'yellow',
                         fillColor: 'green',
-                        fillOpacity: 0.5,
+                        fillOpacity: 0.75,
  
-                    });
-                  
-                //stateinfoWindow(states);    
+                    });    
                     
                 layer.on('mouseout', function (leafletEvent){
                     var dataLayer = leafletEvent.target;
                     dataLayer.setStyle({
                         weight: 0.5,
-                        color: 'white',
+                        color: 'yellow',
                         fillOpacity: 0,
                     });
                 
                     drawMap();
+                    drawInfo();
+                    //updateInfo();
             
                 })
  
             })
         }
         
+        
+        function drawInfo() {
+            // creates an information box in the top right corner of map frame
+            var info = L.control({position: 'topright'});
+            
+            info.onAdd = function(map) {
+
+                var div = L.DomUtil.create('div', 'info');
+
+                return div;  
+
+            }
+            
+            info.addTo(map);
+            // adds data to information box upon mouseover event
+            dataLayer.on('mouseover', function() {
+                $(".info").show();
+            });
+            // removes data from information box upon mouseout event
+            dataLayer.on('mouseout', function() {
+                $(".info").hide();    
+            });
+    
+        }
+                   
+        function updateInfo(layer) {
+            // updates the information associated with each county so that the data can be populated in the information box
+            var props = layer.feature.properties;
+
+            var html = "<h3>"+props['NAME']+" County</h3>"+
+                    "Total # of Vacant Units: <b>"+ props["VACANT"]+"</b><br>"+
+                    "# of Vacant Units for Rent: <b>"+ props["VACANT_FOR"]+"</b><br>"+
+                    "# of Vacant Units for Sale: <b>"+ props["VACANT_FO2"]+"</b><br>"+
+                    "# of Total Housing Units:   <b>"+ props["TOTAL"]+"</b><br>"
+
+            $(".info").html(html);
+        }
         
         function countyinfoWindow(e, counties){
             var infoWindow = $('#info');
@@ -405,9 +340,6 @@
 
             
         }
-        
-        
-        
         
     </script>
 </body>
