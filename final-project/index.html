@@ -75,11 +75,11 @@
         .info {
             position: absolute;
             background: whitesmoke;
-            right: 15px;
+            right: 2px;
             padding: 8px 15px;
-            top: 75px;
+            top: 300px;
             bottom: 25px;
-            width: 100px;
+            width: 140px;
             height: 200px;
             color: black;
             border: 1px solid black;
@@ -90,8 +90,42 @@
           margin: 1px 0 4px;
           color: black;
         }
-
-        }
+        .legend {
+            position: absolute;
+            top: 250px;
+            bottom: 25px;
+            width: 100px;
+            height: 100px;
+			padding: 6px 8px;
+			font-size: 1em;
+			background: white;
+			box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+			border-radius: 5px;
+		}
+		
+		.legend h3 {
+			font-size: 1.1em;
+			font-weight: normal;
+			color: #001323;
+			margin: 10 0 10px 0;
+		}
+		
+		.legend span {
+			width: 20px;
+			height: 20px;
+			float: left;
+			margin: 0 10px 4px 0;
+		}
+		
+		.legend label {
+			font-size: 1.1em;
+		}
+		
+		.legend label:after {
+			content: '';
+			display: block;
+			clear: both;
+		}
         #voting {
             color: white;
             background-color: darkslategray;
@@ -124,7 +158,7 @@
         <h2><u>About This Map</u></h2>
         <p><i>Map created December 10, 2016, by Ryan Kelly, Professor of Geography, GISP, Bluegrass Community and Technical College</i></p>
     <h2><u>About the Data</u></h2>
-        <p><i>The data were furnished from the 2010 US Census (http://www.census.gov/2010census/) and David Leip's Presidential Atlas 2016 (http://uselectionatlas.org)</i></p>
+        <p><i>The data were furnished from the 2010 US Census (http://www.census.gov/2010census/) and David Leip's Presidential Atlas 2016 (http://uselectionatlas.org)  County level voting data unavailable for Alaska</i></p>
     </div>
 
     <div id='ui-controls'>
@@ -203,8 +237,6 @@
 
                     countiesDataFip = countiesDataFip.slice(-5,countiesDataFip.length);
 
-
-
                     if (countyFIP === countiesDataFip) {
 
                         counties.features[county].properties = countiesData[d];
@@ -217,6 +249,11 @@
             drawMap(states, counties, lakes);
 
             }
+        
+            drawLegend();
+            //buildUI();
+            drawInfo();
+            
 
         function drawMap(states, counties, lakes) {
 
@@ -227,25 +264,41 @@
                        color: 'white', // set stroke color
                        fillColor: getCountyColor(feature),
                        weight: 0.5, // set stroke weight
-                       fillOpacity: 1, // override defautl fill opacity
+                       fillOpacity: 0.75, // override defautl fill opacity
                    };
-               }
+               },
+                
+                  onEachFeature: function(feature, layer) {
+
+                  var tooltip = 'County Name: ' + feature.properties.name + '<br>' +
+                                'Clinton: ' + feature.properties.clinton + '<br>' +
+                                'Trump: ' + feature.properties.trump + '<br>' +
+                                'Johnson: ' + feature.properties.johnson  + '<br>' +
+                                'Stein: ' + feature.properties.stein + '<br>' +
+                                'McMullin: ' + feature.properties.mcmullin;
+
+                  layer.bindTooltip(tooltip, {sticky: true});
+
+              }
             });
 
             statesLayer = L.geoJson(states, {
 
+              onEachFeature: onEachFeature,
               style: function(feature) { // style each feature of GeoJson layer
                   return {
                       color: 'white', // set stroke color
                       fillColor: getStateColor(feature),
-                      weight: 1, // set stroke weight
+                      weight: 1.5, // set stroke weight
                       fillOpacity: 1, // override defautl fill opacity
                   };
               },
+                
               onEachFeature: function(feature, layer) {
 
-                  var tooltip = 'trump: ' + feature.properties.trump + '<br>' +
-                                'clinton: ' + feature.properties.clinton ;
+                  var tooltip = 'STATE: ' + feature.properties.name + '<br>' +
+                                'Clinton: ' + feature.properties.clinton + '<br>' +
+                                'Trump: ' + feature.properties.trump   ;
 
                   layer.bindTooltip(tooltip, {sticky: true});
 
@@ -270,7 +323,7 @@
                 "Counties": countiesLayer
             }
 
-          L.control.layers(null, sourcesLayers, { collapsed:false }).addTo(map);
+            L.control.layers(null, sourcesLayers, { collapsed:false }).addTo(map);
 
         }
 
@@ -280,9 +333,9 @@
             var trump = Number(feature.properties.trump);
 
             if(clinton > trump) {
-              return "blue";
+              return "#0101df";
             } else if(trump > clinton) {
-              return "red";
+              return "#fe2e2e";
             }
 
         }
@@ -307,6 +360,22 @@
                 return "#df0101"
             }
 
+            var income = Number(feature.properties.Median_HI);
+            
+            if (Median_HI >= 70000) {
+                return  'blue';
+            } else if (Median_HI >= 50000) {
+                return 'green';
+            } else if (Median_HI >= 40000) {
+                return "#81BEF7";
+            } else if (Median_HI >= 30000) {
+                return "#f5a9a9";
+            } else if (Median_HI >= 20000) {
+                return "#fe2e2e";
+            } else {
+                return "#df0101"
+            }
+            
         }
         
         function onEachFeature(feature, layer) {
@@ -317,8 +386,7 @@
                      dataLayer.setStyle({
                         weight: 6,
                         color: 'yellow',
-                        fillColor: 'green',
-                        fillOpacity: 0.75,
+                        fillOpacity: 1,
     
                      });
         
@@ -336,32 +404,62 @@
          }
         
     
-        // function drawInfo() {
-        //     // creates an information box in the top right corner of map frame
-        //     var info = L.control({position: 'topright'});
-        //
-        //     info.onAdd = function(map) {
-        //
-        //         var div = L.DomUtil.create('div', 'info');
-        //
-        //         return div;
-        //
-        //     }
-        //
-        //     info.addTo(map);
-        //     // adds data to information box upon mouseover event
-        //     dataLayer.on('mouseover', function() {
-        //         $(".info").show();
-        //     });
-        //     // removes data from information box upon mouseout event
-        //     dataLayer.on('mouseout', function() {
-        //         $(".info").hide();
-        //     });
-        //
-        // }
+          function drawInfo() {
+              // creates an information box in the top right corner of map frame
+              var info = L.control({position: 'topright'});
+         
+              info.onAdd = function(map) {
+        
+                  var div = L.DomUtil.create('div', 'info');
+         
+                  return div;
+         
+              }
+         
+              info.addTo(map);
+              // adds data to information box upon mouseover event
+              dataLayer.on('mouseover', function() {
+                  $(".info").show();
+              });
+              // removes data from information box upon mouseout event
+              dataLayer.on('mouseout', function() {
+                  $(".info").hide();
+              });
+         
+          }
+        
+        function drawLegend() {
+
+			// create a new Leaflet control object, and position it top left
+			var legend = L.control({
+				position: 'bottomright'
+			});
+
+			// when the legend is added to the map
+			legend.onAdd = function (map) {
+
+				// create a new HTML <div> element and give it a class name of "legend"
+				var div = L.DomUtil.create('div', 'legend');
+
+				return div;
+
+			};
+
+			// add the legend to the map
+			legend.addTo(map);
+		}
+        
+        function buildUI(){
+            $('select[id="voting"]').change(function() {
+
+                attribute = $(this).val();
+                drawMap();
+
+            });
+        }
         //
         // function updateInfo(layer) {
-        //     // updates the information associated with each county so that the data can be populated in the information box
+        //     // updates the information associated with each county so that the data           can be populated in the information box
         //     var props = layer.feature.properties;
         //
         //     var html = "<h3>"+props['NAME']+" County</h3>"+
