@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset=utf-8 />
     <title>MAP 673 Final Project</title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
-	  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.2/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.2/dist/leaflet.css" />
     <link href='https://fonts.googleapis.com/css?family=Work+Sans:400,500,600' rel='stylesheet' type='text/css'>
-
     <style>
         body {
             margin: 0;
@@ -14,7 +14,7 @@
             background: whitesmoke;
             font-family: "Work Sans", sans-serif;
         }
-
+        
         #side-panel {
             position: absolute;
             left: 0;
@@ -25,7 +25,7 @@
             border-right: 2px solid navy;
             overflow-y: scroll;
         }
-
+        
         h1 {
             padding: 8px 25px 8px 15px;
             margin: 0;
@@ -35,7 +35,7 @@
             font-size: 2.5em;
             text-align: center;
         }
-
+        
         h2 {
             margin: 0;
             padding: 8px 25px 8px 15px;
@@ -44,7 +44,7 @@
             font-size: 1.2em;
             text-align: center;
         }
-
+        
         #side-panel p {
             margin: 8px 0 4px;
             padding: 0 25px 0 15px;
@@ -52,84 +52,88 @@
             text-align: center;
             font-size: 1em;
         }
-
+        
         #side-panel p:after {
             content: '';
             display: block;
             clear: both;
         }
-
+        
         #side-panel img {
             float: center;
             margin: 0 0 15px 15px;
             border: 1px solid white;
         }
-
+        
         #map {
             position: absolute;
-            top:0;
-            bottom:0;
+            order: bottom;
+            top: 0;
+            bottom: 0;
             right: 0;
             width: 68%;
         }
-        .info {
+        
+        #info {
             position: absolute;
+            order: top;
             background: whitesmoke;
-            right: 2px;
             padding: 8px 15px;
-            top: 300px;
-            bottom: 25px;
-            width: 140px;
-            height: 200px;
+            max-width: 200px;
+            top: 25%;
+            right: 1%;
             color: black;
             border: 1px solid black;
             border-radius: 1px;
+            font-size: 1em;
         }
-
-        .info p {
-          margin: 1px 0 4px;
-          color: black;
+        
+        #info p {
+            margin: 3px 0 4px;
+            color: black;
         }
-        .legend {
+        #legend {
             position: absolute;
             top: 250px;
             bottom: 25px;
             width: 100px;
             height: 100px;
-			padding: 6px 8px;
-			font-size: 1em;
-			background: white;
-			box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-			border-radius: 5px;
-		}
-		
-		.legend h3 {
-			font-size: 1.1em;
-			font-weight: normal;
-			color: #001323;
-			margin: 10 0 10px 0;
-		}
-		
-		.legend span {
-			width: 20px;
-			height: 20px;
-			float: left;
-			margin: 0 10px 4px 0;
-		}
-		
-		.legend label {
-			font-size: 1.1em;
-		}
-		
-		.legend label:after {
-			content: '';
-			display: block;
-			clear: both;
-		}
+            padding: 6px 8px;
+            font-size: 1em;
+            background: white;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+        }
+        
+        #legend h3 {
+            font-size: 1.1em;
+            font-weight: normal;
+            color: #001323;
+            margin: 10 0 10px 0;
+        }
+        
+        #legend span {
+            width: 20px;
+            height: 20px;
+            float: left;
+            margin: 0 10px 4px 0;
+        }
+        
+        #legend label {
+            font-size: 1.1em;
+        }
+        
+        #legend label:after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+        
         #voting {
             color: white;
             background-color: darkslategray;
         }
+        
         #ui-controls {
             position: absolute;
             margin-left: 33%;
@@ -137,324 +141,260 @@
             background-color: black;
             z-index: 800;
         }
+        
         #ui-controls label {
             font-size: 1em;
             color: white;
             margin-right: 5px;
         }
     </style>
-
 </head>
+
 <body>
     <div id='map'></div>
     <div id='side-panel'>
         <h1>THE CHOICE</h1>
         <h2>The 2016 US Presidential Election</h2>
         <p>This map displays voting data by county for the 2016 general election, as well as select demographic, income and education data by county.</p>
-    <p><img src="graphics/donald-trump-hillary-clinton-impossible-choice.png" alt="legend"></p>
-        <p>306.....................Electoral Votes.................232</p><p><img src="graphics/red-blue.png" alt="legend"></p>
-        <p>The 58th quadrennial Presidetial Election, held on November 8, 2016, saw GOP candidate Donald Trump score a stunning upset over Democratic nominee Hillary Clinton to become the 45th President of the United States of America.  This was the fourth election in U.S. history - and the second of the 21st century - to see the candidate who won the Electoral College lose the popular vote.  The 2016 election further saw the widening gap in American political preferences with the Democratic nominee winning by wide margins in heavily urban counties and the GOP nominee winning by huge margins in rural counties.  Demographic data clearly indicate well-defined voting patterns that follow both racial and educational lines, with Clinton faring well among mnority populations and those holding college degrees, and with Trump winning counties by large margins where the majority of the population was white and did not hold college degrees.</p>
-        <p>The user is encouraged to browse the map data by selecting from the dropdown tab in the upper left corner of the map.  The selected data of each county will populate the information box at the right of the screen as the user scrolls the mouse over the selected county.</p>
+        <p><img src="graphics/donald-trump-hillary-clinton-impossible-choice.png" alt="legend"></p>
+        <p>306.....................Electoral Votes.................232</p>
+        <p><img src="graphics/red-blue.png" alt="legend"></p>
+        <p>The 58th quadrennial Presidetial Election, held on November 8, 2016, saw GOP candidate Donald Trump score a stunning upset over Democratic nominee Hillary Clinton to become the 45th President of the United States of America. This was the fourth election in U.S. history - and the second of the 21st century - to see the candidate who won the Electoral College lose the popular vote. The 2016 election further saw the widening gap in American political preferences with the Democratic nominee winning by wide margins in heavily urban counties and the GOP nominee winning by huge margins in rural counties. Demographic data clearly indicate well-defined voting patterns that follow both racial and educational lines, with Clinton faring well among mnority populations and those holding college degrees, and with Trump winning counties by large margins where the majority of the population was white and did not hold college degrees.</p>
+        <p>The user is encouraged to browse the map data by selecting from the dropdown tab in the upper left corner of the map. The selected data of each county will populate the information box at the right of the screen as the user scrolls the mouse over the selected county.</p>
         <h2><u>About This Map</u></h2>
         <p><i>Map created December 10, 2016, by Ryan Kelly, Professor of Geography, GISP, Bluegrass Community and Technical College</i></p>
-    <h2><u>About the Data</u></h2>
-        <p><i>The data were furnished from the 2010 US Census (http://www.census.gov/2010census/) and David Leip's Presidential Atlas 2016 (http://uselectionatlas.org)  County level voting data unavailable for Alaska</i></p>
+        <h2><u>About the Data</u></h2>
+        <p><i>The data were furnished from the 2010 US Census (http://www.census.gov/2010census/) and David Leip's Presidential Atlas 2016 (http://uselectionatlas.org).  County level voting data unavailable for Alaska</i></p>
     </div>
-
+    <div id="info">
+        <h3><u>County Information</u></h3>
+        <p>County: <span> </span> </p>
+        <p>State:
+            <span1> </span1>
+        </p>
+        <p>% Clinton:
+            <span1> </span1>
+        </p>
+        <p>% Trump:
+            <span2> </span2>
+        </p>
+        <p>Population:
+            <span3> </span3>
+        </p>
+        <p>Males:
+            <span4> </span4>
+        </p>
+        <p>Females:
+            <span5> </span5>
+        </p>
+        <p>White:
+            <span6> </span6>
+        </p>
+        <p>Black:
+            <span7> </span7>
+        </p>
+        <p>Hispanic:
+            <span8> </span8>
+        </p>
+        <p>Asian:
+            <span9> </span9>
+        </p>
+        <p>Native American:
+            <span10> </span10>
+        </p>
+        <p>Per Capita Income:
+            <span11> </span11>
+        </p>
+        <p>Median Household Income:
+            <span12> </span12>
+        </p>
+        <p>% in Poverty:
+            <span13> </span13>
+        </p>
+        <p>% with BA/BS:
+            <span14> </span14>
+        </p>
+        <p>% with MA/MS/PhD:
+            <span15> </span15>
+        </p>
+    </div>
     <div id='ui-controls'>
         <select id="voting">
-            <option value="VOTE" selected>Voting Data 2016 General Election</option>
+            <option value="VOTE">Voting Data 2016 General Election</option>
             <option value="RACE">Race Data (2010 US Census)</option>
             <option value="GENDER">Gender Data (2010 US Census)</option>
             <option value="INCOME">Income Data (2010 US Census)</option>
             <option value="EDUCATION">Education Data (2010 US Census)</option>
         </select>
     </div>
-
     <script src='https://cdnjs.cloudflare.com/ajax/libs/simple-statistics/1.0.1/simple_statistics.min.js'></script>
-	  <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/queue-async/1.0.7/queue.min.js"></script>
-
     <script>
-
         var map = L.map('map', {
-            center: [38, -97.5],
-            zoom: 4,
-            minZoom: 2,
-            maxZoom: 12,
-            maxBounds: L.latLngBounds([70, -166], [10, -40]),
-        });
-
+            center: [38, -97.5]
+            , zoom: 4
+            , minZoom: 2
+            , maxZoom: 12
+            , maxBounds: L.latLngBounds([70, -166], [10, -40])
+        , });
         var CartoDB_DarkMatter = L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', {
-        	attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
-        	subdomains: 'abcd',
-        	maxZoom: 19
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
+            , subdomains: 'abcd'
+            , maxZoom: 19
         }).addTo(map);
-
         map.zoomControl.setPosition('topright');
-
-        var countyLayer,
-            statesLayer,
-            lakesLayer;
-
+        var countyLayer, statesLayer, lakesLayer;
         // Load the map data using queue
-        queue()
-            .defer(d3.json, "US-Counties.json")
-            .defer(d3.json, "us-states.json")
-            .defer(d3.csv, "Election-States.csv")
-            .defer(d3.csv, "Master.csv")
-            .defer(d3.json, "Great-Lakes.json")
-            .await(processData);
-
+        queue().defer(d3.json, "US-Counties.json").defer(d3.json, "us-states.json").defer(d3.csv, "Election-States.csv").defer(d3.csv, "Master.csv").defer(d3.json, "Great-Lakes.json").await(processData);
         // create a function to loop through the counties data and grab the county FIPS code to ensure a match for each county
         function processData(e, counties, states, statesData, countiesData, lakes) {
-
-
             for (var state in states.features) {
-
                 var stateFIP = states.features[state].properties.STATEFP;
-
                 for (var d in statesData) {
                     if (stateFIP === statesData[d].state_fp) {
                         states.features[state].properties = statesData[d];
                         break;
                     }
                 }
-
             }
-
             for (var county in counties.features) {
-
                 var countyFIP = counties.features[county].properties.GEOID;
-
                 for (var d in countiesData) {
-
                     var countiesDataFip = countiesData[d].fips;
                     // need to slice off last five characters for FIPS code
-
-
-                    countiesDataFip = countiesDataFip.slice(-5,countiesDataFip.length);
-
+                    countiesDataFip = countiesDataFip.slice(-5, countiesDataFip.length);
                     if (countyFIP === countiesDataFip) {
-
                         counties.features[county].properties = countiesData[d];
                         break;
                     }
                 }
-
             }
-
             drawMap(states, counties, lakes);
-
-            }
-        
-            drawLegend();
-            //buildUI();
-            drawInfo();
             
+        }
 
         function drawMap(states, counties, lakes) {
-
             countiesLayer = L.geoJson(counties, {
-               onEachFeature: onEachFeature,
-               style: function(feature) { // style each feature of GeoJson layer
-                   return {
-                       color: 'white', // set stroke color
-                       fillColor: getCountyColor(feature),
-                       weight: 0.5, // set stroke weight
-                       fillOpacity: 0.75, // override defautl fill opacity
-                   };
-               },
-                
-                  onEachFeature: function(feature, layer) {
-
-                  var tooltip = 'County Name: ' + feature.properties.name + '<br>' +
-                                'Clinton: ' + feature.properties.clinton + '<br>' +
-                                'Trump: ' + feature.properties.trump + '<br>' +
-                                'Johnson: ' + feature.properties.johnson  + '<br>' +
-                                'Stein: ' + feature.properties.stein + '<br>' +
-                                'McMullin: ' + feature.properties.mcmullin;
-
-                  layer.bindTooltip(tooltip, {sticky: true});
-
-              }
+                onEachFeature: onEachFeature
+                , style: function (feature) { // style each feature of GeoJson layer
+                    return {
+                        color: 'white', // set stroke color
+                        fillColor: getCountyVoteColor(feature)
+                        , weight: 0.5, // set stroke weight
+                        fillOpacity: 1, // override defautl fill opacity
+                    };
+                }
+                , onEachFeature: function (feature, layer) {
+                    var tooltip = 'County Name: ' + feature.properties.name + '<br>' + 'State: ' + feature.properties.state + '<br>' + 'Clinton: ' + feature.properties.clinton + '<br>' + 'Trump: ' + feature.properties.trump + '<br>' + 'Johnson: ' + feature.properties.johnson + '<br>' + 'Stein: ' + feature.properties.stein + '<br>' + 'McMullin: ' + feature.properties.mcmullin;
+                    layer.bindTooltip(tooltip, {
+                        sticky: true
+                    });
+                }
             });
-
             statesLayer = L.geoJson(states, {
-
-              onEachFeature: onEachFeature,
-              style: function(feature) { // style each feature of GeoJson layer
-                  return {
-                      color: 'white', // set stroke color
-                      fillColor: getStateColor(feature),
-                      weight: 1.5, // set stroke weight
-                      fillOpacity: 1, // override defautl fill opacity
-                  };
-              },
-                
-              onEachFeature: function(feature, layer) {
-
-                  var tooltip = 'STATE: ' + feature.properties.name + '<br>' +
-                                'Clinton: ' + feature.properties.clinton + '<br>' +
-                                'Trump: ' + feature.properties.trump   ;
-
-                  layer.bindTooltip(tooltip, {sticky: true});
-
-              }
-
+                onEachFeature: onEachFeature
+                , style: function (feature) { // style each feature of GeoJson layer
+                    return {
+                        color: 'white', // set stroke color
+                        fillColor: getStateColor(feature)
+                        , weight: 1.5, // set stroke weight
+                        fillOpacity: 1, // override defautl fill opacity
+                    };
+                }
+                , onEachFeature: function (feature, layer) {
+                    var tooltip = 'STATE: ' + feature.properties.name + '<br>' + 'Clinton: ' + feature.properties.clinton + '<br>' + 'Trump: ' + feature.properties.trump;
+                    layer.bindTooltip(tooltip, {
+                        sticky: true
+                    });
+                }
             }).addTo(map);
-
             lakesLayer = L.geoJson(lakes, {
-              style: function(feature) { // style each feature of GeoJson layer
-                  return {
-                      color: 'white', // set stroke color
-                      fillColor: 'navy',
-                      weight: 0.5, // set stroke weight
-                      fillOpacity: 1, // override defautl fill opacity
-                  };
-              }
-
+                style: function (feature) { // style each feature of GeoJson layer
+                    return {
+                        color: 'white', // set stroke color
+                        fillColor: 'navy'
+                        , weight: 0.5, // set stroke weight
+                        fillOpacity: 1, // override defautl fill opacity
+                    };
+                }
             }).addTo(map);
-
+            
             var sourcesLayers = {
-                "States": statesLayer,
-                "Counties": countiesLayer
+                "States": statesLayer
+                , "Counties": countiesLayer
             }
-
-            L.control.layers(null, sourcesLayers, { collapsed:false }).addTo(map);
-
+            L.control.layers(null, sourcesLayers, {
+                collapsed: false
+            }).addTo(map);
         }
 
         function getStateColor(feature) {
-
             var clinton = Number(feature.properties.clinton);
             var trump = Number(feature.properties.trump);
-
-            if(clinton > trump) {
-              return "#0101df";
-            } else if(trump > clinton) {
-              return "#fe2e2e";
-            }
-
-        }
-        
-        function getCountyColor(feature) {
-
-            var clinton = Number(feature.properties.clinton);
-            var trump = Number(feature.properties.trump);
-            var totalvote = Number(feature.properties.totalvote);
-
-            if (clinton/totalvote >= 0.6) {
-                return "#08088A";
-            } else if (clinton/totalvote >= 0.55) {
+            if (clinton > trump) {
                 return "#0101df";
-            } else if (clinton/totalvote >= 0.5) {
-                return "#81BEF7";
-            } else if (clinton/totalvote >= 0.45) {
-                return "#f5a9a9";
-            } else if (clinton/totalvote >= 0.40) {
-                return "#fe2e2e";
-            } else {
-                return "#df0101"
             }
-
-            var income = Number(feature.properties.Median_HI);
-            
-            if (Median_HI >= 70000) {
-                return  'blue';
-            } else if (Median_HI >= 50000) {
-                return 'green';
-            } else if (Median_HI >= 40000) {
-                return "#81BEF7";
-            } else if (Median_HI >= 30000) {
-                return "#f5a9a9";
-            } else if (Median_HI >= 20000) {
+            else if (trump > clinton) {
                 return "#fe2e2e";
-            } else {
-                return "#df0101"
             }
-            
         }
-        
+
+        function getCountyVoteColor(feature) {
+            var clinton = Number(feature.properties.clinton);
+            var trump = Number(feature.properties.trump);
+            var johnson = Number(feature.properties.johnson);
+            var stein = Number(feature.properties.stein);
+            var mcmullin = Number(feature.properties.mcmullin);
+            var totalvote = Number(feature.properties.totalvote);
+            if (clinton / totalvote >= 0.6) {
+                return "#08088A";
+            }
+            else if (clinton / (totalvote - johnson - stein - mcmullin) >= 0.55) {
+                return "#0101df";
+            }
+            else if (clinton / (totalvote - johnson - stein - mcmullin) >= 0.5) {
+                return "#81BEF7";
+            }
+            else if (clinton / (totalvote - johnson - stein - mcmullin) >= 0.45) {
+                return "#f5a9a9";
+            }
+            else if (clinton / (totalvote - johnson - stein - mcmullin) >= 0.40) {
+                return "#fe2e2e";
+            }
+            else if (clinton / (totalvote - johnson - stein - mcmullin) >= 0.01) {
+                return "#df0101"
+            }
+        }
+
         function onEachFeature(feature, layer) {
             // changes color of layer to green with mouseover and returns back to original color settings with mouseout
-        
-                layer.on('mouseover', function(leafletEvent) {
-                     var dataLayer = leafletEvent.target;
-                     dataLayer.setStyle({
-                        weight: 6,
-                        color: 'yellow',
-                        fillOpacity: 1,
-    
-                     });
-        
-                layer.on('mouseout', function (leafletEvent){
-                     var dataLayer = leafletEvent.target;
-                     dataLayer.setStyle({
-                         weight: 0.5,
-                         color: 'white',
-                         fillOpacity: 1,
-                     });
-        
-                 })
-        
-             })
-         }
-        
-    
-          function drawInfo() {
-              // creates an information box in the top right corner of map frame
-              var info = L.control({position: 'topright'});
-         
-              info.onAdd = function(map) {
-        
-                  var div = L.DomUtil.create('div', 'info');
-         
-                  return div;
-         
-              }
-         
-              info.addTo(map);
-              // adds data to information box upon mouseover event
-              dataLayer.on('mouseover', function() {
-                  $(".info").show();
-              });
-              // removes data from information box upon mouseout event
-              dataLayer.on('mouseout', function() {
-                  $(".info").hide();
-              });
-         
-          }
-        
-        function drawLegend() {
+            layer.on('mouseover', function (leafletEvent) {
+                var dataLayer = leafletEvent.target;
+                dataLayer.setStyle({
+                    weight: 6
+                    , color: 'yellow'
+                    , fillOpacity: 1
+                , });
+                layer.on('mouseout', function (leafletEvent) {
+                    var dataLayer = leafletEvent.target;
+                    dataLayer.setStyle({
+                        weight: 0.5
+                        , color: 'white'
+                        , fillOpacity: 1
+                    , });
+                })
+            })
+        }
 
-			// create a new Leaflet control object, and position it top left
-			var legend = L.control({
-				position: 'bottomright'
-			});
-
-			// when the legend is added to the map
-			legend.onAdd = function (map) {
-
-				// create a new HTML <div> element and give it a class name of "legend"
-				var div = L.DomUtil.create('div', 'legend');
-
-				return div;
-
-			};
-
-			// add the legend to the map
-			legend.addTo(map);
-		}
         
-        function buildUI(){
-            $('select[id="voting"]').change(function() {
 
+        function buildUI() {
+            $('select[id="voting"]').change(function () {
                 attribute = $(this).val();
                 drawMap();
-
             });
         }
         //
@@ -471,7 +411,7 @@
         //     $(".info").html(html);
         // }
         //
-        // function countyinfoWindow(e, counties){
+        //    function countyinfoWindow(e, counties){
         //     var infoWindow = $('#info');
         //
         //     var infowindowInfo = $('#infoinfo');
@@ -507,10 +447,7 @@
         //     //     e.layer.setStyle({
         //     //         fillOpacity: 0 });
         //     //     });
-
-
         // }
-
     </script>
 </body>
 
