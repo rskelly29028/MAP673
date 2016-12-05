@@ -233,6 +233,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/queue-async/1.0.7/queue.min.js"></script>
     <script>
+        
         var map = L.map('map', {
             center: [38, -97.5]
             , zoom: 4
@@ -240,19 +241,35 @@
             , maxZoom: 12
             , maxBounds: L.latLngBounds([70, -166], [10, -40])
         , });
-        var CartoDB_DarkMatter = L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', {
+        
+        var CartoDB_DarkMatter = 
+            
+            L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
             , subdomains: 'abcd'
             , maxZoom: 19
-        }).addTo(map);
+        
+            }).addTo(map);
+        
         map.zoomControl.setPosition('topright');
+        
         var countyLayer, statesLayer, lakesLayer;
         // Load the map data using queue
-        queue().defer(d3.json, "US-Counties.json").defer(d3.json, "us-states.json").defer(d3.csv, "Election-States.csv").defer(d3.csv, "Master.csv").defer(d3.json, "Great-Lakes.json").await(processData);
+        
+        queue()
+            .defer(d3.json, "US-Counties.json")
+            .defer(d3.json, "us-states.json")
+            .defer(d3.csv, "Election-States.csv")
+            .defer(d3.csv, "Master.csv")
+            .defer(d3.json, "Great-Lakes.json").await(processData);
+        
         // create a function to loop through the counties data and grab the county FIPS code to ensure a match for each county
         function processData(e, counties, states, statesData, countiesData, lakes) {
+            
             for (var state in states.features) {
+                
                 var stateFIP = states.features[state].properties.STATEFP;
+                
                 for (var d in statesData) {
                     if (stateFIP === statesData[d].state_fp) {
                         states.features[state].properties = statesData[d];
@@ -260,8 +277,11 @@
                     }
                 }
             }
+            
             for (var county in counties.features) {
+                
                 var countyFIP = counties.features[county].properties.GEOID;
+                
                 for (var d in countiesData) {
                     var countiesDataFip = countiesData[d].fips;
                     // need to slice off last five characters for FIPS code
@@ -272,45 +292,62 @@
                     }
                 }
             }
+            
             drawMap(states, counties, lakes);
             
         }
 
         function drawMap(states, counties, lakes) {
+            
             countiesLayer = L.geoJson(counties, {
-                onEachFeature: onEachFeature
-                , style: function (feature) { // style each feature of GeoJson layer
-                    return {
+                
+                onEachFeature: onEachFeature, 
+                
+                    style: function (feature) { // style each feature of GeoJson layer
+                        return {
                         color: 'white', // set stroke color
-                        fillColor: getCountyVoteColor(feature)
-                        , weight: 0.5, // set stroke weight
+                        fillColor: getCountyEducationColor(feature),
+                        weight: 0.5, // set stroke weight
                         fillOpacity: 1, // override defautl fill opacity
                     };
-                }
-                , onEachFeature: function (feature, layer) {
-                    var tooltip = 'County Name: ' + feature.properties.name + '<br>' + 'State: ' + feature.properties.state + '<br>' + 'Clinton: ' + feature.properties.clinton + '<br>' + 'Trump: ' + feature.properties.trump + '<br>' + 'Johnson: ' + feature.properties.johnson + '<br>' + 'Stein: ' + feature.properties.stein + '<br>' + 'McMullin: ' + feature.properties.mcmullin;
+                },
+                
+                onEachFeature: function (feature, layer) {
+                    var tooltip = 'County Name: ' + feature.properties.name + '<br>' + 
+                                  'State: ' + feature.properties.state + '<br>' + 
+                                  'Clinton: ' + feature.properties.clinton + '<br>' + 
+                                  'Trump: ' + feature.properties.trump + '<br>' + 
+                                  'Johnson: ' + feature.properties.johnson + '<br>' + 
+                                  'Stein: ' + feature.properties.stein + '<br>' + 
+                                  'McMullin: ' + feature.properties.mcmullin + '<br>' +
+                    
                     layer.bindTooltip(tooltip, {
                         sticky: true
                     });
                 }
             });
-            statesLayer = L.geoJson(states, {
-                onEachFeature: onEachFeature
-                , style: function (feature) { // style each feature of GeoJson layer
-                    return {
-                        color: 'white', // set stroke color
-                        fillColor: getStateColor(feature)
-                        , weight: 1.5, // set stroke weight
-                        fillOpacity: 1, // override defautl fill opacity
+            
+                statesLayer = L.geoJson(states, {
+                    onEachFeature: onEachFeature,
+                        style: function (feature) { // style each feature of GeoJson layer
+                            return {
+                            color: 'white', // set stroke color
+                            fillColor: getStateColor(feature),
+                            weight: 1.5, // set stroke weight
+                            fillOpacity: 1, // override defautl fill opacity
                     };
                 }
                 , onEachFeature: function (feature, layer) {
-                    var tooltip = 'STATE: ' + feature.properties.name + '<br>' + 'Clinton: ' + feature.properties.clinton + '<br>' + 'Trump: ' + feature.properties.trump;
+                    var tooltip = 'STATE: ' + feature.properties.name + '<br>' + 
+                                  'Clinton: ' + feature.properties.clinton + '<br>' + 
+                                  'Trump: ' + feature.properties.trump;
                     layer.bindTooltip(tooltip, {
                         sticky: true
                     });
                 }
+                    
             }).addTo(map);
+            
             lakesLayer = L.geoJson(lakes, {
                 style: function (feature) { // style each feature of GeoJson layer
                     return {
@@ -320,6 +357,7 @@
                         fillOpacity: 1, // override defautl fill opacity
                     };
                 }
+                
             }).addTo(map);
             
             var sourcesLayers = {
@@ -368,35 +406,81 @@
                 return "#df0101"
             }
         }
+        
+        function getCountyIncomeColor(feature) {
+            var medianHI = Number(feature.properties.Median_HI);
+            
+            if (medianHI >= 70000) {
+                return "#004d00";
+            }
+            else if (medianHI>= 50000) {
+                return "#009900";
+            }
+            else if (medianHI >= 40000) {
+                return "#00e600";
+            }
+            else if (medianHI >= 30000) {
+                return "#99ff99";
+            }
+            else  {
+                return "#e6ffe6";
+            }
+        }
 
+        function getCountyEducationColor(feature) {
+            var population = Number(feature.properties.Pop_Total);
+            var bachelor = Number(feature.properties.Bachelor);
+            var masters = Number(feature.properties.Master_Phd);
+            
+            if ((bachelor+masters)/population >= 0.1) {
+                return "#000066";
+            }
+            else if ((bachelor+masters)/population >= 0.08) {
+                return "#0000b3";
+            }
+            else if ((bachelor+masters)/population >= 0.06)  {
+                return "#4d4dff";
+            }
+            else if ((bachelor+masters)/population >= 0.04) {
+                return "#ccccff";
+            }
+            else  {
+                return "#ffffff";
+            }
+        }
+        
+        
         function onEachFeature(feature, layer) {
             // changes color of layer to green with mouseover and returns back to original color settings with mouseout
             layer.on('mouseover', function (leafletEvent) {
                 var dataLayer = leafletEvent.target;
                 dataLayer.setStyle({
-                    weight: 6
-                    , color: 'yellow'
-                    , fillOpacity: 1
-                , });
+                    weight: 6,
+                    color: 'yellow',
+                    fillOpacity: 1,
+                    
+                });
+                
                 layer.on('mouseout', function (leafletEvent) {
                     var dataLayer = leafletEvent.target;
                     dataLayer.setStyle({
-                        weight: 0.5
-                        , color: 'white'
-                        , fillOpacity: 1
-                    , });
+                        weight: 0.5,
+                        color: 'white',
+                        fillOpacity: 1,
+                    });
                 })
             })
         }
 
         
-
         function buildUI() {
             $('select[id="voting"]').change(function () {
                 attribute = $(this).val();
+                
                 drawMap();
             });
         }
+        
         //
         // function updateInfo(layer) {
         //     // updates the information associated with each county so that the data           can be populated in the information box
