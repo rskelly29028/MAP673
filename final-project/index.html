@@ -310,7 +310,7 @@
                     style: function (feature) { // style each feature of GeoJson layer
                         return {
                         color: 'white', // set stroke color
-                        fillColor: getCountyEducationColor(feature),
+                        fillColor: getCountyVoteColor(feature),
                         weight: 0.5, // set stroke weight
                         fillOpacity: 1, // override defautl fill opacity
                     };
@@ -332,6 +332,9 @@
                     });
                 }
             });
+            
+            //drawInfo();
+            //updateInfo();
             
                 statesLayer = L.geoJson(states, {
                     onEachFeature: onEachFeature,
@@ -430,7 +433,7 @@
                 return "#99ff99";
             }
             else  {
-                return "#e6ffe6";
+                return "#c2f0c2";
             }
         }
 
@@ -440,19 +443,19 @@
             var total_pop = Number(feature.properties.pop_Total);
             
             if ((bachelor+masters)/total_pop >= 0.35) {
-                return "#000066";
+                return "#29293d";
             }
             else if ((bachelor+masters)/total_pop >= 0.25) {
-                return "#0000b3";
+                return "#666699";
             }
             else if ((bachelor+masters)/total_pop >= 0.15)  {
-                return "#4d4dff";
+                return "#a3a3c2";
             }
             else if ((bachelor+masters)/total_pop >= 0.05) {
-                return "#ccccff";
+                return "#c2c2d6";
             }
             else  {
-                return "#ffffff";
+                return "#e0e0eb";
             }
         }
         
@@ -461,19 +464,19 @@
             var total_pop = Number(feature.properties.pop_Total);
             
             if (black/total_pop >= 0.8) {
-                return "#000066";
+                return "#663300";
             }
             else if (black/total_pop >= 0.50) {
-                return "#0000b3";
+                return "#b35900";
             }
             else if (black/total_pop >= 0.1)  {
-                return "#4d4dff";
+                return "#ff8000";
             }
             else if (black/total_pop >= 0.05) {
-                return "#ccccff";
+                return "#ffb366";
             }
             else  {
-                return "#ffffff";
+                return "#ffd9b3";
             }
         }
         
@@ -482,19 +485,19 @@
             var total_pop = Number(feature.properties.pop_Total);
             
             if (latino/total_pop >= 0.8) {
-                return "#000066";
+                return "#662900";
             }
             else if (latino/total_pop >= 0.50) {
-                return "#0000b3";
+                return "#ff6600";
             }
             else if (latino/total_pop >= 0.1)  {
-                return "#4d4dff";
+                return "#ff944d";
             }
             else if (latino/total_pop >= 0.05) {
-                return "#ccccff";
+                return "#ffb380";
             }
             else  {
-                return "#ffffff";
+                return "#ffe0cc";
             }
         }
         
@@ -505,33 +508,33 @@
             var native = Number(feature.properties.pop_Amrind);
             var total_pop = Number(feature.properties.pop_Total);
             
-            if ((black+latino+asian+native)/total_pop >= 0.8) {
-                return "#000066";
+            if ((black + latino + asian + native)/total_pop >= 0.8) {
+                return "#66004d";
             }
-            else if ((black+latino+asian+native)/total_pop >= 0.50) {
-                return "#0000b3";
+            else if ((black + latino + asian + native)/total_pop >= 0.50) {
+                return "#cc0099";
             }
-            else if ((black+latino+asian+native)/total_pop >= 0.1)  {
-                return "#4d4dff";
+            else if ((black + latino + asian + native)/total_pop >= 0.1)  {
+                return "#ff33cc";
             }
-            else if ((black+latino+asian+native)/total_pop >= 0.05) {
-                return "#ccccff";
+            else if ((black + latino + asian + native)/total_pop >= 0.05) {
+                return "#ff80df";
             }
             else  {
-                return "#ffffff";
+                return "#ffccf2";
             }
         }
         
         function onEachFeature(feature, layer) {
             // changes color of layer to green with mouseover and returns back to original color settings with mouseout
-            layer.on('mouseover', function (leafletEvent) {
-                var dataLayer = leafletEvent.target;
-                dataLayer.setStyle({
-                    weight: 6,
-                    color: 'yellow',
-                    fillOpacity: 1,
+                layer.on('mouseover', function (leafletEvent) {
+                    var dataLayer = leafletEvent.target;
+                    dataLayer.setStyle({
+                        weight: 6,
+                        color: 'yellow',
+                        fillOpacity: 1,
                     
-                });
+                    });
                 
                 layer.on('mouseout', function (leafletEvent) {
                     var dataLayer = leafletEvent.target;
@@ -552,57 +555,52 @@
             });
         }
         
-        //
-        // function updateInfo(layer) {
-        //     // updates the information associated with each county so that the data           can be populated in the information box
-        //     var props = layer.feature.properties;
-        //
-        //     var html = "<h3>"+props['NAME']+" County</h3>"+
-        //             "Total # of Vacant Units: <b>"+ props["VACANT"]+"</b><br>"+
-        //             "# of Vacant Units for Rent: <b>"+ props["VACANT_FOR"]+"</b><br>"+
-        //             "# of Vacant Units for Sale: <b>"+ props["VACANT_FO2"]+"</b><br>"+
-        //             "# of Total Housing Units:   <b>"+ props["TOTAL"]+"</b><br>"
-        //
-        //     $(".info").html(html);
-        // }
-        //
-        //    function countyinfoWindow(e, counties){
-        //     var infoWindow = $('#info');
-        //
-        //     var infowindowInfo = $('#infoinfo');
-        //
-        //     dataLayer.on('mouseclick', function(e) {
-        //         var countyprops = e.layer.feature.properties;
-        //         infoinfo.show();
-        //         $('#legendinfo span').text(countyprops.name);
-        //         $('#legendinfo span1').text(countyprops.clinton);
-        //         $('#legendinfo span2').text(countyprops.trump);
-        //         $('#legendinfo span3').text(countyprops.Pop_Total);
-        //         $('#legendinfo span4').text(countyprops.Pop_Males);
-        //         $('#legendinfo span5').text(countyprops.Pop_Females);
-        //         $('#legendinfo span6').text(countyprops.Pop_White);
-        //         $('#legendinfo span7').text(countyprops.Pop_Black);
-        //         $('#legendinfo span8').text(countyprops.Pop_Latino);
-        //         $('#legendinfo span9').text(countyprops.Pop_Asian);
-        //         $('#legendinfo span10').text(countyprops.Pop_Amrind);
-        //         $('#legendinfo span11').text(countyprops.Income);
-        //         $('#legendinfo span12').text(countyprops.Median_HI);
-        //         $('#legendinfo span13').text(countyprops.Under18_POV);
-        //         $('#legendinfo span14').text(countyprops.Bachelor);
-        //         $('#legendinfo span15').text(countyprops.Master_PhD);
-        //         e.layer.setStyle({
-        //
-        //             fillOpacity: 0.6
-        //         });
-        //
-        // });
-        //
-        //     // dataLayer.on('mouseout', function(e) {
-        //     //     info.hide();
-        //     //     e.layer.setStyle({
-        //     //         fillOpacity: 0 });
-        //     //     });
-        // }
+        
+          function updateInfo(layer) {
+              //updates the information associated with each county so that the data           can be populated in the information box
+              var props = layer.feature.properties;
+         
+              var html = "<h3>"+props['NAME']+" County</h3>"+
+                      "Total # of Vacant Units: <b>"+ props["VOTE"]+"</b><br>"
+         
+              $("#info").html(html);
+         }
+         
+          function drawInfo (e, counties){
+                var infoWindow = $('#info');
+         
+               counties.on('mouseclick', function(e) {
+                    var props = e.layer.feature.properties;
+                    infoinfo.show();
+                      $('#info span').text(props.name);
+                      $('#info span1').text(props.clinton);
+                      $('#info span2').text(props.trump);
+                      $('#info span3').text(props.pop_Total);
+                      $('#info span4').text(props.pop_Males);
+                      $('#info span5').text(props.pop_Females);
+                      $('#info span6').text(props.pop_White);
+                      $('#info span7').text(props.pop_Black);
+                      $('#info span8').text(props.pop_Latino);
+                      $('#info span9').text(props.pop_Asian);
+                      $('#info span10').text(props.pop_Amrind);
+                      $('#info span11').text(props.Income);
+                      $('#info span12').text(props.Median_HI);
+                      $('#info span13').text(props.Under18_POV);
+                      $('#info span14').text(props.bachelor);
+                      $('#info span15').text(props.master_PhD);
+                      e.layer.setStyle({
+         
+                      fillOpacity: 0.6
+                 });
+         
+          });
+         
+           dataLayer.on('mouseout', function(e) {
+              info.hide();
+              e.layer.setStyle({
+                  fillOpacity: 0 });
+            });
+            }
     </script>
 </body>
 
