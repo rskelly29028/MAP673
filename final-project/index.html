@@ -147,6 +147,7 @@
             color: white;
             margin-right: 5px;
         }
+        
     </style>
 </head>
 
@@ -309,7 +310,7 @@
                     style: function (feature) { // style each feature of GeoJson layer
                         return {
                         color: 'white', // set stroke color
-                        fillColor: getCountyMinorityColor(feature),
+                        fillColor: getCountyEducationColor(feature),
                         weight: 0.5, // set stroke weight
                         fillOpacity: 1, // override defautl fill opacity
                     };
@@ -323,6 +324,8 @@
                                   'Johnson: ' + feature.properties.johnson + '<br>' + 
                                   'Stein: ' + feature.properties.stein + '<br>' + 
                                   'McMullin: ' + feature.properties.mcmullin + '<br>' +
+                                  'Median Household Income: $' + feature.properties.Median_HI + '<br>'
+                                  
                     
                     layer.bindTooltip(tooltip, {
                         sticky: true
@@ -339,8 +342,8 @@
                             weight: 1.5, // set stroke weight
                             fillOpacity: 1, // override defautl fill opacity
                     };
-                }
-                , onEachFeature: function (feature, layer) {
+                },
+                    onEachFeature: function (feature, layer) {
                     var tooltip = 'STATE: ' + feature.properties.name + '<br>' + 
                                   'Clinton: ' + feature.properties.clinton + '<br>' + 
                                   'Trump: ' + feature.properties.trump;
@@ -355,8 +358,8 @@
                 style: function (feature) { // style each feature of GeoJson layer
                     return {
                         color: 'white', // set stroke color
-                        fillColor: 'navy'
-                        , weight: 0.5, // set stroke weight
+                        fillColor: 'navy',
+                        weight: 0.5, // set stroke weight
                         fillOpacity: 1, // override defautl fill opacity
                     };
                 }
@@ -436,16 +439,16 @@
             var masters = Number(feature.properties.master_Phd); 
             var total_pop = Number(feature.properties.pop_Total);
             
-            if ((bachelor + masters)/total_pop >= 0.3) {
+            if ((bachelor+masters)/total_pop >= 0.35) {
                 return "#000066";
             }
-            else if ((bachelor + masters)/total_pop >= 0.20) {
+            else if ((bachelor+masters)/total_pop >= 0.25) {
                 return "#0000b3";
             }
-            else if ((bachelor + masters)/total_pop >= 0.15)  {
+            else if ((bachelor+masters)/total_pop >= 0.15)  {
                 return "#4d4dff";
             }
-            else if ((bachelor + masters)/total_pop >= 0.01) {
+            else if ((bachelor+masters)/total_pop >= 0.05) {
                 return "#ccccff";
             }
             else  {
