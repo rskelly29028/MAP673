@@ -181,25 +181,25 @@
         <p>Population:
             <span3> </span3>
         </p>
-        <p>Males:
+        <p>% Male:
             <span4> </span4>
         </p>
-        <p>Females:
+        <p>% Female:
             <span5> </span5>
         </p>
-        <p>White:
+        <p>% White:
             <span6> </span6>
         </p>
-        <p>Black:
+        <p>% Black:
             <span7> </span7>
         </p>
-        <p>Hispanic:
+        <p>% Hispanic:
             <span8> </span8>
         </p>
-        <p>Asian:
+        <p>% Asian:
             <span9> </span9>
         </p>
-        <p>Native American:
+        <p>% Native American:
             <span10> </span10>
         </p>
         <p>Per Capita Income:
@@ -218,15 +218,18 @@
             <span15> </span15>
         </p>
     </div>
+    
     <div id='ui-controls'>
         <select id="voting">
             <option value="VOTE">Voting Data 2016 General Election</option>
-            <option value="RACE">Race Data (2010 US Census)</option>
-            <option value="GENDER">Gender Data (2010 US Census)</option>
+            <option value="MINORITY">% Minority (2010 US Census)</option>
+            <option value="BLACK">% African-American (2010 US Census)</option>
+            <option value="LATINO">% Latino (2010 Census)</option>
             <option value="INCOME">Income Data (2010 US Census)</option>
             <option value="EDUCATION">Education Data (2010 US Census)</option>
         </select>
     </div>
+    
     <script src='https://cdnjs.cloudflare.com/ajax/libs/simple-statistics/1.0.1/simple_statistics.min.js'></script>
     <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script>
@@ -306,7 +309,7 @@
                     style: function (feature) { // style each feature of GeoJson layer
                         return {
                         color: 'white', // set stroke color
-                        fillColor: getCountyEducationColor(feature),
+                        fillColor: getCountyMinorityColor(feature),
                         weight: 0.5, // set stroke weight
                         fillOpacity: 1, // override defautl fill opacity
                     };
@@ -387,7 +390,8 @@
             var stein = Number(feature.properties.stein);
             var mcmullin = Number(feature.properties.mcmullin);
             var totalvote = Number(feature.properties.totalvote);
-            if (clinton / totalvote >= 0.6) {
+            
+            if (clinton / (totalvote - johnson - stein - mcmullin) >= 0.6) {
                 return "#08088A";
             }
             else if (clinton / (totalvote - johnson - stein - mcmullin) >= 0.55) {
@@ -428,20 +432,20 @@
         }
 
         function getCountyEducationColor(feature) {
-            var population = Number(feature.properties.Pop_Total);
-            var bachelor = Number(feature.properties.Bachelor);
-            var masters = Number(feature.properties.Master_Phd);
+            var bachelor = Number(feature.properties.bachelor);
+            var masters = Number(feature.properties.master_Phd); 
+            var total_pop = Number(feature.properties.pop_Total);
             
-            if ((bachelor+masters)/population >= 0.1) {
+            if ((bachelor + masters)/total_pop >= 0.3) {
                 return "#000066";
             }
-            else if ((bachelor+masters)/population >= 0.08) {
+            else if ((bachelor + masters)/total_pop >= 0.20) {
                 return "#0000b3";
             }
-            else if ((bachelor+masters)/population >= 0.06)  {
+            else if ((bachelor + masters)/total_pop >= 0.15)  {
                 return "#4d4dff";
             }
-            else if ((bachelor+masters)/population >= 0.04) {
+            else if ((bachelor + masters)/total_pop >= 0.01) {
                 return "#ccccff";
             }
             else  {
@@ -449,6 +453,71 @@
             }
         }
         
+        function getCountyBlackColor(feature) {
+            var black = Number(feature.properties.pop_Black); 
+            var total_pop = Number(feature.properties.pop_Total);
+            
+            if (black/total_pop >= 0.8) {
+                return "#000066";
+            }
+            else if (black/total_pop >= 0.50) {
+                return "#0000b3";
+            }
+            else if (black/total_pop >= 0.1)  {
+                return "#4d4dff";
+            }
+            else if (black/total_pop >= 0.05) {
+                return "#ccccff";
+            }
+            else  {
+                return "#ffffff";
+            }
+        }
+        
+        function getCountyLatinoColor(feature) {
+            var latino = Number(feature.properties.pop_Latino); 
+            var total_pop = Number(feature.properties.pop_Total);
+            
+            if (latino/total_pop >= 0.8) {
+                return "#000066";
+            }
+            else if (latino/total_pop >= 0.50) {
+                return "#0000b3";
+            }
+            else if (latino/total_pop >= 0.1)  {
+                return "#4d4dff";
+            }
+            else if (latino/total_pop >= 0.05) {
+                return "#ccccff";
+            }
+            else  {
+                return "#ffffff";
+            }
+        }
+        
+        function getCountyMinorityColor(feature) {
+            var black = Number(feature.properties.pop_Black);
+            var latino = Number(feature.properties.pop_Latino); 
+            var asian = Number(feature.properties.pop_Asian);
+            var native = Number(feature.properties.pop_Amrind);
+            var total_pop = Number(feature.properties.pop_Total);
+            
+            if ((black+latino+asian+native)/total_pop >= 0.8) {
+                return "#000066";
+            }
+            else if ((black+latino+asian+native)/total_pop >= 0.50) {
+                return "#0000b3";
+            }
+            else if ((black+latino+asian+native)/total_pop >= 0.1)  {
+                return "#4d4dff";
+            }
+            else if ((black+latino+asian+native)/total_pop >= 0.05) {
+                return "#ccccff";
+            }
+            else  {
+                return "#ffffff";
+            }
+        }
         
         function onEachFeature(feature, layer) {
             // changes color of layer to green with mouseover and returns back to original color settings with mouseout
@@ -472,7 +541,6 @@
             })
         }
 
-        
         function buildUI() {
             $('select[id="voting"]').change(function () {
                 attribute = $(this).val();
