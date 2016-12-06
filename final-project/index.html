@@ -93,15 +93,17 @@
         .legend {
             padding: 6px 8px;
             font-size: 1em;
-            background: white;
+            color: white;
+            background: black;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
             border-radius: 5px;
+            border-color: white;
         }
         
         .legend h3 {
             font-size: 1.1em;
             font-weight: normal;
-            color: #001323;
+            color: #ffffff;
             margin: 10 0 10px 0;
         }
         
@@ -150,8 +152,8 @@
         <p><img src="graphics/donald-trump-hillary-clinton-impossible-choice.png" alt="legend"></p>
         <p>306.....................Electoral Votes.................232</p>
         <p><img src="graphics/red-blue.png" alt="legend"></p>
-        <p>The 58th quadrennial Presidetial Election, held on November 8, 2016, saw GOP candidate Donald Trump score a stunning upset over Democratic nominee Hillary Clinton to become the 45th President of the United States of America. This was the fourth election in U.S. history - and the second of the 21st century - to see the candidate who won the Electoral College lose the popular vote. The 2016 election further saw the widening gap in American political preferences with the Democratic nominee winning by wide margins in heavily urban counties and the GOP nominee winning by huge margins in rural counties. Demographic data clearly indicate well-defined voting patterns that follow both racial and educational lines, with Clinton faring well among mnority populations and those holding college degrees, and with Trump winning counties by large margins where the majority of the population was white and did not hold college degrees.</p>
-        <p>The user is encouraged to browse the map data by selecting from the dropdown tab in the upper left corner of the map. The selected data of each county will populate the information box at the right of the screen as the user scrolls the mouse over the selected county.</p>
+        <p>The 58th quadrennial Presidetial Election, held on November 8, 2016, saw GOP candidate Donald Trump score a stunning upset over Democratic nominee Hillary Clinton to become the 45th President of the United States of America. This was the fourth election in U.S. history - and the second of the 21st century - to see the candidate who won the Electoral College lose the popular vote. The 2016 election further saw the polarization in American political preferences with the Democratic nominee winning by wide margins in heavily urban counties and the GOP nominee winning by huge margins in rural counties. Demographic data clearly indicate well-defined voting patterns that follow both racial and educational lines, with Clinton faring well among minority populations and those holding college degrees, and with Trump winning counties by large margins where the majority of the population was white and did not hold college degrees.</p>
+        <p>State data is limited to vote totals, with states won by Hillary Clinton featured in blue and states won by Donald Trump featured in red. The user is encouraged to browse the map data by selecting counties from the tab at upper right and then selecting from the attributes listed in the dropdown menu in the upper left corner of the map. The selected data of each county will populate the information box at the right of the screen as the user scrolls the mouse over the selected county.</p>
         <h2><u>About This Map</u></h2>
         <p><i>Map created December 10, 2016, by Ryan Kelly, Professor of Geography, GISP, Bluegrass Community and Technical College</i></p>
         <h2><u>About the Data</u></h2>
@@ -189,7 +191,6 @@
         , });
         
         var CartoDB_DarkMatter = 
-            
             L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
             , subdomains: 'abcd'
@@ -200,7 +201,7 @@
         map.zoomControl.setPosition('topright');
         
         var countyLayer, statesLayer, lakesLayer, dataLayer;
-        var attribute = "VOTE"
+        var attribute = "VOTE";
         
         var labels = {
             "VOTE CLINTON": "Votes for Hillary Clinton",
@@ -257,6 +258,8 @@
 
         function drawMap(states, counties, lakes) {
             
+            var value = $('#voting').val(); //value will be set VOTE for the initial load
+            
             countiesLayer = L.geoJson(counties, {
                 
                 onEachFeature: onEachFeature, 
@@ -264,7 +267,7 @@
                     style: function (feature) { // style each feature of GeoJson layer
                         return {
                         color: 'white', // set stroke color
-                        fillColor: getCountyColor(feature),
+                        fillColor: getCountyColor(feature, value),
                         weight: 0.5, // set stroke weight
                         fillOpacity: 1, // override defautl fill opacity
                     };
@@ -275,7 +278,7 @@
                     layer.on('mouseover', function(){
                         
                         updateInfo(this);
-                        //updateLegend(this);
+                        updateLegend(feature);
                     });
                 }
             });
@@ -337,7 +340,7 @@
             }
         }
 
-        function getCountyColor(feature) {
+        function getCountyColor(feature, value) {
             
             var clinton = Number(feature.properties.clinton);
             var trump = Number(feature.properties.trump);
@@ -519,7 +522,20 @@
                 resetHighlight();
             })
         }          
+        
+        
+        // create function to update the map
+        function updateMap(feature){
             
+            countiesLayer.eachLayer(function(layer){
+                
+                layer.setStyle({
+                    fillColor: getCountyColor(feature, layer)
+            });
+        })
+        
+        }
+        
         function drawLegend() {
 
 			// create a new Leaflet control object, and position it top left
@@ -541,27 +557,30 @@
 			legend.addTo(map);
 		}
             
-        function updateLegend(layer) {
+        function updateLegend(feature) {
 
             // creates natural breaks and assigns colors to different classes
-            var legend = $('.legend').html("<h3>" + labels[attribute] + "</h3><ul>"); 
-
-
-            var color = getCountyVoteColor();
-
+            
+            //var props = layer.feature.properties;
+            
+            var legend = $('.legend').html("<h3>" + "LEGEND" + "</h3><ul>"); 
+                
+                    var color = getCountyVoteColor(feature);
+            
                 legend.append(
-                    '<span style="background:' + color + '"></span> ' +
-                    '<label>'+(clinton.toLocaleString() + ' &mdash; ' + 
-                    (trump.toLocaleString() + '</label>')));
-            }
+                    '<span style="background:' + color + '"></span> ' + '<label>' +"Clinton >60%"+ feature.properties.clinton/feature.properties.total_vote + '&mdash;'  + '</label>' +
+                    '<span style="background:' + color + '"></span> ' + '<label>' +"Clinton 55%-60%"+ feature.properties.clinton + '&mdash;'  + '</label>' +
+                    '<label>'+ feature.clinton + '&mdash;'  + '</label>' +
+                    '<label>'+ feature.clinton + '&mdash;'  + '</label>');
+            
 
-        
+        }
 
         function buildUI() {
             $('select[id="voting"]').change(function () {
                 attribute = $(this).val();
                 
-                //drawMap();
+                updateMap();
             });
         }
         
