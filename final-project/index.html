@@ -525,12 +525,12 @@
         
         
         // create function to update the map
-        function updateMap(feature){
+        function updateMap(feature, attribute){
             
             countiesLayer.eachLayer(function(layer){
                 
                 layer.setStyle({
-                    fillColor: getCountyColor(feature)
+                    fillColor: getCountyColor(layer.feature.properties[attribute],feature)
             });
         })
         
