@@ -74,25 +74,23 @@
             width: 68%;
         }
         
-        #info {
-            position: absolute;
-            order: top;
-            background: whitesmoke;
-            padding: 8px 15px;
-            max-width: 200px;
-            top: 25%;
-            right: 1%;
+        .info {
             color: black;
-            border: 1px solid black;
-            border-radius: 1px;
+            padding: 6px 8px;
             font-size: 1em;
+            background: whitesmoke;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            border-radius: 5px;
+            text-align: left;   
         }
         
-        #info p {
-            margin: 3px 0 4px;
+        .info h3 {
             color: black;
+            text-align: left;
+            margin: 0;
         }
-        #legend {
+        
+        .legend {
             position: absolute;
             top: 250px;
             bottom: 25px;
@@ -105,25 +103,22 @@
             border-radius: 5px;
         }
         
-        #legend h3 {
+        .legend h3 {
             font-size: 1.1em;
             font-weight: normal;
             color: #001323;
             margin: 10 0 10px 0;
         }
         
-        #legend span {
+        .legend span {
             width: 20px;
             height: 20px;
             float: left;
             margin: 0 10px 4px 0;
         }
         
-        #legend label {
+        .legend label {
             font-size: 1.1em;
-        }
-        
-        #legend label:after {
             content: '';
             display: block;
             clear: both;
@@ -169,55 +164,7 @@
     </div>
     <div id="info">
         <h3><u>County Information</u></h3>
-        <p>County: <span> </span> </p>
-        <p>State:
-            <span1> </span1>
-        </p>
-        <p>% Clinton:
-            <span1> </span1>
-        </p>
-        <p>% Trump:
-            <span2> </span2>
-        </p>
-        <p>Population:
-            <span3> </span3>
-        </p>
-        <p>% Male:
-            <span4> </span4>
-        </p>
-        <p>% Female:
-            <span5> </span5>
-        </p>
-        <p>% White:
-            <span6> </span6>
-        </p>
-        <p>% Black:
-            <span7> </span7>
-        </p>
-        <p>% Hispanic:
-            <span8> </span8>
-        </p>
-        <p>% Asian:
-            <span9> </span9>
-        </p>
-        <p>% Native American:
-            <span10> </span10>
-        </p>
-        <p>Per Capita Income:
-            <span11> </span11>
-        </p>
-        <p>Median Household Income:
-            <span12> </span12>
-        </p>
-        <p>% in Poverty:
-            <span13> </span13>
-        </p>
-        <p>% with BA/BS:
-            <span14> </span14>
-        </p>
-        <p>% with MA/MS/PhD:
-            <span15> </span15>
-        </p>
+        
     </div>
     
     <div id='ui-controls'>
@@ -257,7 +204,7 @@
         
         map.zoomControl.setPosition('topright');
         
-        var countyLayer, statesLayer, lakesLayer;
+        var countyLayer, statesLayer, lakesLayer, dataLayer;
         // Load the map data using queue
         
         queue()
@@ -298,6 +245,8 @@
             }
             
             drawMap(states, counties, lakes);
+            drawInfo();
+            updateInfo(this);
             
         }
 
@@ -323,18 +272,16 @@
                                   'Trump: ' + feature.properties.trump + '<br>' + 
                                   'Johnson: ' + feature.properties.johnson + '<br>' + 
                                   'Stein: ' + feature.properties.stein + '<br>' + 
-                                  'McMullin: ' + feature.properties.mcmullin + '<br>' +
-                                  'Median Household Income: $' + feature.properties.Median_HI + '<br>'
+                                  'McMullin: ' + feature.properties.mcmullin + '<br>'
                                   
                     
                     layer.bindTooltip(tooltip, {
                         sticky: true
                     });
+                    
+                    //updateInfo(this);
                 }
             });
-            
-            //drawInfo();
-            //updateInfo();
             
                 statesLayer = L.geoJson(states, {
                     onEachFeature: onEachFeature,
@@ -370,14 +317,17 @@
             }).addTo(map);
             
             var sourcesLayers = {
-                "States": statesLayer
-                , "Counties": countiesLayer
+                "States": statesLayer,
+                "Counties": countiesLayer
             }
             L.control.layers(null, sourcesLayers, {
                 collapsed: false
+                
             }).addTo(map);
+            
         }
-
+        
+            
         function getStateColor(feature) {
             var clinton = Number(feature.properties.clinton);
             var trump = Number(feature.properties.trump);
@@ -543,6 +493,8 @@
                         color: 'white',
                         fillOpacity: 1,
                     });
+                    
+                    drawMap();
                 })
             })
         }
@@ -556,52 +508,58 @@
         }
         
         
-          function updateInfo(layer) {
-              //updates the information associated with each county so that the data           can be populated in the information box
-              var props = layer.feature.properties;
-         
-              var html = "<h3>"+props['NAME']+" County</h3>"+
-                      "Total # of Vacant Units: <b>"+ props["VOTE"]+"</b><br>"
-         
-              $("#info").html(html);
-         }
-         
-          function drawInfo (e, counties){
-                var infoWindow = $('#info');
-         
-               counties.on('mouseclick', function(e) {
-                    var props = e.layer.feature.properties;
-                    infoinfo.show();
-                      $('#info span').text(props.name);
-                      $('#info span1').text(props.clinton);
-                      $('#info span2').text(props.trump);
-                      $('#info span3').text(props.pop_Total);
-                      $('#info span4').text(props.pop_Males);
-                      $('#info span5').text(props.pop_Females);
-                      $('#info span6').text(props.pop_White);
-                      $('#info span7').text(props.pop_Black);
-                      $('#info span8').text(props.pop_Latino);
-                      $('#info span9').text(props.pop_Asian);
-                      $('#info span10').text(props.pop_Amrind);
-                      $('#info span11').text(props.Income);
-                      $('#info span12').text(props.Median_HI);
-                      $('#info span13').text(props.Under18_POV);
-                      $('#info span14').text(props.bachelor);
-                      $('#info span15').text(props.master_PhD);
-                      e.layer.setStyle({
-         
-                      fillOpacity: 0.6
-                 });
-         
-          });
-         
-           dataLayer.on('mouseout', function(e) {
-              info.hide();
-              e.layer.setStyle({
-                  fillOpacity: 0 });
-            });
+          function drawInfo(layer, feature) {
+          // creates an information box in the lower right corner of map frame
               
+                var info = L.control({position: 'bottomright'});
+            
+                info.onAdd = function(map) {
+
+                var div = L.DomUtil.create('div', 'info');
+
+                return div;  
+
             }
+            
+            info.addTo(map);
+            // adds data to information box upon mouseover event
+            countiesLayer.on('mouseover', function() {
+                $(".info").show();
+            });
+            // removes data from information box upon mouseout event
+            countiesLayer.on('mouseout', function() {
+                $(".info").hide();    
+            });
+    
+        }
+              
+          function updateInfo(layer){
+              
+                var props = layer.feature;
+                
+                var html = "<h3>" + props +" County</h3>" +
+                           "State: <b>"+ props+"</b><br>" +
+                           "Population: <b>"+ props+"</b><br>" +
+                           "% Vote for Clinton: <b>"+ props+"</b><br>" +
+                           "% Vote for Trump: <b>"+ props+"</b><br>" +
+                           "% Vote for Other: <b>"+ props+"</b><br>" +
+                           "% White: <b>"+ props+"</b><br>" +
+                           "% African-American: <b>"+ props+"</b><br>" +
+                           "% Latino: <b>"+ props+"</b><br>" +
+                           "% Asian: <b>"+ props+"</b><br>" +
+                           "% Native American: <b>"+ props+"</b><br>" +
+                           "% Male: <b>"+ props+"</b><br>" +
+                           "% Female: <b>"+ props+"</b><br>" +
+                           "Per Capita Income: <b>"+ props+"</b><br>" +
+                           "Median Household Income: <b>"+ props+"</b><br>" +
+                           "% Under 18 Living in Poverty: <b>"+ props+"</b><br>" +
+                           "% with BA/BS: <b>"+ props+"</b><br>" +
+                           "% with MA/MS/PhD: <b>"+ props+"</b><br>" 
+                    
+                    
+                    
+               $(".info").html(html);
+          }
         
     </script>
 </body>
