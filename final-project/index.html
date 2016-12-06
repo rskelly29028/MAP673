@@ -75,27 +75,22 @@
         }
         
         .info {
-            color: black;
+            color: white;
             padding: 6px 8px;
             font-size: 1em;
-            background: whitesmoke;
-            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            background: black;
             border-radius: 5px;
+            border-color: white;
             text-align: left;   
         }
         
         .info h3 {
-            color: black;
+            color: white;
             text-align: left;
             margin: 0;
         }
         
         .legend {
-            position: absolute;
-            top: 250px;
-            bottom: 25px;
-            width: 100px;
-            height: 100px;
             padding: 6px 8px;
             font-size: 1em;
             background: white;
@@ -205,6 +200,13 @@
         map.zoomControl.setPosition('topright');
         
         var countyLayer, statesLayer, lakesLayer, dataLayer;
+        var attribute = "VOTE"
+        
+        var labels = {
+            "VOTE CLINTON": "Votes for Hillary Clinton",
+            "VOTE TRUMP": "Votes for Donald Trump"
+        }
+        
         // Load the map data using queue
         
         queue()
@@ -244,9 +246,12 @@
                 }
             }
             
+            drawLegend();
             drawMap(states, counties, lakes);
+            buildUI();
             drawInfo();
-            //updateInfo(this);
+            //onEachFeature();
+            
             
         }
 
@@ -259,7 +264,7 @@
                     style: function (feature) { // style each feature of GeoJson layer
                         return {
                         color: 'white', // set stroke color
-                        fillColor: getCountyVoteColor(feature),
+                        fillColor: getCountyColor(feature),
                         weight: 0.5, // set stroke weight
                         fillOpacity: 1, // override defautl fill opacity
                     };
@@ -267,9 +272,10 @@
                 
                 onEachFeature: function (feature, layer) {
                     
-                    
                     layer.on('mouseover', function(){
+                        
                         updateInfo(this);
+                        //updateLegend(this);
                     });
                 }
             });
@@ -331,6 +337,39 @@
             }
         }
 
+        function getCountyColor(feature) {
+            
+            var clinton = Number(feature.properties.clinton);
+            var trump = Number(feature.properties.trump);
+            var johnson = Number(feature.properties.johnson);
+            var stein = Number(feature.properties.stein);
+            var mcmullin = Number(feature.properties.mcmullin);
+            var totalvote = Number(feature.properties.totalvote);
+            var medianHI = Number(feature.properties.Median_HI);
+            var bachelor = Number(feature.properties.bachelor);
+            var masters = Number(feature.properties.master_Phd); 
+            var total_pop = Number(feature.properties.pop_Total);
+            var black = Number(feature.properties.pop_Black);
+            var latino = Number(feature.properties.pop_Latino); 
+            var asian = Number(feature.properties.pop_Asian);
+            var native = Number(feature.properties.pop_Amrind);
+            
+            if (value = "VOTE"){
+                return getCountyVoteColor(feature);
+            }   else if (value = "BLACK"){
+                    return getCountyBlackColor(feature);
+            }   else if (value = "LATINO"){
+                    return getCountyLatinoColor(feature);
+            }   else if (value = "MINORITY"){
+                    return getCountyMinorityColor(feature);
+            }   else if (value = "INCOME"){
+                    return getCountyIncomeColor(feature);
+            }   else if (value = "EDUCATION"){
+                    return getCountyEducationColor(feature)
+            }
+                    
+                }
+          
         function getCountyVoteColor(feature) {
             var clinton = Number(feature.properties.clinton);
             var trump = Number(feature.properties.trump);
@@ -468,34 +507,61 @@
         }
         
         function onEachFeature(feature, layer) {
-            // changes color of layer to green with mouseover and returns back to original color settings with mouseout
-                layer.on('mouseover', function (leafletEvent) {
-                    var dataLayer = leafletEvent.target;
-                    dataLayer.setStyle({
-                        weight: 6,
-                        color: 'yellow',
-                        fillOpacity: 1,
-                    
-                    });
+            // highlights county border yellow with mouseover and returns back to original color settings with mouseout
+            countiesLayer.on('mouseover', function pointMouseover(leafletEvent) {
                 
-                layer.on('mouseout', function (leafletEvent) {
-                    var dataLayer = leafletEvent.target;
-                    dataLayer.setStyle({
-                        weight: 0.5,
-                        color: 'white',
-                        fillOpacity: 1,
-                    });
+                highlightFeature();
                     
-                    drawMap();
-                })
+            });
+            
+            countiesLayer.on('mouseout', function pointMouseover(leafletEvent){
+                
+                resetHighlight();
             })
-        }
+        }          
+            
+        function drawLegend() {
+
+			// create a new Leaflet control object, and position it top left
+			var legend = L.control({
+				position: 'bottomleft'
+			});
+
+			// when the legend is added to the map
+			legend.onAdd = function (map) {
+
+				// create a new HTML <div> element and give it a class name of "legend"
+				var div = L.DomUtil.create('div', 'legend');
+
+				return div;
+
+			};
+
+			// add the legend to the map
+			legend.addTo(map);
+		}
+            
+        function updateLegend(layer) {
+
+            // creates natural breaks and assigns colors to different classes
+            var legend = $('.legend').html("<h3>" + labels[attribute] + "</h3><ul>"); 
+
+
+            var color = getCountyVoteColor();
+
+                legend.append(
+                    '<span style="background:' + color + '"></span> ' +
+                    '<label>'+(clinton.toLocaleString() + ' &mdash; ' + 
+                    (trump.toLocaleString() + '</label>')));
+            }
+
+        
 
         function buildUI() {
             $('select[id="voting"]').change(function () {
                 attribute = $(this).val();
                 
-                drawMap();
+                //drawMap();
             });
         }
         
@@ -534,7 +600,6 @@
                            "Population: <b>"+ props.pop_Total+"</b><br>" +
                            "% Vote for Clinton: <b>"+ ((props.clinton/props.totalvote)*100).toFixed(2)+"%</b><br>" +
                            "% Vote for Trump: <b>"+ ((props.trump/props.totalvote)*100).toFixed(2) +"%</b><br>" +
-                           "% Vote for Other: <b>"+ (((props.johnson + props.stein + props.mcmullin)/props.totalvote)*100).toFixed(2)+"%</b><br>" +
                            "% White: <b>"+ ((props.pop_White/props.pop_Total)*100).toFixed(2)+"%</b><br>" +
                            "% African-American: <b>"+ ((props.pop_Black/props.pop_Total)*100).toFixed(2)  +"%</b><br>" +
                            "% Latino: <b>"+ ((props.pop_Latino/props.pop_Total)*100).toFixed(2)+"%</b><br>" +
@@ -550,6 +615,23 @@
                     
                $(".info").html(html);
           }
+        
+            function highlightFeature(feature, layer) {
+                var layer = e.target;
+
+                layer.setStyle({
+                    weight: 5,
+                    color: '#666',
+                    dashArray: '',
+                    fillOpacity: 0.7
+            });
+
+            
+            }
+        
+            function resetHighlight(feature, layer) {
+                countiesLayer.resetStyle(e.target);
+            }
         
     </script>
 </body>
