@@ -14,7 +14,7 @@
             background: whitesmoke;
             font-family: "Work Sans", sans-serif;
         }
-        
+
         #side-panel {
             position: absolute;
             left: 0;
@@ -25,7 +25,7 @@
             border-right: 2px solid navy;
             overflow-y: scroll;
         }
-        
+
         h1 {
             padding: 8px 25px 8px 15px;
             margin: 0;
@@ -35,7 +35,7 @@
             font-size: 2.5em;
             text-align: center;
         }
-        
+
         h2 {
             margin: 0;
             padding: 8px 25px 8px 15px;
@@ -44,7 +44,7 @@
             font-size: 1.2em;
             text-align: center;
         }
-        
+
         #side-panel p {
             margin: 8px 0 4px;
             padding: 0 25px 0 15px;
@@ -52,19 +52,19 @@
             text-align: center;
             font-size: 1em;
         }
-        
+
         #side-panel p:after {
             content: '';
             display: block;
             clear: both;
         }
-        
+
         #side-panel img {
             float: center;
             margin: 0 0 15px 15px;
             border: 1px solid white;
         }
-        
+
         #map {
             position: absolute;
             order: bottom;
@@ -73,7 +73,7 @@
             right: 0;
             width: 68%;
         }
-        
+
         .info {
             color: white;
             padding: 6px 8px;
@@ -81,15 +81,15 @@
             background: black;
             border-width: medium;
             border-color: white;
-            text-align: left;   
+            text-align: left;
         }
-        
+
         .info h3 {
             color: white;
             text-align: left;
             margin: 0;
         }
-        
+
         .legend {
             padding: 6px 8px;
             font-size: 1em;
@@ -99,33 +99,33 @@
             border-width: thin;
             border-color: white;
         }
-        
+
         .legend h3 {
             font-size: 1.1em;
             font-weight: normal;
             color: #ffffff;
             margin: 10 0 10px 0;
         }
-        
+
         .legend span {
             width: 20px;
             height: 20px;
             float: left;
             margin: 0 10px 4px 0;
         }
-        
+
         .legend label {
             font-size: 1.1em;
             content: '';
             display: block;
             clear: both;
         }
-        
+
         #voting {
             color: white;
             background-color: darkslategray;
         }
-        
+
         #ui-controls {
             position: absolute;
             margin-left: 33%;
@@ -133,13 +133,13 @@
             background-color: black;
             z-index: 800;
         }
-        
+
         #ui-controls label {
             font-size: 1em;
             color: white;
             margin-right: 5px;
         }
-        
+
     </style>
 </head>
 
@@ -161,9 +161,9 @@
     </div>
     <div id="info">
         <h3><u>County Information</u></h3>
-        
+
     </div>
-    
+
     <div id='ui-controls'>
         <select id="voting">
             <option value="VOTE">Voting Data 2016 General Election</option>
@@ -174,14 +174,14 @@
             <option value="EDUCATION">Education Data (2010 US Census)</option>
         </select>
     </div>
-    
+
     <script src='https://cdnjs.cloudflare.com/ajax/libs/simple-statistics/1.0.1/simple_statistics.min.js'></script>
     <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/queue-async/1.0.7/queue.min.js"></script>
     <script>
-        
+
         var map = L.map('map', {
             center: [38, -97.5],
             zoom: 4,
@@ -189,41 +189,41 @@
             maxZoom: 12,
             maxBounds: L.latLngBounds([75, -170], [10, -30]),
          });
-        
-        var CartoDB_DarkMatter = 
+
+        var CartoDB_DarkMatter =
             L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
             subdomains: 'abcd',
             maxZoom: 19
-        
+
             }).addTo(map);
-        
+
         map.zoomControl.setPosition('topright');
-        
+
         var countyLayer, statesLayer, lakesLayer, dataLayer;
         //var attribute = "VOTE";
-        
+
         var labels = {
             "VOTE CLINTON": "Votes for Hillary Clinton",
             "VOTE TRUMP": "Votes for Donald Trump"
         }
-        
+
         // Load the map data using queue
-        
+
         queue()
             .defer(d3.json, "US-Counties.json")
             .defer(d3.json, "us-states.json")
             .defer(d3.csv, "Election-States.csv")
             .defer(d3.csv, "Master.csv")
             .defer(d3.json, "Great-Lakes.json").await(processData);
-        
+
         // create a function to loop through the counties data and grab the county FIPS code to ensure a match for each county
         function processData(e, counties, states, statesData, countiesData, lakes) {
-            
+
             for (var state in states.features) {
-                
+
                 var stateFIP = states.features[state].properties.STATEFP;
-                
+
                 for (var d in statesData) {
                     if (stateFIP === statesData[d].state_fp) {
                         states.features[state].properties = statesData[d];
@@ -231,11 +231,11 @@
                     }
                 }
             }
-            
+
             for (var county in counties.features) {
-                
+
                 var countyFIP = counties.features[county].properties.GEOID;
-                
+
                 for (var d in countiesData) {
                     var countiesDataFip = countiesData[d].fips;
                     // need to slice off last five characters for FIPS code
@@ -246,23 +246,23 @@
                     }
                 }
             }
-            
+
             drawLegend();
             drawMap(states, counties, lakes);
             buildUI();
             drawInfo();
-            
-           
+
+
         }
 
         function drawMap(states, counties, lakes) {
-            
+
             var value = $('#voting').val(); //value will be set VOTE for the initial load
-            
+
             countiesLayer = L.geoJson(counties, {
-                
-                onEachFeature: onEachFeature, 
-                
+
+                // onEachFeature: onEachFeature,
+
                     style: function (feature) { // style each feature of GeoJson layer
                         return {
                         color: 'white', // set stroke color
@@ -271,21 +271,37 @@
                         fillOpacity: 1, // override defautl fill opacity
                     };
                 },
-            
-                
+
+
                 onEachFeature: function (feature, layer) {
-                    
+
                     layer.on('click', function(){
-                        
+
                         updateInfo(this);
                         updateLegend(feature);
                         //onEachFeature();
                     });
+
+                    layer.on('mouseover', function(e) {
+
+                        layer.setStyle({
+                            weight: 2.5,
+                            color: 'yellow'
+                        });
+                    });
+
+                    layer.on('mouseout', function(e){
+
+                        layer.setStyle({
+                            weight: 0.5,
+                            color: 'white',
+                        });
+                    });
                 }
-            });
-                                
+            }).addTo(map);
+
                 statesLayer = L.geoJson(states, {
-                    onEachFeature: onEachFeature,
+                    // onEachFeature: onEachFeature,
                         style: function (feature) { // style each feature of GeoJson layer
                             return {
                             color: 'white', // set stroke color
@@ -295,22 +311,22 @@
                     };
                 },
                     onEachFeature: function (feature, layer) {
-                
-                    var tooltip = '<b>STATE:</b> ' + feature.properties.name  + '<br>' + 
-                                  '<b>Clinton:</b> ' + feature.properties.clinton + '<br>' + 
+
+                    var tooltip = '<b>STATE:</b> ' + feature.properties.name  + '<br>' +
+                                  '<b>Clinton:</b> ' + feature.properties.clinton + '<br>' +
                                   '<b>Trump:</b> ' + feature.properties.trump + '<br>' +
                                   '<b>Electoral Votes:</b> ' + feature.properties.votes + '<br>' +
                                   '<b>WINNER:</b> ' + feature.properties.winner + '<br>' +
                                   getStatePicture(feature);
-                        
+
                     layer.bindTooltip(tooltip, {
                         sticky: true,
                     });
-                    
+
                 }
-                    
-            }).addTo(map);
-            
+
+            });
+
             lakesLayer = L.geoJson(lakes, {
                 style: function (feature) { // style each feature of GeoJson layer
                     return {
@@ -320,23 +336,23 @@
                         fillOpacity: 1, // override defautl fill opacity
                     };
                 }
-                
-            }).addTo(map);
-            
+
+            });
+
             var sourcesLayers = {
                 "States": statesLayer,
                 "Counties": countiesLayer,
-                
+
             }
-            
+
             L.control.layers(null, sourcesLayers, {
                 collapsed: false
-                
+
             }).addTo(map);
-            
+
         }
-        
-            
+
+
         function getStateColor(feature) {
             var clinton = Number(feature.properties.clinton);
             var trump = Number(feature.properties.trump);
@@ -358,9 +374,9 @@
                 return "<img src='./graphics/Donald_Trump.jpg' />";
             }
         }
-        
+
         function getCountyColor(feature, value) {
-            
+
             var clinton = Number(feature.properties.clinton);
             var trump = Number(feature.properties.trump);
             var johnson = Number(feature.properties.johnson);
@@ -369,17 +385,17 @@
             var totalvote = Number(feature.properties.totalvote);
             var medianHI = Number(feature.properties.Median_HI);
             var bachelor = Number(feature.properties.bachelor);
-            var masters = Number(feature.properties.master_Phd); 
+            var masters = Number(feature.properties.master_Phd);
             var total_pop = Number(feature.properties.pop_Total);
             var black = Number(feature.properties.pop_Black);
-            var latino = Number(feature.properties.pop_Latino); 
+            var latino = Number(feature.properties.pop_Latino);
             var asian = Number(feature.properties.pop_Asian);
             var native = Number(feature.properties.pop_Amrind);
-            
+
             if (value == "VOTE"){
-                    return getCountyVoteColor(feature)           
+                    return getCountyVoteColor(feature)
             }   else if (value == "BLACK"){
-                    return  getCountyBlackColor(feature) 
+                    return  getCountyBlackColor(feature)
             }   else if (value == "LATINO"){
                     return getCountyLatinoColor(feature)
             }   else if (value == "MINORITY"){
@@ -389,9 +405,9 @@
             }   else if (value == "EDUCATION"){
                     return getCountyEducationColor(feature)
             }
-                    
+
                 }
-          
+
         function getCountyVoteColor(feature) {
             var clinton = Number(feature.properties.clinton);
             var trump = Number(feature.properties.trump);
@@ -399,7 +415,7 @@
             var stein = Number(feature.properties.stein);
             var mcmullin = Number(feature.properties.mcmullin);
             var totalvote = Number(feature.properties.totalvote);
-            
+
             if (clinton / (totalvote - johnson - stein - mcmullin) >= 0.6) {
                 return "#08088A";
             }
@@ -419,10 +435,10 @@
                 return "#df0101"
             }
         }
-        
+
         function getCountyIncomeColor(feature) {
             var medianHI = Number(feature.properties.Median_HI);
-            
+
             if (medianHI >= 70000) {
                 return "#004d00";
             }
@@ -442,9 +458,9 @@
 
         function getCountyEducationColor(feature) {
             var bachelor = Number(feature.properties.bachelor);
-            var masters = Number(feature.properties.master_Phd); 
+            var masters = Number(feature.properties.master_Phd);
             var total_pop = Number(feature.properties.pop_Total);
-            
+
             if ((bachelor+masters)/total_pop >= 0.35) {
                 return "#29293d";
             }
@@ -461,11 +477,11 @@
                 return "#e0e0eb";
             }
         }
-        
+
         function getCountyBlackColor(feature) {
-            var black = Number(feature.properties.pop_Black); 
+            var black = Number(feature.properties.pop_Black);
             var total_pop = Number(feature.properties.pop_Total);
-            
+
             if (black/total_pop >= 0.75) {
                 return "#663300";
             }
@@ -482,11 +498,11 @@
                 return "#ffd9b3";
             }
         }
-        
+
         function getCountyLatinoColor(feature) {
-            var latino = Number(feature.properties.pop_Latino); 
+            var latino = Number(feature.properties.pop_Latino);
             var total_pop = Number(feature.properties.pop_Total);
-            
+
             if (latino/total_pop >= 0.75) {
                 return "#662900";
             }
@@ -503,14 +519,14 @@
                 return "#ffe0cc";
             }
         }
-        
+
         function getCountyMinorityColor(feature) {
             var black = Number(feature.properties.pop_Black);
-            var latino = Number(feature.properties.pop_Latino); 
+            var latino = Number(feature.properties.pop_Latino);
             var asian = Number(feature.properties.pop_Asian);
             var native = Number(feature.properties.pop_Amrind);
             var total_pop = Number(feature.properties.pop_Total);
-            
+
             if ((black + latino + asian + native)/total_pop >= 0.8) {
                 return "#66004d";
             }
@@ -527,44 +543,19 @@
                 return "#ffccf2";
             }
         }
-        
-        function onEachFeature(feature, layer) {
-        
-            // highlights feature to yellow with mouseover and returns back to original color settings with mouseout
-            
-            countiesLayer.on('mouseover', function pointMouseover(leafletEvent) {
-                var dataLayer = leafletEvent.target;
-                dataLayer.setStyle({
-                    weight: 2.5,
-                    color: 'yellow'
-                    
-            });
-            
-            countiesLayer.on('mouseout', function pointMouseover(leafletEvent){
-                var dataLayer = leafletEvent.target;
-                dataLayer.setStyle({
-                    weight: 0.5,
-                    color: 'white',
-            });
-                
-            
-            })
-        }          
-            )
-        }
 
         // create function to update the map
         function updateMap(){
-            
+
                 countiesLayer.eachLayer(function(layer){
-                
+
                 layer.setStyle({
                     fillColor: getCountyColor(layer.feature, attribute)
             });
         })
-        
+
         }
-        
+
         function drawLegend() {
 
 			// create a new Leaflet control object, and position it top left
@@ -585,48 +576,48 @@
 			// add the legend to the map
 			legend.addTo(map);
 		}
-            
+
         function updateLegend(feature) {
 
             // creates natural breaks and assigns colors to different classes
-            
+
             //var props = layer.feature.properties;
-            
-            var legend = $('.legend').html("<h3>" + "LEGEND" + "</h3><ul>"); 
-                
+
+            var legend = $('.legend').html("<h3>" + "LEGEND" + "</h3><ul>");
+
                     var color = getCountyVoteColor(feature);
-            
+
                 legend.append(
                     '<span style="background:' + color + '"></span> ' + '<label>' +"Clinton >60%"+ feature.properties.clinton/feature.properties.total_vote + '&mdash;'  + '</label>' +
                     '<span style="background:' + color + '"></span> ' + '<label>' +"Clinton 55%-60%"+ feature.properties.clinton + '&mdash;'  + '</label>' +
                     '<label>'+ feature.clinton + '&mdash;'  + '</label>' +
                     '<label>'+ feature.clinton + '&mdash;'  + '</label>');
-            
+
 
         }
 
         function buildUI() {
             $('select[id="voting"]').change(function () {
                 attribute = $(this).val();
-                
+
                 updateMap();
             });
         }
-        
-        
+
+
           function drawInfo(layer, feature) {
           // creates an information box in the lower right corner of map frame
-              
+
                 var info = L.control({position: 'bottomright'});
-            
+
                 info.onAdd = function(map) {
 
                 var div = L.DomUtil.create('div', 'info');
 
-                return div;  
+                return div;
 
             }
-            
+
             info.addTo(map);
             // adds data to information box upon mouseover event
             countiesLayer.on('mouseover', function() {
@@ -634,15 +625,15 @@
             });
             // removes data from information box upon mouseout event
             countiesLayer.on('mouseout', function() {
-                $(".info").hide();    
+                $(".info").hide();
             });
-    
+
         }
-              
+
           function updateInfo(layer){
-              
+
                 var props = layer.feature.properties;
-                
+
                 var html = "<h3>" + props.name +" County</h3>" +
                            "State: <b>"+ props.state+"</b><br>" +
                            "Population: <b>"+ props.pop_Total+"</b><br>" +
@@ -659,12 +650,12 @@
                            "Median Household Income: <b>$"+ props.Median_HI+"</b><br>" +
                            "% Under 18 Living in Poverty: <b>"+ ((props.Under18_POV/props.pop_Total)*100).toFixed(2)+"%</b><br>" +
                            "% with Bachelor Degree: <b>"+ ((props.bachelor/props.pop_Total)*100).toFixed(2)+"%</b><br>" +
-                           "% with Masters or PhD: <b>"+ ((props.master_Phd/props.pop_Total)*100).toFixed(2)+"%</b><br>" 
-                    
+                           "% with Masters or PhD: <b>"+ ((props.master_Phd/props.pop_Total)*100).toFixed(2)+"%</b><br>"
+
                $(".info").html(html);
           }
-        
-        
+
+
     </script>
 </body>
 
