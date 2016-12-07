@@ -183,25 +183,25 @@
     <script>
         
         var map = L.map('map', {
-            center: [38, -97.5]
-            , zoom: 4
-            , minZoom: 2
-            , maxZoom: 12
-            , maxBounds: L.latLngBounds([70, -166], [10, -40])
-        , });
+            center: [38, -97.5],
+            zoom: 4,
+            minZoom: 2,
+            maxZoom: 12,
+            maxBounds: L.latLngBounds([75, -170], [10, -30]),
+         });
         
         var CartoDB_DarkMatter = 
             L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
-            , subdomains: 'abcd'
-            , maxZoom: 19
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
+            subdomains: 'abcd',
+            maxZoom: 19
         
             }).addTo(map);
         
         map.zoomControl.setPosition('topright');
         
         var countyLayer, statesLayer, lakesLayer, dataLayer;
-        var attribute = "VOTE";
+        //var attribute = "VOTE";
         
         var labels = {
             "VOTE CLINTON": "Votes for Hillary Clinton",
@@ -251,7 +251,7 @@
             drawMap(states, counties, lakes);
             buildUI();
             drawInfo();
-            updateMap();
+            
            
         }
 
@@ -275,7 +275,7 @@
                 
                 onEachFeature: function (feature, layer) {
                     
-                    layer.on('mouseover', function(){
+                    layer.on('click', function(){
                         
                         updateInfo(this);
                         updateLegend(feature);
@@ -376,17 +376,17 @@
             var asian = Number(feature.properties.pop_Asian);
             var native = Number(feature.properties.pop_Amrind);
             
-            if (value = "VOTE"){
-                return getCountyVoteColor(feature);
-            }   else if (value = "BLACK"){
-                    return getCountyBlackColor(feature);
-            }   else if (value = "LATINO"){
-                    return getCountyLatinoColor(feature);
-            }   else if (value = "MINORITY"){
-                    return getCountyMinorityColor(feature);
-            }   else if (value = "INCOME"){
-                    return getCountyIncomeColor(feature);
-            }   else if (value = "EDUCATION"){
+            if (value == "VOTE"){
+                    return getCountyVoteColor(feature)           
+            }   else if (value == "BLACK"){
+                    return  getCountyBlackColor(feature) 
+            }   else if (value == "LATINO"){
+                    return getCountyLatinoColor(feature)
+            }   else if (value == "MINORITY"){
+                    return getCountyMinorityColor(feature)
+            }   else if (value == "INCOME"){
+                    return getCountyIncomeColor(feature)
+            }   else if (value == "EDUCATION"){
                     return getCountyEducationColor(feature)
             }
                     
@@ -466,7 +466,7 @@
             var black = Number(feature.properties.pop_Black); 
             var total_pop = Number(feature.properties.pop_Total);
             
-            if (black/total_pop >= 0.8) {
+            if (black/total_pop >= 0.75) {
                 return "#663300";
             }
             else if (black/total_pop >= 0.50) {
@@ -475,7 +475,7 @@
             else if (black/total_pop >= 0.1)  {
                 return "#ff8000";
             }
-            else if (black/total_pop >= 0.05) {
+            else if (black/total_pop >= 0.01) {
                 return "#ffb366";
             }
             else  {
@@ -487,7 +487,7 @@
             var latino = Number(feature.properties.pop_Latino); 
             var total_pop = Number(feature.properties.pop_Total);
             
-            if (latino/total_pop >= 0.8) {
+            if (latino/total_pop >= 0.75) {
                 return "#662900";
             }
             else if (latino/total_pop >= 0.50) {
@@ -496,7 +496,7 @@
             else if (latino/total_pop >= 0.1)  {
                 return "#ff944d";
             }
-            else if (latino/total_pop >= 0.05) {
+            else if (latino/total_pop >= 0.01) {
                 return "#ffb380";
             }
             else  {
@@ -554,12 +554,12 @@
         }
 
         // create function to update the map
-        function updateMap(feature, value){
+        function updateMap(){
             
                 countiesLayer.eachLayer(function(layer){
                 
-                countiesLayer.setStyle({
-                    fillColor: getCountyColor(feature, value)
+                layer.setStyle({
+                    fillColor: getCountyColor(layer.feature, attribute)
             });
         })
         
