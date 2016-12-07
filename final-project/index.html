@@ -148,11 +148,11 @@
     <div id='side-panel'>
         <h1>THE CHOICE</h1>
         <h2>The 2016 US Presidential Election</h2>
-        <p>This map displays voting data by county for the 2016 general election, as well as select demographic, income and education data by county.</p>
+        <p>This map displays voting data by state for the 2016 general election, as well as select demographic, income and education data by county.</p>
         <p><img src="graphics/donald-trump-hillary-clinton-impossible-choice.png" alt="legend"></p>
         <p>306.....................Electoral Votes.................232</p>
         <p><img src="graphics/red-blue.png" alt="legend"></p>
-        <p>The 58th quadrennial Presidetial Election, held on November 8, 2016, saw GOP candidate Donald Trump score a stunning upset over Democratic nominee Hillary Clinton to become the 45th President of the United States of America. This was the fourth election in U.S. history - and the second of the 21st century - to see the candidate who won the Electoral College lose the popular vote. The 2016 election further saw the polarization in American political preferences with the Democratic nominee winning by wide margins in heavily urban counties and the GOP nominee winning by huge margins in rural counties. Demographic data clearly indicate well-defined voting patterns that follow both racial and educational lines, with Clinton faring well among minority populations and those holding college degrees, and with Trump winning counties by large margins where the majority of the population was white and did not hold college degrees.</p>
+        <p>The 58th quadrennial presidetial election, held on November 8, 2016, saw GOP candidate Donald Trump score a stunning upset over Democratic nominee Hillary Clinton to become the 45th President of the United States of America. This was the fourth election in U.S. history - and the second of the 21st century - to see the candidate who won the Electoral College lose the popular vote. The 2016 election further saw the polarization in American political preferences with the Democratic nominee winning by wide margins in heavily urban counties and the GOP nominee winning by huge margins in rural counties. Demographic data clearly indicate well-defined voting patterns that follow both racial and educational lines, with Clinton faring well among minority populations and those holding college degrees, and with Trump winning counties by large margins where the majority of the population was white and did not hold college degrees.</p>
         <p>State data is limited to vote totals, with states won by Hillary Clinton featured in blue and states won by Donald Trump featured in red. Scroll the mouse over the state map to view the number of votes won by each candidate in each state, along with the number of electoral votes awarded to the winner.  The user is encouraged to browse the map data by selecting counties from the tab at upper right and then selecting from the attributes listed in the dropdown menu in the upper left corner of the map. The selected data of each county will populate the information box at the right of the screen as the user scrolls the mouse over the selected county.</p>
         <h2><u>About This Map</u></h2>
         <p><i>Map created December 10, 2016, by Ryan Kelly, Professor of Geography, GISP, Bluegrass Community and Technical College</i></p>
@@ -271,11 +271,24 @@
                         fillOpacity: 1, // override defautl fill opacity
                     };
                 },
-            
                 
                 onEachFeature: function (feature, layer) {
                     
-                    layer.on('click', function(){
+                    var popup = '<b>County Name:</b> ' + feature.properties.name  + '<br>' + 
+                                  '<b>State Name:</b> ' + feature.properties.state + '<br>' +
+                                  '<b>Clinton:</b> ' + feature.properties.clinton + '<br>' + 
+                                  '<b>Trump:</b> ' + feature.properties.trump + '<br>' +
+                                  '<b>Johnson:</b> ' + feature.properties.johnson + '<br>' + 
+                                  '<b>Stein:</b> ' + feature.properties.stein + '<br>' + 
+                                  '<b>McMullin:</b> ' + feature.properties.mcmullin + '<br>' +
+                                  '<b>WINNER:</b> ' + feature.properties.winner + '<br>' +
+                                  getStatePicture(feature);
+                        
+                    layer.bindPopup(popup, {
+                        sticky: true,
+                    })
+                    
+                    layer.on('mouseover', function(){
                         
                         updateInfo(this);
                         updateLegend(feature);
@@ -283,7 +296,7 @@
                     });
                 }
             });
-                                
+               
                 statesLayer = L.geoJson(states, {
                     onEachFeature: onEachFeature,
                         style: function (feature) { // style each feature of GeoJson layer
@@ -323,10 +336,21 @@
                 
             }).addTo(map);
             
+            //statesoutlineLayer = L.geoJson(states, {
+            //    style: function (feature) { // style each feature of GeoJson layer
+            //        return {
+            //            color: 'white', // set stroke color
+            //            weight: 1.5, // set stroke weight
+            //            fillOpacity: 0, // override defautl fill opacity
+            //            position: 'front',
+            //        };
+            //    }
+            //    
+            //    }).addTo(map);
+            
             var sourcesLayers = {
                 "States": statesLayer,
-                "Counties": countiesLayer,
-                
+                "Counties": countiesLayer, 
             }
             
             L.control.layers(null, sourcesLayers, {
@@ -335,6 +359,7 @@
             }).addTo(map);
             
         }
+        
         
             
         function getStateColor(feature) {
@@ -367,6 +392,7 @@
             var stein = Number(feature.properties.stein);
             var mcmullin = Number(feature.properties.mcmullin);
             var totalvote = Number(feature.properties.totalvote);
+            var genvote = (Number(feature.properties.clinton) + Number(feature.properties.trump));
             var medianHI = Number(feature.properties.Median_HI);
             var bachelor = Number(feature.properties.bachelor);
             var masters = Number(feature.properties.master_Phd); 
@@ -395,27 +421,28 @@
         function getCountyVoteColor(feature) {
             var clinton = Number(feature.properties.clinton);
             var trump = Number(feature.properties.trump);
+            var genvote = (Number(feature.properties.clinton) + Number(feature.properties.trump));
             var johnson = Number(feature.properties.johnson);
             var stein = Number(feature.properties.stein);
             var mcmullin = Number(feature.properties.mcmullin);
             var totalvote = Number(feature.properties.totalvote);
             
-            if (clinton / (totalvote - johnson - stein - mcmullin) >= 0.6) {
+            if (clinton / genvote >= 0.6) {
                 return "#08088A";
             }
-            else if (clinton / (totalvote - johnson - stein - mcmullin) >= 0.55) {
+            else if (clinton / genvote >= 0.55) {
                 return "#0101df";
             }
-            else if (clinton / (totalvote - johnson - stein - mcmullin) >= 0.5) {
+            else if (clinton / genvote >= 0.5) {
                 return "#81BEF7";
             }
-            else if (clinton / (totalvote - johnson - stein - mcmullin) >= 0.45) {
+            else if (clinton / genvote >= 0.45) {
                 return "#f5a9a9";
             }
-            else if (clinton / (totalvote - johnson - stein - mcmullin) >= 0.40) {
+            else if (clinton / genvote >= 0.40) {
                 return "#fe2e2e";
             }
-            else if (clinton / (totalvote - johnson - stein - mcmullin) >= 0.01) {
+            else if (clinton / genvote >= 0.01) {
                 return "#df0101"
             }
         }
@@ -446,19 +473,19 @@
             var total_pop = Number(feature.properties.pop_Total);
             
             if ((bachelor+masters)/total_pop >= 0.35) {
-                return "#29293d";
+                return "#00004b";
             }
             else if ((bachelor+masters)/total_pop >= 0.25) {
-                return "#666699";
+                return "#0000ab";
             }
             else if ((bachelor+masters)/total_pop >= 0.15)  {
-                return "#a3a3c2";
+                return "#2727ff";
             }
             else if ((bachelor+masters)/total_pop >= 0.05) {
-                return "#c2c2d6";
+                return "#7575ff";
             }
             else  {
-                return "#e0e0eb";
+                return "#d0d0ff";
             }
         }
         
@@ -467,19 +494,19 @@
             var total_pop = Number(feature.properties.pop_Total);
             
             if (black/total_pop >= 0.75) {
-                return "#663300";
+                return "#4b2600";
             }
             else if (black/total_pop >= 0.50) {
-                return "#b35900";
+                return "#783e00";
             }
             else if (black/total_pop >= 0.1)  {
-                return "#ff8000";
+                return "#b45e00";
             }
             else if (black/total_pop >= 0.01) {
-                return "#ffb366";
+                return "#ff8600";
             }
             else  {
-                return "#ffd9b3";
+                return "#ffcf9d";
             }
         }
         
@@ -488,19 +515,19 @@
             var total_pop = Number(feature.properties.pop_Total);
             
             if (latino/total_pop >= 0.75) {
-                return "#662900";
+                return "#272700";
             }
             else if (latino/total_pop >= 0.50) {
-                return "#ff6600";
+                return "#636300";
             }
             else if (latino/total_pop >= 0.1)  {
-                return "#ff944d";
+                return "#b7b700";
             }
             else if (latino/total_pop >= 0.01) {
-                return "#ffb380";
+                return "#ffff0d";
             }
             else  {
-                return "#ffe0cc";
+                return "#ffffb6";
             }
         }
         
@@ -511,7 +538,7 @@
             var native = Number(feature.properties.pop_Amrind);
             var total_pop = Number(feature.properties.pop_Total);
             
-            if ((black + latino + asian + native)/total_pop >= 0.8) {
+            if ((black + latino + asian + native)/total_pop >= 0.75) {
                 return "#66004d";
             }
             else if ((black + latino + asian + native)/total_pop >= 0.50) {
@@ -663,6 +690,8 @@
                     
                $(".info").html(html);
           }
+        
+            
         
         
     </script>
