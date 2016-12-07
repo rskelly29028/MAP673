@@ -153,7 +153,7 @@
         <p>306.....................Electoral Votes.................232</p>
         <p><img src="graphics/red-blue.png" alt="legend"></p>
         <p>The 58th quadrennial Presidetial Election, held on November 8, 2016, saw GOP candidate Donald Trump score a stunning upset over Democratic nominee Hillary Clinton to become the 45th President of the United States of America. This was the fourth election in U.S. history - and the second of the 21st century - to see the candidate who won the Electoral College lose the popular vote. The 2016 election further saw the polarization in American political preferences with the Democratic nominee winning by wide margins in heavily urban counties and the GOP nominee winning by huge margins in rural counties. Demographic data clearly indicate well-defined voting patterns that follow both racial and educational lines, with Clinton faring well among minority populations and those holding college degrees, and with Trump winning counties by large margins where the majority of the population was white and did not hold college degrees.</p>
-        <p>State data is limited to vote totals, with states won by Hillary Clinton featured in blue and states won by Donald Trump featured in red. The user is encouraged to browse the map data by selecting counties from the tab at upper right and then selecting from the attributes listed in the dropdown menu in the upper left corner of the map. The selected data of each county will populate the information box at the right of the screen as the user scrolls the mouse over the selected county.</p>
+        <p>State data is limited to vote totals, with states won by Hillary Clinton featured in blue and states won by Donald Trump featured in red. Scroll the mouse over the state map to view the number of votes won by each candidate in each state, along with the number of electoral votes awarded to the winner.  The user is encouraged to browse the map data by selecting counties from the tab at upper right and then selecting from the attributes listed in the dropdown menu in the upper left corner of the map. The selected data of each county will populate the information box at the right of the screen as the user scrolls the mouse over the selected county.</p>
         <h2><u>About This Map</u></h2>
         <p><i>Map created December 10, 2016, by Ryan Kelly, Professor of Geography, GISP, Bluegrass Community and Technical College</i></p>
         <h2><u>About the Data</u></h2>
@@ -247,13 +247,13 @@
                 }
             }
             
+            //updateMap(value, 'VOTE')
             drawLegend();
             drawMap(states, counties, lakes);
             buildUI();
             drawInfo();
             //onEachFeature();
-            
-            
+           
         }
 
         function drawMap(states, counties, lakes) {
@@ -294,11 +294,16 @@
                     };
                 },
                     onEachFeature: function (feature, layer) {
+                
                         var tooltip = '<b>STATE:</b> ' + feature.properties.name  + '<br>' + 
                                   '<b>Clinton:</b> ' + feature.properties.clinton + '<br>' + 
-                                  '<b>Trump:</b> ' + feature.properties.trump;
+                                  '<b>Trump:</b> ' + feature.properties.trump + '<br>' +
+                                  '<b>Electoral Votes:</b> ' + feature.properties.votes + '<br>' +
+                                  '<b>WINNER:</b> ' + feature.properties.winner + '<br>' +
+                                  getStatePicture(feature);
+                        
                     layer.bindTooltip(tooltip, {
-                        sticky: true
+                        sticky: true,
                     });
                     
                 }
@@ -340,6 +345,17 @@
             }
         }
 
+        function getStatePicture (feature) {
+            var clinton = Number(feature.properties.clinton);
+            var trump = Number(feature.properties.trump);
+            if (clinton > trump) {
+                return "<img src='./graphics/Hillary_Clinton.jpg' />";
+            }
+            else if (trump > clinton) {
+                return "<img src='./graphics/Donald_Trump.jpg' />";
+            }
+        }
+        
         function getCountyColor(feature, value) {
             
             var clinton = Number(feature.properties.clinton);
@@ -525,12 +541,12 @@
         
         
         // create function to update the map
-        function updateMap(feature, attribute){
+        function updateMap(feature, value){
             
-            countiesLayer.eachLayer(function(layer){
+                countiesLayer.eachLayer(function(layer){
                 
                 layer.setStyle({
-                    fillColor: getCountyColor(layer.feature.properties[attribute],feature)
+                    fillColor: getCountyColor(feature, value)
             });
         })
         
@@ -629,8 +645,8 @@
                            "Per Capita Income: <b>$"+ props.Income+"</b><br>" +
                            "Median Household Income: <b>$"+ props.Median_HI+"</b><br>" +
                            "% Under 18 Living in Poverty: <b>"+ ((props.Under18_POV/props.pop_Total)*100).toFixed(2)+"%</b><br>" +
-                           "% with BA/BS: <b>"+ ((props.bachelor/props.pop_Total)*100).toFixed(2)+"%</b><br>" +
-                           "% with MA/MS/PhD: <b>"+ ((props.master_Phd/props.pop_Total)*100).toFixed(2)+"%</b><br>" 
+                           "% with Bachelor Degree: <b>"+ ((props.bachelor/props.pop_Total)*100).toFixed(2)+"%</b><br>" +
+                           "% with Masters or PhD: <b>"+ ((props.master_Phd/props.pop_Total)*100).toFixed(2)+"%</b><br>" 
                     
                $(".info").html(html);
           }
