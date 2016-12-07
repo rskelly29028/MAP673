@@ -79,7 +79,7 @@
             padding: 6px 8px;
             font-size: 1em;
             background: black;
-            border-radius: 5px;
+            border-width: medium;
             border-color: white;
             text-align: left;   
         }
@@ -96,7 +96,7 @@
             color: white;
             background: black;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-            border-radius: 5px;
+            border-width: thin;
             border-color: white;
         }
         
@@ -247,12 +247,11 @@
                 }
             }
             
-            //updateMap(value, 'VOTE')
             drawLegend();
             drawMap(states, counties, lakes);
             buildUI();
             drawInfo();
-            //onEachFeature();
+            updateMap();
            
         }
 
@@ -272,6 +271,7 @@
                         fillOpacity: 1, // override defautl fill opacity
                     };
                 },
+            
                 
                 onEachFeature: function (feature, layer) {
                     
@@ -279,10 +279,11 @@
                         
                         updateInfo(this);
                         updateLegend(feature);
+                        //onEachFeature();
                     });
                 }
             });
-            
+                                
                 statesLayer = L.geoJson(states, {
                     onEachFeature: onEachFeature,
                         style: function (feature) { // style each feature of GeoJson layer
@@ -295,7 +296,7 @@
                 },
                     onEachFeature: function (feature, layer) {
                 
-                        var tooltip = '<b>STATE:</b> ' + feature.properties.name  + '<br>' + 
+                    var tooltip = '<b>STATE:</b> ' + feature.properties.name  + '<br>' + 
                                   '<b>Clinton:</b> ' + feature.properties.clinton + '<br>' + 
                                   '<b>Trump:</b> ' + feature.properties.trump + '<br>' +
                                   '<b>Electoral Votes:</b> ' + feature.properties.votes + '<br>' +
@@ -324,8 +325,10 @@
             
             var sourcesLayers = {
                 "States": statesLayer,
-                "Counties": countiesLayer
+                "Counties": countiesLayer,
+                
             }
+            
             L.control.layers(null, sourcesLayers, {
                 collapsed: false
                 
@@ -526,26 +529,36 @@
         }
         
         function onEachFeature(feature, layer) {
-            // highlights county border yellow with mouseover and returns back to original color settings with mouseout
+        
+            // highlights feature to yellow with mouseover and returns back to original color settings with mouseout
+            
             countiesLayer.on('mouseover', function pointMouseover(leafletEvent) {
-                
-                highlightFeature();
+                var dataLayer = leafletEvent.target;
+                dataLayer.setStyle({
+                    weight: 2.5,
+                    color: 'yellow'
                     
             });
             
             countiesLayer.on('mouseout', function pointMouseover(leafletEvent){
+                var dataLayer = leafletEvent.target;
+                dataLayer.setStyle({
+                    weight: 0.5,
+                    color: 'white',
+            });
                 
-                resetHighlight();
+            
             })
         }          
-        
-        
+            )
+        }
+
         // create function to update the map
         function updateMap(feature, value){
             
                 countiesLayer.eachLayer(function(layer){
                 
-                layer.setStyle({
+                countiesLayer.setStyle({
                     fillColor: getCountyColor(feature, value)
             });
         })
@@ -651,22 +664,6 @@
                $(".info").html(html);
           }
         
-            function highlightFeature(feature, layer) {
-                var layer = e.target;
-
-                layer.setStyle({
-                    weight: 5,
-                    color: '#666',
-                    dashArray: '',
-                    fillOpacity: 0.7
-            });
-
-            
-            }
-        
-            function resetHighlight(feature, layer) {
-                countiesLayer.resetStyle(e.target);
-            }
         
     </script>
 </body>
