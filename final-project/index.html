@@ -95,28 +95,31 @@
             font-size: 1em;
             color: white;
             background: black;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
             border-width: thin;
             border-color: white;
+            text-align: left;
         }
         
         .legend h3 {
             font-size: 1.1em;
             font-weight: normal;
-            color: #ffffff;
-            margin: 10 0 10px 0;
+            text-align: center;
+            color: white;
+            margin: 10 0 0px 0;
         }
         
         .legend span {
             width: 20px;
             height: 20px;
             float: left;
-            margin: 0 10px 4px 0;
+            text-align: left;
+            margin: 0 20px 4px 0;
         }
         
         .legend label {
             font-size: 1.1em;
             content: '';
+            text-align: left;
             display: block;
             clear: both;
         }
@@ -203,11 +206,17 @@
         map.zoomControl.setPosition('topright');
         
         var countyLayer, statesLayer, lakesLayer, dataLayer;
-        //var attribute = "VOTE";
         
-        var labels = {
-            "VOTE CLINTON": "Votes for Hillary Clinton",
-            "VOTE TRUMP": "Votes for Donald Trump"
+        var attribute = "VOTE";
+        
+        var votinglabels = {
+            "VOTE": "Percent for Each Candidate",
+            "CLINTON60": "Hillary Clinton > 60%",
+            "CLINTON5560": "Hillary Clinton 55% - 60%",
+            "CLINTON5055": "Hillary Clinton 50% - 55%",
+            "TRUMP5055": "Donald Trump 50% -55%",
+            "TRUMP5560": "Donald Trump 55% - 60%",
+            "TRUMP60": "Donald Trump > 60%",
         }
         
         // Load the map data using queue
@@ -252,7 +261,8 @@
             drawLegend();
             drawMap(states, counties, lakes);
             buildUI();
-            drawInfo();
+            drawInfo()
+            //getLegend();
             
            
         }
@@ -306,7 +316,7 @@
                     layer.on('mouseover', function(){
                         
                         updateInfo(this);
-                        updateLegend(feature);
+                        getLegend();
                         //onEachFeature();
                     });
                     
@@ -414,6 +424,23 @@
             }
             else if (trump > clinton) {
                 return "<img src='./graphics/Donald_Trump.jpg' />";
+            }
+        }
+        
+        function getLegend(feature, value){
+            
+            if (value == "VOTE"){
+                    return buildVoteLegend(feature)           
+            }   else if (value == "BLACK"){
+                    return  buildBlackLegend(feature) 
+            }   else if (value == "LATINO"){
+                    return buildLatinoLegend(feature)
+            }   else if (value == "MINORITY"){
+                    return buildMinorityLegend(feature)
+            }   else if (value == "INCOME"){
+                    return buildIncomeLegend(feature)
+            }   else if (value == "EDUCATION"){
+                    return buildEducationLegend(feature)
             }
         }
         
@@ -588,8 +615,40 @@
             }
         }
         
-        
+        function createvotePopup(feature){
+           
+            var votepopup = '<b>County Name:</b> ' + feature.properties.name  + '<br>' + 
+                                  '<b>State Name:</b> ' + feature.properties.state + '<br>' +
+                                  '<b>Clinton:</b> ' + feature.properties.clinton + '<br>' + 
+                                  '<b>Trump:</b> ' + feature.properties.trump + '<br>' +
+                                  '<b>Johnson:</b> ' + feature.properties.johnson + '<br>' + 
+                                  '<b>Stein:</b> ' + feature.properties.stein + '<br>' + 
+                                  '<b>McMullin:</b> ' + feature.properties.mcmullin + '<br>' +
+                                  '<b>WINNER:</b> ' + feature.properties.winner + '<br>' +
+                                  getStatePicture(feature);
+                        
+                    layer.bindPopup(votepopup, {
+                        sticky: true,
+                    })
+            
+        }
 
+        function createracePopup(feature){
+            
+            var racepopup = '<b>County Name:</b> ' + feature.properties.name  + '<br>' + 
+                            '<b>State Name:</b> ' + feature.properties.state + '<br>' +
+                            '<b>White:</b> ' + feature.properties.pop_White + '<br>' + 
+                            '<b>African-American:</b> ' + feature.properties.pop_Black + '<br>' +
+                            '<b>Latino:</b> ' + feature.properties.pop_Latino + '<br>' + 
+                            '<b>Asian:</b> ' + feature.properties.pop_Asian + '<br>' + 
+                             '<b>Native American:</b> ' + feature.properties.pop_Amrind + '<br>'; 
+                         
+                     layer.bindPopup(racepopup, {
+                         sticky: true,
+                     })
+            
+        }
+        
         // create function to update the map
         function updateMap(){
             
@@ -623,25 +682,143 @@
 			legend.addTo(map);
 		}
             
-        function updateLegend(feature) {
+        function buildVoteLegend(feature) {
 
             // creates natural breaks and assigns colors to different classes
             
             //var props = layer.feature.properties;
             
-            var legend = $('.legend').html("<h3>" + "LEGEND" + "</h3><ul>"); 
-                
-                    var color = getCountyVoteColor(feature);
+            var colorclinton60 = "#08088a";
+            var colorclinton5560 = "#0101df";
+            var colorclinton5055 = "#81bef7";
+            var colortrump5055 = "#f5a9a9";
+            var colortrump5560 = "#fe2e2e";
+            var colortrump60 = "#df0101";
             
-                legend.append(
-                    '<span style="background:' + color + '"></span> ' + '<label>' +"Clinton >60%"+ feature.properties.clinton/feature.properties.total_vote + '&mdash;'  + '</label>' +
-                    '<span style="background:' + color + '"></span> ' + '<label>' +"Clinton 55%-60%"+ feature.properties.clinton + '&mdash;'  + '</label>' +
-                    '<label>'+ feature.clinton + '&mdash;'  + '</label>' +
-                    '<label>'+ feature.clinton + '&mdash;'  + '</label>');
+            var legend = $('.legend').html("<h3>" + "Percent for Each Candidate" + "</h3><ul>" + '<br>' +
+                                           '<span style="background:' + colorclinton60 + '"></span>' + "Clinton > 60%" + '<br>' + '<br>' +
+                                           '<span style="background:' + colorclinton5560 + '"></span>' + "Clinton 55% to 60%" + '<br>' + '<br>' +
+                                           '<span style="background:' + colorclinton5055 + '"></span>' + "Clinton > 50% to 55%" + '<br>' + '<br>' +
+                                           '<span style="background:' + colortrump5055 + '"></span>' + "Trump 50% to 55%" + '<br>' + '<br>' +
+                                           '<span style="background:' + colortrump5560 + '"></span>' + "Trump 55% to 60%" + '<br>' + '<br>' +
+                                           '<span style="background:' + colortrump60 + '"></span>' + "Trump > 60%");
+            
+    
             
 
         }
+        
+        function buildMinorityLegend(feature) {
 
+            // creates natural breaks and assigns colors to different classes
+            
+            //var props = layer.feature.properties;
+            
+            var colorminority75 = "#66004d";
+            var colorminority5075 = "#cc0099";
+            var colorminority1050 = "#ff33cc";
+            var colorminority510 = "#ff80df";
+            var colorminority5 = "#ffccf2";
+            
+            
+            var legend = $('.legend').html("<h3>" + "Percent Minority by County" + "</h3><ul>" + '<br>' +
+                                           '<span style="background:' + colorminority75 + '"></span>' + "More than 75% Minority" + '<br>' + '<br>' +
+                                           '<span style="background:' + colorminority5075 + '"></span>' + "50% to 75% Minority" + '<br>' + '<br>' +
+                                           '<span style="background:' + colorminority1050 + '"></span>' + "10% to 50% Minority" + '<br>' + '<br>' +
+                                           '<span style="background:' + colorminority510 + '"></span>' + "5% to 10% Minority" + '<br>' + '<br>' +
+                                           '<span style="background:' + colorminority5 + '"></span>' + "Less than 5% Minority");
+          
+        }
+
+        function buildBlackLegend(feature) {
+
+            // creates natural breaks and assigns colors to different classes
+            
+            //var props = layer.feature.properties;
+            
+            var colorblack75 = "#4b2600";
+            var colorblack5075 = "#783e00";
+            var colorblack1050 = "#b45e00";
+            var colorblack110 = "#ff8600";
+            var colorblack1 = "#ffcf9d";
+            
+            
+            var legend = $('.legend').html("<h3>" + "Percent African-American" + "</h3><ul>" + '<br>' +
+                                           '<span style="background:' + colorblack75 + '"></span>' + "More than 75%" + '<br>' + '<br>' +
+                                           '<span style="background:' + colorblack5075 + '"></span>' + "50% to 75%" + '<br>' + '<br>' +
+                                           '<span style="background:' + colorblack1050 + '"></span>' + "10% to 50%" + '<br>' + '<br>' +
+                                           '<span style="background:' + colorblack110 + '"></span>' + "1% to 10%" + '<br>' + '<br>' +
+                                           '<span style="background:' + colorblack1 + '"></span>' + "Less than 1%");
+          
+        }
+        
+        function buildLatinoLegend(feature) {
+
+            // creates natural breaks and assigns colors to different classes
+            
+            //var props = layer.feature.properties;
+            
+            var colorlatino75 = "#4d0000";
+            var colorlatino5075 = "#b30000";
+            var colorlatino1050 = "#ff0000";
+            var colorlatino110 = "#ff8080";
+            var colorlatino1 = "#ffcccc";
+            
+            
+            var legend = $('.legend').html("<h3>" + "Percent Latino" + "</h3><ul>" + '<br>' +
+                                           '<span style="background:' + colorlatino75 + '"></span>' + "More than 75%" + '<br>' + '<br>' +
+                                           '<span style="background:' + colorlatino5075 + '"></span>' + "50% to 75%" + '<br>' + '<br>' +
+                                           '<span style="background:' + colorlatino1050 + '"></span>' + "10% to 50%" + '<br>' + '<br>' +
+                                           '<span style="background:' + colorlatino110 + '"></span>' + "1% to 10%" + '<br>' + '<br>' +
+                                           '<span style="background:' + colorlatino1 + '"></span>' + "Less than 1%");
+          
+        }
+        
+        
+        function buildEducationLegend(feature) {
+
+            // creates natural breaks and assigns colors to different classes
+            
+            //var props = layer.feature.properties;
+            
+            var coloredu35 = "#00004b";
+            var coloredu2535 = "#0000ab";
+            var coloredu1525 = "#2727ff";
+            var coloredu1015 = "#7575ff";
+            var coloredu10 = "#d0d0ff";
+            
+            
+            var legend = $('.legend').html("<h3>" + "Percent with College Degree" + "</h3><ul>" + '<br>' +
+                                           '<span style="background:' + coloredu35 + '"></span>' + "More than 35%" + '<br>' + '<br>' +
+                                           '<span style="background:' + coloredu2535 + '"></span>' + "25% to 35%" + '<br>' + '<br>' +
+                                           '<span style="background:' + coloredu1525 + '"></span>' + "15% to 25%" + '<br>' + '<br>' +
+                                           '<span style="background:' + coloredu1015 + '"></span>' + "10% to 15%" + '<br>' + '<br>' +
+                                           '<span style="background:' + coloredu10 + '"></span>' + "Less than 10%");
+          
+            }
+        
+        function buildIncomeLegend(feature) {
+
+            // creates natural breaks and assigns colors to different classes
+            
+            //var props = layer.feature.properties;
+            
+            var colorinc70 = "#004d00";
+            var colorinc5070 = "#009900";
+            var colorinc4050 = "#00e600";
+            var colorinc3040 = "#33ff33";
+            var colorinc30 = "#80ff80";
+            
+            
+            var legend = $('.legend').html("<h3>" + "Median Household Income" + "</h3><ul>" + '<br>' +
+                                           '<span style="background:' + colorinc70 + '"></span>' + "Greater than $70,000" + '<br>' + '<br>' +
+                                           '<span style="background:' + colorinc5070 + '"></span>' + "$50,000 to $70,000" + '<br>' + '<br>' +
+                                           '<span style="background:' + colorinc4050 + '"></span>' + "$40,000 to $50,000" + '<br>' + '<br>' +
+                                           '<span style="background:' + colorinc3040 + '"></span>' + "$30,000 to $40,000" + '<br>' + '<br>' +
+                                           '<span style="background:' + colorinc30 + '"></span>' + "Less than $30,000");
+          
+        }
+        
         function buildUI() {
             $('select[id="voting"]').change(function () {
                 attribute = $(this).val();
