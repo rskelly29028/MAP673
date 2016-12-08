@@ -154,12 +154,12 @@
         <p><img src="graphics/red-blue.png" alt="legend"></p>
         <p>62,829,410..............Popular Vote...........65,483,780</p>
         
-        <p>The 58th quadrennial presidetial election, held on November 8, 2016, saw GOP candidate Donald Trump score a stunning upset over Democratic nominee Hillary Clinton to become the 45th President of the United States of America. This was the fourth election in U.S. history - and the second of the 21st century - to see the candidate who won the Electoral College lose the popular vote. The 2016 election further saw the polarization in American political preferences with the Democratic nominee winning by wide margins in heavily urban counties and the GOP nominee winning by huge margins in rural counties. Demographic data clearly indicate well-defined voting patterns that follow both racial and educational lines, with Clinton faring well among minority populations and those holding college degrees, and with Trump winning counties by large margins where the majority of the population was white and did not possess a college degree.</p>
+        <p>The 58th quadrennial presidetial election, held on November 8, 2016, saw GOP candidate Donald Trump score a stunning upset over Democratic nominee Hillary Clinton to become the 45th President of the United States of America. This was the fourth election in U.S. history - and the second of the 21st century - to see the candidate who won the Electoral College lose the popular vote. The 2016 election further saw the polarization in American political preferences with the Democratic nominee winning by wide margins in heavily urban counties and the GOP nominee winning by huge margins in rural counties. Demographic data clearly indicate well-defined voting patterns that follow both racial and educational lines, with Clinton faring well among minority populations and those holding college degrees, and with Trump winning counties by large margins where the majority of the population is white and does not possess a college degree.</p>
         <p>State data is limited to vote totals, with states won by Hillary Clinton featured in blue and states won by Donald Trump featured in red. Scroll the mouse over the state map to view the number of votes won by each candidate in each state, along with the number of electoral votes awarded to the winner.  Proceed to select the counties layer from the tab at upper right and then select from the attributes listed in the dropdown menu in the upper left corner of the map. The selected data of each county will populate the information box at the right of the screen as the user scrolls the mouse over the selected county.  Click on a selectd county to view data specific to that county and attribute from the dropdown menu.</p>
         <h2><u>About This Map</u></h2>
         <p><i>Map created December 10, 2016, by Ryan Kelly, Professor of Geography, GISP, Bluegrass Community and Technical College</i></p>
         <h2><u>About the Data</u></h2>
-        <p><i>The data were furnished from the 2010 US Census (http://www.census.gov/2010census/) and David Leip's Presidential Atlas 2016 (http://uselectionatlas.org).  County level voting data unavailable for Alaska</i></p>
+        <p><i>The data were furnished from the 2010 US Census (http://www.census.gov/2010census/) and David Leip's Presidential Atlas 2016 (http://uselectionatlas.org).  County level voting data unavailable for Alaska.  Maine had its electoral votes split 3:1 for Hillary Clinton; the split is not represented on the map.</i></p>
     </div>
     <div id="info">
         <h3><u>County Information</u></h3>
@@ -263,20 +263,20 @@
             
             countiesLayer = L.geoJson(counties, {
                 
-                onEachFeature: onEachFeature, 
+                //onEachFeature: onEachFeature, 
                 
                     style: function (feature) { // style each feature of GeoJson layer
                         return {
                         color: 'white', // set stroke color
                         fillColor: getCountyColor(feature, value),
-                        weight: 0.5, // set stroke weight
+                        weight: 0.7, // set stroke weight
                         fillOpacity: 1, // override defautl fill opacity
                     };
                 },
                 
                 onEachFeature: function (feature, layer) {
                     
-                    var popup = '<b>County Name:</b> ' + feature.properties.name  + '<br>' + 
+                    var votepopup = '<b>County Name:</b> ' + feature.properties.name  + '<br>' + 
                                   '<b>State Name:</b> ' + feature.properties.state + '<br>' +
                                   '<b>Clinton:</b> ' + feature.properties.clinton + '<br>' + 
                                   '<b>Trump:</b> ' + feature.properties.trump + '<br>' +
@@ -286,9 +286,22 @@
                                   '<b>WINNER:</b> ' + feature.properties.winner + '<br>' +
                                   getStatePicture(feature);
                         
-                    layer.bindPopup(popup, {
+                    layer.bindPopup(votepopup, {
                         sticky: true,
                     })
+                    
+                    //var racepopup = '<b>County Name:</b> ' + feature.properties.name  + '<br>' + 
+                    //              '<b>State Name:</b> ' + feature.properties.state + '<br>' +
+                    //              '<b>White:</b> ' + feature.properties.pop_White + '<br>' + 
+                    //              '<b>African-American:</b> ' + feature.properties.pop_Black + '<br>' +
+                    //              '<b>Latino:</b> ' + feature.properties.pop_Latino + '<br>' + 
+                    //              '<b>Asian:</b> ' + feature.properties.pop_Asian + '<br>' + 
+                    //              '<b>Native American:</b> ' + feature.properties.pop_Amrind + '<br>'; 
+                    //    
+                    //layer.bindPopup(racepopup, {
+                    //    sticky: true,
+                    //})
+                    
                     
                     layer.on('mouseover', function(){
                         
@@ -296,11 +309,30 @@
                         updateLegend(feature);
                         //onEachFeature();
                     });
+                    
+                    layer.on('mouseover', function(e){ 
+                        
+                        layer.setStyle({
+                            weight: 2,
+                            color: 'yellow',
+                        });
+                    
+                    });
+                    
+                    layer.on('mouseout', function(e){
+                        
+                        layer.setStyle({
+                            weight: 0.7,
+                            color: 'white',
+                        });
+                    });
                 }
-            });
+           
+            
+        }).addTo(map);
                
                 statesLayer = L.geoJson(states, {
-                    onEachFeature: onEachFeature,
+                    //onEachFeature: onEachFeature,
                         style: function (feature) { // style each feature of GeoJson layer
                             return {
                             color: 'white', // set stroke color
@@ -353,6 +385,7 @@
             var sourcesLayers = {
                 "States": statesLayer,
                 "Counties": countiesLayer, 
+                
             }
             
             L.control.layers(null, sourcesLayers, {
@@ -361,9 +394,7 @@
             }).addTo(map);
             
         }
-        
-        
-            
+          
         function getStateColor(feature) {
             var clinton = Number(feature.properties.clinton);
             var trump = Number(feature.properties.trump);
@@ -462,10 +493,10 @@
                 return "#00e600";
             }
             else if (medianHI >= 30000) {
-                return "#99ff99";
+                return "#33ff33";
             }
             else  {
-                return "#c2f0c2";
+                return "#80ff80";
             }
         }
 
@@ -483,7 +514,7 @@
             else if ((bachelor+masters)/total_pop >= 0.15)  {
                 return "#2727ff";
             }
-            else if ((bachelor+masters)/total_pop >= 0.05) {
+            else if ((bachelor+masters)/total_pop >= 0.1) {
                 return "#7575ff";
             }
             else  {
@@ -517,19 +548,19 @@
             var total_pop = Number(feature.properties.pop_Total);
             
             if (latino/total_pop >= 0.75) {
-                return "#272700";
+                return "#4d0000";
             }
             else if (latino/total_pop >= 0.50) {
-                return "#636300";
+                return "#b30000";
             }
             else if (latino/total_pop >= 0.1)  {
-                return "#b7b700";
+                return "#ff0000";
             }
             else if (latino/total_pop >= 0.01) {
-                return "#ffff0d";
+                return "#ff8080";
             }
             else  {
-                return "#ffffb6";
+                return "#ffcccc";
             }
         }
         
@@ -557,30 +588,7 @@
             }
         }
         
-        function onEachFeature(feature, layer) {
         
-            // highlights feature to yellow with mouseover and returns back to original color settings with mouseout
-            
-            countiesLayer.on('mouseover', function pointMouseover(leafletEvent) {
-                var dataLayer = leafletEvent.target;
-                dataLayer.setStyle({
-                    weight: 2.5,
-                    color: 'yellow'
-                    
-            });
-            
-            countiesLayer.on('mouseout', function pointMouseover(leafletEvent){
-                var dataLayer = leafletEvent.target;
-                dataLayer.setStyle({
-                    weight: 0.5,
-                    color: 'white',
-            });
-                
-            
-            })
-        }          
-            )
-        }
 
         // create function to update the map
         function updateMap(){
@@ -692,10 +700,7 @@
                     
                $(".info").html(html);
           }
-        
-            
-        
-        
+    
     </script>
 </body>
 
