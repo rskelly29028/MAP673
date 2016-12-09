@@ -205,30 +205,20 @@
         
         map.zoomControl.setPosition('topright');
         
-        var countyLayer, statesLayer, lakesLayer, dataLayer;
+        var countyLayer, statesLayer, lakesLayer, outlineLayer, dataLayer;
         
         var attribute = "VOTE";
         
-        var votinglabels = {
-            "VOTE": "Percent for Each Candidate",
-            "CLINTON60": "Hillary Clinton > 60%",
-            "CLINTON5560": "Hillary Clinton 55% - 60%",
-            "CLINTON5055": "Hillary Clinton 50% - 55%",
-            "TRUMP5055": "Donald Trump 50% -55%",
-            "TRUMP5560": "Donald Trump 55% - 60%",
-            "TRUMP60": "Donald Trump > 60%",
-        }
-        
         // Load the map data using queue
-        
         queue()
             .defer(d3.json, "US-Counties.json")
             .defer(d3.json, "us-states.json")
             .defer(d3.csv, "Election-States.csv")
             .defer(d3.csv, "Master.csv")
-            .defer(d3.json, "Great-Lakes.json").await(processData);
+            .defer(d3.json, "Great-Lakes.json")
+            .await(processData);
         
-        // create a function to loop through the counties data and grab the county FIPS code to ensure a match for each county
+        // create the main function to loop through the counties data and grab the county FIPS code to ensure a match for each county
         function processData(e, counties, states, statesData, countiesData, lakes) {
             
             for (var state in states.features) {
@@ -262,31 +252,27 @@
             drawMap(states, counties, lakes);
             buildUI();
             drawInfo()
-            //buildVoteLegend();
-         
         }
 
+        // create the main function to draw the map
         function drawMap(states, counties, lakes) {
             
             var value = $('#voting').val(); //value will be set VOTE for the initial load
             
             countiesLayer = L.geoJson(counties, {
                 
-                //onEachFeature: onEachFeature, 
-                
                     style: function (feature) { // style each feature of GeoJson layer
                         return {
                         color: 'white', // set stroke color
                         fillColor: getCountyColor(feature, value),
+                        legend: getLegend(feature, value),
                         weight: 0.7, // set stroke weight
                         fillOpacity: 1, // override defautl fill opacity
                     };
                 },
                 
                 onEachFeature: function (feature, layer) {
-                    
-                    getLegend(feature, value);
-                    
+                  
                     var votepopup = '<b>County Name:</b> ' + feature.properties.name  + '<br>' + 
                                   '<b>State Name:</b> ' + feature.properties.state + '<br>' +
                                   '<b>Clinton:</b> ' + feature.properties.clinton + '<br>' + 
@@ -301,24 +287,10 @@
                         sticky: true,
                     })
                     
-                    //var racepopup = '<b>County Name:</b> ' + feature.properties.name  + '<br>' + 
-                    //              '<b>State Name:</b> ' + feature.properties.state + '<br>' +
-                    //              '<b>White:</b> ' + feature.properties.pop_White + '<br>' + 
-                    //              '<b>African-American:</b> ' + feature.properties.pop_Black + '<br>' +
-                    //              '<b>Latino:</b> ' + feature.properties.pop_Latino + '<br>' + 
-                    //              '<b>Asian:</b> ' + feature.properties.pop_Asian + '<br>' + 
-                    //              '<b>Native American:</b> ' + feature.properties.pop_Amrind + '<br>'; 
-                    //    
-                    //layer.bindPopup(racepopup, {
-                    //    sticky: true,
-                    //})
-                    
-                    
                     layer.on('mouseover', function(){
                         
                         updateInfo(this);
-                        //getLegend();
-                        //onEachFeature();
+                 
                     });
                     
                     layer.on('mouseover', function(e){ 
@@ -351,6 +323,7 @@
                             fillOpacity: 1, // override defautl fill opacity
                     };
                 },
+                    
                     onEachFeature: function (feature, layer) {
                 
                     var tooltip = '<b>STATE:</b> ' + feature.properties.name  + '<br>' + 
@@ -368,43 +341,33 @@
                     
             }).addTo(map);
             
-            lakesLayer = L.geoJson(lakes, {
-                style: function (feature) { // style each feature of GeoJson layer
-                    return {
-                        color: 'white', // set stroke color
-                        fillColor: 'navy',
-                        weight: 0.5, // set stroke weight
-                        fillOpacity: 1, // override defautl fill opacity
-                    };
-                }
+                lakesLayer = L.geoJson(lakes, {
+                    style: function (feature) { // style each feature of GeoJson layer
+                        return {
+                            color: 'white', // set stroke color
+                            fillColor: 'navy',
+                            weight: 0.5, // set stroke weight
+                            fillOpacity: 1, // override defautl fill opacity
+                        };
+                    }
                 
             }).addTo(map);
-            
-            //statesoutlineLayer = L.geoJson(states, {
-            //    style: function (feature) { // style each feature of GeoJson layer
-            //        return {
-            //            color: 'white', // set stroke color
-            //            weight: 1.5, // set stroke weight
-            //            fillOpacity: 0, // override defautl fill opacity
-            //            position: 'front',
-            //        };
-            //    }
-            //    
-            //    }).addTo(map);
+         
             
             var sourcesLayers = {
                 "States": statesLayer,
-                "Counties": countiesLayer, 
-                
+                "Counties": countiesLayer,  
             }
             
+            // build a tab for the user to select counties or states
             L.control.layers(null, sourcesLayers, {
                 collapsed: false
                 
             }).addTo(map);
             
         }
-          
+        
+        // build the fuction to obtain red/blue color for Clinton/Trump
         function getStateColor(feature) {
             var clinton = Number(feature.properties.clinton);
             var trump = Number(feature.properties.trump);
@@ -415,7 +378,8 @@
                 return "#fe2e2e";
             }
         }
-
+        
+        //build the function to generate picture of Clinton/Trump
         function getStatePicture (feature) {
             var clinton = Number(feature.properties.clinton);
             var trump = Number(feature.properties.trump);
@@ -427,6 +391,7 @@
             }
         }
         
+        //build the main function to populate the legend with the correct data from the UI dropdown
         function getLegend(feature, value){
             
             if (value == "VOTE"){
@@ -444,6 +409,7 @@
             }
         }
         
+        // build the main function to generate county color scheme from UI dropdown list
         function getCountyColor(feature, value) {
             
             var clinton = Number(feature.properties.clinton);
@@ -477,7 +443,8 @@
             }
                     
                 }
-          
+        
+        // build the function to generate county colors on voting statistics
         function getCountyVoteColor(feature) {
             var clinton = Number(feature.properties.clinton);
             var trump = Number(feature.properties.trump);
@@ -507,6 +474,7 @@
             }
         }
         
+        // build the function to generate county colors on income statistics
         function getCountyIncomeColor(feature) {
             var medianHI = Number(feature.properties.Median_HI);
             
@@ -526,7 +494,8 @@
                 return "#80ff80";
             }
         }
-
+        
+        // build the function to generate county colors on education statistics
         function getCountyEducationColor(feature) {
             var bachelor = Number(feature.properties.bachelor);
             var masters = Number(feature.properties.master_Phd); 
@@ -549,6 +518,7 @@
             }
         }
         
+        // build the function to generate county colors on African-American statistics
         function getCountyBlackColor(feature) {
             var black = Number(feature.properties.pop_Black); 
             var total_pop = Number(feature.properties.pop_Total);
@@ -570,6 +540,7 @@
             }
         }
         
+        // build the function to generate county colors on Latino statistics
         function getCountyLatinoColor(feature) {
             var latino = Number(feature.properties.pop_Latino); 
             var total_pop = Number(feature.properties.pop_Total);
@@ -591,6 +562,7 @@
             }
         }
         
+        // build the function to generate county colors on minority race statistics
         function getCountyMinorityColor(feature) {
             var black = Number(feature.properties.pop_Black);
             var latino = Number(feature.properties.pop_Latino); 
@@ -615,6 +587,7 @@
             }
         }
         
+        // build the function to create a popup of county-level voting results
         function createvotePopup(feature){
            
             var votepopup = '<b>County Name:</b> ' + feature.properties.name  + '<br>' + 
@@ -633,6 +606,7 @@
             
         }
 
+        // build the function to create a popup of county-level racial statistics
         function createracePopup(feature){
             
             var racepopup = '<b>County Name:</b> ' + feature.properties.name  + '<br>' + 
@@ -657,10 +631,12 @@
                 layer.setStyle({
                     fillColor: getCountyColor(layer.feature, attribute)
             });
+               
         })
         
         }
         
+        // create the function to build a legend box
         function drawLegend() {
 
 			// create a new Leaflet control object, and position it top left
@@ -681,12 +657,9 @@
 			// add the legend to the map
 			legend.addTo(map);
 		}
-            
+        
+        // build the function to create voter legend data
         function buildVoteLegend(feature) {
-
-            // creates natural breaks and assigns colors to different classes
-            
-            //var props = layer.feature.properties;
             
             var colorclinton60 = "#08088a";
             var colorclinton5560 = "#0101df";
@@ -703,16 +676,10 @@
                                            '<span style="background:' + colortrump5560 + '"></span>' + "Trump 55% to 60%" + '<br>' + '<br>' +
                                            '<span style="background:' + colortrump60 + '"></span>' + "Trump > 60%");
             
-    
-            
-
         }
         
+        // build the function to create minority race legend data
         function buildMinorityLegend(feature) {
-
-            // creates natural breaks and assigns colors to different classes
-            
-            //var props = layer.feature.properties;
             
             var colorminority75 = "#66004d";
             var colorminority5075 = "#cc0099";
@@ -730,12 +697,9 @@
           
         }
 
+        // build the function to create African-American legend data
         function buildBlackLegend(feature) {
 
-            // creates natural breaks and assigns colors to different classes
-            
-            //var props = layer.feature.properties;
-            
             var colorblack75 = "#4b2600";
             var colorblack5075 = "#783e00";
             var colorblack1050 = "#b45e00";
@@ -752,12 +716,9 @@
           
         }
         
+        // build the function to create Latino legend data
         function buildLatinoLegend(feature) {
 
-            // creates natural breaks and assigns colors to different classes
-            
-            //var props = layer.feature.properties;
-            
             var colorlatino75 = "#4d0000";
             var colorlatino5075 = "#b30000";
             var colorlatino1050 = "#ff0000";
@@ -774,12 +735,8 @@
           
         }
         
-        
+        // build the function to create education attainment legend data
         function buildEducationLegend(feature) {
-
-            // creates natural breaks and assigns colors to different classes
-            
-            //var props = layer.feature.properties;
             
             var coloredu35 = "#00004b";
             var coloredu2535 = "#0000ab";
@@ -797,11 +754,8 @@
           
             }
         
+        // build the function to create income legend data
         function buildIncomeLegend(feature) {
-
-            // creates natural breaks and assigns colors to different classes
-            
-            //var props = layer.feature.properties;
             
             var colorinc70 = "#004d00";
             var colorinc5070 = "#009900";
@@ -818,17 +772,18 @@
           
         }
         
-        function buildUI() {
-            $('select[id="voting"]').change(function () {
-                attribute = $(this).val();
+            // create the main function to build the UI dropdown box
+            function buildUI() {
+                $('select[id="voting"]').change(function () {
+                    attribute = $(this).val();
                 
-                updateMap();
-            });
-        }
+                    updateMap();
+                });
+            }
         
-          function drawInfo(layer, feature) {
-          // creates an information box in the lower right corner of map frame
-              
+            // create the main function to build the information window
+            function drawInfo(layer, feature) {
+          
                 var info = L.control({position: 'bottomright'});
             
                 info.onAdd = function(map) {
@@ -851,7 +806,8 @@
     
         }
               
-          function updateInfo(layer){
+            // create the function to update the information box with new data
+            function updateInfo(layer){
               
                 var props = layer.feature.properties;
                 
