@@ -188,11 +188,11 @@
     <script>
         
         var map = L.map('map', {
-            center: [38, -97.5],
+            center: [28, -97.5],
             zoom: 4,
             minZoom: 2,
             maxZoom: 12,
-            maxBounds: L.latLngBounds([75, -170], [10, -30]),
+            maxBounds: L.latLngBounds([80, -175], [10, -30]),
          });
         
         var CartoDB_DarkMatter = 
@@ -263,28 +263,28 @@
                 
                     style: function (feature) { // style each feature of GeoJson layer
                         return {
-                        color: 'white', // set stroke color
+                        color: 'white', // set stroke color  
                         fillColor: getCountyColor(feature, value),
-                        legend: getLegend(feature, value),
                         weight: 0.7, // set stroke weight
                         fillOpacity: 1, // override defautl fill opacity
+                        legend: getLegend(feature, value),
                     };
                 },
-                
+               
                 onEachFeature: function (feature, layer) {
-                  
-                    var votepopup = '<b>County Name:</b> ' + feature.properties.name  + '<br>' + 
-                                  '<b>State Name:</b> ' + feature.properties.state + '<br>' +
-                                  '<b>Clinton:</b> ' + feature.properties.clinton + '<br>' + 
-                                  '<b>Trump:</b> ' + feature.properties.trump + '<br>' +
-                                  '<b>Johnson:</b> ' + feature.properties.johnson + '<br>' + 
-                                  '<b>Stein:</b> ' + feature.properties.stein + '<br>' + 
-                                  '<b>McMullin:</b> ' + feature.properties.mcmullin + '<br>' +
-                                  '<b>WINNER:</b> ' + feature.properties.winner + '<br>' +
-                                  getStatePicture(feature);
+                        
+                     var votepopup = '<b>County Name:</b> ' + feature.properties.name  + '<br>' + 
+                                     '<b>State Name:</b> ' + feature.properties.state + '<br>' +
+                                     '<b>Clinton:</b> ' + feature.properties.clinton + '<br>' + 
+                                     '<b>Trump:</b> ' + feature.properties.trump + '<br>' +
+                                     '<b>Johnson:</b> ' + feature.properties.johnson + '<br>' + 
+                                     '<b>Stein:</b> ' + feature.properties.stein + '<br>' + 
+                                     '<b>McMullin:</b> ' + feature.properties.mcmullin + '<br>' +
+                                     '<b>WINNER:</b> ' + feature.properties.winner + '<br>' +
+                                     getStatePicture(feature);
                         
                     layer.bindPopup(votepopup, {
-                        sticky: true,
+                           sticky: true,
                     })
                     
                     layer.on('mouseover', function(){
@@ -314,7 +314,7 @@
         }).addTo(map);
                
                 statesLayer = L.geoJson(states, {
-                    //onEachFeature: onEachFeature,
+                    
                         style: function (feature) { // style each feature of GeoJson layer
                             return {
                             color: 'white', // set stroke color
@@ -671,7 +671,7 @@
             var legend = $('.legend').html("<h3>" + "Percent for Each Candidate" + "</h3><ul>" + '<br>' +
                                            '<span style="background:' + colorclinton60 + '"></span>' + "Clinton > 60%" + '<br>' + '<br>' +
                                            '<span style="background:' + colorclinton5560 + '"></span>' + "Clinton 55% to 60%" + '<br>' + '<br>' +
-                                           '<span style="background:' + colorclinton5055 + '"></span>' + "Clinton > 50% to 55%" + '<br>' + '<br>' +
+                                           '<span style="background:' + colorclinton5055 + '"></span>' + "Clinton 50% to 55%" + '<br>' + '<br>' +
                                            '<span style="background:' + colortrump5055 + '"></span>' + "Trump 50% to 55%" + '<br>' + '<br>' +
                                            '<span style="background:' + colortrump5560 + '"></span>' + "Trump 55% to 60%" + '<br>' + '<br>' +
                                            '<span style="background:' + colortrump60 + '"></span>' + "Trump > 60%");
