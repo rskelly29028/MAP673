@@ -262,7 +262,7 @@
             drawMap(states, counties, lakes);
             buildUI();
             drawInfo()
-            buildVoteLegend();
+            //buildVoteLegend();
          
         }
 
@@ -284,6 +284,8 @@
                 },
                 
                 onEachFeature: function (feature, layer) {
+                    
+                    getLegend(feature, value);
                     
                     var votepopup = '<b>County Name:</b> ' + feature.properties.name  + '<br>' + 
                                   '<b>State Name:</b> ' + feature.properties.state + '<br>' +
@@ -315,7 +317,7 @@
                     layer.on('mouseover', function(){
                         
                         updateInfo(this);
-                        getLegend();
+                        //getLegend();
                         //onEachFeature();
                     });
                     
