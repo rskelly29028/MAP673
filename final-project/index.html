@@ -151,22 +151,22 @@
     <div id='side-panel'>
         <h1>THE CHOICE</h1>
         <h2>The 2016 US Presidential Election</h2>
-        <p>This map displays voting data by state for the 2016 general election, and voting, demographic, income and education data by county.</p>
+        <p>This map displays voting data by state for the 2016 general election and voting, demographic, income and education data by county.</p>
         <p><img src="graphics/donald-trump-hillary-clinton-impossible-choice.png" alt="legend"></p>
         <p>306.....................Electoral Votes.................232</p>
         <p><img src="graphics/red-blue.png" alt="legend"></p>
         <p>62,829,410..............Popular Vote...........65,483,780</p>
         
-        <p>The 58th quadrennial presidetial election, held on November 8, 2016, saw GOP candidate Donald Trump score a stunning upset over Democratic nominee Hillary Clinton to become the 45th President of the United States of America. This was the fourth election in U.S. history - and the second of the 21st century - to see the candidate who won the Electoral College lose the popular vote. The 2016 election further saw the polarization in American political preferences with the Democratic nominee winning by wide margins in heavily urban counties and the GOP nominee winning by huge margins in rural counties. Demographic data clearly indicate well-defined voting patterns that follow both racial and educational lines, with Clinton faring well among minority populations and those holding college degrees, and with Trump winning counties by large margins where the majority of the population is white and does not possess a college degree.</p>
-        <p>State data is limited to vote totals, with states won by Hillary Clinton featured in blue and states won by Donald Trump featured in red. Scroll the mouse over the state map to view the number of votes won by each candidate in each state, along with the number of electoral votes awarded to the winner.  Proceed to select the counties layer from the tab at upper right and then select from the attributes listed in the dropdown menu in the upper left corner of the map. The selected data of each county will populate the information box at the right of the screen as the user scrolls the mouse over the selected county.  Click on a selectd county to view data specific to that county and attribute from the dropdown menu.</p>
+        <p>The November 8, 2016 election saw GOP candidate Donald Trump score a stunning upset over Democratic nominee Hillary Clinton to become the 45th President of the United States. This was the fourth election in U.S. history - and the second of the 21st century - to see the candidate who won the Electoral College lose the popular vote. The 2016 election also saw the polarization in American political preferences with the Democratic nominee winning by wide margins in urban counties and the GOP nominee winning by huge margins in rural counties. Demographic data indicate well-defined voting patterns that follow both racial and educational lines. Clinton fared well among minority populations and voters with college degrees, while Trump fared well among white voters and those without college degrees.</p>
+        <p>State data is limited to vote totals, with states won by Hillary Clinton in blue and states won by Donald Trump in red. Scroll over each state to view the popular as well as electoral votes awarded. Check the County box in the upper right corner for county data. Attribute data is available from the dropdown menu in the upper left corner. County data will appear in the box to the right as the user scrolls over each county. Click on a county to view voting data for that county.</p>
         <h2><u>About This Map</u></h2>
-        <p><i>Map created December 10, 2016, by Ryan Kelly, Professor of Geography, GISP, Bluegrass Community and Technical College</i></p>
+        <p><i>Map created December 11, 2016, by Ryan Kelly, Professor of Geography, GISP, Bluegrass Community and Technical College, Lexington KY</i></p>
         <h2><u>About the Data</u></h2>
-        <p><i>The data were furnished from the 2010 US Census (http://www.census.gov/2010census/) and David Leip's Presidential Atlas 2016 (http://uselectionatlas.org).  County level voting data unavailable for Alaska.  Maine had its electoral votes split 3:1 for Hillary Clinton; the split is not represented on the map.</i></p>
+        <p><i>Data furnished from the 2010 US Census (http://www.census.gov/2010census/) and from David Leip's Presidential Atlas 2016 (http://uselectionatlas.org).  County level voting data unavailable for Alaska. Maine had its electoral votes split 3:1 for Hillary Clinton; the split is not represented on the state map.</i></p>
     </div>
+    
     <div id="info">
-        <h3><u>County Information</u></h3>
-        
+        <h3><u>County Information</u></h3>    
     </div>
     
     <div id='ui-controls'>
@@ -177,6 +177,7 @@
             <option value="LATINO">% Latino (2010 Census)</option>
             <option value="INCOME">Income Data (2010 US Census)</option>
             <option value="EDUCATION">Education Data (2010 US Census)</option>
+            <option value="POVERTY">Poverty Data (2010 US Census)</option>
         </select>
     </div>
     
@@ -296,7 +297,8 @@
                             color: 'white',
                         });
                     });
-                    
+
+                      // build the popup w/voting data on mouse click
                       var votepopup = '<b>County Name:</b> ' + feature.properties.name  + '<br>' + 
                                        '<b>State Name:</b> ' + feature.properties.state + '<br>' +
                                        '<b>Clinton:</b> ' + feature.properties.clinton + '<br>' + 
@@ -310,10 +312,9 @@
                        layer.bindPopup(votepopup, {
                              sticky: true,
                        })
-                
-                        // getPopup(feature, value);
+                      
                 }
-           
+                
         }).addTo(map);
                
                 statesLayer = L.geoJson(states, {
@@ -329,6 +330,7 @@
                     
                     onEachFeature: function (feature, layer) {
                 
+                    // build the tooltip of voting data by state
                     var tooltip = '<b>STATE:</b> ' + feature.properties.name  + '<br>' + 
                                   '<b>Clinton:</b> ' + feature.properties.clinton + '<br>' + 
                                   '<b>Trump:</b> ' + feature.properties.trump + '<br>' +
@@ -411,6 +413,8 @@
                     return buildIncomeLegend(feature)
             }   else if (value == "EDUCATION"){
                     return buildEducationLegend(feature)
+            }   else if (value = "POVERTY"){
+                    return buildPovertyLegend(feature)
             }
         }
         
@@ -425,6 +429,7 @@
             var totalvote = Number(feature.properties.totalvote);
             var genvote = (Number(feature.properties.clinton) + Number(feature.properties.trump));
             var medianHI = Number(feature.properties.Median_HI);
+            var Under18POV = Number(feature.properties.Under18_POV);
             var bachelor = Number(feature.properties.bachelor);
             var masters = Number(feature.properties.master_Phd); 
             var total_pop = Number(feature.properties.pop_Total);
@@ -445,6 +450,8 @@
                     return getCountyIncomeColor(feature)
             }   else if (value == "EDUCATION"){
                     return getCountyEducationColor(feature)
+            }   else if (value == "POVERTY"){
+                    return getCountyPovertyColor (feature)
             }
                     
         }
@@ -502,8 +509,32 @@
             }
         }
         
+        // build the function to generate county colors on poverty statistics
+        function getCountyPovertyColor(feature) {
+            
+            var Under18POV = Number(feature.properties.Under18_POV); 
+            var total_pop = Number(feature.properties.pop_Total);
+            
+            if (Under18POV/total_pop >= 0.15) {
+                return "#2f4f4f";
+            }
+            else if (Under18POV/total_pop >= 0.1) {
+                return "#696969";
+            }
+            else if (Under18POV/total_pop >= 0.05)  {
+                return "#c0c0c0";
+            }
+            else if (Under18POV/total_pop >= 0.02) {
+                return "#dcdcdc";
+            }
+            else  {
+                return "#f5f5f5";
+            }
+        }
+        
         // build the function to generate county colors on education statistics
         function getCountyEducationColor(feature) {
+            
             var bachelor = Number(feature.properties.bachelor);
             var masters = Number(feature.properties.master_Phd); 
             var total_pop = Number(feature.properties.pop_Total);
@@ -527,6 +558,7 @@
         
         // build the function to generate county colors on African-American statistics
         function getCountyBlackColor(feature) {
+            
             var black = Number(feature.properties.pop_Black); 
             var total_pop = Number(feature.properties.pop_Total);
             
@@ -549,6 +581,7 @@
         
         // build the function to generate county colors on Latino statistics
         function getCountyLatinoColor(feature) {
+            
             var latino = Number(feature.properties.pop_Latino); 
             var total_pop = Number(feature.properties.pop_Total);
             
@@ -571,6 +604,7 @@
         
         // build the function to generate county colors on minority race statistics
         function getCountyMinorityColor(feature) {
+            
             var black = Number(feature.properties.pop_Black);
             var latino = Number(feature.properties.pop_Latino); 
             var asian = Number(feature.properties.pop_Asian);
@@ -594,6 +628,7 @@
             }
         }
         
+        // may be able to eliminate all popup functions of pie charts cannot be built
         
         // build the function to determine which popup is to be launched
         function getPopup(feature, value){
@@ -609,6 +644,8 @@
             }   else if (value == "INCOME"){
                     return createvotePopup(feature)
             }   else if (value == "EDUCATION"){
+                    return createvotePopup(feature)
+            }   else if (value == "POVERTY"){
                     return createvotePopup(feature)
             }
         }
@@ -633,7 +670,7 @@
         }
 
         // build the function to create a popup of county-level racial statistics
-        function createracePopup(feature){
+        function createracePopup(layer, feature){
             
             var racepopup = '<b>County Name:</b> ' + feature.properties.name  + '<br>' + 
                             '<b>State Name:</b> ' + feature.properties.state + '<br>' +
@@ -641,13 +678,15 @@
                             '<b>African-American:</b> ' + feature.properties.pop_Black + '<br>' +
                             '<b>Latino:</b> ' + feature.properties.pop_Latino + '<br>' + 
                             '<b>Asian:</b> ' + feature.properties.pop_Asian + '<br>' + 
-                             '<b>Native American:</b> ' + feature.properties.pop_Amrind + '<br>'; 
+                            '<b>Native American:</b> ' + feature.properties.pop_Amrind + '<br>'; 
                          
                      layer.bindPopup(racepopup, {
                          sticky: true,
                      })
             
         }
+        
+        // end potential deletions of functions
         
         // create function to update the map
         function updateMap(){
@@ -657,13 +696,14 @@
                 layer.setStyle({
                     fillColor: getCountyColor(layer.feature, attribute),
                     legend: getLegend(layer.feature, attribute)
+                    //popup: getPopup(layer.feature, attribute)
             });
                
         })
         
         }
         
-        // create the function to build a legend box
+        // create the function to build the legend box
         function drawLegend() {
 
 			// create a new Leaflet control object, and position it top left
@@ -799,6 +839,24 @@
           
         }
         
+        
+        // build the function to create poverty legend data
+        function buildPovertyLegend(feature) {
+            
+            var colorpov15 = "#2f4f4f";
+            var colorpov10 = "#696969";
+            var colorpov5 = "#c0c0c0";
+            var colorpov2 = "#dcdcdc";
+            var colorpov1 = "#f5f5f5";
+            
+            var legend = $('.legend').html("<h3>" + "Percent of Children in Poverty" + "</h3><ul>" + '<br>' +
+                                           '<span style="background:' + colorpov15 + '"></span>' + "Greater than 15%" + '<br>' + '<br>' +
+                                           '<span style="background:' + colorpov10 + '"></span>' + "10% to 15%" + '<br>' + '<br>' +
+                                           '<span style="background:' + colorpov5 + '"></span>' + "5% to 10%" + '<br>' + '<br>' +
+                                           '<span style="background:' + colorpov2 + '"></span>' + "2% to 5%" + '<br>' + '<br>' +
+                                           '<span style="background:' + colorpov1 + '"></span>' + "Less than 2%");
+          
+        }
             // create the main function to build the UI dropdown box
             function buildUI() {
                 $('select[id="voting"]').change(function () {
