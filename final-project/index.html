@@ -274,21 +274,6 @@
                
                 onEachFeature: function (feature, layer) {
                      
-                     
-                     var votepopup = '<b>County Name:</b> ' + feature.properties.name  + '<br>' + 
-                                     '<b>State Name:</b> ' + feature.properties.state + '<br>' +
-                                     '<b>Clinton:</b> ' + feature.properties.clinton + '<br>' + 
-                                     '<b>Trump:</b> ' + feature.properties.trump + '<br>' +
-                                     '<b>Johnson:</b> ' + feature.properties.johnson + '<br>' + 
-                                     '<b>Stein:</b> ' + feature.properties.stein + '<br>' + 
-                                     '<b>McMullin:</b> ' + feature.properties.mcmullin + '<br>' +
-                                     '<b>WINNER:</b> ' + feature.properties.winner + '<br>' +
-                                     getStatePicture(feature);
-                        
-                    layer.bindPopup(votepopup, {
-                           sticky: true,
-                    })
-                    
                     layer.on('mouseover', function(){
                         
                         updateInfo(this);
@@ -298,7 +283,7 @@
                     layer.on('mouseover', function(e){ 
                         
                         layer.setStyle({
-                            weight: 2,
+                            weight: 3,
                             color: 'yellow',
                         });
                     
@@ -311,6 +296,22 @@
                             color: 'white',
                         });
                     });
+                    
+                      var votepopup = '<b>County Name:</b> ' + feature.properties.name  + '<br>' + 
+                                       '<b>State Name:</b> ' + feature.properties.state + '<br>' +
+                                       '<b>Clinton:</b> ' + feature.properties.clinton + '<br>' + 
+                                       '<b>Trump:</b> ' + feature.properties.trump + '<br>' +
+                                       '<b>Johnson:</b> ' + feature.properties.johnson + '<br>' + 
+                                       '<b>Stein:</b> ' + feature.properties.stein + '<br>' + 
+                                       '<b>McMullin:</b> ' + feature.properties.mcmullin + '<br>' +
+                                       '<b>WINNER:</b> ' + feature.properties.winner + '<br>' +
+                                       getStatePicture(feature);
+                          
+                       layer.bindPopup(votepopup, {
+                             sticky: true,
+                       })
+                
+                        // getPopup(feature, value);
                 }
            
         }).addTo(map);
@@ -371,6 +372,7 @@
         
         // build the fuction to obtain red/blue color for Clinton/Trump
         function getStateColor(feature) {
+            
             var clinton = Number(feature.properties.clinton);
             var trump = Number(feature.properties.trump);
             if (clinton > trump) {
@@ -383,6 +385,7 @@
         
         //build the function to generate picture of Clinton/Trump
         function getStatePicture (feature) {
+            
             var clinton = Number(feature.properties.clinton);
             var trump = Number(feature.properties.trump);
             if (clinton > trump) {
@@ -448,6 +451,7 @@
         
         // build the function to generate county colors on voting statistics
         function getCountyVoteColor(feature) {
+            
             var clinton = Number(feature.properties.clinton);
             var trump = Number(feature.properties.trump);
             var genvote = (Number(feature.properties.clinton) + Number(feature.properties.trump));
@@ -478,6 +482,7 @@
         
         // build the function to generate county colors on income statistics
         function getCountyIncomeColor(feature) {
+            
             var medianHI = Number(feature.properties.Median_HI);
             
             if (medianHI >= 70000) {
@@ -589,8 +594,27 @@
             }
         }
         
+        
+        // build the function to determine which popup is to be launched
+        function getPopup(feature, value){
+            
+            if (value == "VOTE"){
+                    return createvotePopup(feature)           
+            }   else if (value == "BLACK"){
+                    return createracePopup(feature) 
+            }   else if (value == "LATINO"){
+                    return createracePopup(feature)
+            }   else if (value == "MINORITY"){
+                    return createracePopup(feature)
+            }   else if (value == "INCOME"){
+                    return createvotePopup(feature)
+            }   else if (value == "EDUCATION"){
+                    return createvotePopup(feature)
+            }
+        }
+        
         // build the function to create a popup of county-level voting results
-        function createvotePopup(feature){
+        function createvotePopup(layer, feature){
            
             var votepopup = '<b>County Name:</b> ' + feature.properties.name  + '<br>' + 
                                   '<b>State Name:</b> ' + feature.properties.state + '<br>' +
