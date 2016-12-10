@@ -262,12 +262,12 @@
             
             countiesLayer = L.geoJson(counties, {
                 
-                    style: function (feature) { // style each feature of GeoJson layer
+                    style: function (feature) { 
                         return {
-                        color: 'white', // set stroke color  
+                        color: 'white',   
                         fillColor: getCountyColor(feature, value),
-                        weight: 0.7, // set stroke weight
-                        fillOpacity: 1, // override defautl fill opacity
+                        weight: 0.7, 
+                        fillOpacity: 1, 
                         legend: getLegend(feature, value)
                     };
                       
@@ -319,12 +319,12 @@
                
                 statesLayer = L.geoJson(states, {
                     
-                        style: function (feature) { // style each feature of GeoJson layer
+                        style: function (feature) { 
                             return {
-                            color: 'white', // set stroke color
+                            color: 'white', 
                             fillColor: getStateColor(feature),
-                            weight: 1.5, // set stroke weight
-                            fillOpacity: 1, // override defautl fill opacity
+                            weight: 1.5, 
+                            fillOpacity: 1, 
                     };
                 },
                     
@@ -347,12 +347,12 @@
             }).addTo(map);
             
                 lakesLayer = L.geoJson(lakes, {
-                    style: function (feature) { // style each feature of GeoJson layer
+                    style: function (feature) {
                         return {
-                            color: 'white', // set stroke color
+                            color: 'white', 
                             fillColor: 'navy',
-                            weight: 0.5, // set stroke weight
-                            fillOpacity: 1, // override defautl fill opacity
+                            weight: 0.5,
+                            fillOpacity: 1, 
                         };
                     }
                 
