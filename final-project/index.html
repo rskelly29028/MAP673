@@ -188,11 +188,11 @@
     <script>
         
         var map = L.map('map', {
-            center: [28, -97.5],
+            center: [33.5, -97.5],
             zoom: 4,
             minZoom: 2,
             maxZoom: 12,
-            maxBounds: L.latLngBounds([80, -175], [10, -30]),
+            //maxBounds: L.latLngBounds([85, -179], [10, -30]),
          });
         
         var CartoDB_DarkMatter = 
@@ -251,7 +251,7 @@
             drawLegend();
             drawMap(states, counties, lakes);
             buildUI();
-            drawInfo()
+            drawInfo();
         }
 
         // create the main function to draw the map
@@ -267,8 +267,9 @@
                         fillColor: getCountyColor(feature, value),
                         weight: 0.7, // set stroke weight
                         fillOpacity: 1, // override defautl fill opacity
-                        legend: getLegend(feature, value),
+                        legend: getLegend(feature, value)
                     };
+                      
                 },
                
                 onEachFeature: function (feature, layer) {
@@ -442,7 +443,7 @@
                     return getCountyEducationColor(feature)
             }
                     
-                }
+        }
         
         // build the function to generate county colors on voting statistics
         function getCountyVoteColor(feature) {
@@ -629,7 +630,8 @@
                 countiesLayer.eachLayer(function(layer){
                 
                 layer.setStyle({
-                    fillColor: getCountyColor(layer.feature, attribute)
+                    fillColor: getCountyColor(layer.feature, attribute),
+                    legend: getLegend(layer.feature, attribute)
             });
                
         })
