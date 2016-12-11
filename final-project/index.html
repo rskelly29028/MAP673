@@ -217,10 +217,11 @@
             .defer(d3.csv, "Election-States.csv")
             .defer(d3.csv, "Master.csv")
             .defer(d3.json, "Great-Lakes.json")
+            .defer(d3.json, "states-outline.json")
             .await(processData);
         
         // create the main function to loop through the counties data and grab the county FIPS code to ensure a match for each county
-        function processData(e, counties, states, statesData, countiesData, lakes) {
+        function processData(e, counties, states, statesData, countiesData, lakes, outline) {
             
             for (var state in states.features) {
                 
@@ -250,13 +251,13 @@
             }
             
             drawLegend();
-            drawMap(states, counties, lakes);
+            drawMap(states, counties, lakes, outline);
             buildUI();
             drawInfo();
         }
 
         // create the main function to draw the map
-        function drawMap(states, counties, lakes) {
+        function drawMap(states, counties, lakes, outline) {
             
             var value = $('#voting').val(); //value will be set VOTE for the initial load
             
@@ -358,6 +359,16 @@
                 
             }).addTo(map);
          
+                outlineLayer = L.geoJson(outline, {
+                    style: function (feature) {
+                        return {
+                            color: 'white',
+                            weight: 1.5,
+                            fillOpacity: 1, 
+                        };
+                    }
+                
+            }).addTo(map);
             
             var sourcesLayers = {
                 "States": statesLayer,
